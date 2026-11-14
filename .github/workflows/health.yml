@@ -1,6 +1,10 @@
 name: Monitor live applications
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/health.yml
   schedule:
     - cron: '23 04 * * *'
   workflow_dispatch:
