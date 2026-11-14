@@ -43,7 +43,7 @@ test('full German Mac QWERTZ keyboard is visible, including at phone width',asyn
 test('simulator mirrors German keys and respects Backspace and modifiers',async({page})=>{
  await page.locator('.nav [data-page="settings"]').click();
  await page.locator('#modeSelect').selectOption('sim');
- await page.locator('#continueButton').click();
+ await page.locator('.nav [data-page="train"]').click();
  await page.locator('#typingInput').focus();
  await page.keyboard.press('k');
  await expect(page.locator('#typingInput')).toHaveValue('𑀓');
