@@ -1,0 +1,39 @@
+name: Browser acceptance tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/browser.yml
+  workflow_dispatch:
+  schedule:
+    - cron: '39 05 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned Playwright version
+        run: npm install --no-audit --no-fund
+      - name: Install browser
+        run: npx playwright install --with-deps chromium
+      - name: Run desktop and mobile acceptance tests
+        run: npm run test:browser
+      - name: Keep browser reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14
