@@ -297,8 +297,58 @@ function mistakeSound(){if(!saved.sound)return;try{const ctx=new (window.AudioCo
 function onTypingInput(e){if(finished||composing)return;const now=$('typingInput').value;const was=cp(prevValue),arr=cp(now),ref=cp(prompt);let common=0;while(common<was.length&&common<arr.length&&was[common]===arr[common])common++;let suffix=0;while(suffix<was.length-common&&suffix<arr.length-common&&was[was.length-1-suffix]===arr[arr.length-1-suffix])suffix++;const added=arr.slice(common,arr.length-suffix);const removed=was.length-common-suffix;const inserted=added.map((_,i)=>i===0?(pendingGerman||'·'):'');germanTrace.splice(common,removed,...inserted);pendingGerman=null;renderGermanMirror();if(!started&&added.length){started=Date.now();clock=setInterval(()=>{if(currentPage==='train'&&!finished)renderLive()},250)}if(added.length){for(let j=0;j<added.length;j++){const c=added[j],position=common+j;if(c==='\n'&&position!==ref.length)continue;tries++;if(c!==ref[position]){mistakes++;wrongMap[ref[position]||c]=(wrongMap[ref[position]||c]||0)+1;mistakeSound()}}}prevValue=now;const live=renderLive();if(now===prompt&&!finished&&started){finished=true;$('typingInput').disabled=true;clearInterval(clock);clock=null;completeSession(live)}}
 function completeSession({acc,cpm}){if(lesson.id!=='custom'){const x=saved.completed[lesson.id]||{count:0,best:0};x.count++;x.best=Math.max(x.best,acc);saved.completed[lesson.id]=x}const today=new Date().toLocaleDateString('en-CA');if(saved.lastDay!==today){const yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);saved.streak=saved.lastDay===yesterday.toLocaleDateString('en-CA')?saved.streak+1:1;saved.lastDay=today}Object.entries(wrongMap).forEach(([k,n])=>saved.errors[k]=(saved.errors[k]||0)+n);saved.sessions.unshift({id:lesson.id,when:new Date().toISOString(),acc,cpm,errors:mistakes,chars:cp(prompt).length});saved.sessions=saved.sessions.slice(0,100);persist();renderHome();renderStats();$('completeScore').textContent=acc+'%';$('completeText').textContent=T('completeResult').replace('{acc}',acc).replace('{cpm}',cpm).replace('{errors}',mistakes);$('completeAdvice').textContent=T(acc>=96?'highAccuracy':'lowAccuracy');$('completionOverlay').classList.add('show');$('nextModal').disabled=LESSONS.findIndex(x=>x.id===lesson.id)>=LESSONS.length-1||lesson.id==='custom'}
 function insertSign(sign){if(!sign)return;const el=$('typingInput');if(el.disabled||finished)return;const st=el.selectionStart,en=el.selectionEnd;if(sign==='BACKSPACE'){if(st!==en){el.value=el.value.slice(0,st)+el.value.slice(en);el.setSelectionRange(st,st)}else if(st>0){const pre=cp(el.value.slice(0,st));pre.pop();const pos=pre.join('').length;el.value=el.value.slice(0,pos)+el.value.slice(en);el.setSelectionRange(pos,pos)}}else{const val=el.value.slice(0,st)+sign+el.value.slice(en);el.value=val;const pos=st+sign.length;el.setSelectionRange(pos,pos)}onTypingInput({type:'input'});el.focus()}
-function renderKeyboard(){const hide=saved.blind||forceBlind;const caps={Tab:'Tab',CapsLock:'⇪',Enter:'↵',Backspace:'⌫',ShiftLeft:'⇧',ShiftRight:'⇧',AltLeft:'⌥',AltRight:'⌥'};let result='';for(const row of rows){result+='<div class="key-row">';for(let code of row){const special=['Backspace','Tab','CapsLock','Enter','ShiftLeft','ShiftRight','AltLeft','AltRight'].includes(code);let cls='key '+(special?'wide ':'')+(code==='Space'?'space ':'')+(fingers[code]?'f-'+fingers[code]+' ':'')+(code==='KeyF'||code==='KeyJ'?'home ':'');const glyph=special?'':charMap(code,modifierShift,modifierAlt);const label=special?caps[code]:physicalLabel(code);result+=`<button type="button" class="${cls}" data-code="${code}" aria-label="${esc(label)}" title="${esc(label)}"><span class="latin">${esc(label)}</span>${!special&&code!=='Space'?`<span class="glyph brahmi">${hide?'·':esc(glyph||'·')}</span>`:''}</button>`}result+='</div>'} $('keyboard').innerHTML=result;qsa('.key').forEach(btn=>{btn.addEventListener('mousedown',e=>e.preventDefault());btn.addEventListener('click',()=>{const c=btn.dataset.code;if(c.startsWith('Shift')){modifierShift=!modifierShift;renderKeyboard();return}if(c.startsWith('Alt')){modifierAlt=!modifierAlt;renderKeyboard();return}if(c==='Backspace'){pendingGerman=null;insertSign('BACKSPACE');return}if(c==='Enter'){pendingGerman='␣';insertSign(' ');return}if(c==='Tab'||c==='CapsLock'||c.startsWith('Meta')||c.startsWith('Control'))return;const val=charMap(c,modifierShift,modifierAlt);if(val){pendingGerman=germanKeyStroke(c,modifierShift,modifierAlt);insertSign(val)}if(modifierShift||modifierAlt){modifierShift=false;modifierAlt=false;renderKeyboard()}renderLive()})});$('shiftToggle').style.borderColor=modifierShift?'var(--gold)':'';$('altToggle').style.borderColor=modifierAlt?'var(--gold)':'';$('visibilityToggle').textContent=T(hide?'showLegends':'hideLegends');renderLive()}
-const EDICT_GLOSSARY={"vaci-gutī":{"ru":"Сдержанность и охрана речи","de":"Beherrschung und Schutz der Rede","en":"Restraint and care in speech"},"ātpa-pāsaṃḍa":{"ru":"Собственная религиозная традиция","de":"Die eigene religiöse Tradition","en":"One's own religious tradition"},"para-pāsaṃḍa":{"ru":"Другая религиозная традиция","de":"Eine andere religiöse Tradition","en":"Another religious tradition"},"sāra-vaḍhī":{"ru":"Развитие существенного","de":"Wachstum des Wesentlichen","en":"Growth of essential qualities"},"samavayo":{"ru":"Согласие, единение","de":"Eintracht, Zusammenkommen","en":"Concord, coming together"}};
+function renderReferenceMatrix(){
+ const codes=rows.flat().filter(code=>!['Backspace','Tab','CapsLock','Enter','ShiftLeft','ShiftRight','AltLeft','AltRight','MetaLeft','MetaRight','ControlLeft','ControlRight'].includes(code));
+ const head='<thead><tr><th>'+esc(T('matrixKey'))+'</th><th>Normal</th><th>⇧</th><th>⌥</th><th>⇧+⌥</th></tr></thead>';
+ const body=codes.map(code=>'<tr><th>'+esc(physicalLabel(code))+'</th>'+[[false,false],[true,false],[false,true],[true,true]].map(([sh,al])=>{const v=charMap(code,sh,al);return '<td class="brahmi" title="'+esc(v||T('unmapped'))+'">'+esc(v||'—')+'</td>'}).join('')+'</tr>').join('');
+ $('mapTable').innerHTML='<div class="matrix-scroll"><table>'+head+'<tbody>'+body+'</tbody></table></div><p class="micro">Prachya Boonkwan · Brahmi.keylayout · MIT (2019). '+esc(T('physicalHint'))+'</p>';
+}
+function renderKeyboard(){
+ const hide=saved.blind||forceBlind;
+ const caps={Tab:'⇥',CapsLock:'⇪',Enter:'↵',Backspace:'⌫',ShiftLeft:'⇧',ShiftRight:'⇧',AltLeft:'⌥',AltRight:'⌥',MetaLeft:'⌘',MetaRight:'⌘',ControlLeft:'⌃',ControlRight:'⌃'};
+ const specials=new Set(Object.keys(caps));
+ let html='';
+ for(const row of rows){
+  html+='<div class="key-row">';
+  for(const code of row){
+   const special=specials.has(code);
+   const cls='key '+(special?'wide ':'')+(code==='Space'?'space ':'')+(fingers[code]?'f-'+fingers[code]+' ':'')+((code==='KeyF'||code==='KeyJ')?'home ':'');
+   const glyph=special?'':charMap(code,modifierShift,modifierAlt);
+   const label=special?caps[code]:physicalLayerLabel(code,modifierShift,modifierAlt);
+   const name=special?caps[code]:physicalLabel(code)+' → '+(glyph||T('unmapped'));
+   html+='<button type="button" class="'+cls+'" data-code="'+esc(code)+'" data-empty="'+(!glyph)+'" aria-label="'+esc(name)+'" title="'+esc(name)+'"><span class="latin">'+esc(label)+'</span>'+(!special&&code!=='Space'?'<span class="glyph brahmi">'+(hide?'·':esc(glyph||'—'))+'</span>':'')+'</button>';
+  }
+  html+='</div>';
+ }
+ $('keyboard').innerHTML=html;
+ $('sourceLayout').value=saved.physical;
+ $('physicalKeyboardLabel').textContent=({de:'DE · Mac QWERTZ (ISO)',en:'EN · US QWERTY',ru:'RU · ЙЦУКЕН'}[saved.physical]||'Mac');
+ const layer=modifierAlt?(modifierShift?'shiftOption':'option'):(modifierShift?'shift':'base');
+ qsa('[data-layer]').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.layer===layer)));
+ qsa('#keyboard .key').forEach(btn=>{
+  btn.addEventListener('mousedown',e=>e.preventDefault());
+  btn.addEventListener('click',()=>{
+   const code=btn.dataset.code;
+   if(code.startsWith('Shift')){modifierShift=!modifierShift;renderKeyboard();return}
+   if(code.startsWith('Alt')){modifierAlt=!modifierAlt;renderKeyboard();return}
+   if(code.startsWith('Meta')||code.startsWith('Control')||['Tab','CapsLock'].includes(code))return;
+   if(code==='Backspace'){pendingGerman=null;insertSign('BACKSPACE');return}
+   const glyph=code==='Enter'?' ':charMap(code,modifierShift,modifierAlt);
+   if(!glyph){toast(T('inputUnsupported'));return}
+   pendingGerman=germanKeyStroke(code,modifierShift,modifierAlt);
+   insertSign(glyph);
+   if(modifierAlt||modifierShift){modifierAlt=false;modifierShift=false;renderKeyboard()}
+   else renderLive();
+  });
+ });
+ $('shiftToggle').setAttribute('aria-pressed',String(modifierShift));
+ $('altToggle').setAttribute('aria-pressed',String(modifierAlt));
+ $('shiftToggle').style.borderColor=modifierShift?'var(--gold)':'';
+ $('altToggle').style.borderColor=modifierAlt?'var(--gold)':'';
+ $('visibilityToggle').textContent=T(hide?'showLegends':'hideLegends');
+ renderReferenceMatrix();
+ renderLive();
+}
 function renderEdictContext(){const lang=saved.lang;
 $('edictContextTag').textContent=T('edictLabel');
 $('edictContextTitle').textContent=T('edictTitle');
