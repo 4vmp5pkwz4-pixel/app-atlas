@@ -1,0 +1,37 @@
+name: Release Brahmi Atelier QWERTZ v0.2.0 beta
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/bootstrap-brahmi-v020.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify corpus and structure
+        run: |
+          python3 scripts/validate.py
+          node --check assets/site.js
+          python3 scripts/package.py
+      - name: Publish downloadable beta
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view v0.2.0-beta --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            echo "v0.2.0-beta already exists; leaving it unchanged."
+          else
+            gh release create v0.2.0-beta dist/* \
+              --repo "${GITHUB_REPOSITORY}" \
+              --target "${GITHUB_SHA}" \
+              --title "Brahmi Atelier · Mac QWERTZ · RU/DE/EN · Edict XII (beta)" \
+              --notes "Brahmi Atelier update: English interface for lessons and help, full responsive German Mac ISO QWERTZ virtual keyboard, dual Brahmi/German typing trace, Edict XII sections d–i with bilingual/trilingual educational commentary and source links. Includes a standalone brahmi.html and an itch.io-ready brahmi-itch-html.zip, Buddhabrot standalone build, and full APP ATLAS site ZIP. Historical Unicode Brahmi is a didactic transliteration, not stone facsimile. Automated Chromium desktop/mobile regression suite: 24 passed on the verified source commit; this release remains beta pending legal and licensing review." \
+              --prerelease
+          fi
