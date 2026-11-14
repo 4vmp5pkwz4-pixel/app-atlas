@@ -1,0 +1,32 @@
+name: Suggest an app or improvement
+description: Propose a new interactive project or improvement
+title: "[Idea] "
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: What should the application help someone accomplish?
+      description: Describe the user problem, not only the technology.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Education and training
+        - Scientific visualization
+        - Research instrument
+        - Accessibility
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: audience
+    attributes:
+      label: Who would use it, and how should it run?
+      placeholder: "For example: phone and desktop, no login, works offline"
+  - type: textarea
+    id: references
+    attributes:
+      label: References or examples (optional)

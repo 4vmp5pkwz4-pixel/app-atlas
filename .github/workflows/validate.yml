@@ -14,5 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate public catalog and local links
+      - name: Validate JS syntax
+        run: node --check assets/site.js
+      - name: Validate project catalog and local paths
         run: python3 scripts/validate.py

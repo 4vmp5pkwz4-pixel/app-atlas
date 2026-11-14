@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://4vmp5pkwz4-pixel.github.io/app-atlas/sitemap.xml
