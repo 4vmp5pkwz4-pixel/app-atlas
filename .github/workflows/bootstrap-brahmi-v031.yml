@@ -1,0 +1,49 @@
+name: Release Brahmi Atelier Universal Mac Keyboard v0.3.1 beta
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/bootstrap-brahmi-v031.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate full macOS source mapping and website
+        run: |
+          python3 scripts/validate.py
+          python3 scripts/verify_brahmi.py
+      - name: Install browser tests
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Block release until all desktop/mobile acceptance tests pass
+        run: npm run test:browser
+      - name: Create HTML app and itch.io/website ZIP bundles
+        run: python3 scripts/package.py
+      - name: Publish immutable beta release with SHA-256 checksums
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v0.3.1-beta --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            echo "v0.3.1-beta exists, leaving it unchanged"
+          else
+            gh release create v0.3.1-beta dist/* \
+              --repo "${GITHUB_REPOSITORY}" \
+              --target "${GITHUB_SHA}" \
+              --title "Brahmi Atelier · Universal Mac Keyboards RU/EN/DE · v0.3.1 beta" \
+              --notes "Verified universal-keyboard Brahmi Atelier. Keep the native Russian, English or German macOS input source selected: the editable top row reflects physical keypress characters and the read-only lower row renders Brahmi from the key positions. Includes the authentic Prachya Boonkwan macOS Brahmi ANSI mapping (Normal, Shift, Option and Shift+Option) and preserves empty key cells, including Option+Space. Complete visual mapping table and compact QWERTZ ISO/QWERTY/ЙЦУКЕН keys, 24 courses including Option, Shift+Option and interleaving, spaced practice heuristics, historical Prakrit Edict XII and RU/DE/EN translations. MIT mapping attribution retained. Standalone brahmi.html, itch HTML ZIP, website bundle and checksums included. CI checks full mapping and desktop/mobile Chromium tests before publishing. Beta status: physical macOS Safari, unusual dead keys and IME behaviors require hands-on verification." \
+              --prerelease
+          fi
