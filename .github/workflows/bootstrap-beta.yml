@@ -1,0 +1,37 @@
+name: Publish first public beta download
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/bootstrap-beta.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate release sources
+        run: |
+          python3 scripts/validate.py
+          node --check assets/site.js
+      - name: Package portable apps and website
+        run: python3 scripts/package.py
+      - name: Publish one beta release if absent
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v0.1.0-beta --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            echo "Beta release already exists; leaving it unchanged."
+          else
+            gh release create v0.1.0-beta dist/* \
+              --repo "${GITHUB_REPOSITORY}" \
+              --target "${GITHUB_SHA}" \
+              --title "APP ATLAS v0.1.0 beta — six interactive projects" \
+              --notes "Initial public beta of APP ATLAS. Includes six project pages, two self-contained HTML applications (Brahmi Atelier and Buddhabrot), two itch.io-ready ZIP packages, and a full static-site bundle. Source ZIP links for other projects are on the catalog. Features and legal notice are still being reviewed; this is a beta, not a scientific verification certificate." \
+              --prerelease
+          fi
