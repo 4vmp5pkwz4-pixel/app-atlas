@@ -15,7 +15,7 @@ test('complete English interface and translated lessons',async({page})=>{
  await expect(page.locator('html')).toHaveAttribute('lang','en');
  await expect(page.locator('[data-i18n="navHome"]')).toHaveText('Overview');
  await expect(page.locator('[data-i18n="navSettings"]')).toHaveText('Settings');
- await expect(page.locator('#lessonGrid .lesson')).toHaveCount(21);
+ await expect(page.locator('#lessonGrid .lesson')).toHaveCount(24);
  await expect(page.locator('[data-lesson="home1"] .lesson-title')).toHaveText('Home-row consonants');
  await page.locator('#continueButton').click();
  await expect(page.locator('#lessonName')).toHaveText('Home-row consonants');
@@ -75,7 +75,7 @@ test('Edict XII d–i is provided in all three languages with source attribution
     full:t.find(x=>x.id==='edict12di')?.roman,
     english:t.find(x=>x.id==='edict12di')?.en};
  });
- expect(content.lessons).toBe(21);
+ expect(content.lessons).toBe(24);
  expect(content.sections.every(Boolean)).toBe(true);
  expect(content.sections[0]).toContain('vaci-gutī');
  expect(content.sections[4]).toContain('upahanāti');
@@ -154,4 +154,16 @@ test('default focus is ordinary input, Brahmi is read-only and source can switch
  await expect(page.locator('#germanMirror')).not.toHaveAttribute('readonly',/./);
  await expect(page.locator('#germanMirror')).toBeFocused();
  await expect(page.locator('#sourceLayout option')).toHaveCount(3);
+});
+
+test('new modifier lessons exist in all three languages and are selectable',async({page})=>{
+ const ids=await page.evaluate(()=>window.BrahmiAtelierTest.LESSONS.filter(x=>['option-map','shift-option-map','four-layer-mix'].includes(x.id)).map(x=>({id:x.id,ru:x.ru,en:x.en,de:x.de,prompts:x.prompts})));
+ expect(ids).toHaveLength(3);
+ for(const lesson of ids){expect(lesson.ru.length).toBeGreaterThan(8);expect(lesson.de.length).toBeGreaterThan(8);expect(lesson.en.length).toBeGreaterThan(8);expect(lesson.prompts.length).toBeGreaterThanOrEqual(2)}
+ await page.locator('#langSelect').selectOption('en');
+ await page.locator('[data-lesson="option-map"]').click();
+ await expect(page.locator('#lessonName')).toHaveText('Option: uncommon signs');
+ await expect(page.locator('#prompt')).toContainText('𑀹');
+ await page.locator('[data-layer="option"]').click();
+ await expect(page.locator('.key[data-code="KeyA"] .glyph')).toHaveText('𑀹');
 });
