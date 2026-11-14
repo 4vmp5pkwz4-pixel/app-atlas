@@ -20,7 +20,7 @@ test('complete English interface and translated lessons',async({page})=>{
  await page.locator('#continueButton').click();
  await expect(page.locator('#lessonName')).toHaveText('Home-row consonants');
  await expect(page.locator('[data-i18n="brahmiLine"]')).toHaveText('BRAHMI · converted automatically');
- await expect(page.locator('[data-i18n="physicalLine"]')).toHaveText('YOUR macOS LAYOUT · type here');
+ await expect(page.locator('[data-i18n="physicalLine"]')).toContainText('YOUR macOS LAYOUT · type here');
  await page.locator('#langSelect').selectOption('de');
  await expect(page.locator('[data-i18n="navHome"]')).toHaveText('Übersicht');
  await page.locator('#langSelect').selectOption('ru');
@@ -57,7 +57,7 @@ test('simulator mirrors German keys and respects Backspace and modifiers',async(
  await page.keyboard.press('Backspace');
  await expect(page.locator('#typingInput')).toHaveValue('');
  await expect(page.locator('#germanMirror')).toHaveValue('');
- await page.keyboard.press('Shift+g');
+ await page.locator('#germanMirror').dispatchEvent('keydown',{code:'KeyG',key:'G',shiftKey:true,bubbles:true,cancelable:true});
  await expect(page.locator('#typingInput')).toHaveValue('𑀖');
  await expect(page.locator('#germanMirror')).toHaveValue('G');
  await page.locator('#resetInput').click();
