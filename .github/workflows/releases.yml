@@ -13,7 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Validate catalog
-        run: python3 scripts/validate.py
+        run: |
+          python3 scripts/validate.py
+          python3 scripts/verify_brahmi.py
       - name: Build release assets
         run: python3 scripts/package.py
       - name: Publish tagged GitHub Release

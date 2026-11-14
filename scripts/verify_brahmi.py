@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+"""Validate Brahmi Atelier against authoritative four-layer Mac source. Python stdlib + Node."""
+import json
+import pathlib
+import re
+import subprocess
+import tempfile
+
+ROOT=pathlib.Path(__file__).resolve().parents[1]
+html=(ROOT/"apps/brahmi/index.html").read_text(encoding="utf-8")
+reference=json.loads((ROOT/"data/macos-brahmi-reference.json").read_text(encoding="utf-8"))
+match=re.search(r"const BRAHMI_LAYERS=(\{[^\n;]+\});",html)
+assert match, "Missing embedded Brahmi source layer data"
+actual=json.loads(match.group(1))
+assert actual==reference["layers"], "Web app Brahmi layers diverged from verified Mac .keylayout source"
+assert set(actual)=={"base","shift","option","shiftOption"}
+for layer in actual.values():
+    assert len(layer)>=45, "Incomplete physical key map"
+assert actual["base"]["KeyQ"]=="𑀅"
+assert actual["shift"]["KeyQ"]=="𑀆"
+assert actual["option"]["KeyA"]=="𑀹"
+assert actual["shiftOption"]["KeyI"]=="𑀈"
+assert actual["option"]["KeyS"]=="", "Empty original Option layer must stay empty"
+assert actual["base"]["Space"]==" ", "Preserve source Unicode en-space; normalize at exercise runtime only"
+assert 'id="germanMirror"' in html and 'id="typingInput"' in html
+assert 'id="sourceLayout"' in html and all('value="'+x+'"' in html for x in ("ru","de","en"))
+assert 'data-layer="shiftOption"' in html
+assert "event.code" in (ROOT/"docs/MACOS_BRAHMI_SOURCE.md").read_text(encoding="utf-8")
+assert "if(!saved.independentModeInitialized)" in html
+scripts=re.findall(r"<script(?:\s[^>]*)?>([\s\S]*?)</script>",html)
+assert scripts, "No inline executable JS"
+for i,script in enumerate(scripts):
+    if not script.strip():continue
+    with tempfile.TemporaryDirectory() as work:
+        p=pathlib.Path(work)/f"brahmi-{i}.js"
+        p.write_text(script,encoding="utf-8")
+        result=subprocess.run(["node","--check",str(p)],capture_output=True,text=True)
+        assert result.returncode==0, f"Brahmi JS syntax failed: {result.stderr}"
+print("OK: original macOS Brahmi four layers, UI, and embedded JS syntax")

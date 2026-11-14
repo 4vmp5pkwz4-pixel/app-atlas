@@ -16,6 +16,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate project catalog
         run: python3 scripts/validate.py
+      - name: Validate Mac Brahmi mappings
+        run: python3 scripts/verify_brahmi.py
       - name: Package website and self-contained apps
         run: python3 scripts/package.py
       - name: Upload ready-to-distribute files

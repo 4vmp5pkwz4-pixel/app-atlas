@@ -18,3 +18,5 @@ jobs:
         run: node --check assets/site.js
       - name: Validate project catalog and local paths
         run: python3 scripts/validate.py
+      - name: Verify Brahmi Mac source layers and inline JavaScript
+        run: python3 scripts/verify_brahmi.py
