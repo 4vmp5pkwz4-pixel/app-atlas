@@ -1,0 +1,61 @@
+name: Publish selected HTML app to itch.io
+
+on:
+  workflow_dispatch:
+    inputs:
+      application:
+        description: "App to publish"
+        type: choice
+        required: true
+        options:
+          - brahmi
+          - buddhabrot
+      itch_target:
+        description: "Existing itch.io page as username/slug (e.g. creator/brahmi-atelier)"
+        required: true
+        type: string
+      version:
+        description: "Build version shown on itch.io (e.g. 0.1.0-beta)"
+        required: true
+        type: string
+        default: "0.1.0-beta"
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: itch-publishing
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate public app sources
+        run: python3 scripts/validate.py
+      - name: Make browser-playable packages
+        run: python3 scripts/package.py
+      - name: Set up itch.io Butler
+        uses: jdno/setup-butler@v2.0.0
+      - name: Upload selected package
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+          ITCH_TARGET: ${{ inputs.itch_target }}
+          APP: ${{ inputs.application }}
+          VERSION: ${{ inputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "${BUTLER_API_KEY:-}" ]]; then
+            echo "::error::Set BUTLER_API_KEY in GitHub Actions secrets first."
+            exit 1
+          fi
+          if [[ ! "${ITCH_TARGET}" =~ ^[a-z0-9][a-z0-9_-]*/[a-z0-9][a-z0-9_-]*$ ]]; then
+            echo "::error::Use existing itch.io username/project-slug (lowercase, hyphens)."
+            exit 1
+          fi
+          if [[ ! "${VERSION}" =~ ^[0-9A-Za-z._+-]+$ ]]; then
+            echo "::error::Unexpected version format."
+            exit 1
+          fi
+          PACKAGE="dist/${APP}-itch-html.zip"
+          test -s "${PACKAGE}"
+          butler push "${PACKAGE}" "${ITCH_TARGET}:html5" --userversion "${VERSION}"
