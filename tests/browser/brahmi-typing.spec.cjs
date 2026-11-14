@@ -1,7 +1,13 @@
 const {test,expect}=require('@playwright/test');
 
 test.beforeEach(async({page})=>{
+ const pageErrors=[];
+ page.on('pageerror',err=>pageErrors.push(err.message));
  await page.goto('/apps/brahmi/index.html',{waitUntil:'domcontentloaded'});
+ await expect.poll(async()=>{
+  const ready=await page.evaluate(()=>Boolean(window.BrahmiAtelierTest));
+  return ready?'ready':pageErrors.join(' | ')||'not ready';
+ },{timeout:6000,message:'Brahmi runtime initialization failed; inspect page error'}).toBe('ready');
 });
 
 test('complete English interface and translated lessons',async({page})=>{
@@ -13,8 +19,8 @@ test('complete English interface and translated lessons',async({page})=>{
  await expect(page.locator('[data-lesson="home1"] .lesson-title')).toHaveText('Home-row consonants');
  await page.locator('#continueButton').click();
  await expect(page.locator('#lessonName')).toHaveText('Home-row consonants');
- await expect(page.locator('[data-i18n="brahmiLine"]')).toHaveText('BRAHMI · typed characters');
- await expect(page.locator('[data-i18n="germanLine"]')).toHaveText('YOUR macOS LAYOUT · type here');
+ await expect(page.locator('[data-i18n="brahmiLine"]')).toHaveText('BRAHMI · converted automatically');
+ await expect(page.locator('[data-i18n="physicalLine"]')).toHaveText('YOUR macOS LAYOUT · type here');
  await page.locator('#langSelect').selectOption('de');
  await expect(page.locator('[data-i18n="navHome"]')).toHaveText('Übersicht');
  await page.locator('#langSelect').selectOption('ru');
@@ -55,10 +61,10 @@ test('simulator mirrors German keys and respects Backspace and modifiers',async(
  await expect(page.locator('#typingInput')).toHaveValue('𑀖');
  await expect(page.locator('#germanMirror')).toHaveValue('G');
  await page.locator('#resetInput').click();
- await expect(page.locator('#germanMirror')).toHaveText('—');
+ await expect(page.locator('#germanMirror')).toHaveValue('');
  await page.locator('.key[data-code="KeyK"]').click();
  await expect(page.locator('#typingInput')).toHaveValue('𑀓');
- await expect(page.locator('#germanMirror')).toHaveText('k');
+ await expect(page.locator('#germanMirror')).toHaveValue('k');
 });
 
 test('Edict XII d–i is provided in all three languages with source attribution',async({page})=>{
