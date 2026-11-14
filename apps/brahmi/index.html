@@ -145,8 +145,10 @@ TEXTS.forEach(x=>x.brahmi=iastToBrahmi(x.roman));
 const BRAHMI_LAYERS={"base":{"KeyA":"𑀸","KeyS":"𑀲","KeyD":"𑀤","KeyF":"𑁆","KeyH":"𑀳","KeyG":"𑀕","KeyZ":"𑀝","KeyX":"𑀟","KeyC":"𑀘","KeyV":"𑀯","KeyB":"𑀩","KeyQ":"𑀅","KeyW":"𑀰","KeyE":"𑁂","KeyR":"𑀭","KeyY":"𑀬","KeyT":"𑀢","Digit1":"𑁧","Digit2":"𑁨","Digit3":"𑁩","Digit4":"𑁪","Digit6":"𑁬","Digit5":"𑁫","Equal":"𑀉","Digit9":"𑁯","Digit7":"𑁭","Minus":"𑀇","Digit8":"𑁮","Digit0":"𑁦","BracketRight":"𑁀","KeyO":"𑁄","KeyU":"𑀼","BracketLeft":"𑀾","KeyI":"𑀺","KeyP":"𑀧","KeyL":"𑀮","KeyJ":"𑀚","Quote":"𑀗","KeyK":"𑀓","Semicolon":"𑁉","Backslash":"𑀏","Comma":"𑀑","Slash":"𑁋","KeyN":"𑀦","KeyM":"𑀫","Period":"𑁇","Space":" ","Backquote":"𑁍"},"shift":{"KeyA":"𑀸","KeyS":"𑀲","KeyD":"𑀥","KeyF":"𑁆","KeyH":"𑀂","KeyG":"𑀖","KeyZ":"𑀞","KeyX":"𑀠","KeyC":"𑀙","KeyV":"𑀯","KeyB":"𑀪","KeyQ":"𑀆","KeyW":"𑀱","KeyE":"𑁃","KeyR":"𑀭","KeyY":"𑀜","KeyT":"𑀣","Digit1":"1","Digit2":"2","Digit3":"3","Digit4":"4","Digit6":"6","Digit5":"5","Equal":"𑀊","Digit9":"9","Digit7":"7","Minus":"𑀈","Digit8":"8","Digit0":"0","BracketRight":"𑁁","KeyO":"𑁅","KeyU":"𑀽","BracketLeft":"𑀿","KeyI":"𑀻","KeyP":"𑀨","KeyL":"𑀴","KeyJ":"𑀛","Quote":"𑀗","KeyK":"𑀔","Semicolon":"𑁊","Backslash":"𑀐","Comma":"𑀒","Slash":"𑁌","KeyN":"𑀡","KeyM":"𑀁","Period":"𑁈","Space":" ","Backquote":"𑁍"},"option":{"KeyA":"𑀹","KeyS":"","KeyD":"","KeyF":"","KeyH":"","KeyG":"","KeyZ":"","KeyX":"","KeyC":"","KeyV":"","KeyB":"","KeyQ":"𑀅","KeyW":"","KeyE":"𑀏","KeyR":"𑀶","KeyY":"","KeyT":"","Digit1":"𑁒","Digit2":"𑁓","Digit3":"𑁔","Digit4":"𑁕","Digit6":"𑁗","Digit5":"𑁖","Equal":"𑁥","Digit9":"𑁚","Digit7":"𑁘","Minus":"𑁤","Digit8":"𑁙","Digit0":"𑁦","BracketRight":"𑀍","KeyO":"𑀑","KeyU":"𑀉","BracketLeft":"𑀋","KeyI":"𑀇","KeyP":"","KeyL":"𑀵","KeyJ":"","Quote":"","KeyK":"","Semicolon":"","Backslash":"","Comma":"","Slash":"","KeyN":"𑀷","KeyM":"𑀀","Period":"","Space":"","Backquote":""},"shiftOption":{"KeyA":"","KeyS":"","KeyD":"","KeyF":"","KeyH":"","KeyG":"","KeyZ":"","KeyX":"","KeyC":"","KeyV":"","KeyB":"","KeyQ":"𑀆","KeyW":"","KeyE":"𑀐","KeyR":"","KeyY":"","KeyT":"","Digit1":"𑁛","Digit2":"𑁜","Digit3":"𑁝","Digit4":"𑁞","Digit6":"𑁠","Digit5":"𑁟","Equal":"","Digit9":"𑁣","Digit7":"𑁡","Minus":"","Digit8":"𑁢","Digit0":"𑁦","BracketRight":"𑀎","KeyO":"𑀒","KeyU":"𑀊","BracketLeft":"𑀌","KeyI":"𑀈","KeyP":"","KeyL":"","KeyJ":"","Quote":"","KeyK":"","Semicolon":"","Backslash":"","Comma":"","Slash":"","KeyN":"","KeyM":"","Period":"","Space":"","Backquote":""}};
 const KC=BRAHMI_LAYERS.base, KS=BRAHMI_LAYERS.shift, KA=BRAHMI_LAYERS.option, KAS=BRAHMI_LAYERS.shiftOption;
 const rows=[['Backquote','Digit1','Digit2','Digit3','Digit4','Digit5','Digit6','Digit7','Digit8','Digit9','Digit0','Minus','Equal','Backspace'],['Tab','KeyQ','KeyW','KeyE','KeyR','KeyT','KeyY','KeyU','KeyI','KeyO','KeyP','BracketLeft','BracketRight'],['CapsLock','KeyA','KeyS','KeyD','KeyF','KeyG','KeyH','KeyJ','KeyK','KeyL','Semicolon','Quote','Backslash','Enter'],['ShiftLeft','IntlBackslash','KeyZ','KeyX','KeyC','KeyV','KeyB','KeyN','KeyM','Comma','Period','Slash','ShiftRight'],['ControlLeft','AltLeft','MetaLeft','Space','MetaRight','AltRight','ControlRight']];
-const physDe={IntlBackslash:'<',Backslash:'#',Backquote:'^',Minus:'ß',Equal:'´',BracketLeft:'Ü',BracketRight:'+',Semicolon:'Ö',Quote:'Ä',Slash:'-',KeyY:'Z',KeyZ:'Y',Comma:',',Period:'.',Space:'SPACE'};
-const physUS={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Slash:'/',Space:'SPACE'};
+const physDe={IntlBackslash:'<',Backslash:'#',Backquote:'^',Minus:'ß',Equal:'´',BracketLeft:'Ü',BracketRight:'+',Semicolon:'Ö',Quote:'Ä',Slash:'-',KeyY:'Z',KeyZ:'Y',Comma:',',Period:'.'};
+const physUS={Backquote:'`',Minus:'-',Equal:'=',BracketLeft:'[',BracketRight:']',Semicolon:';',Quote:"'",Slash:'/',IntlBackslash:'\\',Backslash:'\\'};
+const physRu={Backquote:'Ё',KeyQ:'Й',KeyW:'Ц',KeyE:'У',KeyR:'К',KeyT:'Е',KeyY:'Н',KeyU:'Г',KeyI:'Ш',KeyO:'Щ',KeyP:'З',BracketLeft:'Х',BracketRight:'Ъ',KeyA:'Ф',KeyS:'Ы',KeyD:'В',KeyF:'А',KeyG:'П',KeyH:'Р',KeyJ:'О',KeyK:'Л',KeyL:'Д',Semicolon:'Ж',Quote:'Э',KeyZ:'Я',KeyX:'Ч',KeyC:'С',KeyV:'М',KeyB:'И',KeyN:'Т',KeyM:'Ь',Comma:'Б',Period:'Ю',Slash:'.',Minus:'-',Equal:'=',IntlBackslash:'\\',Backslash:'\\'};
+const PHYSICAL_PRESETS={de:physDe,en:physUS,ru:physRu};
 const fingers={};const fingerGroups={lp:['KeyQ','KeyA','KeyZ','Digit1','Backquote'],lr:['KeyW','KeyS','KeyX','Digit2'],lm:['KeyE','KeyD','KeyC','Digit3'],li:['KeyR','KeyT','KeyF','KeyG','KeyV','KeyB','Digit4','Digit5'],ri:['KeyY','KeyU','KeyH','KeyJ','KeyN','KeyM','Digit6','Digit7'],rm:['KeyI','KeyK','Comma','Digit8'],rr:['KeyO','KeyL','Period','Digit9'],rp:['KeyP','BracketLeft','BracketRight','Semicolon','Quote','Slash','Digit0','Minus','Equal','Backspace','Enter'],thumb:['Space','AltLeft','AltRight','MetaLeft','MetaRight','ControlLeft','ControlRight']};Object.entries(fingerGroups).forEach(([f,ks])=>ks.forEach(k=>fingers[k]=f));
 const LESSONS=[
 {id:'home1',ru:'Опорные согласные',de:'Grundstellung: Konsonanten',ruDesc:'Согласные K, L, S, D, G, H, J. Практикуй, не глядя вниз.',deDesc:'K, L, S, D, G, H, J – ohne auf die Hände zu schauen.',kind:'keys',prompts:['𑀓 𑀮 𑀲 𑀤 𑀳 𑀚 𑀕','𑀲 𑀓 𑀤 𑀮 𑀚 𑀳 𑀕 𑀓','𑀓 𑀤 𑀲 𑀮 𑀓 𑀕 𑀳'],hintRu:'Пальцы исходно стоят на A S D F и J K L Ö.',hintDe:'Die Finger ruhen auf A S D F und J K L Ö.'},
@@ -191,26 +193,74 @@ function T(key){return (I18N[saved.lang]||I18N.en)[key]||I18N.en[key]||key}funct
 const cp=s=>Array.from(String(s||''));const isBrahmi=c=>c&&cp(c).some(x=>{const n=x.codePointAt(0);return n>=0x11000&&n<=0x1107f});
 let currentPage='home',lesson=LESSONS[0],prompt='',romanPrompt='',prevValue='',started=0,clock=null,tries=0,mistakes=0,wrongMap={},finished=false,modifierShift=false,modifierAlt=false,showRoman=true,forceBlind=false,calKey=null,composing=false,focusMode=false;
 let germanTrace=[],pendingGerman=null; // Physical QWERTZ keystrokes alongside Unicode Brahmi.
-function charMap(code,shift=false,alt=false){const key=code+'|'+(shift?'1':'0')+(alt?'1':'0');if(Object.prototype.hasOwnProperty.call(saved.cal,key))return saved.cal[key];if(code==='Space')return ' ';if(alt&&shift)return KAS[code]||'';if(alt)return KA[code]||'';if(shift)return KS[code]||KC[code]||'';return KC[code]||''}
-function reverseLookup(c){const passes=[[false,false],[true,false],[false,true],[true,true]];const keys=[...Object.keys(KC),...Object.keys(KA),...Object.keys(KAS)];const seen=new Set();for(const [sh,al] of passes)for(const key of keys){const id=key+'|'+sh+al;if(seen.has(id))continue;seen.add(id);if(charMap(key,sh,al)===c)return{key,sh,al}}return null}
-function physicalLabel(code){if(code==='Backspace')return '⌫';if(code==='Enter')return '↵';if(code==='Tab')return '⇥';if(code==='CapsLock')return '⇪';if(code.startsWith('Shift'))return '⇧';if(code.startsWith('Alt'))return '⌥';if(code==='Space')return 'Leertaste';const map=physDe;if(map[code])return map[code];if(code.startsWith('Key'))return code.slice(3);if(code.startsWith('Digit'))return code.slice(5);return code}
-
-function germanKeyStroke(code,shift=false,alt=false){
- if(code==='Space'||code==='Enter')return '␣';
- if(!code||!/^((Key|Digit)[A-Z0-9]|Backquote|Minus|Equal|BracketLeft|BracketRight|Semicolon|Quote|Comma|Period|Slash|IntlBackslash|Backslash)$/.test(code))return '';
- const base=physicalLabel(code);
- const upper={Digit1:'!',Digit2:'"',Digit3:'§',Digit4:'$',Digit5:'%',Digit6:'&',Digit7:'/',Digit8:'(',Digit9:')',Digit0:'=',Minus:'?',Equal:'´',Backquote:'°',BracketLeft:'Ü',BracketRight:'*',Semicolon:'Ö',Quote:'Ä',IntlBackslash:'>',Backslash:"'",Comma:';',Period:':',Slash:'_'};
- const plain=shift?(upper[code]||base.toUpperCase()):base.toLowerCase();
- return alt?'⌥'+(shift?'⇧':'')+'+'+plain:plain;
+function charMap(code,shift=false,alt=false){
+ const layer=alt?(shift?KAS:KA):(shift?KS:KC);
+ if(code==='Space')return ' '; // normalize source base U+2002 to lesson word-spacing U+0020
+ return Object.prototype.hasOwnProperty.call(layer,code)?layer[code]:'';
 }
-function renderGermanMirror(){$('germanMirror').textContent=germanTrace.filter(Boolean).join(' ')||'—'}
+function reverseLookup(c){
+ if(c===' ')return{key:'Space',sh:false,al:false};
+ for(const [sh,al,m] of [[false,false,KC],[true,false,KS],[false,true,KA],[true,true,KAS]]){
+   for(const [key,value] of Object.entries(m))if(value&&value===c)return{key,sh,al};
+ }
+ return null;
+}
+function physicalLabel(code){
+ const special={Backspace:'⌫',Enter:'↵',Tab:'⇥',CapsLock:'⇪',ShiftLeft:'⇧',ShiftRight:'⇧',AltLeft:'⌥',AltRight:'⌥',MetaLeft:'⌘',MetaRight:'⌘',ControlLeft:'⌃',ControlRight:'⌃',Space:'Space'};
+ if(special[code])return special[code];
+ const x=(PHYSICAL_PRESETS[saved.physical]||physDe)[code];
+ if(x!==undefined)return x;
+ if(code.startsWith('Key'))return code.slice(3);
+ if(code.startsWith('Digit'))return code.slice(5);
+ return code;
+}
+function physicalLayerLabel(code,shift=false,alt=false){
+ const observed=saved.observed?.[saved.physical+'|'+code+'|'+(shift?'1':'0')+(alt?'1':'0')];
+ if(observed)return observed;
+ const basic=physicalLabel(code);
+ if(code==='Space')return '␣';
+ if(alt)return '⌥'+(shift?'⇧':'')+'+'+basic;
+ if(!shift)return basic;
+ if(code.startsWith('Key')||/^[\p{L}]$/u.test(basic))return basic.toUpperCase();
+ const ruShift={Digit1:'!',Digit2:'"',Digit3:'№',Digit4:';',Digit5:'%',Digit6:':',Digit7:'?',Digit8:'*',Digit9:'(',Digit0:')',Comma:'<',Period:'>',Slash:','};
+ const deShift={Digit1:'!',Digit2:'"',Digit3:'§',Digit4:'$',Digit5:'%',Digit6:'&',Digit7:'/',Digit8:'(',Digit9:')',Digit0:'=',Minus:'?',BracketRight:'*',IntlBackslash:'>',Comma:';',Period:':',Slash:'_'};
+ const enShift={Digit1:'!',Digit2:'@',Digit3:'#',Digit4:'$',Digit5:'%',Digit6:'^',Digit7:'&',Digit8:'*',Digit9:'(',Digit0:')',Minus:'_',Equal:'+',BracketLeft:'{',BracketRight:'}',Semicolon:':',Quote:'"',Comma:'<',Period:'>',Slash:'?',Backquote:'~'};
+ const m=saved.physical==='ru'?ruShift:saved.physical==='en'?enShift:deShift;
+ return m[code]||basic;
+}
+function germanKeyStroke(code,shift=false,alt=false,actualKey=null){
+ if(code==='Space'||code==='Enter')return ' ';
+ if(typeof actualKey==='string'&&actualKey&&actualKey!=='Unidentified'){
+    if(actualKey==='Dead')return '◌'; // actual OS output is a dead key, not a character
+    if([...actualKey].length<=5&&!['Shift','Alt','Meta','Control','CapsLock'].includes(actualKey))return actualKey;
+ }
+ return physicalLayerLabel(code,shift,alt);
+}
+function renderGermanMirror(){
+ const area=$('germanMirror');
+ area.value=germanTrace.filter(x=>x!==undefined).join('');
+ area.scrollTop=area.scrollHeight;
+}
 function germanUpcoming(target,start){
  const visible=target.slice(start,start+24).map(c=>{
    if(c===' ')return '␣';
    const r=reverseLookup(c);
-   return r?germanKeyStroke(r.key,r.sh,r.al):'·';
+   return r?(r.al?'⌥+':'')+(r.sh?'⇧+':'')+physicalLabel(r.key):'—';
  }).join(' ');
  $('expectedGerman').textContent=visible+(target.length>start+24?' …':'')||'—';
+}
+function trainingFocus(){
+ const field=$(saved.mode==='native'?'typingInput':'germanMirror');
+ if(field&&!field.disabled)field.focus({preventScroll:true});
+}
+function syncInputMode(){
+ const native=saved.mode==='native';
+ $('typingInput').readOnly=!native;
+ $('germanMirror').readOnly=native;
+ $('germanMirror').placeholder=T('physicalPlaceholder');
+ $('physicalInputLabel').textContent=T('physicalLine')+' · '+({ru:'РУССКИЙ',de:'DEUTSCH',en:'ENGLISH'}[saved.physical]||'DE');
+ $('germanMirror').setAttribute('aria-label',T('physicalLine'));
+ $('typingInput').setAttribute('aria-label',T('brahmiLine'));
 }
 function fingerName(f){return T(({lp:'fingerLp',lr:'fingerLr',lm:'fingerLm',li:'fingerLi',ri:'fingerRi',rm:'fingerRm',rr:'fingerRr',rp:'fingerRp',thumb:'fingerThumb'})[f]||'fingerThumb')}
 function setLanguage(lang){saved.lang=I18N[lang]?lang:'en';document.documentElement.lang=saved.lang;qsa('[data-i18n]').forEach(el=>{el.textContent=T(el.dataset.i18n)});qsa('[data-i18n-html]').forEach(el=>{el.innerHTML=T(el.dataset.i18nHtml)});$('typingInput').placeholder=lang==='de'?'Hier Brahmi schreiben …':lang==='en'?'Type Brahmi here…':'Здесь печатай брахми…';$('typingInput').setAttribute('aria-label',T('brahmiLine'));$('germanMirror').setAttribute('aria-label',T('germanLine'));$('langSelect').value=saved.lang;renderAll();persist()}
