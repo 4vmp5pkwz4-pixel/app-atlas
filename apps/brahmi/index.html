@@ -150,6 +150,28 @@ TEXTS.forEach(x=>x.brahmi=iastToBrahmi(x.roman));
 
 /* Authentic Prachya Boonkwan macOS Brahmi layout: 2019 ANSI layer indexes 0, 1, 2, 4.
    See data/macos-brahmi-reference.json. Empty string means NO output, not fallback. */
+/* Original macOS Brahmi keyboard mapping notice
+Copyright (c) 2019 Prachya Boonkwan
+Source: https://github.com/kaamanita/brahmi/blob/master/Brahmi.keylayout
+MIT License:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
 const BRAHMI_LAYERS={"base":{"KeyA":"𑀸","KeyS":"𑀲","KeyD":"𑀤","KeyF":"𑁆","KeyH":"𑀳","KeyG":"𑀕","KeyZ":"𑀝","KeyX":"𑀟","KeyC":"𑀘","KeyV":"𑀯","KeyB":"𑀩","KeyQ":"𑀅","KeyW":"𑀰","KeyE":"𑁂","KeyR":"𑀭","KeyY":"𑀬","KeyT":"𑀢","Digit1":"𑁧","Digit2":"𑁨","Digit3":"𑁩","Digit4":"𑁪","Digit6":"𑁬","Digit5":"𑁫","Equal":"𑀉","Digit9":"𑁯","Digit7":"𑁭","Minus":"𑀇","Digit8":"𑁮","Digit0":"𑁦","BracketRight":"𑁀","KeyO":"𑁄","KeyU":"𑀼","BracketLeft":"𑀾","KeyI":"𑀺","KeyP":"𑀧","KeyL":"𑀮","KeyJ":"𑀚","Quote":"𑀗","KeyK":"𑀓","Semicolon":"𑁉","Backslash":"𑀏","Comma":"𑀑","Slash":"𑁋","KeyN":"𑀦","KeyM":"𑀫","Period":"𑁇","Space":" ","Backquote":"𑁍"},"shift":{"KeyA":"𑀸","KeyS":"𑀲","KeyD":"𑀥","KeyF":"𑁆","KeyH":"𑀂","KeyG":"𑀖","KeyZ":"𑀞","KeyX":"𑀠","KeyC":"𑀙","KeyV":"𑀯","KeyB":"𑀪","KeyQ":"𑀆","KeyW":"𑀱","KeyE":"𑁃","KeyR":"𑀭","KeyY":"𑀜","KeyT":"𑀣","Digit1":"1","Digit2":"2","Digit3":"3","Digit4":"4","Digit6":"6","Digit5":"5","Equal":"𑀊","Digit9":"9","Digit7":"7","Minus":"𑀈","Digit8":"8","Digit0":"0","BracketRight":"𑁁","KeyO":"𑁅","KeyU":"𑀽","BracketLeft":"𑀿","KeyI":"𑀻","KeyP":"𑀨","KeyL":"𑀴","KeyJ":"𑀛","Quote":"𑀗","KeyK":"𑀔","Semicolon":"𑁊","Backslash":"𑀐","Comma":"𑀒","Slash":"𑁌","KeyN":"𑀡","KeyM":"𑀁","Period":"𑁈","Space":" ","Backquote":"𑁍"},"option":{"KeyA":"𑀹","KeyS":"","KeyD":"","KeyF":"","KeyH":"","KeyG":"","KeyZ":"","KeyX":"","KeyC":"","KeyV":"","KeyB":"","KeyQ":"𑀅","KeyW":"","KeyE":"𑀏","KeyR":"𑀶","KeyY":"","KeyT":"","Digit1":"𑁒","Digit2":"𑁓","Digit3":"𑁔","Digit4":"𑁕","Digit6":"𑁗","Digit5":"𑁖","Equal":"𑁥","Digit9":"𑁚","Digit7":"𑁘","Minus":"𑁤","Digit8":"𑁙","Digit0":"𑁦","BracketRight":"𑀍","KeyO":"𑀑","KeyU":"𑀉","BracketLeft":"𑀋","KeyI":"𑀇","KeyP":"","KeyL":"𑀵","KeyJ":"","Quote":"","KeyK":"","Semicolon":"","Backslash":"","Comma":"","Slash":"","KeyN":"𑀷","KeyM":"𑀀","Period":"","Space":"","Backquote":""},"shiftOption":{"KeyA":"","KeyS":"","KeyD":"","KeyF":"","KeyH":"","KeyG":"","KeyZ":"","KeyX":"","KeyC":"","KeyV":"","KeyB":"","KeyQ":"𑀆","KeyW":"","KeyE":"𑀐","KeyR":"","KeyY":"","KeyT":"","Digit1":"𑁛","Digit2":"𑁜","Digit3":"𑁝","Digit4":"𑁞","Digit6":"𑁠","Digit5":"𑁟","Equal":"","Digit9":"𑁣","Digit7":"𑁡","Minus":"","Digit8":"𑁢","Digit0":"𑁦","BracketRight":"𑀎","KeyO":"𑀒","KeyU":"𑀊","BracketLeft":"𑀌","KeyI":"𑀈","KeyP":"","KeyL":"","KeyJ":"","Quote":"","KeyK":"","Semicolon":"","Backslash":"","Comma":"","Slash":"","KeyN":"","KeyM":"","Period":"","Space":"","Backquote":""}};
 const KC=BRAHMI_LAYERS.base, KS=BRAHMI_LAYERS.shift, KA=BRAHMI_LAYERS.option, KAS=BRAHMI_LAYERS.shiftOption;
 const rows=[['Backquote','Digit1','Digit2','Digit3','Digit4','Digit5','Digit6','Digit7','Digit8','Digit9','Digit0','Minus','Equal','Backspace'],['Tab','KeyQ','KeyW','KeyE','KeyR','KeyT','KeyY','KeyU','KeyI','KeyO','KeyP','BracketLeft','BracketRight'],['CapsLock','KeyA','KeyS','KeyD','KeyF','KeyG','KeyH','KeyJ','KeyK','KeyL','Semicolon','Quote','Backslash','Enter'],['ShiftLeft','IntlBackslash','KeyZ','KeyX','KeyC','KeyV','KeyB','KeyN','KeyM','Comma','Period','Slash','ShiftRight'],['ControlLeft','AltLeft','MetaLeft','Space','MetaRight','AltRight','ControlRight']];
