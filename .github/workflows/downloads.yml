@@ -1,0 +1,27 @@
+name: Build portable downloads
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate project catalog
+        run: python3 scripts/validate.py
+      - name: Package website and self-contained apps
+        run: python3 scripts/package.py
+      - name: Upload ready-to-distribute files
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-atlas-downloads
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30
