@@ -9,9 +9,10 @@
  let data;
  try{data=JSON.parse(embedded.textContent)}catch{data={projects:[]}}
  const cards=document.getElementById("cards"),search=document.getElementById("search"),filters=document.getElementById("filters"),theme=document.getElementById("theme");
- let lang="ru",category="all",term="";
+ const browserLang=(((navigator.languages||[]).concat(navigator.language||"en")).map(x=>String(x).split("-")[0].toLowerCase()).find(x=>T[x]))||"en";
+ let lang=browserLang,category="all",term="";
  try{lang=localStorage.getItem("app-atlas-language")||lang;const savedTheme=localStorage.getItem("app-atlas-theme");if(savedTheme==="light"||savedTheme==="dark")document.documentElement.dataset.theme=savedTheme;}catch{}
- if(!T[lang])lang="ru";
+ if(!T[lang])lang=browserLang;
  const elt=(tag,cls,value)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(value!==undefined)n.textContent=value;return n};
  const safeLocal=(value)=>typeof value==="string"&&/^\.\/[a-zA-Z0-9/_\-.]+$/.test(value);
  const safeExternal=(value)=>typeof value==="string"&&/^https:\/\/github\.com\/4vmp5pkwz4-pixel\/[a-zA-Z0-9._-]+$/.test(value);
