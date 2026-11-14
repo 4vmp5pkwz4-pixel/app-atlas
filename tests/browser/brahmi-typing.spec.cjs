@@ -14,7 +14,7 @@ test('complete English interface and translated lessons',async({page})=>{
  await page.locator('#continueButton').click();
  await expect(page.locator('#lessonName')).toHaveText('Home-row consonants');
  await expect(page.locator('[data-i18n="brahmiLine"]')).toHaveText('BRAHMI · typed characters');
- await expect(page.locator('[data-i18n="germanLine"]')).toHaveText('DEUTSCH · physical QWERTZ keys');
+ await expect(page.locator('[data-i18n="germanLine"]')).toHaveText('YOUR macOS LAYOUT · type here');
  await page.locator('#langSelect').selectOption('de');
  await expect(page.locator('[data-i18n="navHome"]')).toHaveText('Übersicht');
  await page.locator('#langSelect').selectOption('ru');
@@ -37,23 +37,23 @@ test('full German Mac QWERTZ keyboard is visible, including at phone width',asyn
    await expect(page.locator('.key[data-code="Quote"] .latin')).toHaveText('Ä');
    await expect(page.locator('.key[data-code="BracketLeft"] .latin')).toHaveText('Ü');
    expect(await page.locator('#keyboard .key').count()).toBeGreaterThan(40);
+   await expect(page.locator('.key[data-code="IntlBackslash"]')).toHaveCount(1);
+   await expect(page.locator('.key[data-code="Backslash"]')).toHaveCount(1);
  }
 });
 
 test('simulator mirrors German keys and respects Backspace and modifiers',async({page})=>{
- await page.locator('.nav [data-page="settings"]').click();
- await page.locator('#modeSelect').selectOption('sim');
  await page.locator('.nav [data-page="train"]').click();
- await page.locator('#typingInput').focus();
+ await page.locator('#germanMirror').focus();
  await page.keyboard.press('k');
  await expect(page.locator('#typingInput')).toHaveValue('𑀓');
- await expect(page.locator('#germanMirror')).toHaveText('k');
+ await expect(page.locator('#germanMirror')).toHaveValue('k');
  await page.keyboard.press('Backspace');
  await expect(page.locator('#typingInput')).toHaveValue('');
- await expect(page.locator('#germanMirror')).toHaveText('—');
+ await expect(page.locator('#germanMirror')).toHaveValue('');
  await page.keyboard.press('Shift+g');
  await expect(page.locator('#typingInput')).toHaveValue('𑀖');
- await expect(page.locator('#germanMirror')).toHaveText('G');
+ await expect(page.locator('#germanMirror')).toHaveValue('G');
  await page.locator('#resetInput').click();
  await expect(page.locator('#germanMirror')).toHaveText('—');
  await page.locator('.key[data-code="KeyK"]').click();
@@ -82,4 +82,70 @@ test('Edict XII d–i is provided in all three languages with source attribution
  await expect(page.locator('#edictGlossary')).toContainText('Concord');
  await expect(page.locator('#edictLink')).toHaveAttribute('href',/indike.org/);
  await expect(page.locator('[data-text="edict12di"]')).toHaveCount(1);
+});
+
+test('exact original Mac Brahmi mapping in all four layers',async({page})=>{
+ await page.locator('.nav [data-page="train"]').click();
+ const layers=await page.evaluate(()=>window.BrahmiAtelierTest.BRAHMI_LAYERS);
+ expect(layers.base.KeyQ).toBe('𑀅');
+ expect(layers.shift.KeyQ).toBe('𑀆');
+ expect(layers.option.KeyA).toBe('𑀹');
+ expect(layers.shiftOption.KeyI).toBe('𑀈');
+ expect(layers.option.KeyS).toBe('');
+ expect(layers.base.Equal).toBe('𑀉');
+ for(const [layer,value] of [['base','𑀅'],['shift','𑀆'],['option','𑀅'],['shiftOption','𑀆']]){
+   await page.locator('[data-layer="'+layer+'"]').click();
+   await expect(page.locator('.key[data-code="KeyQ"] .glyph')).toHaveText(value);
+   await expect(page.locator('[data-layer="'+layer+'"]')).toHaveAttribute('aria-pressed','true');
+ }
+ await page.locator('[data-layer="option"]').click();
+ await expect(page.locator('.key[data-code="KeyS"] .glyph')).toHaveText('—');
+ await expect(page.locator('.key[data-code="KeyA"] .glyph')).toHaveText('𑀹');
+ await page.locator('#layoutMatrix summary').click();
+ await expect(page.locator('#mapTable table')).toBeVisible();
+ await expect(page.locator('#mapTable tbody tr').first()).toBeVisible();
+});
+test('RU/EN/DE independent keycaps, preserved OS symbol, same Brahmi physical key',async({page})=>{
+ await page.locator('.nav [data-page="train"]').click();
+ for(const [source,keyLabel,actualSymbol,brahmi] of [
+   ['ru','Ф','ф','𑀸'],['en','A','a','𑀸'],['de','A','a','𑀸']
+ ]){
+    await page.locator('#sourceLayout').selectOption(source);
+    await expect(page.locator('.key[data-code="KeyA"] .latin')).toHaveText(keyLabel);
+    await page.locator('#resetInput').click();
+    await page.locator('#germanMirror').focus();
+    await page.locator('#germanMirror').dispatchEvent('keydown',{code:'KeyA',key:actualSymbol,bubbles:true,cancelable:true});
+    await expect(page.locator('#germanMirror')).toHaveValue(actualSymbol);
+    await expect(page.locator('#typingInput')).toHaveValue(brahmi);
+ }
+ await page.locator('#sourceLayout').selectOption('ru');
+ await expect(page.locator('.key[data-code="KeyQ"] .latin')).toHaveText('Й');
+ await expect(page.locator('.key[data-code="KeyY"] .latin')).toHaveText('Н');
+ await page.locator('#sourceLayout').selectOption('de');
+ await expect(page.locator('.key[data-code="KeyY"] .latin')).toHaveText('Z');
+});
+test('macOS Option, Shift and Shift+Option never fall back to wrong Brahmi output',async({page})=>{
+ await page.locator('.nav [data-page="train"]').click();
+ await page.locator('#germanMirror').focus();
+ const press=async(code,key,shiftKey,altKey)=>page.locator('#germanMirror').dispatchEvent('keydown',{code,key,shiftKey,altKey,bubbles:true,cancelable:true});
+ await press('KeyA','ä',false,true);
+ await expect(page.locator('#typingInput')).toHaveValue('𑀹');
+ await expect(page.locator('#germanMirror')).toHaveValue('ä');
+ await press('KeyI','Î',true,true);
+ await expect(page.locator('#typingInput')).toHaveValue('𑀹𑀈');
+ await expect(page.locator('#germanMirror')).toHaveValue('äÎ');
+ await press('KeyS','ß',false,true);
+ await expect(page.locator('#typingInput')).toHaveValue('𑀹𑀈');
+ await expect(page.locator('#germanMirror')).toHaveValue('äÎ');
+ await press('Backspace','Backspace',false,false);
+ await expect(page.locator('#typingInput')).toHaveValue('𑀹');
+ await expect(page.locator('#germanMirror')).toHaveValue('ä');
+});
+test('default focus is ordinary input, Brahmi is read-only and source can switch without OS layout installation',async({page})=>{
+ await page.locator('#continueButton').click();
+ await expect(page.locator('#modeSelect')).toHaveValue('sim');
+ await expect(page.locator('#typingInput')).toHaveAttribute('readonly','');
+ await expect(page.locator('#germanMirror')).not.toHaveAttribute('readonly',/./);
+ await expect(page.locator('#germanMirror')).toBeFocused();
+ await expect(page.locator('#sourceLayout option')).toHaveCount(3);
 });
