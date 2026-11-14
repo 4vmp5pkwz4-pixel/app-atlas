@@ -1,5 +1,5 @@
 name: Bug report
-about: Report a reproducible problem with a public APP ATLAS project
+description: Report a reproducible problem with a public APP ATLAS project
 title: "[Bug] "
 body:
   - type: dropdown
