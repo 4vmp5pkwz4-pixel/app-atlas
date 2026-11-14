@@ -1,0 +1,49 @@
+name: Release Brahmi Atelier Universal Keyboard v0.3.0 beta
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/bootstrap-brahmi-v030.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify original macOS Brahmi source and catalog
+        run: |
+          python3 scripts/validate.py
+          python3 scripts/verify_brahmi.py
+      - name: Install browser acceptance dependencies
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Require desktop and mobile browser acceptance
+        run: npm run test:browser
+      - name: Assemble portable downloads and checksums
+        run: python3 scripts/package.py
+      - name: Publish versioned beta only after all checks pass
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v0.3.0-beta --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            echo "Release already exists; never overwrite published assets silently."
+          else
+            gh release create v0.3.0-beta dist/* \
+              --repo "${GITHUB_REPOSITORY}" \
+              --target "${GITHUB_SHA}" \
+              --title "Brahmi Atelier · Universal RU/EN/DE Mac keyboard · v0.3.0 beta" \
+              --notes "Brahmi Atelier now lets learners keep their regular Russian, English or German macOS keyboard: the top line shows the actual input-source character while the lower line renders Brahmi according to the same physical key. No Brahmi keyboard installation or system input-source switching is required. The keyboard displays the original four layers (Normal, Shift, Option, Shift+Option) verified against Prachya Boonkwan's MIT-licensed 2019 .keylayout, with a complete layer reference matrix. Added dedicated modifier drills, interleaving and spaced review, and preserved multilingual historical Rock Edict XII practice. Standalone brahmi.html and itch.io HTML ZIP are included. Browser regression tests and source-map validation must pass before publication. This remains a beta: exact macOS Safari hardware behavior and external store deployment require separate validation." \
+              --prerelease
+          fi
