@@ -7,9 +7,10 @@ A growing, multilingual collection of independent interactive learning tools, sc
 
 ## Project hub
 
-The public catalog is served by `index.html`. It reads `catalog.json`, which contains only projects intended for public access.
+The public catalog is served by `index.html`. It reads `catalog.json`, which contains only projects intended for public access. Four external apps link to GitHub Pages deployments; Brahmi and Buddhabrot portable editions run directly inside APP ATLAS.
 
 - **Brahmi Atelier:** Offline-capable touch-typing trainer for the ancient Brahmi script.
+- **Buddhabrot portable edition:** A second self-contained runnable HTML application, mirrored from the owner’s public Buddhabrot repository.
 - **NORMA:** Interactive database-normalization studio.
 - **Buddhabrot:** 4D-to-3D volumetric fractal explorer.
 - **HCC:** S³ interactive scientific atlas.
@@ -35,6 +36,7 @@ Open `http://localhost:8000/` from this repository's root.
 - `index.html` — accessible, responsive RU/EN/DE catalog
 - `catalog.json` — machine-readable public project metadata
 - `apps/brahmi/index.html` — hosted stand-alone Brahmi trainer
+- `apps/buddhabrot/index.html` — hosted portable Buddhabrot HTML explorer
 - `assets/` — local visual assets
 - `scripts/validate.py` — local/CI integrity checks
 - `.github/workflows/validate.yml` — CI check on every change

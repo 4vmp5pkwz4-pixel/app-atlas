@@ -10,7 +10,7 @@
       "featured": true,
       "url": "./apps/brahmi/index.html",
       "download": "./apps/brahmi/index.html",
-      "source": null,
+      "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
       "mark": "𑀥",
       "tags": [
         "Brahmi",
@@ -22,15 +22,16 @@
         "ru": "Тренажёр слепой печати древним письмом брахми: немецкая QWERTZ, последовательные уроки, тексты надписей и локальная статистика.",
         "en": "Touch-typing studio for the ancient Brahmi script, with QWERTZ lessons, inscription exercises and locally stored progress.",
         "de": "Zehnfingertrainer für die antike Brahmi-Schrift mit QWERTZ-Lektionen, Inschriftenübungen und lokalem Lernfortschritt."
-      }
+      },
+      "downloadArchive": "https://github.com/4vmp5pkwz4-pixel/app-atlas/archive/refs/heads/main.zip"
     },
     {
       "id": "norma",
       "name": "NORMA · Normalization Studio",
       "category": "learning",
-      "status": "repository",
+      "status": "live",
       "featured": false,
-      "url": null,
+      "url": "https://4vmp5pkwz4-pixel.github.io/Normalisierung/",
       "download": null,
       "source": "https://github.com/4vmp5pkwz4-pixel/Normalisierung",
       "mark": "NF",
@@ -43,16 +44,17 @@
         "ru": "Интерактивный анализ функциональных зависимостей, ключей, нормальных форм и декомпозиций баз данных.",
         "en": "Interactive analysis of dependencies, keys, database normal forms and decompositions.",
         "de": "Interaktive Analyse von Abhängigkeiten, Schlüsseln, Datenbanknormalformen und Zerlegungen."
-      }
+      },
+      "downloadArchive": "https://github.com/4vmp5pkwz4-pixel/Normalisierung/archive/refs/heads/claude/exciting-bohr-lhrume.zip"
     },
     {
       "id": "buddhabrot",
       "name": "Buddhabrot · 4D Explorer",
       "category": "visualization",
-      "status": "repository",
+      "status": "live",
       "featured": false,
-      "url": null,
-      "download": null,
+      "url": "./apps/buddhabrot/index.html",
+      "download": "./apps/buddhabrot/index.html",
       "source": "https://github.com/4vmp5pkwz4-pixel/Buddhabrot",
       "mark": "ℂ⁴",
       "tags": [
@@ -64,15 +66,16 @@
         "ru": "Объёмная визуализация фрактала Буддаброта с вращением четырёхмерного пространства.",
         "en": "A volumetric Buddhabrot explorer with four-dimensional rotation and progressive rendering.",
         "de": "Volumetrischer Buddhabrot-Explorer mit vierdimensionaler Rotation und progressivem Rendering."
-      }
+      },
+      "downloadArchive": "https://github.com/4vmp5pkwz4-pixel/Buddhabrot/archive/refs/heads/claude/3d-buddhabrot-explorer-v10m6m.zip"
     },
     {
       "id": "hcc",
       "name": "HCC · S³ Light-Trisphere",
       "category": "research",
-      "status": "repository",
+      "status": "live",
       "featured": false,
-      "url": null,
+      "url": "https://4vmp5pkwz4-pixel.github.io/HCC/",
       "download": null,
       "source": "https://github.com/4vmp5pkwz4-pixel/HCC",
       "mark": "S³",
@@ -85,15 +88,16 @@
         "ru": "Интерактивный научный атлас геометрии S³, моделей космоса и трёхмерных лабораторий.",
         "en": "Interactive scientific atlas for S³ geometry, cosmological models and three-dimensional laboratories.",
         "de": "Interaktiver Wissenschaftsatlas zu S³-Geometrie, kosmologischen Modellen und 3D-Laboren."
-      }
+      },
+      "downloadArchive": "https://github.com/4vmp5pkwz4-pixel/HCC/archive/refs/heads/main.zip"
     },
     {
       "id": "hopf",
       "name": "HOPF · OmniAtlas",
       "category": "research",
-      "status": "repository",
+      "status": "live",
       "featured": false,
-      "url": null,
+      "url": "https://4vmp5pkwz4-pixel.github.io/HOPF-OmniAtlas/",
       "download": null,
       "source": "https://github.com/4vmp5pkwz4-pixel/HOPF-OmniAtlas",
       "mark": "S²",
@@ -106,15 +110,16 @@
         "ru": "Атлас вычислимых физических моделей, диаграмм Смита, сфер Римана и расслоений Хопфа.",
         "en": "Atlas of computable physical models, Smith charts, Riemann spheres and Hopf fibrations.",
         "de": "Atlas berechenbarer physikalischer Modelle, Smith-Diagramme, Riemann-Sphären und Hopf-Faserungen."
-      }
+      },
+      "downloadArchive": "https://github.com/4vmp5pkwz4-pixel/HOPF-OmniAtlas/archive/refs/heads/main.zip"
     },
     {
       "id": "uprs",
       "name": "UPRS · Möbius–Hopf",
       "category": "research",
-      "status": "repository",
+      "status": "live",
       "featured": false,
-      "url": null,
+      "url": "https://4vmp5pkwz4-pixel.github.io/UPRS-M-BIUS-HOPF/",
       "download": null,
       "source": "https://github.com/4vmp5pkwz4-pixel/UPRS-M-BIUS-HOPF",
       "mark": "∞",
@@ -127,7 +132,8 @@
         "ru": "Автономный научный инструмент геометрических преобразований и моделирования физического отклика.",
         "en": "A self-contained scientific tool for geometric transformations and physical response modeling.",
         "de": "Eigenständiges Werkzeug für geometrische Transformationen und die Modellierung physikalischer Antworten."
-      }
+      },
+      "downloadArchive": "https://github.com/4vmp5pkwz4-pixel/UPRS-M-BIUS-HOPF/archive/refs/heads/main.zip"
     }
   ]
 }

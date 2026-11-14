@@ -27,9 +27,19 @@ for p in manifest.get("projects", []):
     for field in ("url", "download"):
         url = p.get(field)
         if url:
-            assert url.startswith("./") and not any(x in url for x in ("..", "?", "#")), url
-            candidate = ROOT / url[2:]
-            assert candidate.is_file(), f"Missing {field}: {candidate}"
+            if url.startswith("./"):
+                assert not any(x in url for x in ("..", "?", "#")), url
+                candidate = ROOT / url[2:]
+                assert candidate.is_file(), f"Missing {field}: {candidate}"
+            else:
+                assert field == "url" and re.fullmatch(
+                    r"https://4vmp5pkwz4-pixel\\.github\\.io/[A-Za-z0-9._-]+/", url
+                ), f"Unapproved remote URL: {url}"
+    archive = p.get("downloadArchive")
+    if archive:
+        assert re.fullmatch(
+            r"https://github\\.com/4vmp5pkwz4-pixel/[A-Za-z0-9._-]+/archive/refs/heads/[A-Za-z0-9._/-]+\\.zip", archive
+        ), f"Unapproved archive: {archive}"
     if p["status"] == "live":
         assert p.get("url"), f"Live status without app URL: {p['id']}"
     if p["status"] == "repository":

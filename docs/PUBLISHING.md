@@ -31,3 +31,7 @@
 - itch.io: package one app and its relative assets as a ZIP, choose the **HTML** project type, set playable-in-browser appropriately, and provide its GitHub link.
 - Product Hunt: use an already functioning product landing page, screenshots and honest launch description.
 - Hugging Face Spaces: consider for genuinely AI-powered demos, not as a requirement for every HTML site.
+
+## External apps
+
+The catalog offers live GitHub Pages links where existing deployment runs succeeded, plus a source ZIP archive for each public project. External live-page links should be checked after every related project release. The hosted `apps/buddhabrot/index.html` is a copy of the portable edition from the public Buddhabrot repository; its source of truth remains there, so refresh the mirror from the canonical source when necessary. Pages deployment success does not prove all browser features are functional.
