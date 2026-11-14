@@ -99,6 +99,13 @@ test('exact original Mac Brahmi mapping in all four layers',async({page})=>{
  expect(layers.shiftOption.KeyI).toBe('𑀈');
  expect(layers.option.KeyS).toBe('');
  expect(layers.base.Equal).toBe('𑀉');
+ expect(layers.base.Space).toBe(' ');
+ expect(layers.option.Space).toBe('');
+ expect(layers.shiftOption.Space).toBe('');
+ expect(await page.evaluate(()=>window.BrahmiAtelierTest.charMap('Space',false,true))).toBe('');
+ expect(await page.evaluate(()=>window.BrahmiAtelierTest.charMap('Space',true,true))).toBe('');
+ expect(await page.evaluate(()=>window.BrahmiAtelierTest.charMap('Space',false,false))).toBe(' ');
+
  for(const [layer,value] of [['base','𑀅'],['shift','𑀆'],['option','𑀅'],['shiftOption','𑀆']]){
    await page.locator('[data-layer="'+layer+'"]').click();
    await expect(page.locator('.key[data-code="KeyQ"] .glyph')).toHaveText(value);

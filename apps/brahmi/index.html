@@ -235,7 +235,7 @@ let currentPage='home',lesson=LESSONS[0],prompt='',romanPrompt='',prevValue='',s
 let germanTrace=[],pendingGerman=null; // Physical QWERTZ keystrokes alongside Unicode Brahmi.
 function charMap(code,shift=false,alt=false){
  const layer=alt?(shift?KAS:KA):(shift?KS:KC);
- if(code==='Space')return ' '; // normalize source base U+2002 to lesson word-spacing U+0020
+ if(code==='Space'){const output=layer.Space;return output===' '||output===' '?' ':(output||'');} // normalize only mapped space, never revive empty Option layers
  return Object.prototype.hasOwnProperty.call(layer,code)?layer[code]:'';
 }
 function reverseLookup(c){
