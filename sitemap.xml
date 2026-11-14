@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://4vmp5pkwz4-pixel.github.io/app-atlas/</loc></url>
-  <url><loc>https://4vmp5pkwz4-pixel.github.io/app-atlas/apps/brahmi/</loc></url>
+ <url><loc>https://4vmp5pkwz4-pixel.github.io/app-atlas/</loc></url>
+ <url><loc>https://4vmp5pkwz4-pixel.github.io/app-atlas/projects/brahmi/</loc></url>
+ <url><loc>https://4vmp5pkwz4-pixel.github.io/app-atlas/projects/norma/</loc></url>
+ <url><loc>https://4vmp5pkwz4-pixel.github.io/app-atlas/projects/buddhabrot/</loc></url>
+ <url><loc>https://4vmp5pkwz4-pixel.github.io/app-atlas/projects/hcc/</loc></url>
+ <url><loc>https://4vmp5pkwz4-pixel.github.io/app-atlas/projects/hopf/</loc></url>
+ <url><loc>https://4vmp5pkwz4-pixel.github.io/app-atlas/projects/uprs/</loc></url>
+ <url><loc>https://4vmp5pkwz4-pixel.github.io/app-atlas/apps/brahmi/</loc></url>
+ <url><loc>https://4vmp5pkwz4-pixel.github.io/app-atlas/apps/buddhabrot/</loc></url>
 </urlset>

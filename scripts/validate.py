@@ -49,6 +49,9 @@ for p in manifest.get("projects", []):
     if source:
         assert re.fullmatch(r"https://github\.com/4vmp5pkwz4-pixel/[A-Za-z0-9._-]+", source), source
 
+for project in manifest["projects"]:
+    assert (ROOT / "projects" / project["id"] / "index.html").is_file(), f"Missing SEO page: {project['id']}"
+assert (ROOT / "sitemap.xml").is_file(), "Missing sitemap"
 for file in ["index.html", "assets/site.css", "assets/site.js", "assets/atlas-mark.svg", "apps/brahmi/index.html"]:
     assert (ROOT / file).is_file(), f"Required file missing: {file}"
 

@@ -35,3 +35,7 @@
 ## External apps
 
 The catalog offers live GitHub Pages links where existing deployment runs succeeded, plus a source ZIP archive for each public project. External live-page links should be checked after every related project release. The hosted `apps/buddhabrot/index.html` is a copy of the portable edition from the public Buddhabrot repository; its source of truth remains there, so refresh the mirror from the canonical source when necessary. Pages deployment success does not prove all browser features are functional.
+
+## Discovery pages
+
+Every catalog project has a trilingual, indexable page at `projects/<id>/`. Keep those pages, `catalog.json`, the offline JSON embedded in `index.html`, and `sitemap.xml` synchronized. Test the launch and ZIP links after each update.
