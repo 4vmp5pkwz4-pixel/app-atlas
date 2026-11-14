@@ -52,13 +52,20 @@ test('all six multilingual detail pages are available',async({page})=>{
    await expect(page.locator('.actions a')).toHaveCount(id==='brahmi'||id==='buddhabrot'?4:3);
  }
 });
-test('both bundled applications return complete HTML',async({page})=>{
+test('both bundled apps serve complete HTML without starting GPU render loops',async({request})=>{
  for(const id of ['brahmi','buddhabrot']){
-   const response=await page.goto('/apps/'+id+'/index.html',{waitUntil:'domcontentloaded'});
+   const response=await request.get('/apps/'+id+'/index.html');
    expect(response.status()).toBe(200);
-   await expect(page.locator('body')).toBeVisible();
-   expect((await page.title()).length).toBeGreaterThan(4);
+   const html=await response.text();
+   expect(html.toLowerCase()).toContain('<html');
+   expect(html.toLowerCase()).toContain('</html>');
+   expect(html.toLowerCase()).toContain('<title');
  }
+});
+test('Brahmi lessons and keyboard are visible in a real browser',async({page})=>{
+ await page.goto('/apps/brahmi/index.html',{waitUntil:'domcontentloaded'});
+ await expect(page.locator('#continueButton')).toBeVisible();
+ await expect(page.locator('#keyboard')).toBeAttached();
 });
 test('mobile layout has no horizontal document overflow',async({page,isMobile})=>{
  if(!isMobile)return;
