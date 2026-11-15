@@ -667,11 +667,11 @@ function physicalLayerLabel(code,shift=false,alt=false){
  if(code==='Space')return '␣';
  if(alt)return '⌥'+(shift?'⇧':'')+'+'+basic;
  if(!shift)return basic;
+ const verified=PHYSICAL_SHIFT_PRESETS[saved.physical];if(verified){return Object.prototype.hasOwnProperty.call(verified,code)?verified[code]||'—':basic;}
  if(code.startsWith('Key')||/^[\p{L}]$/u.test(basic))return basic.toUpperCase();
  const ruShift={Digit1:'!',Digit2:'"',Digit3:'№',Digit4:';',Digit5:'%',Digit6:':',Digit7:'?',Digit8:'*',Digit9:'(',Digit0:')',Comma:'<',Period:'>',Slash:','};
  const deShift={Digit1:'!',Digit2:'"',Digit3:'§',Digit4:'$',Digit5:'%',Digit6:'&',Digit7:'/',Digit8:'(',Digit9:')',Digit0:'=',Minus:'?',BracketRight:'*',IntlBackslash:'>',Comma:';',Period:':',Slash:'_'};
  const enShift={Digit1:'!',Digit2:'@',Digit3:'#',Digit4:'$',Digit5:'%',Digit6:'^',Digit7:'&',Digit8:'*',Digit9:'(',Digit0:')',Minus:'_',Equal:'+',BracketLeft:'{',BracketRight:'}',Semicolon:':',Quote:'"',Comma:'<',Period:'>',Slash:'?',Backquote:'~'};
- const verified=PHYSICAL_SHIFT_PRESETS[saved.physical];if(verified){return Object.prototype.hasOwnProperty.call(verified,code)?verified[code]||'—':basic;}
  const m=saved.physical==='ru'?ruShift:saved.physical==='en'?enShift:deShift;
  return m[code]||basic;
 }
