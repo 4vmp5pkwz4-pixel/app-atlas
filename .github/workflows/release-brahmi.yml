@@ -1,0 +1,86 @@
+name: Publish verified Brahmi Atelier release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - apps/brahmi/**
+      - data/brahmi-release.json
+      - data/brahmi-hindi-*.json
+      - data/macos-extra-layouts.json
+      - data/brahmi-inscript-keyman-audit.json
+      - scripts/verify_brahmi*.py
+      - scripts/verify_phonetic_atlas.py
+      - scripts/package.py
+      - tests/browser/**
+      - .github/workflows/release-brahmi.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-brahmi-atelier
+  cancel-in-progress: false
+
+jobs:
+  verified-release:
+    name: Verify desktop/mobile then publish release
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate public catalog and all localized source data
+        run: |
+          python3 scripts/validate.py
+          python3 scripts/verify_brahmi.py
+          python3 scripts/verify_phonetic_atlas.py
+          python3 scripts/verify_brahmi_extended_locales.py
+      - name: Install pinned browser dependencies
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Run complete desktop and mobile acceptance
+        run: npm run test:browser
+      - name: Reproducible release packaging
+        run: python3 scripts/package.py
+      - name: Validate release version
+        id: metadata
+        shell: bash
+        run: |
+          VERSION="$(python3 -c 'import json; print(json.load(open("data/brahmi-release.json",encoding="utf-8"))["version"])')"
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+-beta$ ]] || { echo "Unexpected release version: $VERSION"; exit 1; }
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+          test -s dist/SHA256SUMS.txt
+          test -s dist/brahmi.html
+          test -s dist/phonetic-atlas.html
+          test -s dist/brahmi-itch-html.zip
+      - name: Publish GitHub release after successful verification
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION_TAG: ${{ steps.metadata.outputs.tag }}
+        shell: bash
+        run: |
+          if gh release view "$VERSION_TAG" >/dev/null 2>&1; then
+            echo "Release exists: uploading validated artifacts."
+            gh release upload "$VERSION_TAG" dist/* --clobber
+          else
+            gh release create "$VERSION_TAG" dist/* \
+              --target "$GITHUB_SHA" \
+              --title "Brahmi Atelier $VERSION_TAG" \
+              --notes "Source-verified Brahmi phonetic atlas; native Mac Russian standard/QWERTY and Devanagari InScript/QWERTY; complete Hindi (Devanagari) interface and translated lessons/texts; mobile/desktop browser tests passed. ZIP includes the standalone atlas. Physical Option, Japanese IME and macOS Safari still require hardware-level verification."
+          fi
+      - name: Store validation artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brahmi-release-verification
+          path: |
+            dist/
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 30

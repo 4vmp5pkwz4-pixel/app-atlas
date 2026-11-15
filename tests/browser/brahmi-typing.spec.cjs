@@ -160,7 +160,7 @@ test('default focus is ordinary input, Brahmi is read-only and source can switch
  await expect(page.locator('#typingInput')).toHaveAttribute('readonly','');
  await expect(page.locator('#germanMirror')).not.toHaveAttribute('readonly',/./);
  await expect(page.locator('#germanMirror')).toBeFocused();
- await expect(page.locator('#sourceLayout option')).toHaveCount(4);
+ await expect(page.locator('#sourceLayout option')).toHaveCount(8);
 });
 
 test('new modifier lessons exist in all three languages and are selectable',async({page})=>{
@@ -481,9 +481,9 @@ test('copy actions deliver IAST and selected physical key sequence without uploa
 test('version badge v0.6.0 beta is visible and agrees with the source metadata on all pages',async({page})=>{
  await page.locator('#langSelect').selectOption('en');
  const version=await page.evaluate(()=>window.BrahmiAtelierTest.APP_VERSION);
- expect(version).toBe('0.6.0-beta');
+ expect(version).toBe('0.7.0-beta');
  const badge=page.locator('#versionBadge');
- await expect(badge).toHaveText('v0.6.0 β');
+ await expect(badge).toHaveText('v0.7.0 β');
  for(const [width,height] of [[320,568],[375,667],[390,844],[667,375],[1024,768],[1312,1172],[1920,1080]]){
   await page.setViewportSize({width,height});
   for(const go of ['home','train','convert']){

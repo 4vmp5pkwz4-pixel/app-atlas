@@ -20,3 +20,7 @@ jobs:
         run: python3 scripts/validate.py
       - name: Verify Brahmi Mac source layers and inline JavaScript
         run: python3 scripts/verify_brahmi.py
+      - name: Verify Brahmi phonetic atlas source, completeness and JavaScript
+        run: python3 scripts/verify_phonetic_atlas.py
+      - name: Verify native macOS Cyrillic and Devanagari layouts and Hindi localization
+        run: python3 scripts/verify_brahmi_extended_locales.py
