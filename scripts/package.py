@@ -27,7 +27,13 @@ for project in catalog["projects"]:
     assert source.is_file(), source
     simple = OUT / (project["id"] + ".html")
     shutil.copyfile(source, simple)
-    zip_items(OUT / (project["id"] + "-itch-html.zip"), [("index.html", source)])
+    bundle=[("index.html",source)]
+    if project["id"]=="brahmi":
+        atlas=ROOT/"apps/brahmi/phonetic-atlas.html"
+        assert atlas.is_file(), "Brahmi atlas missing"
+        shutil.copyfile(atlas,OUT/"phonetic-atlas.html")
+        bundle.append(("phonetic-atlas.html",atlas))
+    zip_items(OUT / (project["id"] + "-itch-html.zip"),bundle)
 
 public = []
 for relative in ["index.html", "catalog.json", "sitemap.xml", "robots.txt", ".nojekyll"]:
