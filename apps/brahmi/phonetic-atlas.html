@@ -60,7 +60,7 @@ const RU={KeyQ:"Й",KeyW:"Ц",KeyE:"У",KeyR:"К",KeyT:"Е",KeyY:"Н",KeyU:"Г",
 const KANA={KeyQ:"た",KeyW:"て",KeyE:"い",KeyR:"す",KeyT:"か",KeyY:"ん",KeyU:"な",KeyI:"に",KeyO:"ら",KeyP:"せ",KeyA:"ち",KeyS:"と",KeyD:"し",KeyF:"は",KeyG:"き",KeyH:"く",KeyJ:"ま",KeyK:"の",KeyL:"り",KeyZ:"つ",KeyX:"さ",KeyC:"そ",KeyV:"ひ",KeyB:"こ",KeyN:"み",KeyM:"も"};
 const MOD={base:"",shift:"Shift+",option:"Option+",shiftOption:"Shift+Option+"};
 const layers=["base","shift","option","shiftOption"];
-function family(n){if(n<0x11005||n===0x11070)return 1;if(n<0x11013||n===0x11071||n===0x11072)return 2;if(n<0x11038||n===0x11075)return 3;if(n<0x11046||n===0x11073||n===0x11074)return 4;if(n<0x11052)return 5;if(n<0x11066||n===0x1107f)return 6;return 7}
+function family(n){if(n<0x11005||n===0x11070)return 1;if(n<0x11013||n===0x11071||n===0x11072)return 2;if(n<0x11038||n===0x11075)return 3;if(n<=0x11046||n===0x11073||n===0x11074)return 4;if(n<0x11052)return 5;if(n<0x11066||n===0x1107f)return 6;return 7}
 const ROWS=CP.map(n=>{const char=String.fromCodePoint(n),chords=[];layers.forEach(layer=>Object.entries(D.layers[layer]).forEach(([key,v])=>{if(v===char)chords.push({layer,key})}));const ci=CONS.indexOf(char),vi=VOW.indexOf(char);return{n,char,hex:n.toString(16).toUpperCase(),roman:ROMAN[char]||"",dev:ci>=0?DEV[ci]:vi>=0?DEVV[vi]:"",family:family(n),chords}});
 const $=id=>document.getElementById(id);
 function keycap(key,layout){const physical=D.physical[layout]||D.physical.en;if(Object.prototype.hasOwnProperty.call(physical,key))return physical[key];if(key.startsWith("Key"))return key.slice(3);if(key.startsWith("Digit"))return key.slice(5);return key}
