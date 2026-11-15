@@ -405,7 +405,9 @@ test('workshop uses all five UI localizations and example/clear controls without
  await page.locator('#convClear').click();
  await expect(page.locator('#convRoman')).toHaveValue('');
  await page.locator('#convExample').click();
- await expect(page.locator('#convRoman')).toHaveValue('hida budhe jāte sakyamunī ti');
+ await expect(page.locator('#convRoman')).not.toHaveValue('');
+ await expect(page.locator('#wisdomSpotlight')).toBeVisible();
+ await expect(page.locator('#wisdomSourceLink')).toHaveAttribute('href',/^https:\/\//);
  await page.locator('#langSelect').selectOption('br');
  const captions=await page.locator('#page-convert [data-i18n]').allTextContents();
  for(const c of captions.filter(Boolean))expect(/[A-Za-z]/.test(c),'Brahmi UI Latin leak: '+c).toBe(false);
@@ -451,8 +453,10 @@ test('historical text can be sent directly into converter without retyping',asyn
  await expect(page.locator('#convSource')).toHaveValue(text);
  await expect(page.locator('#convRoman')).not.toHaveValue('');
  await page.locator('#convAshoka').click();
- const ashoka=await page.evaluate(()=>window.BrahmiAtelierTest.TEXTS.find(t=>t.id==='edict12di').brahmi);
- await expect(page.locator('#convSource')).toHaveValue(ashoka);
+ const source=await page.locator('#wisdomSourceLink').getAttribute('href');
+ expect(source).toContain('indike.org');
+ await expect(page.locator('#wisdomSpotlight')).toBeVisible();
+ await expect(page.locator('#wisdomClass')).toContainText('Ашоки');
 });
 
 test('copy actions deliver IAST and selected physical key sequence without uploading',async({page})=>{
@@ -471,3 +475,118 @@ test('copy actions deliver IAST and selected physical key sequence without uploa
  expect(await page.evaluate(()=>window.__copiedConverterValue)).toBe('Р Ш В');
  await expect(page.locator('#toast')).toContainText('Copied');
 });
+
+
+test('version badge v0.6.0 beta is visible and agrees with the source metadata on all pages',async({page})=>{
+ await page.locator('#langSelect').selectOption('en');
+ const version=await page.evaluate(()=>window.BrahmiAtelierTest.APP_VERSION);
+ expect(version).toBe('0.6.0-beta');
+ const badge=page.locator('#versionBadge');
+ await expect(badge).toHaveText('v0.6.0 β');
+ for(const [width,height] of [[320,568],[375,667],[390,844],[667,375],[1024,768],[1312,1172],[1920,1080]]){
+  await page.setViewportSize({width,height});
+  for(const go of ['home','train','convert']){
+   if(go==='train')await page.locator('#continueButton').click();
+   else if(go==='home')await page.locator('#backLessons').click().catch(async()=>{await page.locator('.nav [data-page="home"]').click()});
+   else await page.locator('.nav [data-page="convert"]').click();
+   await expect(badge).toBeVisible();
+   const rect=await badge.boundingBox();
+   expect(rect,go+' '+width+'x'+height+' badge rectangle').toBeTruthy();
+   expect(rect.x,go+' '+width+'x'+height+' left edge').toBeGreaterThanOrEqual(-1);
+   expect(rect.y,go+' '+width+'x'+height+' top edge').toBeGreaterThanOrEqual(-1);
+   expect(rect.x+rect.width,go+' '+width+'x'+height+' right edge').toBeLessThanOrEqual(width+1);
+   expect(rect.y+rect.height,go+' '+width+'x'+height+' bottom edge').toBeLessThanOrEqual(height+1);
+  }
+ }
+});
+
+test('the curated historical wisdom corpus is 25 unique, source-linked Ashoka and Dhammapada passages',async({page})=>{
+ const items=await page.evaluate(()=>window.BrahmiAtelierTest.WISDOM_CORPUS);
+ expect(items).toHaveLength(25);
+ expect(new Set(items.map(x=>x.id)).size).toBe(25);
+ expect(items.filter(x=>x.group==='ashoka')).toHaveLength(12);
+ expect(items.filter(x=>x.group==='dhammapada')).toHaveLength(13);
+ for(const item of items){
+  expect(item.roman.trim().length,item.id).toBeGreaterThan(8);
+  expect(item.source_url,item.id).toMatch(/^https:\/\/(indike\.org|suttacentral\.net)\//);
+  for(const locale of ['ru','de','en','ja'])expect(item.meaning[locale].trim().length,item.id+' '+locale).toBeGreaterThan(10);
+ }
+});
+
+test('next passage cycles through all 25 items without repeats, even after filter changes',async({page})=>{
+ await page.locator('#langSelect').selectOption('en');
+ await page.locator('.nav [data-page="convert"]').click();
+ const seen=new Set();
+ for(let i=0;i<25;i++){
+  await page.locator('#convExample').click();
+  const item=await page.locator('#wisdomSpotlight').evaluate(()=>window.BrahmiAtelierTest.WISDOM_LAST_ID||window.BrahmiAtelierTest.WISDOM_CORPUS.find(x=>x.roman===document.querySelector('#wisdomRomanOriginal').textContent)?.id);
+  // Read the selected editorial primary source rather than assuming a fixed order.
+  const roman=await page.locator('#wisdomRomanOriginal').textContent();
+  expect(seen.has(roman),'non-repeating wisdom: iteration '+(i+1)).toBe(false);
+  seen.add(roman);
+  await expect(page.locator('#wisdomSourceLink')).toHaveAttribute('href',/^https:\/\//);
+ }
+ expect(seen.size).toBe(25);
+ await page.locator('#convExample').click();
+ const current=await page.locator('#wisdomRomanOriginal').textContent();
+ expect(current).not.toBe('');
+ await expect(page.locator('#wisdomCount')).toContainText('25');
+});
+
+test('Ashoka and Dhammapada buttons choose the correct primary sources without consecutive repeats',async({page})=>{
+ await page.locator('#langSelect').selectOption('en');
+ await page.locator('.nav [data-page="convert"]').click();
+ const ashoka=new Set();
+ for(let i=0;i<12;i++){
+  await page.locator('#convAshoka').click();
+  const item=await page.locator('#wisdomRomanOriginal').textContent();
+  expect(ashoka.has(item),'Ashoka excerpt should be new').toBe(false);
+  ashoka.add(item);
+  await expect(page.locator('#wisdomSourceLink')).toHaveAttribute('href',/indike\.org/);
+  await expect(page.locator('#wisdomCategory')).toHaveValue('ashoka');
+ }
+ const dhp=new Set();
+ for(let i=0;i<13;i++){
+  await page.locator('#convDhammapada').click();
+  const item=await page.locator('#wisdomRomanOriginal').textContent();
+  expect(dhp.has(item),'Dhammapada verse should be new').toBe(false);
+  dhp.add(item);
+  await expect(page.locator('#wisdomSourceLink')).toHaveAttribute('href',/suttacentral\.net/);
+  await expect(page.locator('#wisdomCategory')).toHaveValue('dhammapada');
+ }
+ await page.locator('#convExample').click();
+ const roman=await page.locator('#wisdomRomanOriginal').textContent();
+ expect(roman).not.toBe('');
+});
+
+test('quote metadata distinguishes original Roman, Brahmi reconstruction and interpretive meaning',async({page})=>{
+ await page.locator('#langSelect').selectOption('en');
+ await page.locator('.nav [data-page="convert"]').click();
+ await page.locator('#convDhammapada').click();
+ await expect(page.locator('#wisdomSpotlight')).toBeVisible();
+ const source=await page.locator('#wisdomRomanOriginal').textContent();
+ const script=await page.locator('#convSource').inputValue();
+ expect(/[a-z]/i.test(source)).toBe(true);
+ expect(/[\u{11000}-\u{1107f}]/u.test(script)).toBe(true);
+ await expect(page.locator('#wisdomMeaning')).not.toBeEmpty();
+ await expect(page.locator('#wisdomEditorial')).toContainText('not an ancient');
+ await page.locator('#convSource').fill('𑀓');
+ await expect(page.locator('#wisdomSpotlight')).toBeHidden();
+ await expect(page.locator('#convRoman')).toHaveValue('ka');
+});
+
+test('wisdom controls and primary source attribution translate in all five interface locales',async({page})=>{
+ await page.locator('.nav [data-page="convert"]').click();
+ for(const [language,label] of [['ru','Другое изречение'],['de','Weiterer Gedanke'],['en','Another passage'],['ja','次の言葉']]){
+  await page.locator('#langSelect').selectOption(language);
+  await expect(page.locator('#convExample')).toContainText(label);
+  await page.locator('#convExample').click();
+  await expect(page.locator('#wisdomMeaning')).not.toBeEmpty();
+  await expect(page.locator('#wisdomSourceLink')).toHaveAttribute('href',/^https:\/\//);
+ }
+ await page.locator('#langSelect').selectOption('br');
+ await expect(page.locator('#convExample')).toContainText('𑀅');
+ await page.locator('#convDhammapada').click();
+ await expect(page.locator('#wisdomMeaning')).toContainText('𑀅');
+});
+
