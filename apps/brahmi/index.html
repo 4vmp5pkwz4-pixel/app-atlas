@@ -849,7 +849,8 @@ function isTrainerKeyboardTarget(target){
  return Boolean(target&&(target.id==='germanMirror'||target.id==='typingInput'||target.closest?.('#keyboard')));
 }
 document.addEventListener('keydown',e=>{
- if(currentPage!=='train'||!isTrainerKeyboardTarget(e.target))return;
+ if(currentPage!=='train')return;
+ // Keyboard state is tracked only while the training page is active. No key text is recorded.
  const code=canonicalTrainerKey(e.code);
  if(!code)return;
  HELD_TRAINER_KEYS.add(code);
@@ -857,8 +858,11 @@ document.addEventListener('keydown',e=>{
  paintPressedKeys();
 },true);
 document.addEventListener('keyup',e=>{
- if(currentPage!=='train'||!isTrainerKeyboardTarget(e.target))return;
- releaseTrainerKey(e.code);
+ if(currentPage!=='train')return;
+ const code=canonicalTrainerKey(e.code);
+ if(!HELD_TRAINER_KEYS.has(code))return;
+ // Tab changes focus before keyup. Releasing outside the original text field must still clear it.
+ releaseTrainerKey(code);
 },true);
 $('keyboard').addEventListener('pointerdown',e=>{
  const key=e.target.closest('.key');if(!key)return;
@@ -867,6 +871,7 @@ $('keyboard').addEventListener('pointerdown',e=>{
 for(const eventName of ['pointerup','pointercancel','pointerout']){
  $('keyboard').addEventListener(eventName,e=>{
   const key=e.target.closest('.key');if(!key||!POINTER_TRAINER_KEYS.has(key.dataset.code))return;
+  if(eventName==='pointerout'&&key.contains(e.relatedTarget))return;
   releaseTrainerKey(key.dataset.code);
  });
 }
