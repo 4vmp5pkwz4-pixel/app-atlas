@@ -688,7 +688,7 @@ saved.observed=saved.observed&&typeof saved.observed==='object'?saved.observed:{
 function persist(){try{localStorage.setItem(LOCAL_KEY,JSON.stringify(saved))}catch(e){}}
 function T(key){return (I18N[saved.lang]||I18N.en)[key]||I18N.en[key]||key}function esc(t){return String(t).replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]))}
 const cp=s=>Array.from(String(s||''));const isBrahmi=c=>c&&cp(c).some(x=>{const n=x.codePointAt(0);return n>=0x11000&&n<=0x1107f});
-let currentPage='home',lesson=LESSONS[0],prompt='',romanPrompt='',prevValue='',started=0,clock=null,tries=0,mistakes=0,wrongMap={},finished=false,modifierShift=false,modifierAlt=false,showRoman=true,forceBlind=false,calKey=null,composing=false,focusMode=false;
+let currentPage='home',lesson=LESSONS[0],prompt='',romanPrompt='',prevValue='',started=0,clock=null,tries=0,mistakes=0,wrongMap={},finished=false,modifierShift=false,modifierAlt=false,modifierControl=false,modifierCommand=false,showRoman=true,forceBlind=false,calKey=null,composing=false,focusMode=false;
 let germanTrace=[],pendingGerman=null; // Physical QWERTZ keystrokes alongside Unicode Brahmi.
 function charMap(code,shift=false,alt=false){
  const layer=alt?(shift?KAS:KA):(shift?KS:KC);
@@ -997,6 +997,90 @@ const HELD_TRAINER_KEYS=new Set();
 const POINTER_TRAINER_KEYS=new Set();
 const FLASH_TRAINER_KEYS=new Set();
 const KEY_LIGHT_TIMERS=new Map();
+
+/* Key Explorer — sound, glyph and key position remain separate facts.
+   Ctrl/Command preview shortcuts; unlike Shift/Option they do not select
+   a fifth or sixth Unicode Brahmi character layer. */
+const LIVE_KEY_MODIFIERS={shift:false,option:false,control:false,command:false};
+let INSPECTED_KEY_CODE='KeyK';
+function modifierState(){
+ return {
+  shift:modifierShift||LIVE_KEY_MODIFIERS.shift||HELD_TRAINER_KEYS.has('ShiftLeft')||HELD_TRAINER_KEYS.has('ShiftRight'),
+  option:modifierAlt||LIVE_KEY_MODIFIERS.option||HELD_TRAINER_KEYS.has('AltLeft')||HELD_TRAINER_KEYS.has('AltRight'),
+  control:modifierControl||LIVE_KEY_MODIFIERS.control||HELD_TRAINER_KEYS.has('ControlLeft')||HELD_TRAINER_KEYS.has('ControlRight'),
+  command:modifierCommand||LIVE_KEY_MODIFIERS.command||HELD_TRAINER_KEYS.has('MetaLeft')||HELD_TRAINER_KEYS.has('MetaRight')
+ };
+}
+function modifierSignature(mods){return [mods.shift,mods.option,mods.control,mods.command].map(Number).join('')}
+function observedModifiers(e){
+ LIVE_KEY_MODIFIERS.shift=Boolean(e.shiftKey);
+ LIVE_KEY_MODIFIERS.option=Boolean(e.altKey);
+ LIVE_KEY_MODIFIERS.control=Boolean(e.ctrlKey);
+ LIVE_KEY_MODIFIERS.command=Boolean(e.metaKey);
+}
+function romanKeySign(glyph){
+ if(!glyph)return '—';
+ if(REVERSE_BRAHMI_CONSONANTS.has(glyph))return REVERSE_BRAHMI_CONSONANTS.get(glyph)+'a';
+ if(glyph==='𑁆')return 'virāma';
+ return oneSignIAST(glyph);
+}
+function latinMnemonicAgreement(code,glyph){
+ if(!(['de','en'].includes(saved.physical)||(saved.physical==='ja'&&saved.jaPreview==='romaji')))return 'na';
+ if(!glyph||!REVERSE_BRAHMI_CONSONANTS.has(glyph))return 'na';
+ const expected=REVERSE_BRAHMI_CONSONANTS.get(glyph).normalize('NFD').replace(/[\u0300-\u036f]/g,'').charAt(0).toUpperCase();
+ const physical=physicalLabel(code);
+ return expected===physical?'yes':'no';
+}
+const SHORTCUT_KEYS={
+ command:{KeyC:'keyShortcutCopy',KeyV:'keyShortcutPaste',KeyX:'keyShortcutCut',KeyA:'keyShortcutSelect',KeyZ:'keyShortcutUndo',KeyF:'keyShortcutFind',KeyS:'keyShortcutSave',KeyP:'keyShortcutPrint'},
+ control:{KeyA:'keyShortcutStart',KeyE:'keyShortcutEnd',KeyK:'keyShortcutDelete'}
+};
+function previewShortcut(code,mods){
+ if(!mods.command&&!mods.control)return null;
+ const combination=(mods.control?'⌃':'')+(mods.command?'⌘':'')+(mods.option?'⌥':'')+(mods.shift?'⇧':'');
+ const name=physicalLabel(code);
+ const chord=combination+name;
+ // These are illustrative conventional macOS editing shortcuts, not
+ // guaranteed output for international layouts or browser-reserved chords.
+ let label='';
+ if(mods.command&&!mods.control&&!mods.option){
+  label=mods.shift&&code==='KeyZ'?T('keyShortcutRedo'):!mods.shift?(SHORTCUT_KEYS.command[code]?T(SHORTCUT_KEYS.command[code]):''):'';
+ }else if(mods.control&&!mods.command&&!mods.option&&!mods.shift){
+  label=SHORTCUT_KEYS.control[code]?T(SHORTCUT_KEYS.control[code]):'';
+ }
+ return {chord,label,description:T('keyShortcut')};
+}
+function inspectKey(code){
+ if(!code)return;
+ INSPECTED_KEY_CODE=code;
+ const target=$('keyInspectorText');
+ if(!target)return;
+ const mods=modifierState(),special=/^(?:Shift|Alt|Control|Meta)/.test(code);
+ let description='';
+ if(special){
+  description=physicalLabel(code)+' · '+(mods.control||mods.command?T('keyShortcut'):T('keyKeyboardLayer'));
+ }else{
+  const shortcut=previewShortcut(code,mods);
+  if(shortcut)description=shortcut.chord+' · '+(shortcut.label?shortcut.label+' · ':'')+T('keyShortcutUnverified');
+  else{
+   const glyph=charMap(code,mods.shift,mods.option);
+   const phonetic=latinMnemonicAgreement(code,glyph);
+   description=physicalLayerLabel(code,mods.shift,mods.option)+' → '+(glyph||'—')+' · '+romanKeySign(glyph)+
+    (phonetic==='yes'?' · ◆ '+T('keyMnemonic'):!glyph?' · '+T('keyNoSign'):'');
+  }
+ }
+ target.textContent=description;
+ qsa('#keyboard .key').forEach(b=>b.classList.toggle('is-inspected',b.dataset.code===code));
+}
+function updateKeyLayerStatus(){
+ const mods=modifierState();
+ const source=mods.command||mods.control
+  ?(mods.control?'⌃ ':'')+(mods.command?'⌘ ':'')+(mods.shift?'⇧ ':'')+(mods.option?'⌥ ':'')+'· '+T('keyShortcut')
+  :(mods.shift?'⇧ ':'')+(mods.option?'⌥ ':'')+(!mods.shift&&!mods.option?'Normal':'')+' · Brahmi / IAST';
+ const node=$('keyLayerStatus');if(node)node.textContent=source;
+ const legend=$('keyAgreementLegend');if(legend)legend.hidden=!(['de','en'].includes(saved.physical)||(saved.physical==='ja'&&saved.jaPreview==='romaji'));
+}
+
 function canonicalTrainerKey(code){
  return code==='OSLeft'?'MetaLeft':code==='OSRight'?'MetaRight':code==='FnLock'?'Fn':code;
 }
@@ -1006,8 +1090,10 @@ function paintPressedKeys(){
   const code=btn.dataset.code;
   btn.classList.toggle('is-held',HELD_TRAINER_KEYS.has(code)||POINTER_TRAINER_KEYS.has(code));
   btn.classList.toggle('is-flash',FLASH_TRAINER_KEYS.has(code));
+  const mods=modifierState();
   btn.classList.toggle('is-layer-active',
-   (modifierShift&&code.startsWith('Shift'))||(modifierAlt&&code.startsWith('Alt')));
+   (mods.shift&&code.startsWith('Shift'))||(mods.option&&code.startsWith('Alt'))||
+   (mods.control&&code.startsWith('Control'))||(mods.command&&code.startsWith('Meta')));
  });
 }
 function pulsePressedKey(code,delay=235){
@@ -1024,26 +1110,34 @@ function releaseTrainerKey(code){
  pulsePressedKey(code);
 }
 function clearKeyHolds(){
- HELD_TRAINER_KEYS.clear();POINTER_TRAINER_KEYS.clear();paintPressedKeys();
+ const previous=modifierSignature(modifierState());
+ HELD_TRAINER_KEYS.clear();POINTER_TRAINER_KEYS.clear();
+ Object.keys(LIVE_KEY_MODIFIERS).forEach(key=>LIVE_KEY_MODIFIERS[key]=false);
+ if(currentPage==='train'&&previous!==modifierSignature(modifierState()))renderKeyboard();
+ else paintPressedKeys();
 }
 function isTrainerKeyboardTarget(target){
  return Boolean(target&&(target.id==='germanMirror'||target.id==='typingInput'||target.closest?.('#keyboard')));
 }
 document.addEventListener('keydown',e=>{
  if(currentPage!=='train')return;
- // Keyboard state is tracked only while the training page is active. No key text is recorded.
- const code=canonicalTrainerKey(e.code);
- if(!code)return;
- HELD_TRAINER_KEYS.add(code);
+ const prev=modifierSignature(modifierState());
+ const code=canonicalTrainerKey(e.code);if(!code)return;
+ HELD_TRAINER_KEYS.add(code);observedModifiers(e);
  FLASH_TRAINER_KEYS.delete(code);
- paintPressedKeys();
+ if(modifierSignature(modifierState())!==prev)renderKeyboard();
+ else paintPressedKeys();
+ if(/^(?:Key|Digit)/.test(code))inspectKey(code);
 },true);
 document.addEventListener('keyup',e=>{
  if(currentPage!=='train')return;
- const code=canonicalTrainerKey(e.code);
- if(!HELD_TRAINER_KEYS.has(code))return;
- // Tab changes focus before keyup. Releasing outside the original text field must still clear it.
- releaseTrainerKey(code);
+ const prev=modifierSignature(modifierState());
+ const code=canonicalTrainerKey(e.code);if(!code)return;
+ observedModifiers(e);
+ // Tab may change focus; release must still clear the old physical key.
+ if(HELD_TRAINER_KEYS.has(code))releaseTrainerKey(code);
+ if(modifierSignature(modifierState())!==prev)renderKeyboard();
+ else paintPressedKeys();
 },true);
 $('keyboard').addEventListener('pointerdown',e=>{
  const key=e.target.closest('.key');if(!key)return;
