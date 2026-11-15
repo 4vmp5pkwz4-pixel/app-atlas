@@ -273,7 +273,7 @@ body.brahmi-interface .aside-foot{display:none}
 .converter-keys{font:550 clamp(13px,1.12vw,17px)/1.75 ui-monospace,monospace}
 .converter-controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:11px}
 .converter-controls .micro{flex:1 1 190px;text-align:right}
-.converter-select{display:block;width:100%;max-width:100%;margin:0 0 10px;min-width:0}
+.converter-select{display:block;width:100%;max-width:100%;margin:0 0 10px;min-width:0}.converter-jis-mode{margin:0 0 9px;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:10px}.converter-jis-mode label{font-size:11px;color:#bedacf}.converter-jis-mode .select{margin:0}
 .converter-detail{overflow:hidden}
 .converter-table-scroll{width:100%;max-width:100%;overflow:auto;border:1px solid rgba(172,215,205,.17);border-radius:13px;scrollbar-width:thin}
 .converter-table{width:100%;border-collapse:collapse;min-width:690px;font-size:clamp(12px,1.05vw,14px)}
@@ -393,6 +393,7 @@ body.training-mode #keyboard .key.is-layer-active:not(.is-held):not(.is-flash){
         <option value="de">Deutsch · QWERTZ (ISO)</option><option value="en">English · QWERTY (US)</option>
         <option value="ru">Русский · ЙЦУКЕН</option><option value="ja">日本語 · JIS (Mac)</option>
        </select>
+       <div class="converter-jis-mode" id="convJisRow" hidden><label for="convJisMode">JIS · ローマ字 / かな</label><select class="select converter-select" id="convJisMode" aria-label="Japanese JIS key legend"><option value="romaji">ローマ字 · Romaji</option><option value="kana">かな · Kana</option></select></div>
        <textarea id="convPhysical" class="converter-textarea converter-keys" readonly rows="3" aria-live="polite"></textarea>
        <p class="micro" data-i18n="convKeyCaveat">Это комбинации физических клавиш, а не обещание конкретных символов Option или японского IME в macOS.</p>
       </section>
@@ -688,6 +689,116 @@ function completeSession({acc,cpm}){if(lesson.id!=='custom'){const x=saved.compl
  x.nextReview=new Date(Date.now()+(stage?intervals[stage-1]:4)*3600000).toISOString();
  saved.completed[lesson.id]=x}const today=new Date().toLocaleDateString('en-CA');if(saved.lastDay!==today){const yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);saved.streak=saved.lastDay===yesterday.toLocaleDateString('en-CA')?saved.streak+1:1;saved.lastDay=today}Object.entries(wrongMap).forEach(([k,n])=>saved.errors[k]=(saved.errors[k]||0)+n);saved.sessions.unshift({id:lesson.id,when:new Date().toISOString(),acc,cpm,errors:mistakes,chars:cp(prompt).length});saved.sessions=saved.sessions.slice(0,100);persist();renderHome();renderStats();$('completeScore').textContent=uiNumber(acc)+'%';$('completeText').textContent=T('completeResult').replace('{acc}',acc).replace('{cpm}',cpm).replace('{errors}',mistakes).replace(/[0-9]/g,c=>saved.lang==='br'?BRAHMI_UI_DIGITS[Number(c)]:c);$('completeAdvice').textContent=T(acc>=96?'highAccuracy':'lowAccuracy');$('completionOverlay').classList.add('show');$('nextModal').disabled=LESSONS.findIndex(x=>x.id===lesson.id)>=LESSONS.length-1||lesson.id==='custom'}
 function insertSign(sign){if(!sign)return;const el=$('typingInput');if(el.disabled||finished)return;const st=el.selectionStart,en=el.selectionEnd;if(sign==='BACKSPACE'){if(st!==en){el.value=el.value.slice(0,st)+el.value.slice(en);el.setSelectionRange(st,st)}else if(st>0){const pre=cp(el.value.slice(0,st));pre.pop();const pos=pre.join('').length;el.value=el.value.slice(0,pos)+el.value.slice(en);el.setSelectionRange(pos,pos)}}else{const val=el.value.slice(0,st)+sign+el.value.slice(en);el.value=val;const pos=st+sign.length;el.setSelectionRange(pos,pos)}onTypingInput({type:'input'});trainingFocus()}
+
+/* Two different outputs are intentional:
+  1) IAST phonological transliteration of Unicode Brahmi; not a translation.
+  2) PHYSICAL macOS key chords in 4 layouts; not a promise about OS Option/IME output.
+  Never substitute a fictional key when a sign is missing in the source keylayout. */
+const REVERSE_BRAHMI_CONSONANTS=new Map();
+for(const [latin,brahmi] of Object.entries(cons))if(!REVERSE_BRAHMI_CONSONANTS.has(brahmi))REVERSE_BRAHMI_CONSONANTS.set(brahmi,latin);
+const REVERSE_BRAHMI_INDEPENDENT=new Map(),REVERSE_BRAHMI_MATRAS=new Map();
+for(const [latin,[independent,dependent]] of Object.entries(vowels)){
+ REVERSE_BRAHMI_INDEPENDENT.set(independent,latin);
+ if(dependent)REVERSE_BRAHMI_MATRAS.set(dependent,latin);
+}
+const BRAHMI_DIGIT_ASCII=new Map([...('𑁦𑁧𑁨𑁩𑁪𑁫𑁬𑁭𑁮𑁯')].map((d,i)=>[d,String(i)]));
+const BRAHMI_PUNCT_ROMAN=new Map([['𑁇','.'],['𑁈','..'],['𑁉',','],['𑀁','ṃ'],['𑀂','ḥ']]);
+const BRAHMI_TO_KEY=new Map();
+for(const [sh,al,layer] of [[false,false,KC],[true,false,KS],[false,true,KA],[true,true,KAS]]){
+ for(const [key,char] of Object.entries(layer)){
+  const output=char===' '?' ':char;
+  if(output&&!BRAHMI_TO_KEY.has(output))BRAHMI_TO_KEY.set(output,{key,sh,al});
+ }
+}
+function brahmiToIAST(source){
+ let out='',pending=null,unsupported=new Set();
+ const appendPending=()=>{if(pending!==null){out+=pending+'a';pending=null}};
+ for(const c of Array.from(source||'')){
+  const con=REVERSE_BRAHMI_CONSONANTS.get(c);
+  if(con!==undefined){appendPending();pending=con;continue}
+  if(REVERSE_BRAHMI_MATRAS.has(c)){
+   const vowel=REVERSE_BRAHMI_MATRAS.get(c);
+   if(pending!==null){out+=pending+vowel;pending=null}
+   else {out+='◌'+vowel;unsupported.add(c)}
+   continue;
+  }
+  if(c==='𑁆'){
+   if(pending!==null){out+=pending;pending=null}
+   else{out+='⟦𑁆⟧';unsupported.add(c)}
+   continue;
+  }
+  appendPending();
+  if(REVERSE_BRAHMI_INDEPENDENT.has(c)){out+=REVERSE_BRAHMI_INDEPENDENT.get(c);continue}
+  if(BRAHMI_DIGIT_ASCII.has(c)){out+=BRAHMI_DIGIT_ASCII.get(c);continue}
+  if(BRAHMI_PUNCT_ROMAN.has(c)){out+=BRAHMI_PUNCT_ROMAN.get(c);continue}
+  if(/\s/u.test(c)){out+=c;continue}
+  unsupported.add(c);out+='⟦'+c+'⟧';
+ }
+ appendPending();
+ return{text:out,unsupported:[...unsupported]};
+}
+function oneSignIAST(c){
+ if(REVERSE_BRAHMI_CONSONANTS.has(c))return REVERSE_BRAHMI_CONSONANTS.get(c)+'(a)';
+ if(REVERSE_BRAHMI_MATRAS.has(c))return '◌'+REVERSE_BRAHMI_MATRAS.get(c);
+ if(REVERSE_BRAHMI_INDEPENDENT.has(c))return REVERSE_BRAHMI_INDEPENDENT.get(c);
+ if(c==='𑁆')return 'virāma';
+ if(BRAHMI_DIGIT_ASCII.has(c))return BRAHMI_DIGIT_ASCII.get(c);
+ if(BRAHMI_PUNCT_ROMAN.has(c))return BRAHMI_PUNCT_ROMAN.get(c);
+ return /\s/u.test(c)?'␣':'—';
+}
+function converterPhysicalLabel(layout,code,jisMode='romaji'){
+ if(code==='Space')return '␣';
+ if(code==='Enter')return '↵';
+ if(layout==='ja'&&jisMode==='kana'&&JIS_KANA[code])return JIS_KANA[code];
+ const presets={ru:physRu,de:physDe,en:physUS,ja:physJa};
+ const explicit=presets[layout]?.[code];
+ if(explicit!==undefined)return explicit;
+ if(code.startsWith('Key'))return code.slice(3);
+ if(code.startsWith('Digit'))return code.slice(5);
+ return code;
+}
+function brahmiKeyChord(c,layout,jisMode='romaji'){
+ if(c==='\n')return '↵';
+ if(c==='\t')return '⇥';
+ const info=BRAHMI_TO_KEY.get(c);
+ if(!info)return '—';
+ const name=converterPhysicalLabel(layout,info.key,jisMode);
+ const mods=[info.sh?'⇧':'',info.al?'⌥':''].filter(Boolean);
+ return mods.length?mods.join('+')+'+'+name:name;
+}
+function brahmiKeySequence(text,layout,jisMode='romaji'){
+ return Array.from(text||'').map(c=>brahmiKeyChord(c,layout,jisMode)).join(' ');
+}
+function renderConverter(){
+ const original=$('convSource').value;
+ const translation=brahmiToIAST(original);
+ $('convRoman').value=translation.text;
+ const lay=$('convLayout').value,jis=$('convJisMode').value;
+ $('convJisRow').hidden=lay!=='ja';
+ $('convPhysical').value=brahmiKeySequence(original,lay,jis);
+ const cps=Array.from(original);
+ const unknown=cps.filter(c=>!BRAHMI_TO_KEY.has(c)&&c!=='\n'&&c!=='\t').length;
+ $('convSummary').textContent=T('convSummary').replace('{n}',uiNumber(cps.length)).replace('{unmapped}',uiNumber(unknown));
+ $('convRows').innerHTML=cps.slice(0,160).map(c=>{
+  const values=['de','en','ru','ja'].map(layout=>{
+   const value=brahmiKeyChord(c,layout,jis);
+   return '<td class="'+(value==='—'?'unknown':'chord')+'">'+esc(value)+'</td>'
+  }).join('');
+  return '<tr><td class="brahmi">'+esc(c===' '?'␣':c==='\n'?'↵':c)+'</td><td>'+esc(oneSignIAST(c))+'</td>'+values+'</tr>';
+ }).join('');
+}
+async function copyConverter(value){
+ const content=$('conv'+value).value;
+ try{
+   if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(content);
+   else {
+     const el=$('conv'+value);el.focus();el.select();
+     if(!document.execCommand('copy'))throw Error('copy blocked');
+   }
+   toast(T('convCopied'));
+ }catch(_){toast(T('convCopyFailed'))}
+}
+
 function renderReferenceMatrix(){
  const codes=activeRows().flat().filter(code=>!['Escape','Lang1','Lang2','Fn','Backspace','Tab','CapsLock','Enter','ShiftLeft','ShiftRight','AltLeft','AltRight','MetaLeft','MetaRight','ControlLeft','ControlRight'].includes(code));
  const head='<thead><tr><th>'+esc(T('matrixKey'))+'</th><th>Normal</th><th>⇧</th><th>⌥</th><th>⇧+⌥</th></tr></thead>';
@@ -819,10 +930,18 @@ $('germanMirror').addEventListener('input',()=>{if(saved.mode==='sim'&&saved.phy
 // Native keyboard calibration: physical key + modifiers is captured, resulting Unicode from input event.
 $('calInput').addEventListener('keydown',e=>{if(e.metaKey||e.ctrlKey)return;calKey={code:e.code,shift:e.shiftKey,alt:e.altKey,key:e.key};if(e.key==='Enter')e.preventDefault()});
 $('calInput').addEventListener('input',e=>{const data=e.data||$('calInput').value;if(!calKey||!data)return;let chars=cp(data);const glyph=chars.filter(x=>isBrahmi(x));if(glyph.length===1){const k=calKey.code+'|'+(calKey.shift?'1':'0')+(calKey.alt?'1':'0');saved.cal[k]=glyph[0];$('calDetected').textContent=physicalLabel(calKey.code)+' → '+glyph[0];persist();updateSettings();renderKeyboard()}else $('calDetected').textContent='… '+data;calKey=null;$('calInput').value=''});
-$('continueButton').onclick=()=>{const due=LESSONS.find(l=>saved.completed[l.id]?.nextReview&&Date.parse(saved.completed[l.id].nextReview)<=Date.now());const id=due?.id||LESSONS.find(l=>!saved.completed[l.id])?.id||'home1';loadLesson(id)};$('backLessons').onclick=()=>navigate('home');$('openConvertFromTrain').onclick=()=>navigate('convert');$('prevLesson').onclick=()=>{const i=LESSONS.findIndex(x=>x.id===lesson.id);if(i>0)loadLesson(LESSONS[i-1].id)};$('nextLesson').onclick=()=>{const i=LESSONS.findIndex(x=>x.id===lesson.id);if(i>=0&&i<LESSONS.length-1)loadLesson(LESSONS[i+1].id)};$('newPrompt').onclick=()=>{if(lesson.kind==='custom')resetSession();else loadLesson(lesson.id,(currentVariant+1)%Math.max(1,lesson.prompts?.length||lesson.romans?.length||1))};$('resetInput').onclick=()=>resetSession();$('focusInput').onclick=()=>trainingFocus();$('toggleRoman').onclick=()=>{showRoman=!showRoman;renderExercise()};$('visibilityToggle').onclick=()=>{forceBlind=!forceBlind;renderKeyboard()};$('shiftToggle').onclick=()=>{modifierShift=!modifierShift;renderKeyboard()};$('altToggle').onclick=()=>{modifierAlt=!modifierAlt;renderKeyboard()};$('langSelect').onchange=e=>setLanguage(e.target.value);$('focusButton').onclick=()=>{focusMode=!focusMode;document.querySelector('.aside').classList.toggle('hidden',focusMode);document.querySelector('.app').style.gridTemplateColumns=focusMode?'minmax(0,1fr)':'';navigate('train');$('focusButton').textContent=focusMode?'× '+(saved.lang==='de'?'Fokus beenden':saved.lang==='en'?'Exit focus':'Выход из фокуса'):T('focusMode')};
+$('continueButton').onclick=()=>{const due=LESSONS.find(l=>saved.completed[l.id]?.nextReview&&Date.parse(saved.completed[l.id].nextReview)<=Date.now());const id=due?.id||LESSONS.find(l=>!saved.completed[l.id])?.id||'home1';loadLesson(id)};$('backLessons').onclick=()=>navigate('home');$('openConvertFromTrain').onclick=()=>navigate('convert');
+$('convSource').addEventListener('input',renderConverter);
+$('convLayout').addEventListener('change',renderConverter);
+$('convJisMode').addEventListener('change',renderConverter);
+$('convExample').onclick=()=>{$('convSource').value='𑀳𑀺𑀤 𑀩𑀼𑀥𑁂 𑀚𑀸𑀢𑁂 𑀲𑀓𑁆𑀬𑀫𑀼𑀦𑀻 𑀢𑀺';renderConverter()};
+$('convClear').onclick=()=>{$('convSource').value='';renderConverter();$('convSource').focus()};
+$('convCopyRoman').onclick=()=>copyConverter('Roman');
+$('convCopyKeys').onclick=()=>copyConverter('Physical');
+$('prevLesson').onclick=()=>{const i=LESSONS.findIndex(x=>x.id===lesson.id);if(i>0)loadLesson(LESSONS[i-1].id)};$('nextLesson').onclick=()=>{const i=LESSONS.findIndex(x=>x.id===lesson.id);if(i>=0&&i<LESSONS.length-1)loadLesson(LESSONS[i+1].id)};$('newPrompt').onclick=()=>{if(lesson.kind==='custom')resetSession();else loadLesson(lesson.id,(currentVariant+1)%Math.max(1,lesson.prompts?.length||lesson.romans?.length||1))};$('resetInput').onclick=()=>resetSession();$('focusInput').onclick=()=>trainingFocus();$('toggleRoman').onclick=()=>{showRoman=!showRoman;renderExercise()};$('visibilityToggle').onclick=()=>{forceBlind=!forceBlind;renderKeyboard()};$('shiftToggle').onclick=()=>{modifierShift=!modifierShift;renderKeyboard()};$('altToggle').onclick=()=>{modifierAlt=!modifierAlt;renderKeyboard()};$('langSelect').onchange=e=>setLanguage(e.target.value);$('focusButton').onclick=()=>{focusMode=!focusMode;document.querySelector('.aside').classList.toggle('hidden',focusMode);document.querySelector('.app').style.gridTemplateColumns=focusMode?'minmax(0,1fr)':'';navigate('train');$('focusButton').textContent=focusMode?'× '+(saved.lang==='de'?'Fokus beenden':saved.lang==='en'?'Exit focus':'Выход из фокуса'):T('focusMode')};
 qsa('[data-page]').forEach(btn=>btn.onclick=()=>navigate(btn.dataset.page));
 $('customRun').onclick=()=>{const raw=$('customText').value.trim();if(!raw){toast(T('customNeed'));return}let text=$('customType').value==='iast'?iastToBrahmi(raw):raw;let roman=$('customType').value==='iast'?raw:'';if(!isBrahmi(text)){toast(T('noBrahmi'));return}if(cp(text).length>1000){toast(saved.lang==='de'?'Maximal 1000 Zeichen.':saved.lang==='en'?'Maximum 1,000 signs.':'Максимум 1000 знаков.');return}setCustom(text,roman)};$('customClear').onclick=()=>$('customText').value='';$('modeSelect').onchange=e=>{saved.mode=e.target.value;resetSession();persist();updateSettings();renderExercise();trainingFocus()};$('physicalSelect').onchange=e=>{saved.physical=e.target.value;persist();updateSettings();renderKeyboard()};$('sourceLayout').onchange=e=>{saved.physical=e.target.value;persist();updateSettings();renderKeyboard()};$('japaneseMode').onchange=e=>{saved.jaPreview=e.target.value;persist();renderKeyboard()};qsa('[data-layer]').forEach(btn=>btn.onclick=()=>{modifierShift=btn.dataset.layer==='shift'||btn.dataset.layer==='shiftOption';modifierAlt=btn.dataset.layer==='option'||btn.dataset.layer==='shiftOption';renderKeyboard()});$('soundToggle').onchange=e=>{saved.sound=e.target.checked;persist()};$('romanSetting').onchange=e=>{saved.roman=e.target.checked;showRoman=saved.roman;persist();renderExercise()};$('blindSetting').onchange=e=>{saved.blind=e.target.checked;persist();renderKeyboard()};$('clearCal').onclick=()=>{saved.cal={};persist();updateSettings();renderKeyboard();$('calDetected').textContent='—';toast(T('cleared'))};$('closeModal').onclick=()=>$('completionOverlay').classList.remove('show');$('completionOverlay').addEventListener('click',e=>{if(e.target===$('completionOverlay'))$('completionOverlay').classList.remove('show')});$('againModal').onclick=()=>{$('completionOverlay').classList.remove('show');if(lesson.kind==='custom'){resetSession();trainingFocus()}else loadLesson(lesson.id,++currentVariant)};$('nextModal').onclick=()=>{$('completionOverlay').classList.remove('show');const i=LESSONS.findIndex(l=>l.id===lesson.id);if(i>=0&&i<LESSONS.length-1)loadLesson(LESSONS[i+1].id)};$('trainWeak').onclick=()=>loadLesson('adaptive');$('exportData').onclick=()=>{const b=new Blob([JSON.stringify(saved,null,2)],{type:'application/json'}),url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='brahmi-atelier-progress.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);toast(T('exportDone'))};$('importButton').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const obj=JSON.parse(await file.text());if(obj.version!==1||!obj.completed||!Array.isArray(obj.sessions))throw Error('schema');saved={...saved,...obj,cal:obj.cal||{},errors:obj.errors||{}};showRoman=saved.roman;persist();setLanguage(saved.lang);toast(T('importDone'))}catch(e){toast(T('importError'))}e.target.value=''};$('resetAll').onclick=()=>{if(!confirm(T('resetConfirm')))return;const lang=saved.lang,phys=saved.physical,mode=saved.mode,jaPreview=saved.jaPreview;saved={version:1,lang,mode:'sim',physical:phys,jaPreview,independentModeInitialized:true,observed:{},roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};persist();setLanguage(lang);toast(T('cleared'))};
-showRoman=saved.roman;setLanguage(saved.lang);const initial=LESSONS.find(l=>l.id===saved.activeLesson)||LESSONS[0];lesson=initial;const p=promptOf(initial);setPrompt(p);renderHome();navigate('home');window.BrahmiAtelierTest={iastToBrahmi,cp,charMap,reverseLookup,TEXTS,LESSONS,BRAHMI_LAYERS,physicalLabel,germanKeyStroke,ROWS_JIS,JIS_KANA,activeRows};
+showRoman=saved.roman;setLanguage(saved.lang);const initial=LESSONS.find(l=>l.id===saved.activeLesson)||LESSONS[0];lesson=initial;const p=promptOf(initial);setPrompt(p);renderHome();navigate('home');window.BrahmiAtelierTest={iastToBrahmi,brahmiToIAST,brahmiKeyChord,brahmiKeySequence,REVERSE_BRAHMI_CONSONANTS,cp,charMap,reverseLookup,TEXTS,LESSONS,BRAHMI_LAYERS,physicalLabel,germanKeyStroke,ROWS_JIS,JIS_KANA,activeRows};
 })();
 </script>
 </body></html>
