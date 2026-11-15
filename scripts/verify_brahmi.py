@@ -27,6 +27,23 @@ assert 'id="sourceLayout"' in html and all('value="'+x+'"' in html for x in ("ru
 assert 'data-layer="shiftOption"' in html
 assert "event.code" in (ROOT/"docs/MACOS_BRAHMI_SOURCE.md").read_text(encoding="utf-8")
 assert "if(!saved.independentModeInitialized)" in html
+
+jis=json.loads((ROOT/"data/macos-jis-layout.json").read_text(encoding="utf-8"))
+def read_jis_constant(name):
+    start=html.find("const "+name+"=")
+    assert start>=0, f"Missing {name}"
+    start+=len("const "+name+"=")
+    end=html.find(";\n",start)
+    assert end>=0, f"Missing terminator for {name}"
+    return json.loads(html[start:end])
+assert jis["rows"]==read_jis_constant("ROWS_JIS"), "Mac JIS key row mismatch"
+assert jis["labels"]==read_jis_constant("physJa"), "Mac JIS physical labels mismatch"
+assert jis["kana"]==read_jis_constant("JIS_KANA"), "Mac JIS Kana preview mismatch"
+assert len(jis["rows"])==5
+assert {"IntlYen","IntlRo","Lang1","Lang2","Fn"}.issubset(set(sum(jis["rows"],[])))
+assert 'id="japaneseMode"' in html and all('value="'+x+'"' in html for x in ("ru","de","en","ja","br"))
+assert "japaneseComposing" in html and "const BRAHMI_UI_ROMAN=" in html
+
 scripts=re.findall(r"<script(?:\s[^>]*)?>([\s\S]*?)</script>",html)
 assert scripts, "No inline executable JS"
 for i,script in enumerate(scripts):
@@ -36,4 +53,4 @@ for i,script in enumerate(scripts):
         p.write_text(script,encoding="utf-8")
         result=subprocess.run(["node","--check",str(p)],capture_output=True,text=True)
         assert result.returncode==0, f"Brahmi JS syntax failed: {result.stderr}"
-print("OK: original macOS Brahmi four layers, UI, and embedded JS syntax")
+print("OK: original Brahmi layers, full Japanese JIS layout, five languages and inline JS syntax")

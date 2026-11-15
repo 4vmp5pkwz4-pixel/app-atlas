@@ -49,3 +49,8 @@ Every future request: classify requirements and sources; preserve invariant beha
 - Visual direction: futuristic luxury with midnight graphite, restrained emerald/jade and champagne-gold, high-fidelity keycaps, subtle glass surfaces and precise typography. Maintain legibility, WCAG-minded contrast and keyboard-focus affordances.
 - Source input and generated Brahmi lines must remain intact (RU/EN/DE macOS physical typing, no Brahmi installation). When a native touchscreen keyboard would cover the trainer, the full clickable in-app keyboard takes priority; document input-method limitations.
 - Any layout change must pass all geometry, functionality and source-mapping checks BEFORE release. Actual physical Safari and hardware behavior still require human verification.
+
+## Japanese JIS + script localization
+- Preserve five UI locales RU/DE/EN/JA/BR, where BR is *modern editorial Pāli-inspired text in Brahmi script*, not a historic Ashokan language.
+- Preserve all Japanese Mac JIS physical keys (IntlYen, IntlRo, Lang1/Eisu/Kana, Lang2, Fn), Romaji/Kana legends, full five-row viewport geometry and no fictional Brahmi output for source-unmapped keys.
+- Japanese IME composition must not be cancelled; the source line can contain composed Japanese and have a different character count from the physical Brāhmi line. Use `data/macos-jis-layout.json` and `docs/JAPANESE_JIS_AND_BRAHMI_SCRIPT.md` as sources and keep Playwright regression coverage.

@@ -18,3 +18,5 @@ Do not claim successful browser verification from syntax checks alone. Never sil
 APP ATLAS is deployed through GitHub Pages, and GitHub Actions publishes downloadable artifacts. Private repositories and personal data must never enter the public site or release archives.
 
 **NON-NEGOTIABLE LAYOUT INVARIANT:** In Brahmi training mode, all five Mac keyboard rows must always fit in the visible viewport. Only the teaching panel may scroll; the keyboard dock must never move, crop, or require horizontal scrolling. Every style change must pass 12-size geometric Playwright QA (see `docs/KEYBOARD_VIEWPORT_QA.md`).
+
+**Five-language Japanese/JIS extension:** Consult `docs/JAPANESE_JIS_AND_BRAHMI_SCRIPT.md`, use `data/macos-jis-layout.json` as verified JIS model, preserve full keyboard, IME composition, Japanese lessons and the modern (not historical) Brahmi-script interface. Never claim Brahmi is a single spoken language.
