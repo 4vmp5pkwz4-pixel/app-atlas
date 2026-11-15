@@ -315,7 +315,8 @@ test('Brahmi-only interface uses Brahmi characters, modern editorial titles and 
  await expect(page.locator('#lessonName')).toContainText('𑀫');
  const metric=await page.locator('#metricAcc').textContent();
  expect(metric).toMatch(/[\u{11066}-\u{1106F}]/u);
- await page.locator('[data-page="texts"]').first().click();
+ await page.locator('#backLessons').click();
+ await page.locator('.nav [data-page="texts"]').click();
  await expect(page.locator('#edictGlossary')).toContainText('𑀯');
  const label=await page.locator('[data-text="edict12di"]').locator('..').textContent();
  expect(/[\u{11000}-\u{1107F}]/u.test(label)).toBe(true);
