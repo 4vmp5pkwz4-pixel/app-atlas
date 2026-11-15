@@ -1,0 +1,49 @@
+name: Release Brahmi Atelier Verified 25-Quote Wisdom Rotation v0.6.0 beta
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/bootstrap-brahmi-v060.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate full macOS source mapping and website
+        run: |
+          python3 scripts/validate.py
+          python3 scripts/verify_brahmi.py
+      - name: Install browser tests
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Block release until all desktop/mobile acceptance tests pass
+        run: npm run test:browser
+      - name: Create HTML app and itch.io/website ZIP bundles
+        run: python3 scripts/package.py
+      - name: Publish immutable beta release with SHA-256 checksums
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v0.6.0-beta --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            echo "v0.6.0-beta exists, leaving it unchanged"
+          else
+            gh release create v0.6.0-beta dist/* \
+              --repo "${GITHUB_REPOSITORY}" \
+              --target "${GITHUB_SHA}" \
+              --title "Brahmi Atelier · 25 Verified Wisdom Passages + Visible Version · v0.6.0 beta" \
+              --notes "Brahmi Atelier v0.6.0 beta has a permanently visible semantic version badge in its topbar (home, training, converter, phone portrait and landscape), 25 source-linked and thoughtfully selected historical passages (12 inscriptional Prakrit excerpts from Ashoka rock edicts, 13 canonical Pali Dhammapada excerpts), and an authentic primary-source verification link for every entry. The converter's Next Passage button uses an anti-repeat cycle, and dedicated buttons switch Ashoka/Dhammapada genres. Four-language interpretations RU/DE/EN/JA, scholarly original Roman transcription, optional editorial restoration notes, and a modern didactic Brahmi rendering are carefully distinguished. The existing Brahmi-to-IAST and German/English/Russian/Japanese Mac key-chord converter, four original Shift/Option layers, all-key lighting, 24 lessons and permanently visible full five-row keyboard are preserved. Standalone offline HTML, itch.io ZIP, public website ZIP and SHA-256 sums included. CI checks exact offline corpus and visible version metadata, plus 78 desktop/mobile Chromium browser tests. Attribution note: canonical Pali Dhammapada text is not Ashoka's personal Prakrit edict; Unicode Brahmi is not an ancient stone facsimile. Physical Safari and reserved Fn/Command key handling require separate device verification." \
+              --prerelease
+          fi
