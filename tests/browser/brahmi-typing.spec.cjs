@@ -481,9 +481,9 @@ test('copy actions deliver IAST and selected physical key sequence without uploa
 test('version badge v0.6.0 beta is visible and agrees with the source metadata on all pages',async({page})=>{
  await page.locator('#langSelect').selectOption('en');
  const version=await page.evaluate(()=>window.BrahmiAtelierTest.APP_VERSION);
- expect(version).toBe('0.7.0-beta');
+ expect(version).toBe('0.8.0-beta');
  const badge=page.locator('#versionBadge');
- await expect(badge).toHaveText('v0.7.0 β');
+ await expect(badge).toHaveText('v0.8.0 β');
  for(const [width,height] of [[320,568],[375,667],[390,844],[667,375],[1024,768],[1312,1172],[1920,1080]]){
   await page.setViewportSize({width,height});
   for(const go of ['home','train','convert']){
