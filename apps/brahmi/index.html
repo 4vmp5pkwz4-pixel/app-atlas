@@ -1043,7 +1043,7 @@ const SHORTCUT_KEYS={
 function previewShortcut(code,mods){
  if(!mods.command&&!mods.control)return null;
  const combination=(mods.control?'⌃':'')+(mods.command?'⌘':'')+(mods.option?'⌥':'')+(mods.shift?'⇧':'');
- const name=physicalLabel(code);
+ const name=code==='Space'?'␣':physicalLabel(code);
  const chord=combination+name;
  // These are illustrative conventional macOS editing shortcuts, not
  // guaranteed output for international layouts or browser-reserved chords.
@@ -1063,7 +1063,8 @@ function inspectKey(code){
  const mods=modifierState(),special=/^(?:Shift|Alt|Control|Meta)/.test(code);
  let description='';
  if(special){
-  description=physicalLabel(code)+' · '+(mods.control||mods.command?T('keyShortcut'):T('keyKeyboardLayer'));
+  const shortcut=(mods.control||mods.command)&&!/^(?:Shift|Alt|Control|Meta)/.test(code)?previewShortcut(code,mods):null;
+  description=shortcut?shortcut.chord+' · '+T('keyShortcutUnverified'):physicalLabel(code)+' · '+T('keyKeyboardLayer');
  }else{
   const shortcut=previewShortcut(code,mods);
   if(shortcut)description=shortcut.chord+' · '+(shortcut.label?shortcut.label+' · ':'')+T('keyShortcutUnverified');
@@ -1174,13 +1175,14 @@ function renderKeyboard(){
    const special=specials.has(code);
    const glyph=special?'':charMap(code,mods.shift,mods.option);
    const roman=romanKeySign(glyph);
-   const shortcut=!special&&code!=='Space'&&shortcutMode?previewShortcut(code,mods):null;
-   const label=special?caps[code]:physicalLayerLabel(code,mods.shift,mods.option);
+   const shortcut=!special&&shortcutMode?previewShortcut(code,mods):null;
+   const modifierKey=/^(?:Shift|Alt|Control|Meta)/.test(code);
+   const label=special?(shortcutMode&&!modifierKey?(mods.control?'⌃':'')+(mods.command?'⌘':'')+caps[code]:caps[code]):physicalLayerLabel(code,mods.shift,mods.option);
    const mnemonic=shortcut?'na':latinMnemonicAgreement(code,glyph);
    const cls='key '+(special?'wide ':'')+(code==='Space'?'space ':'')+
     (fingers[code]?'f-'+fingers[code]+' ':'')+((code==='KeyF'||code==='KeyJ')?'home ':'')+
     (shortcut?'is-shortcut ':'');
-   const name=special?caps[code]:shortcut?
+   const name=special?label:shortcut?
     shortcut.chord+' · '+(shortcut.label||T('keyShortcut')):
     physicalLabel(code)+' → '+(glyph||T('unmapped'))+' → '+roman;
    const middle=shortcut
@@ -1189,7 +1191,7 @@ function renderKeyboard(){
      '<span class="iast" title="IAST">'+(hide?'·':esc(roman))+'</span>';
    html+='<button type="button" class="'+cls+'" data-code="'+esc(code)+'" data-mnemonic="'+mnemonic+
     '" data-empty="'+(!glyph)+'" aria-label="'+esc(name)+'" title="'+esc(name)+'">'+
-    '<span class="latin">'+esc(label)+'</span>'+(!special&&code!=='Space'?middle:'')+'</button>';
+    '<span class="latin">'+esc(label)+'</span>'+(!special&&(code!=='Space'||shortcut)?middle:'')+'</button>';
   }
   html+='</div>';
  }
