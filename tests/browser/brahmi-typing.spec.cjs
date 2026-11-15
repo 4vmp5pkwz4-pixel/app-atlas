@@ -431,3 +431,43 @@ test('converter responds to phone and landscape widths without changing permanen
  const k=await page.locator('#keyboard').boundingBox();
  expect(k.y+k.height).toBeLessThanOrEqual(901);
 });
+
+test('Tab releases key highlight even when focus moves to another control',async({page})=>{
+ await page.locator('#continueButton').click();
+ const source=page.locator('#germanMirror');
+ await source.dispatchEvent('keydown',{code:'Tab',key:'Tab',bubbles:true,cancelable:true});
+ await expect(page.locator('#keyboard .key[data-code="Tab"]')).toHaveClass(/is-held/);
+ await page.locator('#resetInput').focus();
+ await page.locator('#resetInput').dispatchEvent('keyup',{code:'Tab',key:'Tab',bubbles:true,cancelable:true});
+ await expect(page.locator('#keyboard .key[data-code="Tab"]')).not.toHaveClass(/is-held/);
+ await expect(page.locator('#keyboard .key[data-code="Tab"]')).toHaveClass(/is-flash/);
+});
+
+test('historical text can be sent directly into converter without retyping',async({page})=>{
+ await page.locator('.nav [data-page="texts"]').click();
+ const text=await page.evaluate(()=>window.BrahmiAtelierTest.TEXTS.find(t=>t.id==='lumbini').brahmi);
+ await page.locator('[data-convert-text="lumbini"]').click();
+ await expect(page.locator('#page-convert')).toBeVisible();
+ await expect(page.locator('#convSource')).toHaveValue(text);
+ await expect(page.locator('#convRoman')).not.toHaveValue('');
+ await page.locator('#convAshoka').click();
+ const ashoka=await page.evaluate(()=>window.BrahmiAtelierTest.TEXTS.find(t=>t.id==='edict12di').brahmi);
+ await expect(page.locator('#convSource')).toHaveValue(ashoka);
+});
+
+test('copy actions deliver IAST and selected physical key sequence without uploading',async({page})=>{
+ await page.locator('#langSelect').selectOption('en');
+ await page.locator('.nav [data-page="convert"]').click();
+ await page.locator('#convSource').fill('𑀳𑀺𑀤');
+ await page.evaluate(()=>{
+   Object.defineProperty(navigator,'clipboard',{configurable:true,value:{
+      writeText:async s=>{window.__copiedConverterValue=s}
+   }});
+ });
+ await page.locator('#convCopyRoman').click();
+ expect(await page.evaluate(()=>window.__copiedConverterValue)).toBe('hida');
+ await page.locator('#convLayout').selectOption('ru');
+ await page.locator('#convCopyKeys').click();
+ expect(await page.evaluate(()=>window.__copiedConverterValue)).toBe('Р Ш В');
+ await expect(page.locator('#toast')).toContainText('Copied');
+});
