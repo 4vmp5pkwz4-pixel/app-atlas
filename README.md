@@ -4,7 +4,7 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download beta release](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.4.0-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.5.0 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.5.0-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
 An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. **RU · EN · DE.** The main catalog contains no analytics or login.
 
@@ -82,3 +82,11 @@ Five user-interface languages: Russian, German, English, Japanese, and an experi
 ### Complete key illumination + Brahmi reverse-conversion studio
 
 All five keyboard rows still fit permanently in the training viewport, now with high-contrast held/release highlighting for **Space, Shift/Option/Command/Control, Tab, Enter, Backspace and Japanese JIS-only keys** as well as letters. A new dedicated **Convert ⇄** section accepts pasted Brahmi text and outputs **IAST scholarly transliteration** and separately **authentic physical Mac key chords** for DE/EN/RU/JA, with a four-layout table, explicit unsupported signs, offline copy controls and direct links from actual Ashokan inscription texts. This distinction prevents confusing transliteration of ancient languages with keyboard position labels. All 5 UI locales remain supported. See [scientific and test notes](docs/BRAHMI_CONVERTER_AND_KEY_FEEDBACK.md). Firmware-reserved shortcuts and physical Safari input still need on-device verification.
+
+### Verified v0.5.0-beta delivery · 15 November 2026
+
+- [Release v0.5.0-beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.5.0-beta), including `brahmi.html`, an itch.io-ready ZIP and checksums.
+- [66/66 passed in release-gating desktop and mobile Chromium acceptance tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/runs/43717056113).
+- [Independent live browser QA](https://agent.tinyfish.ai/runs/4810fbd3-db46-4827-81a3-7cf4cd19ab13) confirmed five full rows, highlighted Space/Shift/Option/Backspace/Enter/Command/Control and JIS special keys, live reverse conversion and all four Mac layouts.
+
+This evidence is **browser-level**, not a guarantee that macOS Safari will emit key events for firmware Fn or every reserved Command shortcut. The virtual keyboard feedback can be verified even when macOS intercepts physical keys.

@@ -33,3 +33,11 @@ This mode does not upload pasted text or create persistent conversion records. E
 ## 4. Release gates
 
 Run `python3 scripts/verify_brahmi.py`, `python3 scripts/validate.py` and `npm run test:browser`. Browser suite checks each physical and virtual pressed key, the Tab release/focus-change case, JIS-only keys, IAST consonant-vowel/virāma logic, unmapped characters, all Mac layout equivalents, five UI languages, clipboard copy, the historical text launcher, phone/landscape widths and five-row viewport geometry. Independently inspect rendered screenshots and physically verify macOS Safari, Fn/Command limitations, Japanese IME and tactile accessibility before claiming complete hardware support.
+
+### Verified v0.5.0-beta delivery · 15 November 2026
+
+- [Release v0.5.0-beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.5.0-beta), including `brahmi.html`, an itch.io-ready ZIP and checksums.
+- [66/66 passed in release-gating desktop and mobile Chromium acceptance tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/runs/43717056113).
+- [Independent live browser QA](https://agent.tinyfish.ai/runs/4810fbd3-db46-4827-81a3-7cf4cd19ab13) confirmed five full rows, highlighted Space/Shift/Option/Backspace/Enter/Command/Control and JIS special keys, live reverse conversion and all four Mac layouts.
+
+This evidence is **browser-level**, not a guarantee that macOS Safari will emit key events for firmware Fn or every reserved Command shortcut. The virtual keyboard feedback can be verified even when macOS intercepts physical keys.
