@@ -4,7 +4,7 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.5.0 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.5.0-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.5.0 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.6.0-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
 An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. **RU · EN · DE.** The main catalog contains no analytics or login.
 
@@ -85,8 +85,16 @@ All five keyboard rows still fit permanently in the training viewport, now with 
 
 ### Verified v0.5.0-beta delivery · 15 November 2026
 
-- [Release v0.5.0-beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.5.0-beta), including `brahmi.html`, an itch.io-ready ZIP and checksums.
+- [Release v0.5.0-beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.6.0-beta), including `brahmi.html`, an itch.io-ready ZIP and checksums.
 - [66/66 passed in release-gating desktop and mobile Chromium acceptance tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/runs/43717056113).
 - [Independent live browser QA](https://agent.tinyfish.ai/runs/4810fbd3-db46-4827-81a3-7cf4cd19ab13) confirmed five full rows, highlighted Space/Shift/Option/Backspace/Enter/Command/Control and JIS special keys, live reverse conversion and all four Mac layouts.
 
 This evidence is **browser-level**, not a guarantee that macOS Safari will emit key events for firmware Fn or every reserved Command shortcut. The virtual keyboard feedback can be verified even when macOS intercepts physical keys.
+
+### Always-visible semantic version and 25 verified rotating passages · v0.6.0-beta
+
+The Brahmi application now displays its **v0.6.0 β** number in the top navigation on **every page**, including the full-screen typing trainer and small landscape viewports. Version metadata is checked against `data/brahmi-release.json` by CI; the app is standalone and does not need a network request to display it.
+
+The **Convert ⇄** workspace now has **25 independently source-linked excerpts**: 12 **Aśoka edicts in Prakrit** (Girnār editions, Hultzsch 1925) and 13 **Dhammapada verses in Pāli** (SuttaCentral). Repeated clicks load a new passage until the requested pool is exhausted, avoiding immediate repeats at the reset boundary. Buttons select all excerpts, only Aśoka, or only Dhammapada. Each card shows the scholarly Roman original, a locally generated educational Unicode Brahmi transliteration, a concise four-language interpretation and a direct source link. Editorially restored letters in the printed edition are **marked**, and partial excerpts are identified as such. Original Pāli verse texts are not attributed as quotations from Aśoka or mislabeled Girnār Prakrit. The published corpus is independently versioned in `data/brahmi-wisdom.json` and embedded byte-for-byte in the offline HTML, with strict CI verification.
+
+For full provenance and editorial safeguards see [Wisdom corpus and semantic version policy](docs/WISDOM_CORPUS_AND_VERSION.md) and the [agent skill](.agents/skills/brahmi-dual-layout/SKILL.md). The example collection is an editorial selection, not an objective ranking of any religious or philosophical teaching.

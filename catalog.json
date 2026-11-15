@@ -13,18 +13,18 @@
       "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
       "mark": "𑀥",
       "tags": [
+        "v0.6.0 β",
         "Brahmi",
-        "Five UI languages",
-        "Mac JIS",
-        "All-key feedback",
+        "RU/EN/DE/JA",
+        "25 sourced passages",
         "IAST converter",
-        "RU/DE/EN/JA keymaps",
-        "Ashoka"
+        "Mac JIS",
+        "All-key feedback"
       ],
       "desc": {
-        "ru": "Тренажёр письма брахми для Mac RU/DE/EN/JA с неизменно видимой клавиатурой, подсветкой всех клавиш, включая пробел и служебные, японским IME, четырьмя слоями Brahmi, 24 уроками и мастерской обратной транслитерации в IAST и комбинации клавиш четырёх раскладок.",
-        "en": "Brahmi typing for Mac RU/DE/EN/JA with an always-visible keyboard, illuminated Space and every modifier/service key, native Japanese IME, four Brahmi layers, 24 lessons, and a new paste-to-IAST plus four-layout reverse key-chord converter.",
-        "de": "Brahmi-Tastaturtraining für Mac RU/DE/EN/JA mit stets vollständig sichtbarer und bei jedem Tastendruck beleuchteter Tastatur, auch für Leer- und Sondertasten, japanischer IME, 24 Lektionen sowie Brahmi-zu-IAST- und Vier-Belegungs-Tastenumwandlung."
+        "ru": "Brahmi Atelier v0.6.0 β: всегда видимая клавиатура Mac RU/DE/EN/JA с подсветкой всех клавиш, пять языков интерфейса и 24 урока. Новая мастерская транслитерации: 25 проверенных исторических фрагментов из эдиктов Ашоки и «Дхаммапады», кнопка без повторов, первоисточники, Unicode Brahmi, IAST и раскладки клавиш.",
+        "en": "Brahmi Atelier v0.6.0 beta: always-visible lit Mac RU/DE/EN/JA keyboard, five interface languages and 24 lessons. Reverse transliteration studio now rotates 25 source-verified Ashokan edict and Dhammapada excerpts without repeats, with original references, Unicode Brahmi, IAST and Mac physical-key equivalents.",
+        "de": "Brahmi Atelier v0.6.0 Beta: stets vollständige, beleuchtete Mac-Tastatur RU/DE/EN/JA, fünf Oberflächensprachen, 24 Lektionen. Der Umschrift-Workshop bietet jetzt 25 quellengeprüfte Aśoka- und Dhammapada-Passagen ohne Wiederholung, mit Originalquellen, Brahmi, IAST und physischen Tastenfolgen."
       },
       "downloadArchive": "https://github.com/4vmp5pkwz4-pixel/app-atlas/archive/refs/heads/main.zip"
     },
