@@ -22,7 +22,7 @@ assert "brahmiToIAST(prompt).text" in app
 assert "const blind=Boolean(saved.blind||forceBlind)" in app
 assert "keys.hidden=blind;roman.hidden=blind||!showRoman" in app
 assert 'grid-template-columns:minmax(0,1.3fr) minmax(320px,.85fr)' in app
-assert "body.training-mode .trainer-workspace>.exercise{grid-column:1;grid-row:5" in app
+assert "body.training-mode .trainer-workspace>.exercise{grid-column:1;grid-row:3" in app
 assert "body.training-mode .trainer-workspace>.phrase-lab" in app
 assert "body.training-mode .trainer-workspace{display:block}" in app
 assert '.phrase-lines[data-comparing="true"]>.phrase-line:nth-child(3)' in app
