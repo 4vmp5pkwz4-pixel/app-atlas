@@ -882,7 +882,7 @@ function converterPhysicalLabel(layout,code,jisMode='romaji'){
  if(code==='Enter')return '↵';
  if(layout==='ja'&&jisMode==='kana'&&JIS_KANA[code])return JIS_KANA[code];
  const explicit=PHYSICAL_PRESETS[layout]?.[code];
- if(explicit!==undefined)return explicit;
+ if(explicit!==undefined)return ['ruMac','ruPh'].includes(layout)&&/^[а-яё]$/iu.test(explicit)?explicit.toUpperCase():explicit;
  if(code.startsWith('Key'))return code.slice(3);
  if(code.startsWith('Digit'))return code.slice(5);
  return code;
