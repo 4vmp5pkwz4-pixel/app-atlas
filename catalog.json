@@ -14,16 +14,17 @@
       "mark": "𑀥",
       "tags": [
         "Brahmi",
-        "RU/EN/DE/JA",
-        "Japanese Mac JIS",
-        "Touch typing",
-        "Ashoka Edicts",
-        "Four modifier layers"
+        "Five UI languages",
+        "Mac JIS",
+        "All-key feedback",
+        "IAST converter",
+        "RU/DE/EN/JA keymaps",
+        "Ashoka"
       ],
       "desc": {
-        "ru": "Брахми без установки раскладки: ввод с русской, немецкой, английской и японской клавиатур Mac JIS; двойной ввод, японский IME, четыре слоя Shift/Option, 24 урока, эдикты Ашоки. Интерфейс также доступен на японском и в экспериментальной записи письмом брахми.",
-        "en": "Learn Brahmi with Russian, German, English, or Japanese Mac JIS keyboards without installing Brahmi. Full JIS keys, native Japanese IME text composition, dual Unicode typing, four modifier layers, 24 lessons, and Japanese/Brahmi-script interfaces.",
-        "de": "Brahmi mit russischer, deutscher, englischer oder japanischer Mac-JIS-Tastatur ohne Installation üben: vollständige JIS-Tasten, japanische IME-Komposition, vier Shift/Option-Ebenen, 24 Lektionen und Oberflächen auf Japanisch und in Brahmi-Schrift."
+        "ru": "Тренажёр письма брахми для Mac RU/DE/EN/JA с неизменно видимой клавиатурой, подсветкой всех клавиш, включая пробел и служебные, японским IME, четырьмя слоями Brahmi, 24 уроками и мастерской обратной транслитерации в IAST и комбинации клавиш четырёх раскладок.",
+        "en": "Brahmi typing for Mac RU/DE/EN/JA with an always-visible keyboard, illuminated Space and every modifier/service key, native Japanese IME, four Brahmi layers, 24 lessons, and a new paste-to-IAST plus four-layout reverse key-chord converter.",
+        "de": "Brahmi-Tastaturtraining für Mac RU/DE/EN/JA mit stets vollständig sichtbarer und bei jedem Tastendruck beleuchteter Tastatur, auch für Leer- und Sondertasten, japanischer IME, 24 Lektionen sowie Brahmi-zu-IAST- und Vier-Belegungs-Tastenumwandlung."
       },
       "downloadArchive": "https://github.com/4vmp5pkwz4-pixel/app-atlas/archive/refs/heads/main.zip"
     },
