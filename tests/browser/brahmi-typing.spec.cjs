@@ -332,3 +332,102 @@ test('Japanese source layout is independent of Japanese interface selection',asy
  await expect(page.locator('#langSelect')).toHaveValue('en');
  await expect(page.locator('.key[data-code="Lang1"]')).toHaveCount(1);
 });
+
+test('physical keyboard glows for modifiers, Space, Enter, Tab, Backspace and JIS-only keys',async({page})=>{
+ await page.locator('#continueButton').click();
+ const field=page.locator('#germanMirror');await field.focus();
+ const keys=[['Space',' '],['Enter','Enter'],['Backspace','Backspace'],['Tab','Tab'],['CapsLock','CapsLock'],['ShiftLeft','Shift'],['ShiftRight','Shift'],['AltLeft','Alt'],['AltRight','Alt'],['MetaLeft','Meta'],['MetaRight','Meta'],['ControlLeft','Control'],['ControlRight','Control'],['KeyA','a']];
+ for(const [code,key] of keys){
+  await field.dispatchEvent('keydown',{code,key,bubbles:true,cancelable:true});
+  await expect(page.locator('#keyboard .key[data-code="'+code+'"]'),code+' is held').toHaveClass(/is-held/);
+  await field.dispatchEvent('keyup',{code,key,bubbles:true,cancelable:true});
+  await expect(page.locator('#keyboard .key[data-code="'+code+'"]'),code+' release glows').toHaveClass(/is-flash/);
+ }
+ await page.locator('#sourceLayout').selectOption('ja');
+ for(const code of ['IntlYen','IntlRo','Lang1','Lang2','Fn','Escape']){
+  await field.dispatchEvent('keydown',{code,key:'Unidentified',bubbles:true,cancelable:true});
+  await expect(page.locator('#keyboard .key[data-code="'+code+'"]'),code+' JIS held').toHaveClass(/is-held/);
+  await field.dispatchEvent('keyup',{code,key:'Unidentified',bubbles:true,cancelable:true});
+ }
+ await page.locator('#backLessons').click();
+ expect(await page.locator('#keyboard .is-held').count()).toBe(0);
+});
+
+test('virtual keyboard glows for unmapped JIS, modifiers, Space, Command and editing keys',async({page})=>{
+ await page.locator('#continueButton').click();
+ await page.locator('#sourceLayout').selectOption('ja');
+ for(const code of ['Space','ShiftLeft','AltLeft','Lang1','Lang2','Fn','IntlRo','IntlYen','Backspace','ControlLeft','MetaRight','Enter']){
+  await page.locator('#keyboard .key[data-code="'+code+'"]').click();
+  await expect(page.locator('#keyboard .key[data-code="'+code+'"]'),code+' press illumination').toHaveClass(/is-flash/);
+ }
+ await expect(page.locator('#keyboard .key-row')).toHaveCount(5);
+});
+
+test('Brahmi conversion renders scholarly IAST: inherent vowels, matras, virama, digits and unassigned signs',async({page})=>{
+ await page.locator('#langSelect').selectOption('en');
+ await page.locator('.nav [data-page="convert"]').click();
+ await expect(page.locator('#page-convert')).toBeVisible();
+ await expect(page.locator('#convRoman')).toHaveValue('hida budhe jāte sakyamunī ti');
+ await page.locator('#convSource').fill('𑀓𑁆𑀬 𑀓𑀸 𑀓𑀺 𑀓𑀼 𑀅 𑁧𑁨 𑁇');
+ await expect(page.locator('#convRoman')).toHaveValue('kya kā ki ku a 12 .');
+ await page.locator('#convSource').fill('𑀥𑀫𑁆𑀫');
+ await expect(page.locator('#convRoman')).toHaveValue('dhamma');
+ await page.locator('#convSource').fill('𑁆 𑀸 ☯');
+ const roman=await page.locator('#convRoman').inputValue();
+ expect(roman).toContain('⟦𑁆⟧');
+ expect(roman).toContain('◌ā');
+ expect(roman).toContain('⟦☯⟧');
+ await expect(page.locator('#convRows')).toContainText('—');
+});
+
+test('same Brahmi text yields correct DE EN RU JP key chords and optional JIS kana labels',async({page})=>{
+ await page.locator('#langSelect').selectOption('en');
+ await page.locator('.nav [data-page="convert"]').click();
+ await page.locator('#convSource').fill('𑀳𑀺𑀤');
+ for(const [layout,value] of [['de','H I D'],['en','H I D'],['ru','Р Ш В'],['ja','H I D']]){
+  await page.locator('#convLayout').selectOption(layout);
+  await expect(page.locator('#convPhysical')).toHaveValue(value);
+ }
+ await expect(page.locator('#convJisMode')).toBeVisible();
+ await page.locator('#convJisMode').selectOption('kana');
+ await expect(page.locator('#convPhysical')).toHaveValue('く に し');
+ await expect(page.locator('#convRows tr')).toHaveCount(3);
+ await expect(page.locator('#convRows')).toContainText('Р');
+ await page.locator('#convSource').fill('𑀺 𑀓 ☯');
+ expect(await page.locator('#convPhysical').inputValue()).toContain('—');
+ await expect(page.locator('#convSummary')).toContainText('without keys');
+});
+
+test('workshop uses all five UI localizations and example/clear controls without altering the trainer',async({page})=>{
+ await page.locator('#langSelect').selectOption('ja');
+ await page.locator('.nav [data-page="convert"]').click();
+ await expect(page.locator('[data-i18n="navConvert"]')).toHaveText('変換工房');
+ await page.locator('#convClear').click();
+ await expect(page.locator('#convRoman')).toHaveValue('');
+ await page.locator('#convExample').click();
+ await expect(page.locator('#convRoman')).toHaveValue('hida budhe jāte sakyamunī ti');
+ await page.locator('#langSelect').selectOption('br');
+ const captions=await page.locator('#page-convert [data-i18n]').allTextContents();
+ for(const c of captions.filter(Boolean))expect(/[A-Za-z]/.test(c),'Brahmi UI Latin leak: '+c).toBe(false);
+ await page.locator('#langSelect').selectOption('de');
+ await expect(page.locator('[data-i18n="convTitle"]')).toContainText('Brahmi');
+ await page.locator('#langSelect').selectOption('ru');
+ await expect(page.locator('[data-i18n="navConvert"]')).toHaveText('Преобразование');
+ await page.locator('.nav [data-page="train"]').click();
+ await expect(page.locator('#keyboard .key-row')).toHaveCount(5);
+});
+
+test('converter responds to phone and landscape widths without changing permanent keyboard dock',async({page})=>{
+ await page.locator('.nav [data-page="convert"]').click();
+ for(const [width,height] of [[320,568],[375,667],[667,375],[768,1024],[1440,900]]){
+  await page.setViewportSize({width,height});
+  await expect(page.locator('#convSource')).toBeVisible();
+  await expect(page.locator('#convRoman')).toBeVisible();
+  const b=await page.locator('#page-convert').boundingBox();
+  expect(b.x,width+'x'+height+' left').toBeGreaterThanOrEqual(-2);
+  expect(b.x+b.width,width+'x'+height+' right').toBeLessThanOrEqual(width+3);
+ }
+ await page.locator('.nav [data-page="train"]').click();
+ const k=await page.locator('#keyboard').boundingBox();
+ expect(k.y+k.height).toBeLessThanOrEqual(901);
+});
