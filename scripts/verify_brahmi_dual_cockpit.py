@@ -24,7 +24,7 @@ assert "keys.hidden=blind;roman.hidden=blind||!showRoman" in app
 assert 'grid-template-columns:minmax(0,1.3fr) minmax(320px,.85fr)' in app
 assert "body.training-mode .trainer-workspace>.exercise{grid-column:1;grid-row:3" in app
 assert "body.training-mode .trainer-workspace>.phrase-lab" in app
-assert "body.training-mode .trainer-workspace{display:block}" in app
+assert "body.training-mode .trainer-workspace{display:grid;grid-template-columns:minmax(0,1fr)" in app
 assert '.phrase-lines[data-comparing="true"]>.phrase-line:nth-child(3)' in app
 assert 'id="phraseKeysCompare"' in app
 assert 'id="phrasePractice"' in app and 'id="phraseToConvert"' in app
