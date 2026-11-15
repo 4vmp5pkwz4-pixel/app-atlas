@@ -32,9 +32,12 @@ assert "for(const item of TEXTS)" in html
 assert "for(const item of WISDOM_CORPUS)" in html
 assert "querySelectorAll('#keyboard" not in html or "id=\"keyboardDock\"" in html
 # All six UI variants must have the same localizable phrase controls.
-m=re.search(r"const PHRASE_ATLAS_I18N=(\{[^\n;]+\});",html)
-assert m,"Missing embedded six-interface phrase labels"
-labels=json.loads(m.group(1))
+needle="const PHRASE_ATLAS_I18N="
+start=html.find(needle)
+assert start>=0,"Missing embedded six-interface phrase labels"
+start+=len(needle)
+stop=html.index(";\n",start)
+labels=json.loads(html[start:stop])
 assert set(labels)=={"ru","de","en","ja","hi","br"}
 keys=set(labels["en"])
 assert len(keys)>=16
