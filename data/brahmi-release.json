@@ -1,8 +1,8 @@
 {
-  "version": "0.7.0-beta",
-  "display": "v0.7.0 β",
+  "version": "0.8.0-beta",
+  "display": "v0.8.0 β",
   "released_at": "2026-11-15",
-  "feature": "Hindi/Devanagari complete localization, native Mac Russian Phonetic and Devanagari keyboards, 115-sign phonetic atlas and independently verified InScript comparison",
+  "feature": "Live tri-script Mac → Brahmi → IAST key explorer with authentic Shift/Option layers, Mac Command/Control shortcut preview, phonetic mnemonics and six-language interface",
   "corpus": "data/brahmi-wisdom.json",
   "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
   "keyboardSources": [
@@ -14,5 +14,21 @@
     "data/brahmi-hindi-ui.json",
     "data/brahmi-hindi-content.json"
   ],
-  "atlas": "apps/brahmi/phonetic-atlas.html"
+  "atlas": "apps/brahmi/phonetic-atlas.html",
+  "keyExplorer": {
+    "defaultMode": "compare",
+    "views": [
+      "compare",
+      "brahmi",
+      "iast"
+    ],
+    "liveModifiers": [
+      "Shift",
+      "Option",
+      "Control",
+      "Command"
+    ],
+    "source": "data/macos-brahmi-reference.json",
+    "shortcutPolicy": "Preview only; Command/Control do not generate Brahmi Unicode"
+  }
 }

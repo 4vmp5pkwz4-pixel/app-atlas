@@ -342,6 +342,43 @@ body.hindi-interface{font-family:"Kohinoor Devanagari","Noto Sans Devanagari","D
 body.hindi-interface .nav button{line-height:1.5}
 #keyboardDock[data-physical-layout="dev"] .latin,#keyboardDock[data-physical-layout="devq"] .latin{font-family:"Kohinoor Devanagari","Noto Sans Devanagari","Devanagari Sangam MN",sans-serif;font-size:clamp(10px,1.15vw,15px)}
 @media(max-width:750px){body.hindi-interface .top-controls{gap:5px}}
+
+/* Tri-script Key Explorer: the top line is a physical key legend, the centre
+   is authentic Brahmi keymap output, and the bottom is individual-sign IAST. */
+.key-view-controls{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;padding:4px 0}
+.key-view-controls label{font-size:12px;color:var(--muted)}
+.key-view-controls select{padding:6px 9px;max-width:200px;min-width:160px;font-size:12px}
+#keyLayerStatus{color:var(--gold2);font-weight:650;font-size:12px}
+.key-agreement-legend{color:#9cdcc2;font-size:11px}
+.key .iast{display:block;font:600 11px/1.1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#9fd9c6;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.key[data-mnemonic="yes"]:not(.is-held):not(.is-flash){border-color:#8ec7aa}
+.key[data-mnemonic="yes"] .iast{color:#c9efca}
+.key[data-mnemonic="no"] .iast{color:#f0ceaa}
+.key .shortcut{font:750 12px/1.2 ui-monospace,monospace;color:#f2ce96;white-space:nowrap}
+.key .shortcut-action{color:#a8d5c4}
+.key.is-shortcut{border-style:dashed;box-shadow:inset 0 0 0 1px rgba(226,191,127,.14)}
+.key-inspector{min-height:24px;display:flex;align-items:center;padding:3px 9px;border-left:2px solid var(--gold);color:var(--muted);font-size:12px;line-height:1.4}
+.key-inspector-text{overflow-wrap:anywhere}
+#keyboard[data-view="brahmi"] .iast,#keyboard[data-view="iast"] .glyph{display:none}
+#keyboard[data-view="iast"] .iast{font-size:17px;color:var(--gold2)}
+body.training-mode .key-view-controls{gap:4px 9px;padding:1px 0}
+body.training-mode .key-view-controls label,body.training-mode .key-view-controls select,body.training-mode #keyLayerStatus{font-size:clamp(9px,.78vw,11px)}
+body.training-mode .key-view-controls select{min-width:125px;max-width:170px;padding:3px 7px}
+body.training-mode .key-agreement-legend{font-size:10px}
+body.training-mode #keyboard .key .iast{font-size:clamp(7px,.9vw,11px);line-height:1;font-weight:750}
+body.training-mode #keyboard .key .shortcut{font-size:clamp(8px,1vw,12px)}
+body.training-mode #keyboard .key .shortcut-action{font-size:clamp(7px,.8vw,10px)}
+body.training-mode #keyboard[data-view="iast"] .key .iast{font-size:clamp(9px,1.35vw,18px)}
+body.training-mode .key-inspector{min-height:18px;padding:2px 5px;font-size:clamp(9px,.75vw,11px)}
+@media(max-width:600px){
+ body.training-mode .key-view-controls{gap:3px}
+ body.training-mode .key-view-controls label{display:none}
+ body.training-mode .key-view-controls select{min-width:100px;max-width:130px;font-size:9px;padding:2px 4px}
+ body.training-mode .key-agreement-legend{display:none}
+ body.training-mode #keyLayerStatus{font-size:9px}
+ body.training-mode #keyboard .key .iast{font-size:clamp(6px,1.6vw,9px)}
+ body.training-mode .key-inspector{min-height:14px;max-height:25px;overflow:hidden;font-size:9px}
+}
 </style>
 </head>
 <body>
@@ -357,10 +394,10 @@ body.hindi-interface .nav button{line-height:1.5}
 <button data-page="stats"><span class="nav-icon">▥</span><span data-i18n="navStats">Прогресс</span></button>
 <button data-page="settings"><span class="nav-icon">⚙</span><span data-i18n="navSettings">Настройки</span></button>
 </nav>
-<div class="aside-foot"><strong>𑀅𑀳𑀺𑀁𑀲𑀸</strong><p data-i18n="foot">Практикуй внимательно. Прогресс остаётся в браузере. Никакой регистрации или передачи на сервер.</p><span>v0.7.0 β · OFFLINE FIRST · 2026</span></div>
+<div class="aside-foot"><strong>𑀅𑀳𑀺𑀁𑀲𑀸</strong><p data-i18n="foot">Практикуй внимательно. Прогресс остаётся в браузере. Никакой регистрации или передачи на сервер.</p><span>v0.8.0 β · OFFLINE FIRST · 2026</span></div>
 </aside>
 <main class="main">
-<div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.7.0-beta" title="Brahmi Atelier 0.7.0-beta">v0.7.0 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
+<div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.8.0-beta" title="Brahmi Atelier 0.8.0-beta">v0.8.0 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
 <section id="page-home" class="page active">
 <div class="hero"><span class="eyebrow" data-i18n="heroEyebrow">ДРЕВНЕЕ ПИСЬМО · СОВРЕМЕННЫЙ НАВЫК</span><h1 data-i18n-html="heroTitle">Прикоснись к <em>2300 годам</em> письменной истории.</h1><p data-i18n="heroLead">Изучи письмо брахми слепым десятипальцевым методом на немецкой клавиатуре Mac. От первого знака до подлинных пракритских надписей Ашоки.</p><div class="actions"><button class="btn btn-primary" id="continueButton" data-i18n="startLearning">Начать обучение</button><button class="btn" data-page="texts" data-i18n="openTexts">Читать надписи</button></div></div>
 <div class="stat-grid" id="homeStats"></div>
@@ -401,7 +438,18 @@ body.hindi-interface .nav button{line-height:1.5}
 <button type="button" class="btn btn-sm" data-layer="option">⌥ Option</button>
 <button type="button" class="btn btn-sm" data-layer="shiftOption">⇧+⌥</button>
 </div>
-<div class="keyboard-heading"><span id="physicalKeyboardLabel">DE / MAC QWERTZ</span><span>𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI</span></div><div class="keyboard-scroll"><div class="keyboard" id="keyboard"></div></div><div class="finger-panel"><div><span class="muted" data-i18n="fingerLabel">Следующая клавиша и палец:</span> <strong id="fingerHint">—</strong></div><span class="micro" id="inputModeHint"></span></div><p class="keyboard-note" data-i18n="keyboardNote">Клавиши соответствуют физическим позициям немецкой QWERTZ. Нажимай на изображение для пробного ввода; для слепой печати используй настоящую клавиатуру.</p>
+<div class="key-view-controls">
+ <label for="keyViewMode" data-i18n="keyViewLabel">Key display</label>
+ <select class="select" id="keyViewMode" aria-label="Mac and Brahmi key display">
+  <option value="compare" data-i18n="keyViewCompare">Mac · Brahmi · IAST</option>
+  <option value="brahmi" data-i18n="keyViewBrahmi">Mac · Brahmi</option>
+  <option value="iast" data-i18n="keyViewIast">Mac · IAST</option>
+ </select>
+ <span id="keyLayerStatus" role="status" aria-live="polite">Normal · Brahmi</span>
+ <span class="key-agreement-legend" id="keyAgreementLegend" data-i18n="keyAgreementLegend">◆ Latin–IAST mnemonic match</span>
+</div>
+<div class="keyboard-heading"><span id="physicalKeyboardLabel">DE / MAC QWERTZ</span><span>𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI</span></div><div class="keyboard-scroll"><div class="keyboard" id="keyboard"></div></div><div class="key-inspector" id="keyInspector" role="status" aria-live="polite" aria-atomic="true"><span class="key-inspector-text" id="keyInspectorText"></span></div>
+<div class="finger-panel"><div><span class="muted" data-i18n="fingerLabel">Следующая клавиша и палец:</span> <strong id="fingerHint">—</strong></div><span class="micro" id="inputModeHint"></span></div><p class="keyboard-note" data-i18n="keyboardNote">Клавиши соответствуют физическим позициям немецкой QWERTZ. Нажимай на изображение для пробного ввода; для слепой печати используй настоящую клавиатуру.</p>
 </div>
 </section>
 
@@ -458,6 +506,7 @@ body.hindi-interface .nav button{line-height:1.5}
        </select>
        <div class="converter-jis-mode" id="convJisRow" hidden><label for="convJisMode">JIS · ローマ字 / かな</label><select class="select converter-select" id="convJisMode" aria-label="Japanese JIS key legend"><option value="romaji">ローマ字 · Romaji</option><option value="kana">かな · Kana</option></select></div>
        <textarea id="convPhysical" class="converter-textarea converter-keys" readonly rows="3" aria-live="polite"></textarea>
+       <button id="openKeyExplorer" class="btn btn-sm" type="button" data-i18n="keyExploreFromConverter">Исследовать эти клавиши в тренажёре</button>
        <p class="micro" data-i18n="convKeyCaveat">Это комбинации физических клавиш, а не обещание конкретных символов Option или японского IME в macOS.</p>
       </section>
     </div>
@@ -626,17 +675,22 @@ const HINDI_CONTENT={"locale":"hi","language":"Modern Hindi","script":"Deva","so
 I18N.hi={...HINDI_UI.ui,jisPreviewLabel:HINDI_CONTENT.jisPreviewLabel,jisPreviewNote:HINDI_CONTENT.jisPreviewNote};
 LESSONS.forEach(l=>{const x=HINDI_CONTENT.lessons[l.id];if(x){l.hi=x[0];l.hiDesc=x[1];l.hintHi=x[2]}});
 TEXTS.forEach(x=>{const t=HINDI_CONTENT.texts[x.id];if(t){x.labelHi=t[0];x.hi=t[1];x.sourceHi='प्राथमिक स्रोत · '+x.source}});
-const APP_VERSION="0.7.0-beta";
+const KEY_EXPLORER_I18N={"ru":{"keyViewLabel":"Подписи клавиш","keyViewCompare":"Mac · Брахми · IAST","keyViewBrahmi":"Mac · Брахми","keyViewIast":"Mac · IAST","keyAgreementLegend":"◆ Фонетическая подсказка Latin–IAST","keyNoSign":"нет назначения","keyShortcut":"Сочетание macOS — не символ брахми","keyShortcutUnverified":"Команды и системные сочетания зависят от приложения и раскладки","keySign":"Символ","keyKeyboardLayer":"Слой","keyMnemonic":"Латинская буква напоминает IAST","keyShortcutCopy":"копировать","keyShortcutPaste":"вставить","keyShortcutCut":"вырезать","keyShortcutSelect":"выделить всё","keyShortcutUndo":"отменить","keyShortcutRedo":"повторить","keyShortcutFind":"найти","keyShortcutSave":"сохранить","keyShortcutPrint":"печать","keyShortcutEnd":"в конец строки","keyShortcutStart":"в начало строки","keyShortcutDelete":"удалить до конца","keyExploreFromConverter":"Исследовать клавиши в тренажёре"},"de":{"keyViewLabel":"Tastenanzeige","keyViewCompare":"Mac · Brahmi · IAST","keyViewBrahmi":"Mac · Brahmi","keyViewIast":"Mac · IAST","keyAgreementLegend":"◆ Laut-Merkhilfe Latin–IAST","keyNoSign":"nicht belegt","keyShortcut":"macOS-Kombination, kein Brahmi-Zeichen","keyShortcutUnverified":"Systembefehle hängen von App und Belegung ab","keySign":"Zeichen","keyKeyboardLayer":"Ebene","keyMnemonic":"Lateinische Taste entspricht dem IAST-Anfang","keyShortcutCopy":"Kopieren","keyShortcutPaste":"Einfügen","keyShortcutCut":"Ausschneiden","keyShortcutSelect":"Alles auswählen","keyShortcutUndo":"Rückgängig","keyShortcutRedo":"Wiederholen","keyShortcutFind":"Suchen","keyShortcutSave":"Sichern","keyShortcutPrint":"Drucken","keyShortcutEnd":"Zeilenende","keyShortcutStart":"Zeilenanfang","keyShortcutDelete":"Bis zum Ende löschen","keyExploreFromConverter":"Diese Tasten im Trainer erkunden"},"en":{"keyViewLabel":"Key legends","keyViewCompare":"Mac · Brahmi · IAST","keyViewBrahmi":"Mac · Brahmi","keyViewIast":"Mac · IAST","keyAgreementLegend":"◆ Latin–IAST mnemonic agreement","keyNoSign":"unmapped","keyShortcut":"macOS shortcut, not a Brahmi character","keyShortcutUnverified":"System shortcuts depend on app and keyboard layout","keySign":"Sign","keyKeyboardLayer":"Layer","keyMnemonic":"Latin key initial matches IAST","keyShortcutCopy":"Copy","keyShortcutPaste":"Paste","keyShortcutCut":"Cut","keyShortcutSelect":"Select all","keyShortcutUndo":"Undo","keyShortcutRedo":"Redo","keyShortcutFind":"Find","keyShortcutSave":"Save","keyShortcutPrint":"Print","keyShortcutEnd":"End of line","keyShortcutStart":"Beginning of line","keyShortcutDelete":"Delete to end","keyExploreFromConverter":"Explore these keys in the trainer"},"ja":{"keyViewLabel":"キー表示","keyViewCompare":"Mac · ブラーフミー · IAST","keyViewBrahmi":"Mac · ブラーフミー","keyViewIast":"Mac · IAST","keyAgreementLegend":"◆ ラテン文字とIASTの記憶補助","keyNoSign":"割当なし","keyShortcut":"macOSのショートカット（ブラーフミー文字ではない）","keyShortcutUnverified":"OS操作はアプリと配列に依存します","keySign":"文字","keyKeyboardLayer":"レイヤー","keyMnemonic":"IASTの頭文字とラテンキーが一致","keyShortcutCopy":"コピー","keyShortcutPaste":"貼り付け","keyShortcutCut":"切り取り","keyShortcutSelect":"すべて選択","keyShortcutUndo":"取り消す","keyShortcutRedo":"やり直す","keyShortcutFind":"検索","keyShortcutSave":"保存","keyShortcutPrint":"印刷","keyShortcutEnd":"行末","keyShortcutStart":"行頭","keyShortcutDelete":"行末まで削除","keyExploreFromConverter":"このキーを練習画面で調べる"},"hi":{"keyViewLabel":"कुंजी पर लेखन","keyViewCompare":"Mac · ब्राह्मी · IAST","keyViewBrahmi":"Mac · ब्राह्मी","keyViewIast":"Mac · IAST","keyAgreementLegend":"◆ लैटिन और IAST की स्मरण-संगति","keyNoSign":"कुंजी निर्धारित नहीं","keyShortcut":"macOS की कमांड, ब्राह्मी अक्षर नहीं","keyShortcutUnverified":"सिस्टम शॉर्टकट ऐप और व्यवस्था के अनुसार बदलते हैं","keySign":"चिह्न","keyKeyboardLayer":"परत","keyMnemonic":"लैटिन कुंजी और IAST का आरंभ मिलता है","keyShortcutCopy":"प्रतिलिपि","keyShortcutPaste":"चिपकाएँ","keyShortcutCut":"काटें","keyShortcutSelect":"सब चुनें","keyShortcutUndo":"पूर्ववत्","keyShortcutRedo":"फिर करें","keyShortcutFind":"खोजें","keyShortcutSave":"सहेजें","keyShortcutPrint":"मुद्रित करें","keyShortcutEnd":"पंक्ति का अंत","keyShortcutStart":"पंक्ति का आरम्भ","keyShortcutDelete":"अंत तक मिटाएँ","keyExploreFromConverter":"अभ्यास में इन कुंजियों को देखें"}};
+for(const [language,entries] of Object.entries(KEY_EXPLORER_I18N))Object.assign(I18N[language],entries);
+I18N.br&&Object.assign(I18N.br,{keyViewLabel:iastToBrahmi('akkharadassanaṃ'),keyViewCompare:iastToBrahmi('hatthakkharaṃ brāhmī saddarūpaṃ'),keyViewBrahmi:iastToBrahmi('hatthakkharaṃ brāhmī'),keyViewIast:iastToBrahmi('hatthakkharaṃ saddarūpaṃ'),keyAgreementLegend:'◆ '+iastToBrahmi('akkharasaddasāmyaṃ'),keyNoSign:iastToBrahmi('natthi'),keyShortcut:iastToBrahmi('na brāhmīakkharaṃ'),keyShortcutUnverified:iastToBrahmi('hatthakkharavidhānaṃ'),keySign:iastToBrahmi('akkharaṃ'),keyKeyboardLayer:iastToBrahmi('paṭalaṃ'),keyMnemonic:'Latin · IAST'});
+I18N.br.keyExploreFromConverter=iastToBrahmi('akkharāni passatha');
+const APP_VERSION="0.8.0-beta";
 const LOCAL_KEY='brahmi-atelier-2026-v1';
 let saved={version:1,lang:(['ru','de','en','ja','hi'].includes((navigator.language||'').slice(0,2))?(navigator.language||'').slice(0,2):'en'),mode:'sim',physical:((navigator.language||'').slice(0,2)==='ja'?'ja':'de'),jaPreview:'romaji',roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};
 try{const p=JSON.parse(localStorage.getItem(LOCAL_KEY)||'null');if(p&&p.version===1)saved={...saved,...p,completed:p.completed||{},sessions:p.sessions||[],errors:p.errors||{},cal:p.cal||{}}}catch(e){}
-saved.physical=['de','en','ru','ruMac','ruPh','dev','devq','ja'].includes(saved.physical)?saved.physical:'de';saved.jaPreview=['romaji','kana'].includes(saved.jaPreview)?saved.jaPreview:'romaji';
+saved.physical=['de','en','ru','ruMac','ruPh','dev','devq','ja'].includes(saved.physical)?saved.physical:'de';
+saved.keyView=['compare','brahmi','iast'].includes(saved.keyView)?saved.keyView:'compare';saved.jaPreview=['romaji','kana'].includes(saved.jaPreview)?saved.jaPreview:'romaji';
 if(!saved.independentModeInitialized){saved.mode='sim';saved.independentModeInitialized=true;}
 saved.observed=saved.observed&&typeof saved.observed==='object'?saved.observed:{};
 function persist(){try{localStorage.setItem(LOCAL_KEY,JSON.stringify(saved))}catch(e){}}
 function T(key){return (I18N[saved.lang]||I18N.en)[key]||I18N.en[key]||key}function esc(t){return String(t).replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]))}
 const cp=s=>Array.from(String(s||''));const isBrahmi=c=>c&&cp(c).some(x=>{const n=x.codePointAt(0);return n>=0x11000&&n<=0x1107f});
-let currentPage='home',lesson=LESSONS[0],prompt='',romanPrompt='',prevValue='',started=0,clock=null,tries=0,mistakes=0,wrongMap={},finished=false,modifierShift=false,modifierAlt=false,showRoman=true,forceBlind=false,calKey=null,composing=false,focusMode=false;
+let currentPage='home',lesson=LESSONS[0],prompt='',romanPrompt='',prevValue='',started=0,clock=null,tries=0,mistakes=0,wrongMap={},finished=false,modifierShift=false,modifierAlt=false,modifierControl=false,modifierCommand=false,showRoman=true,forceBlind=false,calKey=null,composing=false,focusMode=false;
 let germanTrace=[],pendingGerman=null; // Physical QWERTZ keystrokes alongside Unicode Brahmi.
 function charMap(code,shift=false,alt=false){
  const layer=alt?(shift?KAS:KA):(shift?KS:KC);
@@ -945,6 +999,94 @@ const HELD_TRAINER_KEYS=new Set();
 const POINTER_TRAINER_KEYS=new Set();
 const FLASH_TRAINER_KEYS=new Set();
 const KEY_LIGHT_TIMERS=new Map();
+
+/* Key Explorer — sound, glyph and key position remain separate facts.
+   Ctrl/Command preview shortcuts; unlike Shift/Option they do not select
+   a fifth or sixth Unicode Brahmi character layer. */
+const LIVE_KEY_MODIFIERS={shift:false,option:false,control:false,command:false};
+let INSPECTED_KEY_CODE='KeyK';
+function modifierState(){
+ return {
+  shift:modifierShift||LIVE_KEY_MODIFIERS.shift||HELD_TRAINER_KEYS.has('ShiftLeft')||HELD_TRAINER_KEYS.has('ShiftRight'),
+  option:modifierAlt||LIVE_KEY_MODIFIERS.option||HELD_TRAINER_KEYS.has('AltLeft')||HELD_TRAINER_KEYS.has('AltRight'),
+  control:modifierControl||LIVE_KEY_MODIFIERS.control||HELD_TRAINER_KEYS.has('ControlLeft')||HELD_TRAINER_KEYS.has('ControlRight'),
+  command:modifierCommand||LIVE_KEY_MODIFIERS.command||HELD_TRAINER_KEYS.has('MetaLeft')||HELD_TRAINER_KEYS.has('MetaRight')
+ };
+}
+function modifierSignature(mods){return [mods.shift,mods.option,mods.control,mods.command].map(Number).join('')}
+function observedModifiers(e){
+ // Only actual modifier keydown/keyup changes the held layer. A programmatic
+ // standalone KeyG event with shiftKey:true must not latch Shift forever.
+ if(!/^(?:Shift|Alt|Control|Meta)/.test(e.code||''))return;
+ LIVE_KEY_MODIFIERS.shift=Boolean(e.shiftKey);
+ LIVE_KEY_MODIFIERS.option=Boolean(e.altKey);
+ LIVE_KEY_MODIFIERS.control=Boolean(e.ctrlKey);
+ LIVE_KEY_MODIFIERS.command=Boolean(e.metaKey);
+}
+function romanKeySign(glyph){
+ if(!glyph)return '—';
+ if(REVERSE_BRAHMI_CONSONANTS.has(glyph))return REVERSE_BRAHMI_CONSONANTS.get(glyph)+'a';
+ if(glyph==='𑁆')return 'virāma';
+ return oneSignIAST(glyph);
+}
+function latinMnemonicAgreement(code,glyph){
+ if(!(['de','en'].includes(saved.physical)||(saved.physical==='ja'&&saved.jaPreview==='romaji')))return 'na';
+ if(!glyph||!REVERSE_BRAHMI_CONSONANTS.has(glyph))return 'na';
+ const expected=REVERSE_BRAHMI_CONSONANTS.get(glyph).normalize('NFD').replace(/[\u0300-\u036f]/g,'').charAt(0).toUpperCase();
+ const physical=physicalLabel(code);
+ return expected===physical?'yes':'no';
+}
+const SHORTCUT_KEYS={
+ command:{KeyC:'keyShortcutCopy',KeyV:'keyShortcutPaste',KeyX:'keyShortcutCut',KeyA:'keyShortcutSelect',KeyZ:'keyShortcutUndo',KeyF:'keyShortcutFind',KeyS:'keyShortcutSave',KeyP:'keyShortcutPrint'},
+ control:{KeyA:'keyShortcutStart',KeyE:'keyShortcutEnd',KeyK:'keyShortcutDelete'}
+};
+function previewShortcut(code,mods){
+ if(!mods.command&&!mods.control)return null;
+ const combination=(mods.control?'⌃':'')+(mods.command?'⌘':'')+(mods.option?'⌥':'')+(mods.shift?'⇧':'');
+ const name=code==='Space'?'␣':physicalLabel(code);
+ const chord=combination+name;
+ // These are illustrative conventional macOS editing shortcuts, not
+ // guaranteed output for international layouts or browser-reserved chords.
+ let label='';
+ if(mods.command&&!mods.control&&!mods.option){
+  label=mods.shift&&code==='KeyZ'?T('keyShortcutRedo'):!mods.shift?(SHORTCUT_KEYS.command[code]?T(SHORTCUT_KEYS.command[code]):''):'';
+ }else if(mods.control&&!mods.command&&!mods.option&&!mods.shift){
+  label=SHORTCUT_KEYS.control[code]?T(SHORTCUT_KEYS.control[code]):'';
+ }
+ return {chord,label,description:T('keyShortcut')};
+}
+function inspectKey(code){
+ if(!code)return;
+ INSPECTED_KEY_CODE=code;
+ const target=$('keyInspectorText');
+ if(!target)return;
+ const mods=modifierState(),special=/^(?:Shift|Alt|Control|Meta)/.test(code);
+ let description='';
+ if(special){
+  const shortcut=(mods.control||mods.command)&&!/^(?:Shift|Alt|Control|Meta)/.test(code)?previewShortcut(code,mods):null;
+  description=shortcut?shortcut.chord+' · '+T('keyShortcutUnverified'):physicalLabel(code)+' · '+T('keyKeyboardLayer');
+ }else{
+  const shortcut=previewShortcut(code,mods);
+  if(shortcut)description=shortcut.chord+' · '+(shortcut.label?shortcut.label+' · ':'')+T('keyShortcutUnverified');
+  else{
+   const glyph=charMap(code,mods.shift,mods.option);
+   const phonetic=latinMnemonicAgreement(code,glyph);
+   description=physicalLayerLabel(code,mods.shift,mods.option)+' → '+(glyph||'—')+' · '+romanKeySign(glyph)+
+    (phonetic==='yes'?' · ◆ '+T('keyMnemonic'):!glyph?' · '+T('keyNoSign'):'');
+  }
+ }
+ target.textContent=description;
+ qsa('#keyboard .key').forEach(b=>b.classList.toggle('is-inspected',b.dataset.code===code));
+}
+function updateKeyLayerStatus(){
+ const mods=modifierState();
+ const source=mods.command||mods.control
+  ?(mods.control?'⌃ ':'')+(mods.command?'⌘ ':'')+(mods.shift?'⇧ ':'')+(mods.option?'⌥ ':'')+'· '+T('keyShortcut')
+  :(mods.shift?'⇧ ':'')+(mods.option?'⌥ ':'')+(!mods.shift&&!mods.option?'Normal':'')+' · Brahmi / IAST';
+ const node=$('keyLayerStatus');if(node)node.textContent=source;
+ const legend=$('keyAgreementLegend');if(legend)legend.hidden=!(['de','en'].includes(saved.physical)||(saved.physical==='ja'&&saved.jaPreview==='romaji'));
+}
+
 function canonicalTrainerKey(code){
  return code==='OSLeft'?'MetaLeft':code==='OSRight'?'MetaRight':code==='FnLock'?'Fn':code;
 }
@@ -954,8 +1096,10 @@ function paintPressedKeys(){
   const code=btn.dataset.code;
   btn.classList.toggle('is-held',HELD_TRAINER_KEYS.has(code)||POINTER_TRAINER_KEYS.has(code));
   btn.classList.toggle('is-flash',FLASH_TRAINER_KEYS.has(code));
+  const mods=modifierState();
   btn.classList.toggle('is-layer-active',
-   (modifierShift&&code.startsWith('Shift'))||(modifierAlt&&code.startsWith('Alt')));
+   (mods.shift&&code.startsWith('Shift'))||(mods.option&&code.startsWith('Alt'))||
+   (mods.control&&code.startsWith('Control'))||(mods.command&&code.startsWith('Meta')));
  });
 }
 function pulsePressedKey(code,delay=235){
@@ -972,26 +1116,34 @@ function releaseTrainerKey(code){
  pulsePressedKey(code);
 }
 function clearKeyHolds(){
- HELD_TRAINER_KEYS.clear();POINTER_TRAINER_KEYS.clear();paintPressedKeys();
+ const previous=modifierSignature(modifierState());
+ HELD_TRAINER_KEYS.clear();POINTER_TRAINER_KEYS.clear();
+ Object.keys(LIVE_KEY_MODIFIERS).forEach(key=>LIVE_KEY_MODIFIERS[key]=false);
+ if(currentPage==='train'&&previous!==modifierSignature(modifierState()))renderKeyboard();
+ else paintPressedKeys();
 }
 function isTrainerKeyboardTarget(target){
  return Boolean(target&&(target.id==='germanMirror'||target.id==='typingInput'||target.closest?.('#keyboard')));
 }
 document.addEventListener('keydown',e=>{
  if(currentPage!=='train')return;
- // Keyboard state is tracked only while the training page is active. No key text is recorded.
- const code=canonicalTrainerKey(e.code);
- if(!code)return;
- HELD_TRAINER_KEYS.add(code);
+ const prev=modifierSignature(modifierState());
+ const code=canonicalTrainerKey(e.code);if(!code)return;
+ HELD_TRAINER_KEYS.add(code);observedModifiers(e);
  FLASH_TRAINER_KEYS.delete(code);
- paintPressedKeys();
+ if(modifierSignature(modifierState())!==prev)renderKeyboard();
+ else paintPressedKeys();
+ if(/^(?:Key|Digit)/.test(code))inspectKey(code);
 },true);
 document.addEventListener('keyup',e=>{
  if(currentPage!=='train')return;
- const code=canonicalTrainerKey(e.code);
- if(!HELD_TRAINER_KEYS.has(code))return;
- // Tab changes focus before keyup. Releasing outside the original text field must still clear it.
- releaseTrainerKey(code);
+ const prev=modifierSignature(modifierState());
+ const code=canonicalTrainerKey(e.code);if(!code)return;
+ observedModifiers(e);
+ // Tab may change focus; release must still clear the old physical key.
+ if(HELD_TRAINER_KEYS.has(code))releaseTrainerKey(code);
+ if(modifierSignature(modifierState())!==prev)renderKeyboard();
+ else paintPressedKeys();
 },true);
 $('keyboard').addEventListener('pointerdown',e=>{
  const key=e.target.closest('.key');if(!key)return;
@@ -1011,54 +1163,91 @@ window.addEventListener('blur',clearKeyHolds,{passive:true});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)clearKeyHolds()});
 
 function renderKeyboard(){
+ if(!['compare','brahmi','iast'].includes(saved.keyView))saved.keyView='compare';
  const hide=saved.blind||forceBlind;
  const caps={Escape:'esc',Lang2:'英数',Lang1:'かな',Fn:'fn',Tab:'⇥',CapsLock:'⇪',Enter:'↵',Backspace:'⌫',ShiftLeft:'⇧',ShiftRight:'⇧',AltLeft:'⌥',AltRight:'⌥',MetaLeft:'⌘',MetaRight:'⌘',ControlLeft:'⌃',ControlRight:'⌃'};
  const specials=new Set(Object.keys(caps));
+ const mods=modifierState(),shortcutMode=mods.control||mods.command;
  let html='';
  for(const row of activeRows()){
   html+='<div class="key-row">';
   for(const code of row){
    const special=specials.has(code);
-   const cls='key '+(special?'wide ':'')+(code==='Space'?'space ':'')+(fingers[code]?'f-'+fingers[code]+' ':'')+((code==='KeyF'||code==='KeyJ')?'home ':'');
-   const glyph=special?'':charMap(code,modifierShift,modifierAlt);
-   const label=special?caps[code]:physicalLayerLabel(code,modifierShift,modifierAlt);
-   const name=special?caps[code]:physicalLabel(code)+' → '+(glyph||T('unmapped'));
-   html+='<button type="button" class="'+cls+'" data-code="'+esc(code)+'" data-empty="'+(!glyph)+'" aria-label="'+esc(name)+'" title="'+esc(name)+'"><span class="latin">'+esc(label)+'</span>'+(!special&&code!=='Space'?'<span class="glyph brahmi">'+(hide?'·':esc(glyph||'—'))+'</span>':'')+'</button>';
+   const glyph=special?'':charMap(code,mods.shift,mods.option);
+   const roman=romanKeySign(glyph);
+   const shortcut=!special&&shortcutMode?previewShortcut(code,mods):null;
+   const modifierKey=/^(?:Shift|Alt|Control|Meta)/.test(code);
+   const label=special?(shortcutMode&&!modifierKey?(mods.control?'⌃':'')+(mods.command?'⌘':'')+caps[code]:caps[code]):physicalLayerLabel(code,mods.shift,mods.option);
+   const mnemonic=shortcut?'na':latinMnemonicAgreement(code,glyph);
+   const cls='key '+(special?'wide ':'')+(code==='Space'?'space ':'')+
+    (fingers[code]?'f-'+fingers[code]+' ':'')+((code==='KeyF'||code==='KeyJ')?'home ':'')+
+    (shortcut?'is-shortcut ':'');
+   const name=special?label:shortcut?
+    shortcut.chord+' · '+(shortcut.label||T('keyShortcut')):
+    physicalLabel(code)+' → '+(glyph||T('unmapped'))+' → '+roman;
+   const middle=shortcut
+    ?'<span class="shortcut">'+esc(shortcut.chord)+'</span><span class="iast shortcut-action">'+esc(shortcut.label||'⌘ / ⌃')+'</span>'
+    :'<span class="glyph brahmi">'+(hide?'·':esc(glyph||'—'))+'</span>'+
+     '<span class="iast" title="IAST">'+(hide?'·':esc(roman))+'</span>';
+   html+='<button type="button" class="'+cls+'" data-code="'+esc(code)+'" data-mnemonic="'+mnemonic+
+    '" data-empty="'+(!glyph)+'" aria-label="'+esc(name)+'" title="'+esc(name)+'">'+
+    '<span class="latin">'+esc(label)+'</span>'+(!special&&(code!=='Space'||shortcut)?middle:'')+'</button>';
   }
   html+='</div>';
  }
  $('keyboard').innerHTML=html;
+ $('keyboard').dataset.view=saved.keyView;
+ $('keyViewMode').value=saved.keyView;
  paintPressedKeys();
  $('sourceLayout').value=saved.physical;$('jisModeControl').hidden=saved.physical!=='ja';$('japaneseMode').value=saved.jaPreview;$('keyboardDock').dataset.physicalLayout=saved.physical;
  $('physicalKeyboardLabel').textContent=(PHYSICAL_LAYOUT_NAMES[saved.physical]||'Mac');
- const layer=modifierAlt?(modifierShift?'shiftOption':'option'):(modifierShift?'shift':'base');
+ const layer=mods.option?(mods.shift?'shiftOption':'option'):(mods.shift?'shift':'base');
  qsa('[data-layer]').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.layer===layer)));
  qsa('#keyboard .key').forEach(btn=>{
   btn.addEventListener('mousedown',e=>e.preventDefault());
+  btn.addEventListener('pointerenter',()=>inspectKey(btn.dataset.code));
+  btn.addEventListener('focus',()=>inspectKey(btn.dataset.code));
   btn.addEventListener('click',()=>{
-   const code=btn.dataset.code; pulsePressedKey(code,260);
+   const code=btn.dataset.code;pulsePressedKey(code,260);
    if(code.startsWith('Shift')){modifierShift=!modifierShift;renderKeyboard();return}
    if(code.startsWith('Alt')){modifierAlt=!modifierAlt;renderKeyboard();return}
-   if(code.startsWith('Meta')||code.startsWith('Control')||['Tab','CapsLock','Escape','Fn','Lang1','Lang2'].includes(code))return;
-   if(code==='Backspace'){pendingGerman=null;if(['ja','dev','devq'].includes(saved.physical)&&saved.mode==='sim'){const a=$('germanMirror');a.value=Array.from(a.value).slice(0,-1).join('');}insertSign('BACKSPACE');return}
-   const glyph=code==='Enter'?' ':charMap(code,modifierShift,modifierAlt);
-   if(!glyph){toast(T('inputUnsupported'));return}
-   pendingGerman=germanKeyStroke(code,modifierShift,modifierAlt);
-   if(['ja','dev','devq'].includes(saved.physical)&&saved.mode==='sim'){$('germanMirror').value+=physicalLayerLabel(code,modifierShift,modifierAlt)}
-   insertSign(glyph);
-   if(modifierAlt||modifierShift){modifierAlt=false;modifierShift=false;renderKeyboard()}
-   else renderLive();
+   if(code.startsWith('Control')){modifierControl=!modifierControl;renderKeyboard();return}
+   if(code.startsWith('Meta')){modifierCommand=!modifierCommand;renderKeyboard();return}
+   if(['Tab','CapsLock','Escape','Fn','Lang1','Lang2'].includes(code))return;
+   if(modifierState().control||modifierState().command){
+    // Preview only: a browser cannot simulate OS-level ⌘ or ⌃ actions.
+    inspectKey(code);return;
+   }
+   if(code==='Backspace'){
+    pendingGerman=null;
+    if(['ja','dev','devq'].includes(saved.physical)&&saved.mode==='sim'){
+     const a=$('germanMirror');a.value=Array.from(a.value).slice(0,-1).join('');
+    }
+    insertSign('BACKSPACE');return;
+   }
+   const active=modifierState();
+   const sign=code==='Enter'?' ':charMap(code,active.shift,active.option);
+   if(!sign){toast(T('inputUnsupported'));return}
+   pendingGerman=germanKeyStroke(code,active.shift,active.option);
+   if(['ja','dev','devq'].includes(saved.physical)&&saved.mode==='sim'){$('germanMirror').value+=physicalLayerLabel(code,active.shift,active.option)}
+   insertSign(sign);
+   if(modifierAlt||modifierShift){
+    modifierAlt=false;modifierShift=false;renderKeyboard();
+   }else renderLive();
   });
  });
- $('shiftToggle').setAttribute('aria-pressed',String(modifierShift));
- $('altToggle').setAttribute('aria-pressed',String(modifierAlt));
- $('shiftToggle').style.borderColor=modifierShift?'var(--gold)':'';
- $('altToggle').style.borderColor=modifierAlt?'var(--gold)':'';
+ $('shiftToggle').setAttribute('aria-pressed',String(mods.shift));
+ $('altToggle').setAttribute('aria-pressed',String(mods.option));
+ $('shiftToggle').style.borderColor=mods.shift?'var(--gold)':'';
+ $('altToggle').style.borderColor=mods.option?'var(--gold)':'';
  $('visibilityToggle').textContent=T(hide?'showLegends':'hideLegends');
+ updateKeyLayerStatus();
+ inspectKey(INSPECTED_KEY_CODE);
  renderReferenceMatrix();
  renderLive();
  paintPressedKeys();
 }
+
 const EDICT_GLOSSARY={"vaci-gutī":{"ru":"Сдержанность и охрана речи","de":"Beherrschung und Schutz der Rede","en":"Restraint and care in speech"},"ātpa-pāsaṃḍa":{"ru":"Собственная религиозная традиция","de":"Die eigene religiöse Tradition","en":"One's own religious tradition"},"para-pāsaṃḍa":{"ru":"Другая религиозная традиция","de":"Eine andere religiöse Tradition","en":"Another religious tradition"},"sāra-vaḍhī":{"ru":"Развитие существенного","de":"Wachstum des Wesentlichen","en":"Growth of essential qualities"},"samavayo":{"ru":"Согласие, единение","de":"Eintracht, Zusammenkommen","en":"Concord, coming together"}};
 Object.entries(EDICT_GLOSSARY).forEach(([k,v])=>v.hi=HINDI_CONTENT.glossary[k]||v.en);
 Object.entries(EDICT_GLOSSARY).forEach(([k,v])=>v.br=iastToBrahmi({"vaci-gutī":"vācāya guttī","ātpa-pāsaṃḍa":"attano samayo","para-pāsaṃḍa":"aññassa samayo","sāra-vaḍhī":"sārassa vaḍḍhi","samavayo":"samavayo"}[k]));
@@ -1149,10 +1338,17 @@ $('wisdomCategory').onchange=e=>nextWisdom(e.target.value);
 $('convClear').onclick=()=>{$('convSource').value='';renderConverter();$('convSource').focus()};
 $('convCopyRoman').onclick=()=>copyConverter('Roman');
 $('convCopyKeys').onclick=()=>copyConverter('Physical');
+$('openKeyExplorer').onclick=()=>{
+ saved.physical=$('convLayout').value;persist();
+ const source=$('convSource').value;
+ if(source&&Array.from(source).some(isBrahmi))setCustom(source,brahmiToIAST(source).text);
+ else navigate('train');
+};
 $('prevLesson').onclick=()=>{const i=LESSONS.findIndex(x=>x.id===lesson.id);if(i>0)loadLesson(LESSONS[i-1].id)};$('nextLesson').onclick=()=>{const i=LESSONS.findIndex(x=>x.id===lesson.id);if(i>=0&&i<LESSONS.length-1)loadLesson(LESSONS[i+1].id)};$('newPrompt').onclick=()=>{if(lesson.kind==='custom')resetSession();else loadLesson(lesson.id,(currentVariant+1)%Math.max(1,lesson.prompts?.length||lesson.romans?.length||1))};$('resetInput').onclick=()=>resetSession();$('focusInput').onclick=()=>trainingFocus();$('toggleRoman').onclick=()=>{showRoman=!showRoman;renderExercise()};$('visibilityToggle').onclick=()=>{forceBlind=!forceBlind;renderKeyboard()};$('shiftToggle').onclick=()=>{modifierShift=!modifierShift;renderKeyboard()};$('altToggle').onclick=()=>{modifierAlt=!modifierAlt;renderKeyboard()};$('langSelect').onchange=e=>setLanguage(e.target.value);$('focusButton').onclick=()=>{focusMode=!focusMode;document.querySelector('.aside').classList.toggle('hidden',focusMode);document.querySelector('.app').style.gridTemplateColumns=focusMode?'minmax(0,1fr)':'';navigate('train');$('focusButton').textContent=focusMode?'× '+(saved.lang==='de'?'Fokus beenden':saved.lang==='en'?'Exit focus':'Выход из фокуса'):T('focusMode')};
 qsa('[data-page]').forEach(btn=>btn.onclick=()=>navigate(btn.dataset.page));
-$('customRun').onclick=()=>{const raw=$('customText').value.trim();if(!raw){toast(T('customNeed'));return}let text=$('customType').value==='iast'?iastToBrahmi(raw):raw;let roman=$('customType').value==='iast'?raw:'';if(!isBrahmi(text)){toast(T('noBrahmi'));return}if(cp(text).length>1000){toast(saved.lang==='de'?'Maximal 1000 Zeichen.':saved.lang==='en'?'Maximum 1,000 signs.':'Максимум 1000 знаков.');return}setCustom(text,roman)};$('customClear').onclick=()=>$('customText').value='';$('modeSelect').onchange=e=>{saved.mode=e.target.value;resetSession();persist();updateSettings();renderExercise();trainingFocus()};$('physicalSelect').onchange=e=>{saved.physical=e.target.value;persist();updateSettings();renderKeyboard()};$('sourceLayout').onchange=e=>{saved.physical=e.target.value;persist();updateSettings();renderKeyboard()};$('japaneseMode').onchange=e=>{saved.jaPreview=e.target.value;persist();renderKeyboard()};qsa('[data-layer]').forEach(btn=>btn.onclick=()=>{modifierShift=btn.dataset.layer==='shift'||btn.dataset.layer==='shiftOption';modifierAlt=btn.dataset.layer==='option'||btn.dataset.layer==='shiftOption';renderKeyboard()});$('soundToggle').onchange=e=>{saved.sound=e.target.checked;persist()};$('romanSetting').onchange=e=>{saved.roman=e.target.checked;showRoman=saved.roman;persist();renderExercise()};$('blindSetting').onchange=e=>{saved.blind=e.target.checked;persist();renderKeyboard()};$('clearCal').onclick=()=>{saved.cal={};persist();updateSettings();renderKeyboard();$('calDetected').textContent='—';toast(T('cleared'))};$('closeModal').onclick=()=>$('completionOverlay').classList.remove('show');$('completionOverlay').addEventListener('click',e=>{if(e.target===$('completionOverlay'))$('completionOverlay').classList.remove('show')});$('againModal').onclick=()=>{$('completionOverlay').classList.remove('show');if(lesson.kind==='custom'){resetSession();trainingFocus()}else loadLesson(lesson.id,++currentVariant)};$('nextModal').onclick=()=>{$('completionOverlay').classList.remove('show');const i=LESSONS.findIndex(l=>l.id===lesson.id);if(i>=0&&i<LESSONS.length-1)loadLesson(LESSONS[i+1].id)};$('trainWeak').onclick=()=>loadLesson('adaptive');$('exportData').onclick=()=>{const b=new Blob([JSON.stringify(saved,null,2)],{type:'application/json'}),url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='brahmi-atelier-progress.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);toast(T('exportDone'))};$('importButton').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const obj=JSON.parse(await file.text());if(obj.version!==1||!obj.completed||!Array.isArray(obj.sessions))throw Error('schema');saved={...saved,...obj,cal:obj.cal||{},errors:obj.errors||{}};showRoman=saved.roman;persist();setLanguage(saved.lang);toast(T('importDone'))}catch(e){toast(T('importError'))}e.target.value=''};$('resetAll').onclick=()=>{if(!confirm(T('resetConfirm')))return;const lang=saved.lang,phys=saved.physical,mode=saved.mode,jaPreview=saved.jaPreview;saved={version:1,lang,mode:'sim',physical:phys,jaPreview,independentModeInitialized:true,observed:{},roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};persist();setLanguage(lang);toast(T('cleared'))};
-showRoman=saved.roman;setLanguage(saved.lang);const initial=LESSONS.find(l=>l.id===saved.activeLesson)||LESSONS[0];lesson=initial;const p=promptOf(initial);setPrompt(p);renderHome();navigate('home');window.BrahmiAtelierTest={APP_VERSION,WISDOM_CORPUS,WISDOM_HISTORY,nextWisdom,iastToBrahmi,paintPressedKeys,HELD_TRAINER_KEYS,brahmiToIAST,brahmiKeyChord,brahmiKeySequence,REVERSE_BRAHMI_CONSONANTS,cp,charMap,reverseLookup,TEXTS,LESSONS,BRAHMI_LAYERS,physicalLabel,germanKeyStroke,ROWS_JIS,JIS_KANA,activeRows,MAC_EXTRA_LAYOUTS,HINDI_UI,HINDI_CONTENT,PHYSICAL_PRESETS};
+$('customRun').onclick=()=>{const raw=$('customText').value.trim();if(!raw){toast(T('customNeed'));return}let text=$('customType').value==='iast'?iastToBrahmi(raw):raw;let roman=$('customType').value==='iast'?raw:'';if(!isBrahmi(text)){toast(T('noBrahmi'));return}if(cp(text).length>1000){toast(saved.lang==='de'?'Maximal 1000 Zeichen.':saved.lang==='en'?'Maximum 1,000 signs.':'Максимум 1000 знаков.');return}setCustom(text,roman)};$('customClear').onclick=()=>$('customText').value='';$('modeSelect').onchange=e=>{saved.mode=e.target.value;resetSession();persist();updateSettings();renderExercise();trainingFocus()};$('physicalSelect').onchange=e=>{saved.physical=e.target.value;persist();updateSettings();renderKeyboard()};$('sourceLayout').onchange=e=>{saved.physical=e.target.value;persist();updateSettings();renderKeyboard()};
+$('keyViewMode').onchange=e=>{saved.keyView=['compare','brahmi','iast'].includes(e.target.value)?e.target.value:'compare';persist();renderKeyboard()};$('japaneseMode').onchange=e=>{saved.jaPreview=e.target.value;persist();renderKeyboard()};qsa('[data-layer]').forEach(btn=>btn.onclick=()=>{modifierShift=btn.dataset.layer==='shift'||btn.dataset.layer==='shiftOption';modifierAlt=btn.dataset.layer==='option'||btn.dataset.layer==='shiftOption';renderKeyboard()});$('soundToggle').onchange=e=>{saved.sound=e.target.checked;persist()};$('romanSetting').onchange=e=>{saved.roman=e.target.checked;showRoman=saved.roman;persist();renderExercise()};$('blindSetting').onchange=e=>{saved.blind=e.target.checked;persist();renderKeyboard()};$('clearCal').onclick=()=>{saved.cal={};persist();updateSettings();renderKeyboard();$('calDetected').textContent='—';toast(T('cleared'))};$('closeModal').onclick=()=>$('completionOverlay').classList.remove('show');$('completionOverlay').addEventListener('click',e=>{if(e.target===$('completionOverlay'))$('completionOverlay').classList.remove('show')});$('againModal').onclick=()=>{$('completionOverlay').classList.remove('show');if(lesson.kind==='custom'){resetSession();trainingFocus()}else loadLesson(lesson.id,++currentVariant)};$('nextModal').onclick=()=>{$('completionOverlay').classList.remove('show');const i=LESSONS.findIndex(l=>l.id===lesson.id);if(i>=0&&i<LESSONS.length-1)loadLesson(LESSONS[i+1].id)};$('trainWeak').onclick=()=>loadLesson('adaptive');$('exportData').onclick=()=>{const b=new Blob([JSON.stringify(saved,null,2)],{type:'application/json'}),url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='brahmi-atelier-progress.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);toast(T('exportDone'))};$('importButton').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const obj=JSON.parse(await file.text());if(obj.version!==1||!obj.completed||!Array.isArray(obj.sessions))throw Error('schema');saved={...saved,...obj,cal:obj.cal||{},errors:obj.errors||{}};showRoman=saved.roman;persist();setLanguage(saved.lang);toast(T('importDone'))}catch(e){toast(T('importError'))}e.target.value=''};$('resetAll').onclick=()=>{if(!confirm(T('resetConfirm')))return;const lang=saved.lang,phys=saved.physical,mode=saved.mode,jaPreview=saved.jaPreview;saved={version:1,lang,mode:'sim',physical:phys,jaPreview,keyView:'compare',independentModeInitialized:true,observed:{},roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};persist();setLanguage(lang);toast(T('cleared'))};
+showRoman=saved.roman;setLanguage(saved.lang);const initial=LESSONS.find(l=>l.id===saved.activeLesson)||LESSONS[0];lesson=initial;const p=promptOf(initial);setPrompt(p);renderHome();navigate('home');window.BrahmiAtelierTest={APP_VERSION,WISDOM_CORPUS,WISDOM_HISTORY,nextWisdom,iastToBrahmi,paintPressedKeys,HELD_TRAINER_KEYS,brahmiToIAST,brahmiKeyChord,brahmiKeySequence,REVERSE_BRAHMI_CONSONANTS,cp,charMap,reverseLookup,TEXTS,LESSONS,BRAHMI_LAYERS,physicalLabel,germanKeyStroke,ROWS_JIS,JIS_KANA,activeRows,MAC_EXTRA_LAYOUTS,HINDI_UI,HINDI_CONTENT,PHYSICAL_PRESETS,romanKeySign,latinMnemonicAgreement,previewShortcut,modifierState,inspectKey};
 })();
 </script>
 </body></html>
