@@ -22,7 +22,7 @@ expected_version="0.9.1-beta"
 assert release["version"]==expected_version, "Version release metadata drifted"
 assert release["display"]=="v0.9.1 β"
 assert "const APP_VERSION=\""+expected_version+"\";" in html
-assert ">v0.9.0 β</span>" in html
+assert ">v0.9.1 β</span>" in html
 assert {**source["layers"]["base"]}["KeyA"]=="𑀸"
 assert source["layers"]["shift"]["KeyA"]=="𑀸", "Shift+A has same Brahmi output as A"
 assert source["layers"]["base"]["KeyI"]=="𑀺"
