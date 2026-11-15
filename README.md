@@ -53,6 +53,12 @@ docs/                    Distribution, release and legal checklists
 
 **Licensing:** No open-source license has yet been selected for this repository. Visibility on GitHub does not in itself grant redistribution rights for third-party materials. Confirm the rights to any bundled and historical content and complete applicable operator/legal information before wider promotion. Features in scientific demonstrators are not evidence of empirical validation.
 
+## Brahmi phonetic atlas · research audit (feature branch)
+
+[Explore the full Brahmi phonetic atlas](apps/brahmi/phonetic-atlas.html) · [Research methodology, caveats and independent audit](docs/BRAHMI_PHONETIC_ATLAS_AUDIT.md).
+
+This companion to Brahmi Atelier's converter enumerates all **115 Unicode-assigned Brahmi code points**, with **106 keymapped signs and 9 explicitly unmapped** in the authenticated 2019 Mac keyboard source. It compares **all 34 basic consonants** by a *specified Latin key-to-IAST metric* (US QWERTY 26/34, German QWERTZ 25/34), while keeping Russian ЙЦУКЕН and Japanese Kana/IME as physical-label views rather than manufacturing incompatible scores. Includes searchable group/status filters, Devanagari letter analogues where justified, localized RU/DE/EN/JA presentation and local CSV export. The main five-language converter links to the atlas. This feature is not an independently verified InScript ranking, and not a new tagged app release.
+
 ## Brahmi Atelier keyboard architecture and durable agent skill
 
 The Brahmi trainer works with normal **Russian, English and German macOS keyboards without installing Brahmi**. See [the persistent contributor/agent skill](.agents/skills/brahmi-dual-layout/SKILL.md), [upstream Mac source mapping](docs/MACOS_BRAHMI_SOURCE.md) and the [reproducible JSON map](data/macos-brahmi-reference.json). All future changes are guarded by a JavaScript/authoritative-map check and Playwright tests.
