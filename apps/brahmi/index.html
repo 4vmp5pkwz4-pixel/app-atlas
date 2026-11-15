@@ -912,6 +912,8 @@ function setScriptChrome(){
  if(brand)brand.textContent=br?iastToBrahmi('brāhmī'):hi?'ब्राह्मी':'BRAHMI';
  if(small)small.textContent=br?iastToBrahmi('akkharasikkhā'):hi?'अक्षर · अभ्यास · पठन · स्मरण':'ATELIER · TYPE · READ · REMEMBER';
  if(meta)meta.textContent=br?iastToBrahmi('brāhmī akkharasikkhāsālā'):hi?'ब्राह्मी · अध्ययन-कक्ष':'𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO';
+ const mark=document.querySelector('.phrase-lab-mark');
+ if(mark)mark.textContent=br?'𑀓 · ⌨':'𑀓 · ka · K';
  const keys=br?['𑀫𑀽𑀮','⇧','⌥','⇧⌥']:hi?['मूल','⇧ शिफ्ट','⌥ विकल्प','⇧+⌥']:['Normal','⇧ Shift','⌥ Option','⇧+⌥'];
  qsa('[data-layer]').forEach((btn,i)=>{btn.textContent=keys[i]});
 }
@@ -1184,12 +1186,12 @@ function renderPhraseLab(){
  $('phraseStatus').textContent=!text?'':
   bad.length?T('phraseNoMap').replace('{n}',uiNumber(bad.length)):
   cp(text).length>1000?T('phraseTooLong'):T('phraseReady');
- $('phraseKeysLabel').textContent=T('phraseKeys')+' · '+(PHYSICAL_LAYOUT_NAMES[saved.physical]||saved.physical);
+ $('phraseKeysLabel').textContent=saved.lang==='br'?T('phraseKeys'):T('phraseKeys')+' · '+(PHYSICAL_LAYOUT_NAMES[saved.physical]||saved.physical);
  phraseChordsInto($('phraseKeys'),text,saved.physical);
  const compared=saved.phraseCompare!=='off';
  $('phraseCompareRow').hidden=!compared;
  if(compared){
-  $('phraseCompareLabel').textContent=(PHYSICAL_LAYOUT_NAMES[saved.phraseCompare]||saved.phraseCompare);
+  $('phraseCompareLabel').textContent=saved.lang==='br'?T('phraseCompare'):(PHYSICAL_LAYOUT_NAMES[saved.phraseCompare]||saved.phraseCompare);
   phraseChordsInto($('phraseKeysCompare'),text,saved.phraseCompare);
  }else $('phraseKeysCompare').replaceChildren();
  if(phraseChoice==='current')highlightPhraseProgress();
