@@ -51,7 +51,7 @@ def embedded_json_constant(name):
     pos=html.find(token)
     assert pos>=0, f"Missing {name} in the standalone HTML"
     pos+=len(token)
-    end=html.find(";\\n",pos)
+    end=html.find(";\n",pos)
     assert end>=0, f"Missing terminator for {name}"
     return json.loads(html[pos:end])
 assert embedded_json_constant("APP_VERSION")==release["version"], "Version constant differs from release data"
