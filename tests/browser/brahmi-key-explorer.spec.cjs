@@ -106,3 +106,16 @@ test('small screen keeps three labels in the DOM without horizontal app overflow
   expect(m.keys).toBe(5);
   expect(m.width).toBeLessThanOrEqual(m.viewport+2);
 });
+
+test('from converter, open selected Mac layout and train the exact pasted Brahmi passage',async({page})=>{
+ await page.locator('.nav [data-page="convert"]').click();
+ await page.locator('#convLayout').selectOption('ruPh');
+ await page.locator('#convSource').fill('𑀳𑀺𑀤');
+ await expect(page.locator('#openKeyExplorer')).toHaveText('Explore these keys in the trainer');
+ await page.locator('#openKeyExplorer').click();
+ await expect(page.locator('#page-train')).toHaveClass(/active/);
+ await expect(page.locator('#sourceLayout')).toHaveValue('ruPh');
+ await expect(page.locator('#keyViewMode')).toHaveValue('compare');
+ await expect(page.locator('#prompt')).toContainText('𑀳');
+ await expect(page.locator('#keyboard .key[data-code="KeyK"] .iast')).toHaveText('ka');
+});
