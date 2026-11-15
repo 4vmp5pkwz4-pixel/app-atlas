@@ -88,3 +88,30 @@ test('project detail uses the same gold/jade brand and accurately sourced glyph 
   if(w===1440)await page.screenshot({path:testInfo.outputPath('brahmi-premium-project.png'),fullPage:true});
  }
 });
+
+test('essential German shifted punctuation remains truly visible at desktop, narrow phone and short landscape',async({page})=>{
+ for(const [width,height] of [[1440,900],[390,844],[320,568],[667,375]]){
+  await page.setViewportSize({width,height});
+  for(const [code,normal,shifted] of [['Digit3','3','⇧§'],['Backquote','^','⇧°'],['Minus','ß','⇧?']]){
+   const key=page.locator('#keyboard .key[data-code="'+code+'"]');
+   const base=key.locator('.latin'),alt=key.locator('.shift-peek');
+   await expect(key).toHaveAttribute('data-alt-kind','symbol');
+   await expect(base).toHaveText(normal);
+   await expect(alt).toHaveText(shifted);
+   await expect(alt).toBeVisible();
+   const measure=await alt.evaluate((el)=>{
+    const r=el.getBoundingClientRect(),k=el.closest('button').getBoundingClientRect(),css=getComputedStyle(el);
+    return {display:css.display,width:r.width,height:r.height,left:r.left,top:r.top,right:r.right,bottom:r.bottom,keyLeft:k.left,keyRight:k.right,keyTop:k.top,keyBottom:k.bottom};
+   });
+   expect(measure.display).not.toBe('none');
+   expect(measure.width).toBeGreaterThan(3);
+   expect(measure.height).toBeGreaterThan(3);
+   expect(measure.left).toBeGreaterThanOrEqual(measure.keyLeft-2);
+   expect(measure.top).toBeGreaterThanOrEqual(measure.keyTop-2);
+   expect(measure.bottom).toBeLessThanOrEqual(measure.keyBottom+2);
+   expect(measure.right).toBeLessThanOrEqual(measure.keyRight+2);
+  }
+ }
+ await page.locator('#keyboard .key[data-code="Digit3"]').hover();
+ await expect(page.locator('#keyInspectorText')).toContainText('Shift §');
+});

@@ -39,6 +39,12 @@ The keycap **primary** label reflects the selected character layer; this differs
 - **Brand continuity:** project detail page shares the trainer's understated emerald/jade, warm gold, typography, spacing and authentic source-backed keycap examples. Branding is not treated as a substitute for accessible focus states or accurate data.
 - **Honesty about quality:** “premium” and “world class” are subjective; test evidence supports technical and visual consistency, **not** a verified global ranking or claim to be incomparable to all competing apps.
 
+## Post-deployment visual QA refinement · v0.8.3-beta
+
+An independent browser-based inspection after v0.8.2 publication confirmed readable Normal German letters and correct Shift state changes but detected a **presentation** discrepancy: the alternative symbol forms `3/§`, `^/°`, and `ß/?` were not always visibly present on compact on-screen keys. The original source data and DOM text were correct, but **DOM text equality is not a visual visibility guarantee**.
+
+The v0.8.3 fix classifies German keys by whether the Shift result is a normal uppercase variant or an exceptional alternative. At widths ≤420 px or short-height ≤440 px, ordinary case-only hints may hide to protect readability, while exceptional `§`, `°`, and `?` remain displayed in the upper right of each key. `inspectKey` also reports Normal and Shift values. Browser acceptance now explicitly tests `toBeVisible()`, computed rectangles, width, height, and inside-key bounds at 1440×900, 390×844, 320×568 and 667×375. This distinguishes a **visually rendered** symbol from data which exists but cannot be seen.
+
 ## Verifying on an actual Mac
 
 Open **System Settings → Keyboard → Text Input → Edit → German**, or open Apple's Keyboard Viewer. Hold Shift and Option to inspect the real keyboard OS source. Compare against the app. If actual Apple output differs because of keyboard hardware, macOS version, dead keys, IME or source selection, save the observed result as an explicit calibration rather than modifying the canonical source.
