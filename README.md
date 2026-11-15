@@ -4,7 +4,7 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download beta release](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.3.1-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download beta release](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.3.2-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
 An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. **RU · EN · DE.** The main catalog contains no analytics or login.
 
@@ -23,7 +23,7 @@ An independent, mobile-friendly, multilingual catalog of interactive learning ap
 
 ## Download, test and distribute
 
-- Download single HTML applications and prepared itch.io ZIP packages from the [GitHub Release](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.3.1-beta).
+- Download single HTML applications and prepared itch.io ZIP packages from the [GitHub Release](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.3.2-beta).
 - GitHub Actions builds fresh packages on every push to `main`. [See downloads workflow](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/downloads.yml).
 - Before release: `python3 scripts/validate.py`; `python3 scripts/package.py`; `npm install && npm run test:browser`.
 - Live HTTPS health checks are scheduled daily; browser acceptance tests run weekly and on demand.
@@ -61,6 +61,10 @@ The Brahmi trainer works with normal **Russian, English and German macOS keyboar
 
 Brahmi Atelier now accepts typing from existing **Russian ЙЦУКЕН, English US QWERTY, or German ISO QWERTZ macOS input sources**, without installing a Brahmi keyboard or changing the macOS input source. In the default mode, the editable top line records the OS input character (`KeyboardEvent.key`), while the read-only second line shows the Brahmi character derived from the corresponding physical key (`KeyboardEvent.code`) using the original Prachya Boonkwan 2019 four-layer mapping (Normal, Shift, Option, Shift+Option). The app has 24 lessons, dedicated modifier practice, interleaving, heuristic 1/3/7/14-day spaced review and Prakrit inscription lessons. Physical source-layout presets only alter on-screen labels; browsers cannot reliably infer the currently active OS keyboard source.
 
-**[Verified standalone HTML and itch.io ZIP download · v0.3.1-beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.3.1-beta)**. This beta passed **34 desktop/mobile Chromium Playwright checks**, four-layer source validation and Pages deployment. Actual Mac Safari hardware input, dead keys and accessibility still warrant device testing.
+**[Verified standalone HTML and itch.io ZIP download · v0.3.1-beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.3.2-beta)**. This beta passed **34 desktop/mobile Chromium Playwright checks**, four-layer source validation and Pages deployment. Actual Mac Safari hardware input, dead keys and accessibility still warrant device testing.
 
 Developer preservation: [Brahmi AI-agent skill](.agents/skills/brahmi-dual-layout/SKILL.md) · [Mac source mapping](docs/MACOS_BRAHMI_SOURCE.md) · [Learning method evidence](docs/TYPING_LEARNING_EVIDENCE.md) · [Release acceptance checklist](docs/BRAHMI_RELEASE_CHECKLIST.md).
+
+### Premium always-visible Brahmi keyboard · v0.3.2-beta
+
+The redesigned training view keeps all five physical Mac keyboard rows in a reserved bottom dock while the lesson and RU/EN/DE-to-Brahmi dual typing fields scroll independently above it. Screen widths/heights and landscape are guarded by geometry tests at twelve viewport sizes. [Evidence and safeguards](docs/KEYBOARD_VIEWPORT_QA.md) · [Download fixed standalone HTML](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/download/v0.3.2-beta/brahmi.html).
