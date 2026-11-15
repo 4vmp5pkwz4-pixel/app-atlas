@@ -13,6 +13,17 @@ on:
       - catalog.json
       - package.json
       - playwright.config.cjs
+  pull_request:
+    paths:
+      - .github/workflows/browser.yml
+      - tests/browser/**
+      - assets/**
+      - apps/**
+      - projects/**
+      - index.html
+      - catalog.json
+      - package.json
+      - playwright.config.cjs
   workflow_dispatch:
   schedule:
     - cron: '39 05 * * 1'
