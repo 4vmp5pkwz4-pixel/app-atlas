@@ -45,6 +45,7 @@ jobs:
           python3 scripts/verify_brahmi_extended_locales.py
           python3 scripts/verify_brahmi_editorial.py
           python3 scripts/verify_brahmi_german_visual.py
+          python3 scripts/verify_brahmi_phrase_atlas.py
       - name: Install pinned browser dependencies
         run: |
           npm install --no-audit --no-fund
