@@ -107,6 +107,8 @@ test('essential German shifted punctuation remains truly visible at desktop, nar
    expect(measure.width).toBeGreaterThan(3);
    expect(measure.height).toBeGreaterThan(3);
    expect(measure.left).toBeGreaterThanOrEqual(measure.keyLeft-2);
+   expect(measure.top).toBeGreaterThanOrEqual(measure.keyTop-2);
+   expect(measure.bottom).toBeLessThanOrEqual(measure.keyBottom+2);
    expect(measure.right).toBeLessThanOrEqual(measure.keyRight+2);
   }
  }
