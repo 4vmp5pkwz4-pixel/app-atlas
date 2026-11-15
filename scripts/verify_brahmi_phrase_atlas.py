@@ -49,7 +49,9 @@ reference=json.loads(read("data/macos-brahmi-reference.json"))
 match=re.search(r"const BRAHMI_LAYERS=(\{[^\n;]+\});",html)
 assert match and json.loads(match.group(1))==reference["layers"],"Original four-layer Brahmi mapping changed!"
 mac=json.loads(read("data/macos-german-iso-keycaps.json"))
-assert json.loads(re.search(r"const MAC_GERMAN_ISO=(\{[^\n;]+\});",html).group(1))==mac
+key="const MAC_GERMAN_ISO="
+start=html.index(key)+len(key)
+assert json.loads(html[start:html.index(";\n",start)])==mac
 project=next(x for x in catalog["projects"] if x["id"]=="brahmi")
 assert "v0.9.0 β" in project["tags"]
 assert "eight Mac layouts" in project["desc"]["en"]
