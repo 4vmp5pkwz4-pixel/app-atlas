@@ -21,7 +21,7 @@ test('vowel lesson distinguishes A from Shift+A correctly and preserves actual M
 });
 test('editorial note is localized across five languages, without German-only claims',async({page})=>{
  const expected=[
-  ['ru','Три строки клавиши','Физические позиции'],
+  ['ru','Три строки клавиши','физические позиции'],
   ['de','Drei Angaben pro Taste','physische'],
   ['en','Three distinct labels per key','physical'],
   ['ja','各キーの3段表示','物理'],
