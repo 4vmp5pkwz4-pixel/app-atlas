@@ -160,7 +160,7 @@ test('default focus is ordinary input, Brahmi is read-only and source can switch
  await expect(page.locator('#typingInput')).toHaveAttribute('readonly','');
  await expect(page.locator('#germanMirror')).not.toHaveAttribute('readonly',/./);
  await expect(page.locator('#germanMirror')).toBeFocused();
- await expect(page.locator('#sourceLayout option')).toHaveCount(3);
+ await expect(page.locator('#sourceLayout option')).toHaveCount(4);
 });
 
 test('new modifier lessons exist in all three languages and are selectable',async({page})=>{
@@ -227,4 +227,107 @@ test('scrolling the exercise cannot scroll the permanent keyboard off-screen',as
  await expect(page.locator('#keyboard .key[data-code="KeyM"]')).toBeVisible();
  await page.locator('#keyboard .key[data-code="KeyM"]').click();
  await expect(page.locator('#germanMirror')).not.toHaveValue('');
+});
+
+test('Japanese locale and JIS hardware include all Mac-only keys',async({page})=>{
+ await page.locator('#langSelect').selectOption('ja');
+ await expect(page.locator('html')).toHaveAttribute('lang','ja');
+ await expect(page.locator('[data-i18n="navTrain"]')).toHaveText('タイピング練習');
+ await expect(page.locator('[data-i18n="navSettings"]')).toHaveText('設定');
+ await expect(page.locator('#lessonGrid .lesson')).toHaveCount(24);
+ await page.locator('#continueButton').click();
+ await page.locator('#sourceLayout').selectOption('ja');
+ await expect(page.locator('#japaneseMode')).toBeVisible();
+ const rows=page.locator('#keyboard .key-row');
+ await expect(rows).toHaveCount(5);
+ for(const code of ['IntlYen','IntlRo','Lang1','Lang2','Fn','Backslash','Escape']){
+   await expect(page.locator('.key[data-code="'+code+'"]')).toHaveCount(1);
+ }
+ await expect(page.locator('.key[data-code="Lang1"] .latin')).toHaveText('かな');
+ await expect(page.locator('.key[data-code="Lang2"] .latin')).toHaveText('英数');
+ await expect(page.locator('.key[data-code="IntlYen"] .latin')).toHaveText('¥');
+ await expect(page.locator('.key[data-code="IntlRo"] .latin')).toHaveText('ろ');
+ await expect(page.locator('.key[data-code="IntlRo"] .glyph')).toHaveText('—');
+ await expect(page.locator('.key[data-code="IntlYen"] .glyph')).toHaveText('—');
+ await page.locator('#japaneseMode').selectOption('kana');
+ await expect(page.locator('.key[data-code="KeyA"] .latin')).toHaveText('ち');
+ await expect(page.locator('.key[data-code="KeyQ"] .latin')).toHaveText('た');
+ await expect(page.locator('.key[data-code="KeyY"] .latin')).toHaveText('ん');
+ await page.locator('#japaneseMode').selectOption('romaji');
+ await expect(page.locator('.key[data-code="KeyA"] .latin')).toHaveText('A');
+ await expect(page.locator('#typingInput')).toHaveAttribute('readonly','');
+});
+test('Japanese OS input composition is preserved while Brahmi counts physical keystrokes',async({page})=>{
+ await page.locator('#continueButton').click();
+ await page.locator('#sourceLayout').selectOption('ja');
+ const input=page.locator('#germanMirror');
+ await input.focus();
+ await input.dispatchEvent('compositionstart',{data:''});
+ await input.dispatchEvent('keydown',{code:'KeyK',key:'Process',isComposing:true,bubbles:true,cancelable:true});
+ await expect(page.locator('#typingInput')).toHaveValue('𑀓');
+ // A candidate selection must not produce extra Brahmi characters during composition.
+ await input.dispatchEvent('keydown',{code:'Space',key:'Process',isComposing:true,bubbles:true,cancelable:true});
+ await expect(page.locator('#typingInput')).toHaveValue('𑀓');
+ await input.fill('き');
+ await input.dispatchEvent('compositionend',{data:'き'});
+ await expect(input).toHaveValue('き');
+ await expect(page.locator('#typingInput')).toHaveValue('𑀓');
+ await input.dispatchEvent('keydown',{code:'KeyQ',key:'q',bubbles:true,cancelable:true});
+ await expect(page.locator('#typingInput')).toHaveValue('𑀓𑀅');
+ await input.fill('漢字');
+ await expect(input).toHaveValue('漢字');
+ await expect(page.locator('#typingInput')).toHaveValue('𑀓𑀅');
+});
+test('JIS keyboard, modifier control and input fields fit narrow portrait and short landscape screens',async({page})=>{
+ await page.locator('#continueButton').click();
+ await page.locator('#sourceLayout').selectOption('ja');
+ for(const [w,h] of [[320,568],[360,640],[390,844],[667,375],[844,390],[1312,1172]]){
+   await page.setViewportSize({width:w,height:h});
+   const geometry=await page.evaluate(()=>{
+     const box=el=>el.getBoundingClientRect();
+     const keys=[...document.querySelectorAll('#keyboard .key')].map(box);
+     const dock=box(document.getElementById('keyboardDock'));
+     const rows=[...document.querySelectorAll('#keyboard .key-row')].map(box);
+     return {dock:{top:dock.top,bottom:dock.bottom,right:dock.right},rows:rows.length,
+       keys:keys.length,violations:keys.filter(r=>r.left < -1||r.right>innerWidth+1||r.top < -1||r.bottom>innerHeight+1).length};
+   });
+   const context=w+'x'+h;
+   expect(geometry.rows,context+' rows').toBe(5);
+   expect(geometry.keys,context+' JIS keys').toBeGreaterThanOrEqual(60);
+   expect(geometry.violations,context+' clipped keys').toBe(0);
+   expect(geometry.dock.bottom,context+' clipped dock').toBeLessThanOrEqual(h+1);
+   expect(geometry.dock.top,context+' dock hidden').toBeGreaterThanOrEqual(-1);
+ }
+});
+test('Brahmi-only interface uses Brahmi characters, modern editorial titles and digit forms',async({page})=>{
+ await page.locator('#langSelect').selectOption('br');
+ await expect(page.locator('html')).toHaveAttribute('lang','br');
+ await expect(page.locator('body')).toHaveClass(/brahmi-interface/);
+ await expect(page.locator('#lessonGrid .lesson')).toHaveCount(24);
+ const captions=await page.locator('[data-i18n]').allTextContents();
+ for(const c of captions.filter(Boolean)){
+   expect(/[A-Za-z]/.test(c),'visible translation should not contain Latin alphabet: '+c.slice(0,80)).toBe(false);
+ }
+ await expect(page.locator('[data-i18n="navHome"]')).toContainText('𑀧');
+ const top=await page.locator('#lessonGrid .lesson-title').first().textContent();
+ expect(/[\u{11000}-\u{1107F}]/u.test(top)).toBe(true);
+ await page.locator('#continueButton').click();
+ await expect(page.locator('#lessonName')).toContainText('𑀫');
+ const metric=await page.locator('#metricAcc').textContent();
+ expect(metric).toMatch(/[\u{11066}-\u{1106F}]/u);
+ await page.locator('[data-page="texts"]').first().click();
+ await expect(page.locator('#edictGlossary')).toContainText('𑀯');
+ const label=await page.locator('[data-text="edict12di"]').locator('..').textContent();
+ expect(/[\u{11000}-\u{1107F}]/u.test(label)).toBe(true);
+});
+test('Japanese source layout is independent of Japanese interface selection',async({page})=>{
+ await page.locator('#langSelect').selectOption('ja');
+ await page.locator('#continueButton').click();
+ await page.locator('#sourceLayout').selectOption('de');
+ await expect(page.locator('#sourceLayout')).toHaveValue('de');
+ await expect(page.locator('[data-i18n="navTrain"]')).toHaveText('タイピング練習');
+ await page.locator('#langSelect').selectOption('en');
+ await page.locator('#sourceLayout').selectOption('ja');
+ await expect(page.locator('#langSelect')).toHaveValue('en');
+ await expect(page.locator('.key[data-code="Lang1"]')).toHaveCount(1);
 });
