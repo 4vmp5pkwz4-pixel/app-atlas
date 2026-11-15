@@ -1,14 +1,15 @@
 {
-  "version": "0.8.1-beta",
-  "display": "v0.8.1 β",
+  "version": "0.8.2-beta",
+  "display": "v0.8.2 β",
   "released_at": "2026-11-15",
-  "feature": "Editorial and scientific source review: accurate Mac layout descriptions, correct Shift+A long vowel, aspirated versus other consonants, historical additive numerals versus positional digits, inscription fidelity, and current multilingual catalog metadata",
+  "feature": "Source-verified 48-key German macOS ISO legends, large Normal labels with simultaneous Shift previews, immutable 2019 Brahmi mapping, visual keycap inspection and premium matched project-page specimens",
   "corpus": "data/brahmi-wisdom.json",
   "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
   "keyboardSources": [
     "data/macos-brahmi-reference.json",
     "data/macos-extra-layouts.json",
-    "data/brahmi-inscript-keyman-audit.json"
+    "data/brahmi-inscript-keyman-audit.json",
+    "data/macos-german-iso-keycaps.json"
   ],
   "i18nSources": [
     "data/brahmi-hindi-ui.json",
@@ -32,5 +33,6 @@
     "shortcutPolicy": "Preview only; Command/Control do not generate Brahmi Unicode"
   },
   "editorialReview": "docs/BRAHMI_EDITORIAL_AUDIT_20261115.md",
-  "reviewedDescriptions": "data/brahmi-reviewed-descriptions.json"
+  "reviewedDescriptions": "data/brahmi-reviewed-descriptions.json",
+  "visualAudit": "docs/BRAHMI_GERMAN_ISO_VISUAL_AUDIT.md"
 }

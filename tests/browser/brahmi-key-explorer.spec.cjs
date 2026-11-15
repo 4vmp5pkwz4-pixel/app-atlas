@@ -8,7 +8,8 @@ test.beforeEach(async({page})=>{
 test('all ordinary keycaps expose original Mac legend, authentic Brahmi glyph and scholarly IAST',async({page})=>{
   await expect(page.locator('#keyViewMode')).toHaveValue('compare');
   const ka=page.locator('#keyboard .key[data-code="KeyK"]');
-  await expect(ka.locator('.latin')).toHaveText('K');
+  await expect(ka.locator('.latin')).toHaveText('k');
+  await expect(ka.locator('.shift-peek')).toHaveText('⇧K');
   await expect(ka.locator('.glyph')).toHaveText('𑀓');
   await expect(ka.locator('.iast')).toHaveText('ka');
   await expect(ka).toHaveAttribute('data-mnemonic','yes');

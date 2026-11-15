@@ -4,7 +4,7 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.8.1 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.8.1-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.8.2 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.8.2-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
 An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. **RU · EN · DE.** The main catalog contains no analytics or login.
 
@@ -52,6 +52,12 @@ docs/                    Distribution, release and legal checklists
 - [German legal-readiness checklist](docs/LEGAL_READINESS.md)
 
 **Licensing:** No open-source license has yet been selected for this repository. Visibility on GitHub does not in itself grant redistribution rights for third-party materials. Confirm the rights to any bundled and historical content and complete applicable operator/legal information before wider promotion. Features in scientific demonstrators are not evidence of empirical validation.
+
+## Brahmi Atelier v0.8.2-beta · authentic German Mac keycaps
+
+The physical German Mac ISO visual problem is fixed with 48 **source-backed Normal/Shift key pairs** from Unicode CLDR 41 (`de-t-k0-osx`). The selected Normal-layer German output is large and legible without Shift (e.g. `a`, `ö`, `ü`, `ä`, `ß`); its verified Shift counterpart is displayed simultaneously beside it on desktop, including `3/§`, `^/°`, and `ß/?`. Shift reverses the emphasis rather than hiding the other value. Brahmi Unicode remains from the independent original 2019 keymap, with IAST on the bottom row. Physical Option/IME output is **not** inferred when source evidence is unavailable. The project detail page now uses matching gold/jade typography and three source-correct keycap specimens.
+
+[Full design and keycap invariants](docs/BRAHMI_GERMAN_ISO_VISUAL_AUDIT.md) · [German macOS key data](data/macos-german-iso-keycaps.json).
 
 ## Brahmi Atelier v0.8.1-beta · source-checked teaching descriptions
 

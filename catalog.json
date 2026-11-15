@@ -13,18 +13,18 @@
       "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
       "mark": "𑀥",
       "tags": [
-        "v0.8.1 β",
-        "Brahmi · IAST",
+        "v0.8.2 β",
+        "Mac DE ISO · 48 verified keys",
+        "Brahmi → IAST",
         "RU / DE / EN / JA / HI",
         "24 lessons",
-        "Mac ⇧ ⌥ ⌃ ⌘",
-        "115 Unicode signs",
-        "25 referenced passages"
+        "⇧ ⌥ ⌃ ⌘",
+        "115 Unicode signs"
       ],
       "desc": {
-        "ru": "Brahmi Atelier v0.8.1 β: 24 урока, шесть вариантов интерфейса, девять видов клавиш Mac (включая русскую фонетическую и деванагари). Каждая клавиша одновременно показывает физическую позицию, знак Unicode-брахми и учебную IAST. Есть тренировка Shift/Option, подсказки сочетаний Control/Command, 25 цитат с источниками и фонетический атлас 115 знаков. Сходства с латинскими клавишами — приём запоминания, а не доказательство древнего происхождения раскладки.",
-        "en": "Brahmi Atelier v0.8.1 beta: 24 lessons, six interface options and nine Mac key-label views, including Russian phonetic and Devanagari. Compare physical keys, Unicode Brahmi and didactic IAST side by side; explore Shift/Option and preview non-printing Control/Command shortcuts. Includes 25 source-referenced passages and a 115-sign Unicode atlas. Latin-key matches are mnemonics, not evidence of historical keyboard descent.",
-        "de": "Brahmi Atelier v0.8.1 Beta: 24 Lektionen, sechs Oberflächenvarianten und neun Mac-Tastenansichten, darunter Russisch phonetisch und Devanagari. Physische Tasten, Unicode-Brahmi und didaktische IAST-Umschrift erscheinen parallel. Shift/Option sowie nichtdruckende Control/Command-Kürzel werden erklärt. Mit 25 quellenbezogenen Textauszügen und einem Atlas mit 115 Unicode-Zeichen. Laut-Merkhilfen sind kein historischer Beweis."
+        "ru": "Brahmi Atelier v0.8.2 β: немецкая Mac ISO теперь показывает настоящие строчные буквы и специальные символы без Shift, а варианты Shift — рядом. Все 48 позиций проверяются по Unicode CLDR; знаки брахми — по отдельной таблице Mac 2019 года. Три строки на клавише: немецкая раскладка, Unicode-брахми и IAST. Шесть вариантов интерфейса, 24 урока, научный атлас 115 символов и исторические тексты со ссылками.",
+        "en": "Brahmi Atelier v0.8.2 beta: German Mac ISO displays readable lower-case characters and punctuation without holding Shift, with simultaneous Shift legends on desktop. All 48 character keys are checked against Unicode CLDR, independently of the sourced 2019 Brahmi keymap. Each key links the Mac label, Unicode Brahmi and didactic IAST; with six interface choices, 24 lessons, a 115-sign atlas and source-linked inscriptions.",
+        "de": "Brahmi Atelier v0.8.2 Beta: Deutsche Mac-ISO-Zeichen erscheinen endlich lesbar in der Grundebene (a, ö, ä, ü, ß), die Shift-Zeichen stehen daneben. Alle 48 Zeichenpositionen sind gegen Unicode CLDR geprüft und vom originalen Brahmi-Keylayout (2019) getrennt. Jede Taste verbindet Mac-Beschriftung, Unicode-Brahmi und didaktische IAST-Umschrift. Sechs Oberflächenvarianten, 24 Lektionen und 115 Zeichen im Atlas."
       },
       "downloadArchive": "https://github.com/4vmp5pkwz4-pixel/app-atlas/archive/refs/heads/main.zip"
     },
