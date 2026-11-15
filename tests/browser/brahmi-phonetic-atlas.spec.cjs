@@ -51,6 +51,17 @@ test('language and CSV export, no network required by atlas',async({page})=>{
   expect(download.suggestedFilename()).toBe('brahmi-phonetic-atlas.csv');
 });
 
+test('independently audited Keyman InScript correspondence: 32/34 and 10/14',async({page})=>{
+  await expect(page.locator('#inscriptConsonants')).toHaveText('32/34');
+  await expect(page.locator('#inscriptVowels')).toHaveText('10/14');
+  await expect(page.locator('#inscriptCoverage')).toHaveText('108/115');
+  await page.locator('#inscriptToggle').click();
+  await expect(page.locator('#inscriptRows tr')).toHaveCount(48);
+  await expect(page.locator('#inscriptRows td.no')).toHaveCount(6);
+  await expect(page.locator('#inscriptRows')).toContainText('K_SLASH');
+  await expect(page.locator('#inscriptRows')).toContainText('SHIFT K_COMMA');
+});
+
 test('main converter links to new atlas in all five interface locales',async({page})=>{
   await page.goto('/apps/brahmi/index.html',{waitUntil:'domcontentloaded'});
   for(const lang of ['ru','en','de','ja','br']){
