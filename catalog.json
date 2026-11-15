@@ -13,8 +13,8 @@
       "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
       "mark": "𑀥",
       "tags": [
-        "v0.9.0 β",
-        "Full phrase atlas",
+        "v0.9.1 β",
+        "Two live input rows + compact Atlas",
         "8 Mac layouts · compare",
         "Brahmi → IAST",
         "24 lessons",
@@ -22,9 +22,9 @@
         "RU / DE / EN / JA / HI"
       ],
       "desc": {
-        "ru": "Brahmi Atelier v0.9.0 β — полнофразовый атлас прямо в тренажёре: исходный брахми, научное чтение IAST и вся последовательность клавиш Mac одновременно. Можно выбирать текущий урок, 10 исторических текстов и 25 цитат с источниками; сравнивать две раскладки из восьми, а затем одним нажатием начать упражнение. Изучение не сбрасывает прогресс, неизвестные клавиши не выдумываются. Пять языков интерфейса и экспериментальный интерфейс брахми.",
-        "en": "Brahmi Atelier v0.9.0 beta adds a complete phrase atlas inside the typing trainer: Unicode Brahmi, conventionally decoded IAST and every physical Mac key chord, side by side. Choose your current lesson, 10 source-linked historical passages or 25 quotations; independently compare two of eight Mac layouts, then explicitly practice or open the converter. Browsing never resets scores, unmapped signs are not invented, and the fixed five-row keyboard stays visible.",
-        "de": "Brahmi Atelier v0.9.0 Beta: Ein integrierter Satzatlas zeigt vollständiges Unicode-Brahmi, wissenschaftliche IAST-Lesung und alle physischen Mac-Tastenkombinationen. Aktuelle Lektion, zehn historische Texte und 25 quellenbelegte Zitate lassen sich auswählen und in zwei von acht Mac-Belegungen vergleichen. Erst ein ausdrücklicher Klick beginnt die Übung; beim Betrachten bleibt der Lernfortschritt erhalten. Die fünf Reihen der Tastatur bleiben sichtbar."
+        "ru": "Brahmi Atelier v0.9.1 β — две исходные строки тренажёра снова видны одновременно: ввод в выбранной раскладке Mac и автоматически формируемый текст брахми. Маленькие подсказки физических клавиш и IAST встроены в заголовки этих строк, а полный атлас фраз из 10 исторических текстов и 25 цитат расположен рядом на большом экране или ниже основного ввода на мобильном. Сравнение раскладок, оригинальные Unicode-таблицы и пятистрочная клавиатура сохранены.",
+        "en": "Brahmi Atelier v0.9.1 beta restores two simultaneously readable live training tracks—Mac input and corresponding Brahmi output. Tiny source-authenticated physical-key cues and scholarly IAST share the existing track headings rather than stacking extra full-width lines. The full phrase atlas (ten historical texts and 25 quotations) lives alongside the exercise on desktop or after the input on mobile. All source mappings, eight Mac keyboard presets and the five-row dock are preserved.",
+        "de": "Brahmi Atelier v0.9.1 Beta zeigt wieder beide ursprünglichen Übungszeilen auf einen Blick: Eingabe mit der ausgewählten Mac-Belegung und automatisch erzeugtes Unicode-Brahmi. Kleine physische Tastenkürzel und IAST-Hinweise sind platzsparend in die Zeilenüberschriften integriert, statt zusätzliche Reihen darunter anzuhängen. Der vollständige Satzatlas mit zehn historischen Texten und 25 Zitaten steht am Desktop daneben und auf Mobilgeräten nach dem Eingabebereich."
       },
       "downloadArchive": "https://github.com/4vmp5pkwz4-pixel/app-atlas/archive/refs/heads/main.zip"
     },
