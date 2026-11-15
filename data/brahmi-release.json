@@ -1,8 +1,8 @@
 {
-  "version": "0.8.3-beta",
-  "display": "v0.8.3 β",
+  "version": "0.9.0-beta",
+  "display": "v0.9.0 β",
   "released_at": "2026-11-15",
-  "feature": "Post-deployment visual QA fix: German Mac ISO §, ° and ? Shift alternatives remain visibly labeled on narrow/short keycaps, with normal output prioritized and 48-key CLDR invariant held independently of Brahmi Unicode",
+  "feature": "Inline Phrase Atlas in full Brahmi typing trainer: synchronized complete Brahmi/IAST/physical Mac key sequences for exercise, 10 source-linked historical texts and 25 quotations; eight source-pinned Mac layout views with independently selectable second layout, explicit safe Practice/Converter handoff, six localized interfaces, persistent side-by-side preference, live next-key highlighting and no loss of keyboard height",
   "corpus": "data/brahmi-wisdom.json",
   "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
   "keyboardSources": [
@@ -34,5 +34,22 @@
   },
   "editorialReview": "docs/BRAHMI_EDITORIAL_AUDIT_20261115.md",
   "reviewedDescriptions": "data/brahmi-reviewed-descriptions.json",
-  "visualAudit": "docs/BRAHMI_GERMAN_ISO_VISUAL_AUDIT.md"
+  "visualAudit": "docs/BRAHMI_GERMAN_ISO_VISUAL_AUDIT.md",
+  "phraseAtlas": {
+    "source": "docs/BRAHMI_TRAINER_PHRASE_ATLAS.md",
+    "defaultOpen": true,
+    "sourceMode": "current exercise",
+    "comparisonOptional": true,
+    "layouts": [
+      "de",
+      "en",
+      "ru",
+      "ruMac",
+      "ruPh",
+      "dev",
+      "devq",
+      "ja"
+    ],
+    "noInventedMappings": true
+  }
 }
