@@ -14,15 +14,16 @@
       "mark": "𑀥",
       "tags": [
         "Brahmi",
-        "RU / EN / DE",
-        "macOS",
+        "RU/EN/DE/JA",
+        "Japanese Mac JIS",
         "Touch typing",
-        "Unicode"
+        "Ashoka Edicts",
+        "Four modifier layers"
       ],
       "desc": {
-        "ru": "Брахми без установки раскладки: печатай на русском, английском или немецком Mac, одновременно наблюдая обычные и брахмийские символы. Четыре слоя клавиш, 24 урока, эдикты Ашоки и повторение ошибок.",
-        "en": "Learn Brahmi without installing or switching macOS keyboards. Type in Russian, English or German with synchronized physical and Brahmi text, authentic Shift/Option layers, 24 lessons and spaced review.",
-        "de": "Brahmi ohne Tastaturinstallation lernen: mit russischer, englischer oder deutscher Mac-Belegung tippen, beide Schriften live sehen, vier Shift/Option-Ebenen, 24 Lektionen und verteilte Wiederholung."
+        "ru": "Брахми без установки раскладки: ввод с русской, немецкой, английской и японской клавиатур Mac JIS; двойной ввод, японский IME, четыре слоя Shift/Option, 24 урока, эдикты Ашоки. Интерфейс также доступен на японском и в экспериментальной записи письмом брахми.",
+        "en": "Learn Brahmi with Russian, German, English, or Japanese Mac JIS keyboards without installing Brahmi. Full JIS keys, native Japanese IME text composition, dual Unicode typing, four modifier layers, 24 lessons, and Japanese/Brahmi-script interfaces.",
+        "de": "Brahmi mit russischer, deutscher, englischer oder japanischer Mac-JIS-Tastatur ohne Installation üben: vollständige JIS-Tasten, japanische IME-Komposition, vier Shift/Option-Ebenen, 24 Lektionen und Oberflächen auf Japanisch und in Brahmi-Schrift."
       },
       "downloadArchive": "https://github.com/4vmp5pkwz4-pixel/app-atlas/archive/refs/heads/main.zip"
     },

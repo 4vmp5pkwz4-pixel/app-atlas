@@ -68,3 +68,9 @@ Developer preservation: [Brahmi AI-agent skill](.agents/skills/brahmi-dual-layou
 ### Premium always-visible Brahmi keyboard · v0.3.2-beta
 
 The redesigned training view keeps all five physical Mac keyboard rows in a reserved bottom dock while the lesson and RU/EN/DE-to-Brahmi dual typing fields scroll independently above it. Screen widths/heights and landscape are guarded by geometry tests at twelve viewport sizes. [Evidence and safeguards](docs/KEYBOARD_VIEWPORT_QA.md) · [Download fixed standalone HTML](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/download/v0.3.2-beta/brahmi.html).
+
+## Japanese Mac JIS + Brahmi-script interface
+
+The standalone **Brahmi Atelier** now offers five interface locales: **Russian, German, English, Japanese and experimental modern Pāli-inspired microcopy in Unicode Brahmi script**. It has four independent physical keyboard presets, including a complete **Japanese Apple JIS layout** with 英数/Kana, ¥, ろ, Fn and punctuation positions, plus Kana/Romaji legend previews. The upper field keeps native Japanese IME composition while Brahmi follows physical key positions in the lower field. Some JIS-only keys have no source-authenticated Brahmi output; none is invented. The entire five-row keyboard remains permanently visible, including on short landscape screens.
+
+**Historical accuracy:** Brahmi is a script, not a language. The script-only UI is modern editorial teaching material, *not* a historical inscriptional Prakrit translation. Read [Japanese/Brahmi provenance and limitations](docs/JAPANESE_JIS_AND_BRAHMI_SCRIPT.md) or the [persistent AI skill](.agents/skills/brahmi-dual-layout/SKILL.md). Production macOS Safari and a physical Japanese JIS Mac keyboard still need on-device input-method testing; Chromium cannot prove exact native IME behavior.
