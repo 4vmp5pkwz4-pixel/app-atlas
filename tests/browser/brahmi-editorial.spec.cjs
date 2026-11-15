@@ -38,8 +38,12 @@ test('source-edited inscription descriptions and numerical distinctions remain v
  await expect(page.locator('#lessonSummary')).toContainText('positional digits');
  await page.locator('#resetInput').click();
  await page.locator('#langSelect').selectOption('ru');
- await expect(page.locator('[data-i18n="transcriptionNotice"]')).toContainText('не фотография');
- await expect(page.locator('[data-i18n="convRomanCaveat"]')).toContainText('не устанавливает');
+ const reviewed=await page.evaluate(()=>({
+  transcription:window.BrahmiAtelierTest.T('transcriptionNotice'),
+  roman:window.BrahmiAtelierTest.T('convRomanCaveat')
+ }));
+ expect(reviewed.transcription).toContain('не фотография');
+ expect(reviewed.roman).toContain('не устанавливает');
  const lessons=await page.evaluate(()=>{
    const list=window.BrahmiAtelierTest.LESSONS;
    return {shift:list.find(x=>x.id==='shift').ru,peace:list.find(x=>x.id==='peace').ruDesc,
