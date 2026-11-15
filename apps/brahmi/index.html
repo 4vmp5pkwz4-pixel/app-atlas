@@ -400,7 +400,18 @@ body.training-mode #keyboard .key{gap:0}
 }
 @media(max-width:420px),(max-height:440px){
  body.training-mode #keyboard .key .shift-peek{display:none}
+ /* Exceptional symbols remain visible as compact upper-corner legends,
+    unlike ordinary a/A letter-case hints. This preserves §, ° and ? even
+    on narrow ISO keycaps without clipping the important Normal symbol. */
+ body.training-mode #keyboard .key[data-alt-kind="symbol"] .physical-cap{position:relative;width:100%;min-height:9px}
+ body.training-mode #keyboard .key[data-alt-kind="symbol"] .shift-peek{
+   display:block;position:absolute;right:0;top:-2px;
+   font-size:clamp(5px,1.25vw,7px);line-height:1;color:#fff0c7;
+   letter-spacing:-.04em;max-width:65%;overflow:hidden;text-overflow:clip
+ }
+ body.training-mode #keyboard .key[data-alt-kind="symbol"] .physical-cap .latin{transform:translateX(-3px);font-size:clamp(8px,2.15vw,10px)}
 }
+
 
 </style>
 </head>
@@ -1110,7 +1121,8 @@ function inspectKey(code){
   else{
    const glyph=charMap(code,mods.shift,mods.option);
    const phonetic=latinMnemonicAgreement(code,glyph);
-   description=physicalLayerLabel(code,mods.shift,mods.option)+' → '+(glyph||'—')+' · '+romanKeySign(glyph)+
+   const pair=macKeycapPair(code,mods.shift,mods.option);
+   description=pair.primary+(pair.alternate?' · '+pair.alternateModifier+' '+pair.alternate:'')+' → '+(glyph||'—')+' · '+romanKeySign(glyph)+
     (phonetic==='yes'?' · ◆ '+T('keyMnemonic'):!glyph?' · '+T('keyNoSign'):'');
   }
  }
@@ -1219,6 +1231,8 @@ function renderKeyboard(){
    const label=special?(shortcutMode&&!modifierKey?(mods.control?'⌃':'')+(mods.command?'⌘':'')+caps[code]:caps[code]):physicalLayerLabel(code,mods.shift,mods.option);
    const mnemonic=shortcut?'na':latinMnemonicAgreement(code,glyph);
    const cap=(!special&&!shortcut)?macKeycapPair(code,mods.shift,mods.option):null;
+   const deBase=MAC_GERMAN_ISO.layers.base[code],deShift=MAC_GERMAN_ISO.layers.shift[code];
+   const altKind=saved.physical==='de'&&deBase!==undefined&&deShift!==undefined&&deBase.toLocaleUpperCase('de-DE')!==deShift?'symbol':'case';
    const cls='key '+(special?'wide ':'')+(code==='Space'?'space ':'')+
     (fingers[code]?'f-'+fingers[code]+' ':'')+((code==='KeyF'||code==='KeyJ')?'home ':'')+
     (shortcut?'is-shortcut ':'');
@@ -1230,7 +1244,7 @@ function renderKeyboard(){
     :'<span class="glyph brahmi">'+(hide?'·':esc(glyph||'—'))+'</span>'+
      '<span class="iast" title="IAST">'+(hide?'·':esc(roman))+'</span>';
    html+='<button type="button" class="'+cls+'" data-code="'+esc(code)+'" data-mnemonic="'+mnemonic+
-    '" data-empty="'+(!glyph)+'" aria-label="'+esc(name)+'" title="'+esc(name)+'">'+
+    '" data-empty="'+(!glyph)+'" data-alt-kind="'+altKind+'" aria-label="'+esc(name)+'" title="'+esc(name)+'">'+
     '<span class="physical-cap"><span class="latin">'+esc(label)+'</span>'+ (cap?.alternate&&cap.alternate!==cap.primary?'<span class="shift-peek" title="'+esc(cap.alternateModifier)+' · '+esc(cap.alternate)+'">'+(mods.shift?'':'⇧')+esc(cap.alternate)+'</span>':'')+'</span>'+(!special&&(code!=='Space'||shortcut)?middle:'')+'</button>';
   }
   html+='</div>';
