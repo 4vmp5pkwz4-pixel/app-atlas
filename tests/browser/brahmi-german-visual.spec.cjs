@@ -68,7 +68,7 @@ test('accurate German labels remain legible at desktop and do not horizontally c
   }
  }
 });
-test('project detail uses the same gold/jade brand and accurately sourced glyph specimens',async({page})=>{
+test('project detail uses the same gold/jade brand and accurately sourced glyph specimens',async({page},testInfo)=>{
  await page.goto('/projects/brahmi/');
  await expect(page.locator('body')).toHaveClass(/brahmi-detail/);
  await expect(page.locator('.proof-key')).toHaveCount(3);
