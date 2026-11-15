@@ -35,6 +35,17 @@ for layer,entries in data["layers"].items():
 assert len(actual)==106, len(actual)
 missing=sorted(assigned-actual.keys())
 assert missing==[0x11003,0x11004,0x11070,0x11071,0x11072,0x11073,0x11074,0x11075,0x1107f]
+# Validate the independent, versioned Keyman InScript sources and comparison.
+kmn=json.loads((ROOT/"data/brahmi-inscript-keyman-audit.json").read_text(encoding="utf-8"))
+mm=re.search(r'<script id="inscript-data" type="application/json">(.*?)</script>',atlas,re.S)
+assert mm, "Missing embedded independent InScript audit"
+embedded_kmn=json.loads(mm.group(1))
+assert embedded_kmn==kmn, "InScript atlas no longer matches the independently sourced dataset"
+assert sum(x["same"] for x in kmn["consonants"])==32
+assert sum(x["same"] for x in kmn["vowels"])==10
+assert len(kmn["consonants"])==34 and len(kmn["vowels"])==14
+assert kmn["totals"]["brahmiDistinctAssigned"]==108
+assert len([x for x in kmn["consonants"]+kmn["vowels"] if not x["same"]])==6
 assert 'id="atlasLaunch"' in trainer and 'href="./phonetic-atlas.html"' in trainer
 assert '"en"' in atlas and '"ru"' in atlas and '"de"' in atlas and '"ja"' in atlas
 assert "InScript" in atlas
@@ -45,4 +56,4 @@ with tempfile.TemporaryDirectory() as temporary:
     p.write_text(scripts[0],encoding="utf-8")
     result=subprocess.run(["node","--check",str(p)],capture_output=True,text=True)
     assert result.returncode==0, result.stderr
-print("PASS: 115 assigned, 106 mapped, 9 explicitly missing; original layers, localized trainer launcher and valid JavaScript")
+print("PASS: 115 assigned; Mac 106/115; Keyman InScript 108/115 and 32/34 consonants + 10/14 vowels; original source layers and JavaScript")
