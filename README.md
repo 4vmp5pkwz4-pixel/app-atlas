@@ -4,7 +4,7 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.7.0 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.7.0-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.8.0 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.8.0-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
 An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. **RU · EN · DE.** The main catalog contains no analytics or login.
 
@@ -53,7 +53,15 @@ docs/                    Distribution, release and legal checklists
 
 **Licensing:** No open-source license has yet been selected for this repository. Visibility on GitHub does not in itself grant redistribution rights for third-party materials. Confirm the rights to any bundled and historical content and complete applicable operator/legal information before wider promotion. Features in scientific demonstrators are not evidence of empirical validation.
 
-## Brahmi phonetic atlas · source-verified v0.7.0-beta
+## Brahmi Atelier v0.8.0-beta · live Mac keyboard explorer
+
+**[Launch Brahmi Atelier](https://4vmp5pkwz4-pixel.github.io/app-atlas/apps/brahmi/)** · [Technical design, modifier semantics and test gates](docs/BRAHMI_LIVE_KEY_EXPLORER.md).
+
+The trainer's virtual physical Mac keys now show **selected physical legend → actual Unicode Brahmi → scholarly IAST** *simultaneously*, rather than relying on the converter alone. Keys update in real time while **Shift** and **Option** are held, with all four original 2019 source-backed Brahmi layers. **Control** and **Command** illuminate shortcut previews (e.g., ⌘C for Copy) rather than inventing a non-existent extra Brahmi text layer; the app does not execute OS commands. The three presentation modes are Compare / Brahmi / IAST, with local preference persistence, a key detail inspector and restrained Latin-IAST mnemonic markers (not historical proof). The converter can launch the chosen layout and pasted passage directly in the trainer. All six interface languages are supported, including experimental Brahmi and modern Hindi in Devanagari.
+
+Automated Playwright runs cover desktop and mobile modifier press/release, native Devanagari key legends, shortcuts, transliteration, offline behavior and old lessons. A successful release pipeline packages both trainer and standalone atlas.
+
+## Brahmi phonetic atlas · source-verified source audit
 
 [Explore the full Brahmi phonetic atlas](apps/brahmi/phonetic-atlas.html) · [Research methodology, caveats and independent audit](docs/BRAHMI_PHONETIC_ATLAS_AUDIT.md).
 
