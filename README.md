@@ -4,7 +4,7 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.8.3 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.8.3-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.9.0 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.0-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
 An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. **RU · EN · DE.** The main catalog contains no analytics or login.
 
@@ -52,6 +52,12 @@ docs/                    Distribution, release and legal checklists
 - [German legal-readiness checklist](docs/LEGAL_READINESS.md)
 
 **Licensing:** No open-source license has yet been selected for this repository. Visibility on GitHub does not in itself grant redistribution rights for third-party materials. Confirm the rights to any bundled and historical content and complete applicable operator/legal information before wider promotion. Features in scientific demonstrators are not evidence of empirical validation.
+
+## Brahmi Atelier v0.9.0-beta · compact complete-phrase learning atlas
+
+The **Typing Trainer** now contains an expanded-by-default, collapsible full-phrase reading panel. It displays the **entire Brahmi text**, a teaching-oriented **IAST transcription from the exact converter function**, and the **entire source-verified physical Mac key sequence**, with a second optional row for another selected layout. Select the active exercise, any of ten historical readings, or any of 25 source-linked quotations. Choose **eight Mac layouts** (German, English, three Russian modes, two Devanagari Mac modes and Japanese JIS), synchronize the primary layout to the virtual keyboard, and compare a secondary one without changing the current exercise. Explicit *Practice* or *Open converter* actions preserve user intent; unsupported signs are marked `—` and cannot silently become untypeable exercises. The five-row keyboard remains fixed while the phrase panel scrolls independently.
+
+[Exact component specification and source integrity](docs/BRAHMI_TRAINER_PHRASE_ATLAS.md) · [Standalone app](apps/brahmi/index.html) · [Original verified keymap](data/macos-brahmi-reference.json).
 
 ## Brahmi Atelier v0.8.3-beta · visibly complete compact German legends
 
