@@ -44,6 +44,25 @@ assert {"IntlYen","IntlRo","Lang1","Lang2","Fn"}.issubset(set(sum(jis["rows"],[]
 assert 'id="japaneseMode"' in html and all('value="'+x+'"' in html for x in ("ru","de","en","ja","br"))
 assert "japaneseComposing" in html and "const BRAHMI_UI_ROMAN=" in html
 
+# Version badge and sourced quotation corpus must agree with offline datasets.
+release=json.loads((ROOT/"data/brahmi-release.json").read_text(encoding="utf-8"))
+version_match=re.search(r'const APP_VERSION=("[^"\\n]+");',html)
+assert version_match, "Missing semantic APP_VERSION constant"
+assert json.loads(version_match.group(1))==release["version"], "Version constant differs from release data"
+assert 'id="versionBadge"' in html and '>'+release["display"]+'</span>' in html, "Visible version badge missing"
+wisdom=json.loads((ROOT/"data/brahmi-wisdom.json").read_text(encoding="utf-8"))
+wisdom_match=re.search(r'const WISDOM_CORPUS=(\\[[^\\n;]+\\]);',html)
+assert wisdom_match, "Missing embedded offline wisdom corpus"
+assert json.loads(wisdom_match.group(1))==wisdom["items"], "Embedded wisdom source differs from curated data"
+assert len(wisdom["items"])>=25 and len({item["id"] for item in wisdom["items"]})==len(wisdom["items"])
+assert len([x for x in wisdom["items"] if x["group"]=="ashoka"])>=12
+assert len([x for x in wisdom["items"] if x["group"]=="dhammapada"])>=13
+for item in wisdom["items"]:
+    assert all(item["meaning"].get(lang) for lang in ("ru","de","en","ja")), item["id"]
+    assert item["source_url"].startswith(("https://indike.org/","https://suttacentral.net/"))
+assert 'id="wisdomSpotlight"' in html and 'id="wisdomCategory"' in html
+assert "function nextWisdom(" in html
+
 scripts=re.findall(r"<script(?:\s[^>]*)?>([\s\S]*?)</script>",html)
 assert scripts, "No inline executable JS"
 for i,script in enumerate(scripts):
@@ -53,4 +72,4 @@ for i,script in enumerate(scripts):
         p.write_text(script,encoding="utf-8")
         result=subprocess.run(["node","--check",str(p)],capture_output=True,text=True)
         assert result.returncode==0, f"Brahmi JS syntax failed: {result.stderr}"
-print("OK: original Brahmi layers, full Japanese JIS layout, five languages and inline JS syntax")
+print("OK: authentic Mac maps, visible version "+release["version"]+", 25 source-linked quotations, and JS syntax")
