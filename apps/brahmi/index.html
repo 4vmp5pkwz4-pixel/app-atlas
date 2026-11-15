@@ -337,6 +337,11 @@ body.brahmi-interface .wisdom-title,body.brahmi-interface .wisdom-meaning,
 body.brahmi-interface .wisdom-editorial,body.brahmi-interface .wisdom-head
 {font-family:"Noto Sans Brahmi","Segoe UI Historic",sans-serif;line-height:1.85}
 @media(max-width:600px){.wisdom-category{max-width:100%;flex:1 1 100%}.wisdom-spotlight{padding:12px}}
+/* Hindi Devanagari and physical Devanagari legends require fully legible complex-script shaping. */
+body.hindi-interface{font-family:"Kohinoor Devanagari","Noto Sans Devanagari","Devanagari Sangam MN",-apple-system,sans-serif}
+body.hindi-interface .nav button{line-height:1.5}
+#keyboardDock[data-physical-layout="dev"] .latin,#keyboardDock[data-physical-layout="devq"] .latin{font-family:"Kohinoor Devanagari","Noto Sans Devanagari","Devanagari Sangam MN",sans-serif;font-size:clamp(10px,1.15vw,15px)}
+@media(max-width:750px){body.hindi-interface .top-controls{gap:5px}}
 </style>
 </head>
 <body>
@@ -681,7 +686,7 @@ function germanKeyStroke(code,shift=false,alt=false,actualKey=null){
 }
 function renderGermanMirror(){
  const area=$('germanMirror');
- if(saved.physical==='ja'&&saved.mode==='sim')return; // Never overwrite a live Japanese IME composition.
+ if(['ja','dev','devq'].includes(saved.physical)&&saved.mode==='sim')return; // Preserve Japanese and Devanagari native composition.
  area.value=germanTrace.filter(x=>x!==undefined).join('');
  area.scrollTop=area.scrollHeight;
 }
@@ -1035,11 +1040,11 @@ function renderKeyboard(){
    if(code.startsWith('Shift')){modifierShift=!modifierShift;renderKeyboard();return}
    if(code.startsWith('Alt')){modifierAlt=!modifierAlt;renderKeyboard();return}
    if(code.startsWith('Meta')||code.startsWith('Control')||['Tab','CapsLock','Escape','Fn','Lang1','Lang2'].includes(code))return;
-   if(code==='Backspace'){pendingGerman=null;if(saved.physical==='ja'&&saved.mode==='sim'){const a=$('germanMirror');a.value=Array.from(a.value).slice(0,-1).join('');}insertSign('BACKSPACE');return}
+   if(code==='Backspace'){pendingGerman=null;if(['ja','dev','devq'].includes(saved.physical)&&saved.mode==='sim'){const a=$('germanMirror');a.value=Array.from(a.value).slice(0,-1).join('');}insertSign('BACKSPACE');return}
    const glyph=code==='Enter'?' ':charMap(code,modifierShift,modifierAlt);
    if(!glyph){toast(T('inputUnsupported'));return}
    pendingGerman=germanKeyStroke(code,modifierShift,modifierAlt);
-   if(saved.physical==='ja'&&saved.mode==='sim'){$('germanMirror').value+=physicalLayerLabel(code,modifierShift,modifierAlt)}
+   if(['ja','dev','devq'].includes(saved.physical)&&saved.mode==='sim'){$('germanMirror').value+=physicalLayerLabel(code,modifierShift,modifierAlt)}
    insertSign(glyph);
    if(modifierAlt||modifierShift){modifierAlt=false;modifierShift=false;renderKeyboard()}
    else renderLive();
@@ -1080,7 +1085,7 @@ $('typingInput').addEventListener('input',onTypingInput);$('typingInput').addEve
  }
 });
 let japaneseComposing=false;
-$('germanMirror').addEventListener('compositionstart',()=>{if(saved.physical==='ja')japaneseComposing=true});
+$('germanMirror').addEventListener('compositionstart',()=>{if(['ja','dev','devq'].includes(saved.physical))japaneseComposing=true});
 $('germanMirror').addEventListener('compositionend',()=>{japaneseComposing=false});
 $('germanMirror').addEventListener('keydown',e=>{
  if(saved.mode!=='sim'||finished)return;
@@ -1089,7 +1094,7 @@ $('germanMirror').addEventListener('keydown',e=>{
  // On JIS Macs, Eisu/Kana are OS input-mode controls, not Brahmi characters.
  if(['Lang1','Lang2','Fn','Escape','CapsLock','Convert','NonConvert'].includes(e.code))return;
  if(['Shift','Alt','Meta','Control','CapsLock'].includes(e.key))return;
- const ja=saved.physical==='ja';
+ const ja=['ja','dev','devq'].includes(saved.physical);
  if(ja){
    // Never cancel native Japanese composition or candidate selection with preventDefault().
    // A composed kana/kanji character may result from many physical key presses, while the
@@ -1129,7 +1134,7 @@ $('germanMirror').addEventListener('keydown',e=>{
 });
 $('germanMirror').addEventListener('paste',e=>{e.preventDefault();toast(saved.lang==='de'?'Einfügen ist beim Üben deaktiviert.':saved.lang==='ru'?'Вставка во время тренировки отключена.':'Pasting is disabled during practice.')});
 $('germanMirror').addEventListener('beforeinput',e=>{if(saved.mode==='sim'&&(e.inputType==='insertFromPaste'||e.inputType==='insertFromDrop'))e.preventDefault()});
-$('germanMirror').addEventListener('input',()=>{if(saved.mode==='sim'&&saved.physical!=='ja')renderGermanMirror()});
+$('germanMirror').addEventListener('input',()=>{if(saved.mode==='sim'&&!['ja','dev','devq'].includes(saved.physical))renderGermanMirror()});
 // Native keyboard calibration: physical key + modifiers is captured, resulting Unicode from input event.
 $('calInput').addEventListener('keydown',e=>{if(e.metaKey||e.ctrlKey)return;calKey={code:e.code,shift:e.shiftKey,alt:e.altKey,key:e.key};if(e.key==='Enter')e.preventDefault()});
 $('calInput').addEventListener('input',e=>{const data=e.data||$('calInput').value;if(!calKey||!data)return;let chars=cp(data);const glyph=chars.filter(x=>isBrahmi(x));if(glyph.length===1){const k=calKey.code+'|'+(calKey.shift?'1':'0')+(calKey.alt?'1':'0');saved.cal[k]=glyph[0];$('calDetected').textContent=physicalLabel(calKey.code)+' → '+glyph[0];persist();updateSettings();renderKeyboard()}else $('calDetected').textContent='… '+data;calKey=null;$('calInput').value=''});
