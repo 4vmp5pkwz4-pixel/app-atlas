@@ -1,26 +1,30 @@
 # APP ATLAS · External launch copy (draft, review before submission)
 
 Canonical site: https://4vmp5pkwz4-pixel.github.io/app-atlas/
-Public beta release: https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.1.0-beta
+Current Brahmi beta release: https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.1-beta
 
 Do not claim external storefront publication until the external store page is visible and tested. All audience numbers, awards, testimonials and performance claims must be supported by evidence.
 
-## itch.io · Brahmi Atelier
+## itch.io · Brahmi Atelier (current v0.9.1-beta copy)
 
-**Title (EN):** Brahmi Atelier — Learn Ancient Script Touch-Typing  
-**Subtitle (EN):** Interactive ten-finger typing lessons for the ancient Brahmi script on a German QWERTZ keyboard.  
-**Description (EN):** Learn Brahmi character placement and syllable construction through structured keyboard exercises, guided drills and historically grounded practice material. Includes an in-browser keyboard simulator, accuracy feedback, progress tracking in the browser and Russian/German interface options. Download the self-contained HTML edition or launch directly online. Ancient inscriptions are rendered as educational Unicode transcriptions, not facsimiles of artifacts.
+**Title (EN):** Brahmi Atelier — Discover an Ancient Script Through Your Keyboard  
+**Subtitle (EN):** A source-grounded Brahmi typing studio with live Mac input, Unicode Brahmi and scholarly IAST.  
+**Short description (EN):** Brahmi Atelier is an offline-capable learning studio for the ancient Brahmi script. Type on a familiar Mac keyboard and see its source-mapped Unicode Brahmi output instantly in a second line, alongside IAST readings and compact key hints. Explore 24 progressive lessons, eight keyboard layout views, four source-verified Brahmi modifier layers, a 115-character Unicode atlas, and source-linked inscriptions and verses. Adaptive exercises and locally saved progress connect writing practice with historical sources—without installing a special keyboard.
 
-**Title (DE):** Brahmi Atelier — Zehnfingertraining für die Brahmi-Schrift  
-**Subtitle (DE):** Ein interaktiver Tastaturtrainer für die antike Brahmi-Schrift auf deutscher QWERTZ-Tastatur.  
-**Description (DE):** Strukturierte Übungen, visuelle Tastaturhilfen, Feedback zur Genauigkeit und lokaler Lernfortschritt. Mit simuliertem Tastaturmodus und Übungen zu historischen Inschriften. Historische Texte werden als didaktische Unicode-Transkriptionen und nicht als Originalabbildungen dargestellt.
+**Titel (DE):** Brahmi Atelier — Eine alte Schrift mit der eigenen Tastatur entdecken  
+**Untertitel (DE):** Quellenbasierter Brahmi-Trainer mit paralleler Mac-Eingabe, Unicode-Brahmi und wissenschaftlicher IAST-Umschrift.  
+**Kurzbeschreibung (DE):** Brahmi Atelier ist ein auch offline nutzbares Lernatelier für die historische Brahmi-Schrift. Auf der gewohnten Mac-Tastatur tippen und die zugeordneten Unicode-Brahmi-Zeichen unmittelbar in einer zweiten Zeile sehen – mit IAST-Umschrift und kompakten Tastenhilfen. 24 aufbauende Lektionen, acht Tastaturansichten, vier quellengeprüfte Brahmi-Belegungsebenen, ein Unicode-Atlas mit 115 Zeichen und quellenverlinkte Inschriften und Verse verbinden Schreibpraxis und historische Überlieferung. Adaptive Übungen und lokal gespeicherter Fortschritt unterstützen das Lernen – ohne eine zusätzliche Brahmi-Tastatur installieren zu müssen.
 
-**Title (RU):** Brahmi Atelier — десятипальцевая печать письмом брахми  
-**Description (RU):** Тренажёр письма брахми на немецкой QWERTZ-клавиатуре: упражнения по клавишам и слогам, статистика точности, локальное сохранение результатов и тренировочный корпус древних надписей. Исторические фрагменты представлены учебной Unicode-транскрипцией.
+**Название (RU):** Brahmi Atelier — древняя письменность на современной клавиатуре  
+**Краткое описание (RU):** Автономный тренажёр древнего письма брахми: вводите символы на привычной клавиатуре Mac и сразу наблюдайте соответствующие знаки Unicode-брахми во второй строке вместе с подсказками клавиш и транслитерацией IAST. Включает 24 урока, восемь вариантов отображения раскладок Mac, четыре слоя проверенной карты брахми, атлас 115 знаков, исторические тексты со ссылками на источники и локальное сохранение прогресса.
 
-Suggested descriptive tags: education, language, typing, keyboard, brahmi, history, learning, practice.
+**Editorial accuracy and scope:** Brahmi is a script, not a single ancient language. IAST is scholarly transliteration, not a semantic translation or a guaranteed reconstruction of ancient pronunciation. The historical passages are modern educational Unicode renderings of edited readings, not artifact facsimiles. The eight Mac presets are visualized physical layouts; changing them in the app does not switch macOS input sources. Option/dead-key/IME behavior can vary on physical hardware. The upstream Brahmi keymap is a specific documented 2019 implementation and does not establish historic links to modern QWERTY. The offline release does not require an account.
 
-Upload: `brahmi-itch-html.zip` from the beta release. Select **HTML Game** / browser playable; test real keyboard focus and iframe behavior.
+**Distribution:** [Play in browser](https://4vmp5pkwz4-pixel.github.io/app-atlas/apps/brahmi/) · [Verified portable release](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.1-beta). External storefront publication must not be claimed before a live storefront listing is independently checked.
+
+Suggested descriptive tags: brahmi, ancient scripts, writing systems, typing practice, epigraphy, IAST, keyboard layouts, interactive learning, Unicode.
+
+Upload: `brahmi-itch-html.zip` from the verified release. Select **HTML Game** / browser playable; test real keyboard focus and iframe behavior.
 
 ## itch.io · Buddhabrot
 
