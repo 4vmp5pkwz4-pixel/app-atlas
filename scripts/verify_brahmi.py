@@ -46,14 +46,18 @@ assert "japaneseComposing" in html and "const BRAHMI_UI_ROMAN=" in html
 
 # Version badge and sourced quotation corpus must agree with offline datasets.
 release=json.loads((ROOT/"data/brahmi-release.json").read_text(encoding="utf-8"))
-version_match=re.search(r'const APP_VERSION=("[^"\\n]+");',html)
-assert version_match, "Missing semantic APP_VERSION constant"
-assert json.loads(version_match.group(1))==release["version"], "Version constant differs from release data"
+def embedded_json_constant(name):
+    token="const "+name+"="
+    pos=html.find(token)
+    assert pos>=0, f"Missing {name} in the standalone HTML"
+    pos+=len(token)
+    end=html.find(";\\n",pos)
+    assert end>=0, f"Missing terminator for {name}"
+    return json.loads(html[pos:end])
+assert embedded_json_constant("APP_VERSION")==release["version"], "Version constant differs from release data"
 assert 'id="versionBadge"' in html and '>'+release["display"]+'</span>' in html, "Visible version badge missing"
 wisdom=json.loads((ROOT/"data/brahmi-wisdom.json").read_text(encoding="utf-8"))
-wisdom_match=re.search(r'const WISDOM_CORPUS=(\\[[^\\n;]+\\]);',html)
-assert wisdom_match, "Missing embedded offline wisdom corpus"
-assert json.loads(wisdom_match.group(1))==wisdom["items"], "Embedded wisdom source differs from curated data"
+assert embedded_json_constant("WISDOM_CORPUS")==wisdom["items"], "Embedded wisdom source differs from curated data"
 assert len(wisdom["items"])>=25 and len({item["id"] for item in wisdom["items"]})==len(wisdom["items"])
 assert len([x for x in wisdom["items"] if x["group"]=="ashoka"])>=12
 assert len([x for x in wisdom["items"] if x["group"]=="dhammapada"])>=13
