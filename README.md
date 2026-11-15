@@ -4,7 +4,7 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.5.0 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.6.0-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.7.0 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.7.0-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
 An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. **RU · EN · DE.** The main catalog contains no analytics or login.
 
@@ -53,11 +53,19 @@ docs/                    Distribution, release and legal checklists
 
 **Licensing:** No open-source license has yet been selected for this repository. Visibility on GitHub does not in itself grant redistribution rights for third-party materials. Confirm the rights to any bundled and historical content and complete applicable operator/legal information before wider promotion. Features in scientific demonstrators are not evidence of empirical validation.
 
-## Brahmi phonetic atlas · research audit (feature branch)
+## Brahmi phonetic atlas · source-verified v0.7.0-beta
 
 [Explore the full Brahmi phonetic atlas](apps/brahmi/phonetic-atlas.html) · [Research methodology, caveats and independent audit](docs/BRAHMI_PHONETIC_ATLAS_AUDIT.md).
 
 This companion to Brahmi Atelier's converter enumerates all **115 Unicode-assigned Brahmi code points**, with **106 keymapped signs and 9 explicitly unmapped** in the authenticated 2019 Mac keyboard source. It compares **all 34 basic consonants** by a *specified Latin key-to-IAST metric* (US QWERTY 26/34, German QWERTZ 25/34), while keeping Russian ЙЦУКЕН and Japanese Kana/IME as physical-label views rather than manufacturing incompatible scores. Includes searchable group/status filters, Devanagari letter analogues where justified, localized RU/DE/EN/JA presentation and local CSV export. The main five-language converter links to the atlas. A second, independently sourced **Keyman InScript ↔ Devanagari InScript** audit confirms **32/34 consonant** and **10/14 independent-vowel** exact-key correspondences between the two specified implementations; this is a different metric from the Latin key-to-IAST score. It is not a universal InScript ranking or a new tagged app release.
+
+## v0.7.0-beta · Hindi/Devanagari and Russian/macOS keyboards
+
+Brahmi Atelier now supports **nine physical-key legend views** across four national groups: German ISO QWERTZ, English US QWERTY, Russian ЙЦУКЕН (existing PC-style), Russian standard macOS, Russian–QWERTY/Phonetic macOS, Japanese JIS Romaji/Kana, and both native Mac Devanagari InScript and Devanagari–QWERTY. The four new Mac layouts are transcribed from the documented **Unicode CLDR** keyboard charts in `data/macos-extra-layouts.json`, without claiming exact Option/IME output.
+
+The interface can now be switched to **हिन्दी · देवनागरी**. The localization includes 211 UI phrases plus full translations for all 24 lessons, 10 source-linked inscription exercises, 25 rotating Ashoka/Dhammapada quotations and the five-word glossary. Separate input handling preserves native Devanagari composition in the user's original input line while Brahmi training follows physical `KeyboardEvent.code` as before.
+
+The standalone `brahmi-itch-html.zip` now includes the full companion `phonetic-atlas.html` for offline use. CI tests guard source fidelity, all locales, mixed-script input and the 48-pair independent Keyman InScript comparison. A release workflow runs all acceptance tests before publishing `v0.7.0-beta` and future versioned updates automatically when merged to `main`.
 
 ## Brahmi Atelier keyboard architecture and durable agent skill
 
