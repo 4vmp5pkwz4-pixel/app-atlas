@@ -11,6 +11,7 @@ on:
       - catalog.json
       - projects/brahmi/index.html
       - data/macos-extra-layouts.json
+      - data/macos-german-iso-keycaps.json
       - data/brahmi-inscript-keyman-audit.json
       - scripts/verify_brahmi*.py
       - scripts/verify_phonetic_atlas.py
@@ -43,6 +44,7 @@ jobs:
           python3 scripts/verify_phonetic_atlas.py
           python3 scripts/verify_brahmi_extended_locales.py
           python3 scripts/verify_brahmi_editorial.py
+          python3 scripts/verify_brahmi_german_visual.py
       - name: Install pinned browser dependencies
         run: |
           npm install --no-audit --no-fund
