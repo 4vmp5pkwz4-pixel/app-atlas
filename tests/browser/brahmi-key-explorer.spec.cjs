@@ -108,7 +108,8 @@ test('small screen keeps three labels in the DOM without horizontal app overflow
 });
 
 test('from converter, open selected Mac layout and train the exact pasted Brahmi passage',async({page})=>{
- await page.locator('.nav [data-page="convert"]').click();
+ // The sidebar is intentionally hidden on compact mobile training screens.
+ await page.locator('#openConvertFromTrain').click();
  await page.locator('#convLayout').selectOption('ruPh');
  await page.locator('#convSource').fill('𑀳𑀺𑀤');
  await expect(page.locator('#openKeyExplorer')).toHaveText('Explore these keys in the trainer');
