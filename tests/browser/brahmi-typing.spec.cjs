@@ -487,8 +487,8 @@ test('version badge v0.6.0 beta is visible and agrees with the source metadata o
   await page.setViewportSize({width,height});
   for(const go of ['home','train','convert']){
    if(go==='train')await page.locator('#continueButton').click();
-   else if(go==='home')await page.locator('#backLessons').click().catch(async()=>{await page.locator('.nav [data-page="home"]').click()});
-   else await page.locator('.nav [data-page="convert"]').click();
+   else if(go==='home')await page.locator('.nav [data-page="home"]').click();
+   else await page.locator('#openConvertFromTrain').click();
    await expect(badge).toBeVisible();
    const rect=await badge.boundingBox();
    expect(rect,go+' '+width+'x'+height+' badge rectangle').toBeTruthy();
@@ -527,10 +527,10 @@ test('next passage cycles through all 25 items without repeats, even after filte
   await expect(page.locator('#wisdomSourceLink')).toHaveAttribute('href',/^https:\/\//);
  }
  expect(seen.size).toBe(25);
+ await expect(page.locator('#wisdomCount')).toContainText('25');
  await page.locator('#convExample').click();
  const current=await page.locator('#wisdomRomanOriginal').textContent();
  expect(current).not.toBe('');
- await expect(page.locator('#wisdomCount')).toContainText('25');
 });
 
 test('Ashoka and Dhammapada buttons choose the correct primary sources without consecutive repeats',async({page})=>{
