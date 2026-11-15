@@ -1,0 +1,49 @@
+name: Release Brahmi Atelier All-Key Illumination + Reverse Converter v0.5.0 beta
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/bootstrap-brahmi-v050.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate full macOS source mapping and website
+        run: |
+          python3 scripts/validate.py
+          python3 scripts/verify_brahmi.py
+      - name: Install browser tests
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Block release until all desktop/mobile acceptance tests pass
+        run: npm run test:browser
+      - name: Create HTML app and itch.io/website ZIP bundles
+        run: python3 scripts/package.py
+      - name: Publish immutable beta release with SHA-256 checksums
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v0.5.0-beta --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            echo "v0.5.0-beta exists, leaving it unchanged"
+          else
+            gh release create v0.5.0-beta dist/* \
+              --repo "${GITHUB_REPOSITORY}" \
+              --target "${GITHUB_SHA}" \
+              --title "Brahmi Atelier · All-Key Feedback + Brahmi-to-IAST + Four Mac Layouts · v0.5.0 beta" \
+              --notes "New Brahmi Atelier v0.5.0 beta: every visible physical and virtual Mac keycap illuminates while held and briefly on release, including Space, Enter, Backspace, Tab, CapsLock, left/right Shift, Option, Command, Control and Japanese JIS Fn, Eisu/Kana, Yen/Ro. Tab focus transitions release correctly. A new Convert studio accepts Unicode Brahmi text, returns scholarly IAST transliteration (inherent a, dependent vowels, virama) and separate authentic four-layer Brahmi reverse-key chord sequences across DE/EN/RU/JA Mac keyboard label presets, with unmapped signs marked explicitly. Includes complete comparison table, Japanese Kana keycap preview, offline clipboard copy, Lumbini / Ashoka Rock Edict XII examples and direct conversion links from inscriptions. All 24 lessons, 5 interface languages, and full 5-row visible keyboard are preserved. A 66-case desktop/mobile Chromium Playwright suite and source/JIS validation must pass before release. Note: transliteration is not translation; displayed source labels do not guarantee actual macOS Option/IME output; Mac Fn and reserved shortcuts may never reach a browser. Native Safari and Japanese Mac hardware remain to be checked." \
+              --prerelease
+          fi
