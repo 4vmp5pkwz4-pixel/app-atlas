@@ -551,7 +551,10 @@ body.training-mode .phrase-value{max-height:60px}
  body.training-mode .trainer-workspace{display:grid;grid-template-columns:minmax(0,1fr);align-content:start}
  body.training-mode .trainer-workspace>.lesson-headline{grid-column:1;grid-row:1}
  body.training-mode .trainer-workspace>.lesson-header{grid-column:1;grid-row:2;justify-content:flex-start;flex-wrap:wrap;padding:2px 0}
- body.training-mode .trainer-workspace>.lesson-description{display:none}
+ body.training-mode .trainer-workspace>.lesson-description{
+  position:absolute;clip:rect(0 0 0 0);clip-path:inset(50%);
+  width:1px;height:1px;overflow:hidden;white-space:nowrap
+ }
  body.training-mode .trainer-workspace>.exercise{grid-column:1;grid-row:3;margin-bottom:6px}
  body.training-mode .trainer-workspace>.phrase-lab{grid-column:1;grid-row:4;max-height:none;margin:6px 0 8px}
  body.training-mode .trainer-workspace>.brahmi-matrix{grid-column:1;grid-row:5}
