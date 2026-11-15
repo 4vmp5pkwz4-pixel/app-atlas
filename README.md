@@ -4,7 +4,7 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.8.0 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.8.0-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.8.1 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.8.1-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
 An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. **RU · EN · DE.** The main catalog contains no analytics or login.
 
@@ -53,6 +53,12 @@ docs/                    Distribution, release and legal checklists
 
 **Licensing:** No open-source license has yet been selected for this repository. Visibility on GitHub does not in itself grant redistribution rights for third-party materials. Confirm the rights to any bundled and historical content and complete applicable operator/legal information before wider promotion. Features in scientific demonstrators are not evidence of empirical validation.
 
+## Brahmi Atelier v0.8.1-beta · source-checked teaching descriptions
+
+This editorial revision updates the **public catalog, SEO detail page, five natural-language interfaces, and ten lessons** without replacing the verified keyboard source. It corrects the former claim that the displayed keyboard always uses German QWERTZ; the selected Mac layout determines the keycap, while Brahmi output continues to follow the 2019 source map. It also corrects a concrete teaching error: **KeyA and Shift+KeyA both output 𑀸**; KeyI versus Shift+KeyI yields 𑀺 versus 𑀻. The updated Shift lesson distinguishes aspiration from other consonant variants, and the numbers lesson separates Brahmi positional digits from historical additive numerals. Ancient inscriptions are now consistently described as **modern educational Unicode transcriptions of edited readings**, not exact photographs or literal historical pronunciation.
+
+[Reproducible review and primary sources](docs/BRAHMI_EDITORIAL_AUDIT_20261115.md) · [Verified source maps](docs/MACOS_BRAHMI_SOURCE.md).
+
 ## Brahmi Atelier v0.8.0-beta · live Mac keyboard explorer
 
 **[Launch Brahmi Atelier](https://4vmp5pkwz4-pixel.github.io/app-atlas/apps/brahmi/)** · [Technical design, modifier semantics and test gates](docs/BRAHMI_LIVE_KEY_EXPLORER.md).
@@ -65,7 +71,7 @@ Automated Playwright runs cover desktop and mobile modifier press/release, nativ
 
 [Explore the full Brahmi phonetic atlas](apps/brahmi/phonetic-atlas.html) · [Research methodology, caveats and independent audit](docs/BRAHMI_PHONETIC_ATLAS_AUDIT.md).
 
-This companion to Brahmi Atelier's converter enumerates all **115 Unicode-assigned Brahmi code points**, with **106 keymapped signs and 9 explicitly unmapped** in the authenticated 2019 Mac keyboard source. It compares **all 34 basic consonants** by a *specified Latin key-to-IAST metric* (US QWERTY 26/34, German QWERTZ 25/34), while keeping Russian ЙЦУКЕН and Japanese Kana/IME as physical-label views rather than manufacturing incompatible scores. Includes searchable group/status filters, Devanagari letter analogues where justified, localized RU/DE/EN/JA presentation and local CSV export. The main five-language converter links to the atlas. A second, independently sourced **Keyman InScript ↔ Devanagari InScript** audit confirms **32/34 consonant** and **10/14 independent-vowel** exact-key correspondences between the two specified implementations; this is a different metric from the Latin key-to-IAST score. It is not a universal InScript ranking or a new tagged app release.
+This companion to Brahmi Atelier's converter enumerates all **115 Unicode-assigned Brahmi code points**, with **106 keymapped signs and 9 explicitly unmapped** in the authenticated 2019 Mac keyboard source. It compares **all 34 basic consonants** by a *specified Latin key-to-IAST metric* (US QWERTY 26/34, German QWERTZ 25/34), while keeping Russian ЙЦУКЕН and Japanese Kana/IME as physical-label views rather than manufacturing incompatible scores. Includes searchable group/status filters, Devanagari letter analogues where justified, localized RU/DE/EN/JA/HI presentation (plus experimental Brahmi-script UI) and local CSV export. The six-interface converter links to the atlas. A second, independently sourced **Keyman InScript ↔ Devanagari InScript** audit confirms **32/34 consonant** and **10/14 independent-vowel** exact-key correspondences between the two specified implementations; this is a different metric from the Latin key-to-IAST score. It is not a universal InScript ranking or a new tagged app release.
 
 ## v0.7.0-beta · Hindi/Devanagari and Russian/macOS keyboards
 
@@ -107,7 +113,7 @@ All five keyboard rows still fit permanently in the training viewport, now with 
 
 ### Verified v0.5.0-beta delivery · 15 November 2026
 
-- [Release v0.5.0-beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.6.0-beta), including `brahmi.html`, an itch.io-ready ZIP and checksums.
+- [Release v0.6.0-beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.6.0-beta), including `brahmi.html`, an itch.io-ready ZIP and checksums.
 - [66/66 passed in release-gating desktop and mobile Chromium acceptance tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/runs/43717056113).
 - [Independent live browser QA](https://agent.tinyfish.ai/runs/4810fbd3-db46-4827-81a3-7cf4cd19ab13) confirmed five full rows, highlighted Space/Shift/Option/Backspace/Enter/Command/Control and JIS special keys, live reverse conversion and all four Mac layouts.
 

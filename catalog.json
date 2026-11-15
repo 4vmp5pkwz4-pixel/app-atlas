@@ -13,18 +13,18 @@
       "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
       "mark": "𑀥",
       "tags": [
-        "v0.6.0 β",
-        "Brahmi",
-        "RU/EN/DE/JA",
-        "25 sourced passages",
-        "IAST converter",
-        "Mac JIS",
-        "All-key feedback"
+        "v0.8.1 β",
+        "Brahmi · IAST",
+        "RU / DE / EN / JA / HI",
+        "24 lessons",
+        "Mac ⇧ ⌥ ⌃ ⌘",
+        "115 Unicode signs",
+        "25 referenced passages"
       ],
       "desc": {
-        "ru": "Brahmi Atelier v0.6.0 β: всегда видимая клавиатура Mac RU/DE/EN/JA с подсветкой всех клавиш, пять языков интерфейса и 24 урока. Новая мастерская транслитерации: 25 проверенных исторических фрагментов из эдиктов Ашоки и «Дхаммапады», кнопка без повторов, первоисточники, Unicode Brahmi, IAST и раскладки клавиш.",
-        "en": "Brahmi Atelier v0.6.0 beta: always-visible lit Mac RU/DE/EN/JA keyboard, five interface languages and 24 lessons. Reverse transliteration studio now rotates 25 source-verified Ashokan edict and Dhammapada excerpts without repeats, with original references, Unicode Brahmi, IAST and Mac physical-key equivalents.",
-        "de": "Brahmi Atelier v0.6.0 Beta: stets vollständige, beleuchtete Mac-Tastatur RU/DE/EN/JA, fünf Oberflächensprachen, 24 Lektionen. Der Umschrift-Workshop bietet jetzt 25 quellengeprüfte Aśoka- und Dhammapada-Passagen ohne Wiederholung, mit Originalquellen, Brahmi, IAST und physischen Tastenfolgen."
+        "ru": "Brahmi Atelier v0.8.1 β: 24 урока, шесть вариантов интерфейса, девять видов клавиш Mac (включая русскую фонетическую и деванагари). Каждая клавиша одновременно показывает физическую позицию, знак Unicode-брахми и учебную IAST. Есть тренировка Shift/Option, подсказки сочетаний Control/Command, 25 цитат с источниками и фонетический атлас 115 знаков. Сходства с латинскими клавишами — приём запоминания, а не доказательство древнего происхождения раскладки.",
+        "en": "Brahmi Atelier v0.8.1 beta: 24 lessons, six interface options and nine Mac key-label views, including Russian phonetic and Devanagari. Compare physical keys, Unicode Brahmi and didactic IAST side by side; explore Shift/Option and preview non-printing Control/Command shortcuts. Includes 25 source-referenced passages and a 115-sign Unicode atlas. Latin-key matches are mnemonics, not evidence of historical keyboard descent.",
+        "de": "Brahmi Atelier v0.8.1 Beta: 24 Lektionen, sechs Oberflächenvarianten und neun Mac-Tastenansichten, darunter Russisch phonetisch und Devanagari. Physische Tasten, Unicode-Brahmi und didaktische IAST-Umschrift erscheinen parallel. Shift/Option sowie nichtdruckende Control/Command-Kürzel werden erklärt. Mit 25 quellenbezogenen Textauszügen und einem Atlas mit 115 Unicode-Zeichen. Laut-Merkhilfen sind kein historischer Beweis."
       },
       "downloadArchive": "https://github.com/4vmp5pkwz4-pixel/app-atlas/archive/refs/heads/main.zip"
     },

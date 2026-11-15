@@ -1,8 +1,8 @@
 {
-  "version": "0.8.0-beta",
-  "display": "v0.8.0 β",
+  "version": "0.8.1-beta",
+  "display": "v0.8.1 β",
   "released_at": "2026-11-15",
-  "feature": "Live tri-script Mac → Brahmi → IAST key explorer with authentic Shift/Option layers, Mac Command/Control shortcut preview, phonetic mnemonics and six-language interface",
+  "feature": "Editorial and scientific source review: accurate Mac layout descriptions, correct Shift+A long vowel, aspirated versus other consonants, historical additive numerals versus positional digits, inscription fidelity, and current multilingual catalog metadata",
   "corpus": "data/brahmi-wisdom.json",
   "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
   "keyboardSources": [
@@ -30,5 +30,7 @@
     ],
     "source": "data/macos-brahmi-reference.json",
     "shortcutPolicy": "Preview only; Command/Control do not generate Brahmi Unicode"
-  }
+  },
+  "editorialReview": "docs/BRAHMI_EDITORIAL_AUDIT_20261115.md",
+  "reviewedDescriptions": "data/brahmi-reviewed-descriptions.json"
 }

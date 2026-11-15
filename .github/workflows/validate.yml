@@ -24,3 +24,5 @@ jobs:
         run: python3 scripts/verify_phonetic_atlas.py
       - name: Verify native macOS Cyrillic and Devanagari layouts and Hindi localization
         run: python3 scripts/verify_brahmi_extended_locales.py
+      - name: Verify scientifically reviewed descriptions and catalog SEO
+        run: python3 scripts/verify_brahmi_editorial.py

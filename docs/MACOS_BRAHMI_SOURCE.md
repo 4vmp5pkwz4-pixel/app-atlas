@@ -9,11 +9,11 @@ The source contains four relevant ANSI keyMap modifier indexes: 0 for unmodified
 Physical keyboard layers are separate from Brahmi:
 - `event.code`: physical key position, unaffected by user's OS input source.
 - `event.key`: actual character sent by the user's active macOS layout and modifier state. Capture it when available for the **upper physical input line**.
-- User-selected **RU / EN / DE** label presets visualize typical layouts; browser pages **cannot reliably discover a user's active OS input source**. The user can change the preset and see actual entered characters.
+- User-selected **DE, EN, RU, Japanese JIS and Devanagari** label presets visualize documented physical positions, including two Russian and two Devanagari Mac variants; browser pages **cannot reliably discover a user's active OS input source**. The user can change the preset and see actual entered characters.
 - `event.key = Dead`, IME composition, shortcut interception and OS-specific Option behavior cannot be assumed to be a printable character; indicate that exact output is unavailable and allow optional layout calibration.
 - Native installed Brahmi keyboard remains an *optional* compatibility mode. Main practice works with an ordinary layout, without installing/switching macOS Brahmi.
-- Never capture global keystrokes. Listen only when the training field is focused. Do not record passwords or sensitive text.
-- On-screen key displays both current physical preset and the chosen Brahmi layer (base / Shift / Option / Shift+Option). Exact reference for Brahmi is always the source map; the physical preset for Option may be unknown until a key is actually pressed.
+- The virtual keyboard observes physical key press/release events only while the training page is active; actual text entry occurs in its training fields. It does not persist or transmit raw keystrokes. Avoid unrelated sensitive input on the training page.
+- Each ordinary on-screen key displays three separate values: physical key legend, sourced Brahmi output, and educational isolated-sign IAST. The Brahmi source layers are base / Shift / Option / Shift+Option; Control/Command preview non-printing shortcuts, not hypothetical fifth/sixth Brahmi layers. Physical Option output may be unknown until observed on-device.
 
 Sources:
 - Apple Keyboard Viewer and modifiers: https://support.apple.com/guide/mac-help/write-in-another-language-on-mac-mchlp1406/mac
@@ -22,4 +22,4 @@ Sources:
 
 ## Non-negotiable tests
 
-Test all RU/EN/DE presets with the same physical codes, verify four distinct modifier layers, confirm no Brahmi installation is required, confirm actual Cyrillic `event.key` is preserved, Unicode Brahmi values follow source exactly, and keyboard does not crop at widths 320, 375, 768 and 1440 pixels. Test physical and virtual key clicks, Backspace, Space, Shift, Option, Shift+Option, text imports, progress scoring and the source reference.
+Test DE/EN/RU/JA/Devanagari presets with the same physical codes, verify four distinct modifier layers, confirm no Brahmi installation is required, confirm actual Cyrillic `event.key` is preserved, Unicode Brahmi values follow source exactly, and keyboard does not crop at widths 320, 375, 768 and 1440 pixels. Test physical and virtual key clicks, Backspace, Space, Shift, Option, Shift+Option, text imports, progress scoring and the source reference.

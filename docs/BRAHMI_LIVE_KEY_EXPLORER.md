@@ -41,8 +41,12 @@ The full [phonetic atlas](../apps/brahmi/phonetic-atlas.html) continues to offer
 - `python3 scripts/verify_brahmi.py`: source-map fidelity, embedded JS syntax, manifest version.
 - `python3 scripts/verify_brahmi_extended_locales.py`: native Mac Russian/Devanagari maps, six-language Hindi baseline.
 - `python3 scripts/verify_phonetic_atlas.py`: complete Unicode and Keyman source audit.
-- `npm run test:browser`: existing 98 tests plus dedicated 7-test Key Explorer suite, on desktop and mobile Chromium.
+- `npm run test:browser`: the regression suite and dedicated 8-test Key Explorer suite, on desktop and mobile Chromium.
 - `scripts/package.py`: offline ZIP includes both trainer and atlas.
-- `.github/workflows/release-brahmi.yml` publishes **v0.8.0-beta** on `main` only after all gates pass.
+- `.github/workflows/release-brahmi.yml` publishes the version specified in `data/brahmi-release.json` on `main` only after all gates pass.
 
 Physical testing on the user's real Mac is additionally advisable to verify actual Option/dead-key responses and OS-intercepted shortcuts; automated Chromium success alone is not that verification.
+
+## Editorial clarification (v0.8.1-beta)
+
+The title *phonetic* describes a modern typing mnemonic, not proof of ancient/modern letter-form identity or a reconstruction of spoken Prakrit. The visually paired K → 𑀓 → ka means **physical Latin key, Unicode Brahmi, conventional isolated-sign IAST**. A dependent vowel sign is displayed as an attachment (e.g., ◌ā), not an independent syllable. Shift+A does **not** introduce an independent new ā character in the pinned source; KeyA and Shift+KeyA both map to 𑀸. See [editorial audit](BRAHMI_EDITORIAL_AUDIT_20261115.md).

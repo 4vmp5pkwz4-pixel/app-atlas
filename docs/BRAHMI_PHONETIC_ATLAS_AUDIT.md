@@ -58,9 +58,9 @@ Neither the 32/34 structural correspondence nor the 26/34 Latin-key mnemonic sco
 ## What the reader can do
 
 - Browse all 115 assigned signs with glyph, code point, group, available educational Roman value, aligned Devanagari for 34 common consonants and 14 independent vowels, original four-layer Mac source chord, and alternate physical keycap labels.
-- Search/filter across characters and all 5 physical-label views (DE, EN, RU, Japanese Romaji, Japanese Kana); show only the 9 source-unmapped signs.
+- Search/filter across characters and nine physical-label views (DE, EN, RU ЙЦУКЕН, RU Mac standard, RU Mac phonetic/QWERTY, Japanese JIS Romaji, Japanese JIS Kana, Devanagari Mac InScript, Devanagari Mac QWERTY); show only the 9 source-unmapped signs.
 - Download the currently filtered comparison as CSV, without uploading text or opening network connections.
-- Follow the localized **Phonetic Atlas** link from the existing converter (RU/DE/EN/JA, plus an editorial Brahmi-script link). The original five-row typing trainer is unchanged.
+- Follow the localized **Phonetic Atlas** link from the existing converter (RU/DE/EN/JA/HI and experimental Brahmi-script). The five-row typing trainer now shows Mac legends, Brahmi output and IAST in parallel.
 
 **Important:** This atlas offers a **verified transcription/typing aid**, not precise sound values of 3rd-century BCE inscriptions. Old Tamil or exceptional Brahmi signs are intentionally not assigned fictional Devanagari, IAST or physical-key analogues. Japanese kana legends are only physical preview labels; Japanese IME composition may map multiple keystrokes to one committed character. `Option` character output must be checked on real macOS hardware when required.
 
@@ -79,4 +79,4 @@ Neither the 32/34 structural correspondence nor the 26/34 Latin-key mnemonic sco
 - `python3 scripts/verify_brahmi.py` and `python3 scripts/validate.py` must still pass.
 - Real Safari, installed keyboard layouts, screen-reader readability of Brahmi fonts and Japanese IME output still require Mac hardware testing. Successful Chromium tests do not prove that OS-reserved shortcuts can be intercepted.
 
-No claim of a new versioned public release is made by this feature branch; the existing `v0.6.0 beta` badge remains as-is until the project's normal release gates pass.
+The research dataset and keyboard counts remain versioned independently of the application UI; the current reviewed application release is `v0.8.1-beta`. The nine physical-label views do not mean nine independently verified historical keyboards.
