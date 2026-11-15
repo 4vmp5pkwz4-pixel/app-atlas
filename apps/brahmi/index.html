@@ -527,7 +527,7 @@ function syncInputMode(){
  $('typingInput').readOnly=!native;
  $('germanMirror').readOnly=native;
  $('germanMirror').placeholder=T('physicalPlaceholder');
- $('physicalInputLabel').textContent=T('physicalLine')+' · '+({ru:'РУССКИЙ',de:'DEUTSCH',en:'ENGLISH',ja:'日本語 JIS'}[saved.physical]||'DE');
+ $('physicalInputLabel').textContent=T('physicalLine')+(saved.lang==='br'?'':' · '+({ru:'РУССКИЙ',de:'DEUTSCH',en:'ENGLISH',ja:'日本語 JIS'}[saved.physical]||'DE'));
  $('germanMirror').setAttribute('aria-label',T('physicalLine'));
  $('typingInput').setAttribute('aria-label',T('brahmiLine'));
 }
