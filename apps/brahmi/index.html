@@ -473,6 +473,87 @@ body.training-mode .phrase-roman{font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){.phrase-lab *{scroll-behavior:auto}}
 
+
+/* 0.9.1 learning cockpit: preserved TWO large live input tracks.
+   Small source-derived mnemonic cues live INSIDE the existing track headings;
+   the full Phrase Atlas is a parallel reference, never a blocking preamble. */
+body.training-mode .trainer-workspace{
+ display:grid;
+ grid-template-columns:minmax(0,1.3fr) minmax(320px,.85fr);
+ column-gap:clamp(7px,1vw,15px);
+ row-gap:0;align-content:start;
+}
+body.training-mode .trainer-workspace>.lesson-header,
+body.training-mode .trainer-workspace>#lessonIndex,
+body.training-mode .trainer-workspace>.lesson-headline,
+body.training-mode .trainer-workspace>.lesson-description,
+body.training-mode .trainer-workspace>.brahmi-matrix{grid-column:1/-1}
+body.training-mode .trainer-workspace>.exercise{grid-column:1;grid-row:5;min-width:0;align-self:start}
+body.training-mode .trainer-workspace>.phrase-lab{
+ grid-column:2;grid-row:5;align-self:start;min-width:0;margin:0;
+ max-height:min(48vh,440px);overflow-y:auto;overscroll-behavior:contain;
+ scrollbar-width:thin;scrollbar-color:#58796f transparent
+}
+body.training-mode .trainer-workspace>.brahmi-matrix{grid-row:6}
+.input-line-head{display:flex;gap:8px;align-items:center;min-width:0;min-height:17px;margin-bottom:4px}
+.input-line-head .input-line-label{flex:0 1 43%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:0}
+.input-line-head .inline-skill-cues{flex:1 1 0;min-width:0;display:flex;align-items:center;gap:3px;
+ border-left:1px solid rgba(152,204,189,.26);padding-left:8px;overflow-x:auto;overflow-y:hidden;
+ scrollbar-width:thin;white-space:nowrap;color:#c6e6d8;line-height:1.1}
+.inline-skill-cues[hidden]{display:none!important}
+.inline-skill-cues .cue-token{flex:none;display:inline-flex;align-items:center;justify-content:center;
+ min-width:17px;padding:2px 4px;border-radius:5px;
+ font:750 10px/1.1 ui-monospace,SFMono-Regular,Consolas,monospace;
+ border:1px solid rgba(160,216,197,.23);color:#d6e8df;background:rgba(34,62,58,.7)}
+.inline-skill-cues .cue-token.is-now{border-color:#e7ca8d;background:#574e36;color:#fff9e7;box-shadow:inset 0 0 0 1px #e4cf9c44}
+.inline-skill-cues .cue-token.is-past{opacity:.55}
+.inline-iast-cues{font:600 11px/1.3 ui-monospace,SFMono-Regular,Consolas,monospace}
+.inline-iast-cues .cue-caption{flex:none;color:#ebd29d;font:800 9px/1.2 -apple-system,BlinkMacSystemFont,sans-serif}
+.inline-iast-cues .cue-roman{flex:none;font-size:11px;color:#d6ebe1}
+body.training-mode .exercise>div[style*="height:13px"]{display:none}
+body.training-mode .input-track{padding:5px 7px}
+body.training-mode .dual-typing{gap:5px}
+body.training-mode .input-line-head .input-line-label{font-size:clamp(8px,.69vw,10px);letter-spacing:.035em}
+body.training-mode .input-line-head .cue-token{font-size:clamp(8px,.67vw,10px);padding:1px 3px}
+body.training-mode .input-line-head .cue-roman{font-size:clamp(9px,.75vw,12px)}
+/* Two semantic reading tracks + a narrow physical-chip sidebar, no third full-width row. */
+.phrase-lines{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(105px,.78fr);
+ grid-template-rows:auto auto;gap:4px}
+.phrase-lines>.phrase-line{min-width:0;display:flex;flex-direction:column;gap:2px;padding:5px 7px}
+.phrase-lines>.phrase-line:nth-child(1){grid-column:1;grid-row:1}
+.phrase-lines>.phrase-line:nth-child(2){grid-column:1;grid-row:2}
+.phrase-lines>.phrase-line:nth-child(3){grid-column:2;grid-row:1/span 2}
+.phrase-lines[data-comparing="true"]>.phrase-line:nth-child(3){grid-row:1}
+.phrase-lines>.phrase-line:nth-child(4){grid-column:2;grid-row:2}
+.phrase-lines>.phrase-line .phrase-value{max-height:66px;min-width:0}
+.phrase-lines .phrase-chords{display:flex;gap:3px;flex-wrap:wrap;align-content:flex-start}
+body.training-mode .phrase-controls{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+body.training-mode .phrase-actions{grid-column:1/-1}
+body.training-mode .phrase-choice-control{grid-column:1/-1}
+body.training-mode .phrase-meta{min-height:0;font-size:9px}
+body.training-mode .phrase-lab-summary{padding:6px 9px}
+body.training-mode .phrase-lab-body{padding:0 7px 7px}
+body.training-mode .phrase-value{max-height:60px}
+@media(max-width:1150px){
+ body.training-mode .trainer-workspace{display:block}
+ body.training-mode .trainer-workspace>.exercise{margin-bottom:6px}
+ body.training-mode .trainer-workspace>.phrase-lab{max-height:none;margin:6px 0 8px}
+}
+@media(max-width:600px){
+ .input-line-head{gap:5px}
+ .input-line-head .input-line-label{flex:0 1 38%;max-width:38%}
+ .input-line-head .inline-skill-cues{padding-left:5px;gap:2px}
+ body.training-mode .input-track{padding:4px 6px}
+ body.training-mode .phrase-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body.training-mode .phrase-lines{grid-template-columns:minmax(0,1.35fr) minmax(100px,.85fr)}
+}
+@media(max-height:500px){
+ body.training-mode .lesson-description{display:none}
+ body.training-mode #lessonIndex{margin-top:2px!important}
+ body.training-mode .lesson-headline{font-size:18px;margin:2px 0}
+ body.training-mode .trainer-workspace>.phrase-lab{max-height:none}
+}
+
 </style>
 </head>
 <body>
@@ -504,6 +585,19 @@ body.training-mode .phrase-roman{font-size:12px}
 <div class="trainer-workspace" id="trainerWorkspace" tabindex="-1">
 <div class="lesson-header"><button class="btn btn-sm btn-ghost" id="backLessons" data-i18n="allLessons">← Все уроки</button><div class="actions"><button class="btn btn-sm" id="prevLesson" data-i18n="prev">← Назад</button><button class="btn btn-sm" id="nextLesson" data-i18n="next">Следующий →</button><button class="btn btn-sm" id="openConvertFromTrain" data-i18n="convOpen">Преобразование ⇄</button></div></div>
 <div class="eyebrow" style="margin-top:19px" id="lessonIndex">01 / 18</div><h1 class="lesson-headline" id="lessonName">Первый ряд</h1><p class="lesson-description" id="lessonSummary"></p>
+
+<div class="exercise"><div class="exercise-meta"><span class="tag" id="lessonCategory">НАВЫК</span><div class="actions"><button class="btn btn-sm btn-ghost" id="newPrompt" data-i18n="newPrompt">↻ Повторить</button><button class="btn btn-sm btn-ghost" id="toggleRoman" data-i18n="toggleRoman">a → 𑀅 / транслитерация</button></div></div><div id="translitPrompt" class="reading text-roman"></div><div id="prompt" class="target brahmi" aria-live="off"></div><div class="progress-track" aria-label="Прогресс ввода"><div id="typingProgress"></div></div><div style="height:13px"></div><div class="dual-typing">
+<div class="input-track physical-track">
+<div class="input-line-head"><label class="input-line-label" for="germanMirror" id="physicalInputLabel" data-i18n="physicalLine">ФИЗИЧЕСКАЯ РАСКЛАДКА · печатай здесь</label><div id="liveMacRail" class="inline-skill-cues inline-mac-cues" role="group" aria-label="Upcoming physical keys" tabindex="0"></div></div>
+<textarea id="germanMirror" class="german-mirror" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="Current macOS keyboard input" rows="2" placeholder="Type with your current macOS layout"></textarea>
+</div>
+<div class="input-track brahmi-track">
+<div class="input-line-head"><label class="input-line-label" for="typingInput" data-i18n="brahmiLine">БРАХМИ · появляется автоматически</label><div id="liveRomanRail" class="inline-skill-cues inline-iast-cues" role="note" aria-label="IAST reading of current exercise" tabindex="0"></div></div>
+<textarea id="typingInput" class="type-field brahmi" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" readonly aria-label="Brahmi Unicode result" rows="2"></textarea>
+</div>
+</div>
+<div class="german-target"><span data-i18n="physicalTarget">СЛЕДУЮЩИЕ ФИЗИЧЕСКИЕ КЛАВИШИ</span><strong id="expectedGerman">—</strong></div>
+<p class="micro" data-i18n="mirrorInfo">В первой строке печатай обычной раскладкой Mac; во второй появятся соответствующие символы брахми по физическим клавишам. Никакой установки или смены системной раскладки не требуется.</p><div class="type-tools"><span id="nextHint" class="hint" aria-live="polite"></span><span class="actions"><button class="btn btn-sm" id="focusInput" data-i18n="focusInput">Ввести</button><button class="btn btn-sm" id="resetInput" data-i18n="resetInput">Сброс</button></span></div><div class="metric-row"><div class="metric"><b id="metricAcc">100%</b><small data-i18n="accuracy">Точность</small></div><div class="metric"><b id="metricCpm">0</b><small data-i18n="cpm">Знаков/мин</small></div><div class="metric"><b id="metricTime">0:00</b><small data-i18n="time">Время</small></div><div class="metric"><b id="metricErrors">0</b><small data-i18n="errors">Ошибки</small></div></div><div class="smallbox" id="lessonExplanation"></div></div>
 <details id="trainerPhraseLab" class="phrase-lab" open>
  <summary class="phrase-lab-summary"><span data-i18n="phraseTitle">Фраза · брахми / IAST / клавиши Mac</span><span class="phrase-lab-mark">𑀓 · ka · K</span></summary>
  <div class="phrase-lab-body">
@@ -523,18 +617,6 @@ body.training-mode .phrase-roman{font-size:12px}
   <p class="phrase-footnote" data-i18n="phraseCaveat">Физические сочетания из исходной таблицы брахми; отображение клавиш не меняет раскладку macOS. — означает отсутствие подтверждённой комбинации.</p>
  </div>
 </details>
-<div class="exercise"><div class="exercise-meta"><span class="tag" id="lessonCategory">НАВЫК</span><div class="actions"><button class="btn btn-sm btn-ghost" id="newPrompt" data-i18n="newPrompt">↻ Повторить</button><button class="btn btn-sm btn-ghost" id="toggleRoman" data-i18n="toggleRoman">a → 𑀅 / транслитерация</button></div></div><div id="translitPrompt" class="reading text-roman"></div><div id="prompt" class="target brahmi" aria-live="off"></div><div class="progress-track" aria-label="Прогресс ввода"><div id="typingProgress"></div></div><div style="height:13px"></div><div class="dual-typing">
-<div class="input-track physical-track">
-<label class="input-line-label" for="germanMirror" id="physicalInputLabel" data-i18n="physicalLine">ФИЗИЧЕСКАЯ РАСКЛАДКА · печатай здесь</label>
-<textarea id="germanMirror" class="german-mirror" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="Current macOS keyboard input" rows="2" placeholder="Type with your current macOS layout"></textarea>
-</div>
-<div class="input-track brahmi-track">
-<label class="input-line-label" for="typingInput" data-i18n="brahmiLine">БРАХМИ · появляется автоматически</label>
-<textarea id="typingInput" class="type-field brahmi" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" readonly aria-label="Brahmi Unicode result" rows="2"></textarea>
-</div>
-</div>
-<div class="german-target"><span data-i18n="physicalTarget">СЛЕДУЮЩИЕ ФИЗИЧЕСКИЕ КЛАВИШИ</span><strong id="expectedGerman">—</strong></div>
-<p class="micro" data-i18n="mirrorInfo">В первой строке печатай обычной раскладкой Mac; во второй появятся соответствующие символы брахми по физическим клавишам. Никакой установки или смены системной раскладки не требуется.</p><div class="type-tools"><span id="nextHint" class="hint" aria-live="polite"></span><span class="actions"><button class="btn btn-sm" id="focusInput" data-i18n="focusInput">Ввести</button><button class="btn btn-sm" id="resetInput" data-i18n="resetInput">Сброс</button></span></div><div class="metric-row"><div class="metric"><b id="metricAcc">100%</b><small data-i18n="accuracy">Точность</small></div><div class="metric"><b id="metricCpm">0</b><small data-i18n="cpm">Знаков/мин</small></div><div class="metric"><b id="metricTime">0:00</b><small data-i18n="time">Время</small></div><div class="metric"><b id="metricErrors">0</b><small data-i18n="errors">Ошибки</small></div></div><div class="smallbox" id="lessonExplanation"></div></div>
 <details class="brahmi-matrix" id="layoutMatrix"><summary data-i18n="matrixTitle">Полная таблица Brahmi · 4 слоя</summary><div id="mapTable"></div></details>
 </div>
 <div class="keyboard-dock" id="keyboardDock" aria-label="Complete Brahmi keyboard">
