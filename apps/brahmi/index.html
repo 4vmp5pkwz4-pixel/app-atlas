@@ -664,7 +664,7 @@ function refreshTrainerViewport(){
 }
 window.addEventListener('resize',refreshTrainerViewport,{passive:true});
 if(window.visualViewport)window.visualViewport.addEventListener('resize',refreshTrainerViewport,{passive:true});
-function navigate(page){if(!['home','train','convert','texts','guide','stats','settings'].includes(page))return;currentPage=page;document.body.classList.toggle('training-mode',page==='train');qsa('.page').forEach(el=>el.classList.toggle('active',el.id==='page-'+page));qsa('.nav [data-page]').forEach(el=>el.classList.toggle('active',el.dataset.page===page));if(page==='stats')renderStats();if(page==='texts')renderTextLibrary();if(page==='convert')renderConverter();if(page==='train'){renderExercise();renderKeyboard();refreshTrainerViewport();}window.scrollTo({top:0,behavior:'smooth'})}
+function navigate(page){if(!['home','train','convert','texts','guide','stats','settings'].includes(page))return;currentPage=page;document.body.classList.toggle('training-mode',page==='train');qsa('.page').forEach(el=>el.classList.toggle('active',el.id==='page-'+page));qsa('.nav [data-page]').forEach(el=>el.classList.toggle('active',el.dataset.page===page));if(page==='stats')renderStats();if(page==='texts')renderTextLibrary();if(page==='convert')renderConverter();if(page!=='train')clearKeyHolds();if(page==='train'){renderExercise();renderKeyboard();refreshTrainerViewport();}window.scrollTo({top:0,behavior:'smooth'})}
 function renderHome(){const n=Object.keys(saved.completed).filter(id=>id!=='custom').length;const ss=saved.sessions;const best=ss.length?Math.max(...ss.map(x=>x.acc)):0;const stats=[[uiNumber(n)+'/'+uiNumber(LESSONS.length),T('lessons')],[best?uiNumber(best)+'%':'—',T('best')],[uiNumber(ss.length),T('sessions')],[uiNumber(saved.streak),T('streak')]];$('homeStats').innerHTML=stats.map(([v,s])=>'<div class="stat"><div class="value">'+esc(v)+'</div><div class="caption">'+esc(s)+'</div></div>').join('');$('lessonGrid').innerHTML=LESSONS.map((l,i)=>{const rec=saved.completed[l.id];const due=Boolean(rec?.nextReview&&Date.parse(rec.nextReview)<=Date.now());const title=l[saved.lang]||l.en||l.ru;const desc=l[saved.lang+'Desc']||l.enDesc||l.ruDesc;return `<button class="lesson" data-lesson="${l.id}"><span class="lesson-number">${uiNumber(String(i+1).padStart(2,'0'))} / ${uiNumber(String(LESSONS.length).padStart(2,'0'))}</span><span class="lesson-title">${esc(title)}</span><span class="lesson-info">${esc(desc)}</span><span class="lesson-foot"><span>${l.kind==='historic'?T('historic'):T('practice')}</span><span class="${rec?'check':'badge-new'}">${due?'⟳ '+T('reviewDue'):(rec?'✓ '+rec.best+'%':'○')}</span></span></button>`}).join('');qsa('[data-lesson]').forEach(b=>b.addEventListener('click',()=>loadLesson(b.dataset.lesson)))}
 function promptOf(l,variant=0){if(l.kind==='historic'||l.kind==='final'){let x=TEXTS.find(t=>t.id===l.textId);return{text:x.brahmi,roman:x.roman,meta:x}}if(l.kind==='adaptive'){let es=Object.entries(saved.errors).sort((a,b)=>b[1]-a[1]).slice(0,9).map(x=>x[0]).filter(isBrahmi);const extras=['𑀓','𑀲','𑀤','𑀫'];while(es.length<6)es.push(extras[es.length%extras.length]);const sequence=[...es.slice(0,6),...es.slice(0,6).reverse(),...es.slice(0,6)];return{text:sequence.join(' '),roman:'',meta:null}}if(l.romans){let r=l.romans[variant%l.romans.length];return{text:iastToBrahmi(r),roman:r,meta:null}}return{text:l.prompts[variant%l.prompts.length],roman:'',meta:null}}
 let currentVariant=0;
@@ -805,6 +805,75 @@ function renderReferenceMatrix(){
  const body=codes.map(code=>'<tr><th>'+esc(physicalLabel(code))+'</th>'+[[false,false],[true,false],[false,true],[true,true]].map(([sh,al])=>{const v=charMap(code,sh,al);return '<td class="brahmi" title="'+esc(v||T('unmapped'))+'">'+esc(v||'—')+'</td>'}).join('')+'</tr>').join('');
  $('mapTable').innerHTML='<div class="matrix-scroll"><table>'+head+'<tbody>'+body+'</tbody></table></div><p class="micro">Prachya Boonkwan · Brahmi.keylayout · MIT (2019). '+esc(T('physicalHint'))+'</p>';
 }
+
+/* Physical and on-screen complete-key feedback: includes every service key,
+   Space, Shift, Option, Meta, Control, Tab, Enter, Backspace and Japanese JIS.
+   No global keystroke logging: only focused trainer input fields are observed.
+   macOS/firmware-reserved shortcuts and Fn sometimes never reach a web page. */
+const HELD_TRAINER_KEYS=new Set();
+const POINTER_TRAINER_KEYS=new Set();
+const FLASH_TRAINER_KEYS=new Set();
+const KEY_LIGHT_TIMERS=new Map();
+function canonicalTrainerKey(code){
+ return code==='OSLeft'?'MetaLeft':code==='OSRight'?'MetaRight':code==='FnLock'?'Fn':code;
+}
+function paintPressedKeys(){
+ const root=$('keyboard');if(!root)return;
+ qsa('#keyboard .key').forEach(btn=>{
+  const code=btn.dataset.code;
+  btn.classList.toggle('is-held',HELD_TRAINER_KEYS.has(code)||POINTER_TRAINER_KEYS.has(code));
+  btn.classList.toggle('is-flash',FLASH_TRAINER_KEYS.has(code));
+  btn.classList.toggle('is-layer-active',
+   (modifierShift&&code.startsWith('Shift'))||(modifierAlt&&code.startsWith('Alt')));
+ });
+}
+function pulsePressedKey(code,delay=235){
+ code=canonicalTrainerKey(code||'');
+ if(!code)return;
+ if(KEY_LIGHT_TIMERS.has(code))clearTimeout(KEY_LIGHT_TIMERS.get(code));
+ FLASH_TRAINER_KEYS.add(code);
+ paintPressedKeys();
+ KEY_LIGHT_TIMERS.set(code,setTimeout(()=>{KEY_LIGHT_TIMERS.delete(code);FLASH_TRAINER_KEYS.delete(code);paintPressedKeys()},delay));
+}
+function releaseTrainerKey(code){
+ code=canonicalTrainerKey(code||'');
+ HELD_TRAINER_KEYS.delete(code);POINTER_TRAINER_KEYS.delete(code);
+ pulsePressedKey(code);
+}
+function clearKeyHolds(){
+ HELD_TRAINER_KEYS.clear();POINTER_TRAINER_KEYS.clear();paintPressedKeys();
+}
+function isTrainerKeyboardTarget(target){
+ return Boolean(target&&(target.id==='germanMirror'||target.id==='typingInput'||target.closest?.('#keyboard')));
+}
+document.addEventListener('keydown',e=>{
+ if(currentPage!=='train'||!isTrainerKeyboardTarget(e.target))return;
+ const code=canonicalTrainerKey(e.code);
+ if(!code)return;
+ HELD_TRAINER_KEYS.add(code);
+ FLASH_TRAINER_KEYS.delete(code);
+ paintPressedKeys();
+},true);
+document.addEventListener('keyup',e=>{
+ if(currentPage!=='train'||!isTrainerKeyboardTarget(e.target))return;
+ releaseTrainerKey(e.code);
+},true);
+$('keyboard').addEventListener('pointerdown',e=>{
+ const key=e.target.closest('.key');if(!key)return;
+ POINTER_TRAINER_KEYS.add(key.dataset.code);FLASH_TRAINER_KEYS.delete(key.dataset.code);paintPressedKeys();
+});
+for(const eventName of ['pointerup','pointercancel','pointerout']){
+ $('keyboard').addEventListener(eventName,e=>{
+  const key=e.target.closest('.key');if(!key||!POINTER_TRAINER_KEYS.has(key.dataset.code))return;
+  releaseTrainerKey(key.dataset.code);
+ });
+}
+$('keyboard').addEventListener('click',e=>{
+ const key=e.target.closest('.key');if(key)pulsePressedKey(key.dataset.code,260);
+},true);
+window.addEventListener('blur',clearKeyHolds,{passive:true});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)clearKeyHolds()});
+
 function renderKeyboard(){
  const hide=saved.blind||forceBlind;
  const caps={Escape:'esc',Lang2:'英数',Lang1:'かな',Fn:'fn',Tab:'⇥',CapsLock:'⇪',Enter:'↵',Backspace:'⌫',ShiftLeft:'⇧',ShiftRight:'⇧',AltLeft:'⌥',AltRight:'⌥',MetaLeft:'⌘',MetaRight:'⌘',ControlLeft:'⌃',ControlRight:'⌃'};
@@ -823,6 +892,7 @@ function renderKeyboard(){
   html+='</div>';
  }
  $('keyboard').innerHTML=html;
+ paintPressedKeys();
  $('sourceLayout').value=saved.physical;$('jisModeControl').hidden=saved.physical!=='ja';$('japaneseMode').value=saved.jaPreview;$('keyboardDock').dataset.physicalLayout=saved.physical;
  $('physicalKeyboardLabel').textContent=({de:'DE · Mac QWERTZ (ISO)',en:'EN · US QWERTY',ru:'RU · ЙЦУКЕН',ja:'JP · Mac JIS / かな・英数'}[saved.physical]||'Mac');
  const layer=modifierAlt?(modifierShift?'shiftOption':'option'):(modifierShift?'shift':'base');
@@ -830,7 +900,7 @@ function renderKeyboard(){
  qsa('#keyboard .key').forEach(btn=>{
   btn.addEventListener('mousedown',e=>e.preventDefault());
   btn.addEventListener('click',()=>{
-   const code=btn.dataset.code;
+   const code=btn.dataset.code; pulsePressedKey(code,260);
    if(code.startsWith('Shift')){modifierShift=!modifierShift;renderKeyboard();return}
    if(code.startsWith('Alt')){modifierAlt=!modifierAlt;renderKeyboard();return}
    if(code.startsWith('Meta')||code.startsWith('Control')||['Tab','CapsLock','Escape','Fn','Lang1','Lang2'].includes(code))return;
@@ -851,6 +921,7 @@ function renderKeyboard(){
  $('visibilityToggle').textContent=T(hide?'showLegends':'hideLegends');
  renderReferenceMatrix();
  renderLive();
+ paintPressedKeys();
 }
 const EDICT_GLOSSARY={"vaci-gutī":{"ru":"Сдержанность и охрана речи","de":"Beherrschung und Schutz der Rede","en":"Restraint and care in speech"},"ātpa-pāsaṃḍa":{"ru":"Собственная религиозная традиция","de":"Die eigene religiöse Tradition","en":"One's own religious tradition"},"para-pāsaṃḍa":{"ru":"Другая религиозная традиция","de":"Eine andere religiöse Tradition","en":"Another religious tradition"},"sāra-vaḍhī":{"ru":"Развитие существенного","de":"Wachstum des Wesentlichen","en":"Growth of essential qualities"},"samavayo":{"ru":"Согласие, единение","de":"Eintracht, Zusammenkommen","en":"Concord, coming together"}};
 Object.entries(EDICT_GLOSSARY).forEach(([k,v])=>v.br=iastToBrahmi({"vaci-gutī":"vācāya guttī","ātpa-pāsaṃḍa":"attano samayo","para-pāsaṃḍa":"aññassa samayo","sāra-vaḍhī":"sārassa vaḍḍhi","samavayo":"samavayo"}[k]));
@@ -941,7 +1012,7 @@ $('convCopyKeys').onclick=()=>copyConverter('Physical');
 $('prevLesson').onclick=()=>{const i=LESSONS.findIndex(x=>x.id===lesson.id);if(i>0)loadLesson(LESSONS[i-1].id)};$('nextLesson').onclick=()=>{const i=LESSONS.findIndex(x=>x.id===lesson.id);if(i>=0&&i<LESSONS.length-1)loadLesson(LESSONS[i+1].id)};$('newPrompt').onclick=()=>{if(lesson.kind==='custom')resetSession();else loadLesson(lesson.id,(currentVariant+1)%Math.max(1,lesson.prompts?.length||lesson.romans?.length||1))};$('resetInput').onclick=()=>resetSession();$('focusInput').onclick=()=>trainingFocus();$('toggleRoman').onclick=()=>{showRoman=!showRoman;renderExercise()};$('visibilityToggle').onclick=()=>{forceBlind=!forceBlind;renderKeyboard()};$('shiftToggle').onclick=()=>{modifierShift=!modifierShift;renderKeyboard()};$('altToggle').onclick=()=>{modifierAlt=!modifierAlt;renderKeyboard()};$('langSelect').onchange=e=>setLanguage(e.target.value);$('focusButton').onclick=()=>{focusMode=!focusMode;document.querySelector('.aside').classList.toggle('hidden',focusMode);document.querySelector('.app').style.gridTemplateColumns=focusMode?'minmax(0,1fr)':'';navigate('train');$('focusButton').textContent=focusMode?'× '+(saved.lang==='de'?'Fokus beenden':saved.lang==='en'?'Exit focus':'Выход из фокуса'):T('focusMode')};
 qsa('[data-page]').forEach(btn=>btn.onclick=()=>navigate(btn.dataset.page));
 $('customRun').onclick=()=>{const raw=$('customText').value.trim();if(!raw){toast(T('customNeed'));return}let text=$('customType').value==='iast'?iastToBrahmi(raw):raw;let roman=$('customType').value==='iast'?raw:'';if(!isBrahmi(text)){toast(T('noBrahmi'));return}if(cp(text).length>1000){toast(saved.lang==='de'?'Maximal 1000 Zeichen.':saved.lang==='en'?'Maximum 1,000 signs.':'Максимум 1000 знаков.');return}setCustom(text,roman)};$('customClear').onclick=()=>$('customText').value='';$('modeSelect').onchange=e=>{saved.mode=e.target.value;resetSession();persist();updateSettings();renderExercise();trainingFocus()};$('physicalSelect').onchange=e=>{saved.physical=e.target.value;persist();updateSettings();renderKeyboard()};$('sourceLayout').onchange=e=>{saved.physical=e.target.value;persist();updateSettings();renderKeyboard()};$('japaneseMode').onchange=e=>{saved.jaPreview=e.target.value;persist();renderKeyboard()};qsa('[data-layer]').forEach(btn=>btn.onclick=()=>{modifierShift=btn.dataset.layer==='shift'||btn.dataset.layer==='shiftOption';modifierAlt=btn.dataset.layer==='option'||btn.dataset.layer==='shiftOption';renderKeyboard()});$('soundToggle').onchange=e=>{saved.sound=e.target.checked;persist()};$('romanSetting').onchange=e=>{saved.roman=e.target.checked;showRoman=saved.roman;persist();renderExercise()};$('blindSetting').onchange=e=>{saved.blind=e.target.checked;persist();renderKeyboard()};$('clearCal').onclick=()=>{saved.cal={};persist();updateSettings();renderKeyboard();$('calDetected').textContent='—';toast(T('cleared'))};$('closeModal').onclick=()=>$('completionOverlay').classList.remove('show');$('completionOverlay').addEventListener('click',e=>{if(e.target===$('completionOverlay'))$('completionOverlay').classList.remove('show')});$('againModal').onclick=()=>{$('completionOverlay').classList.remove('show');if(lesson.kind==='custom'){resetSession();trainingFocus()}else loadLesson(lesson.id,++currentVariant)};$('nextModal').onclick=()=>{$('completionOverlay').classList.remove('show');const i=LESSONS.findIndex(l=>l.id===lesson.id);if(i>=0&&i<LESSONS.length-1)loadLesson(LESSONS[i+1].id)};$('trainWeak').onclick=()=>loadLesson('adaptive');$('exportData').onclick=()=>{const b=new Blob([JSON.stringify(saved,null,2)],{type:'application/json'}),url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='brahmi-atelier-progress.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);toast(T('exportDone'))};$('importButton').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const obj=JSON.parse(await file.text());if(obj.version!==1||!obj.completed||!Array.isArray(obj.sessions))throw Error('schema');saved={...saved,...obj,cal:obj.cal||{},errors:obj.errors||{}};showRoman=saved.roman;persist();setLanguage(saved.lang);toast(T('importDone'))}catch(e){toast(T('importError'))}e.target.value=''};$('resetAll').onclick=()=>{if(!confirm(T('resetConfirm')))return;const lang=saved.lang,phys=saved.physical,mode=saved.mode,jaPreview=saved.jaPreview;saved={version:1,lang,mode:'sim',physical:phys,jaPreview,independentModeInitialized:true,observed:{},roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};persist();setLanguage(lang);toast(T('cleared'))};
-showRoman=saved.roman;setLanguage(saved.lang);const initial=LESSONS.find(l=>l.id===saved.activeLesson)||LESSONS[0];lesson=initial;const p=promptOf(initial);setPrompt(p);renderHome();navigate('home');window.BrahmiAtelierTest={iastToBrahmi,brahmiToIAST,brahmiKeyChord,brahmiKeySequence,REVERSE_BRAHMI_CONSONANTS,cp,charMap,reverseLookup,TEXTS,LESSONS,BRAHMI_LAYERS,physicalLabel,germanKeyStroke,ROWS_JIS,JIS_KANA,activeRows};
+showRoman=saved.roman;setLanguage(saved.lang);const initial=LESSONS.find(l=>l.id===saved.activeLesson)||LESSONS[0];lesson=initial;const p=promptOf(initial);setPrompt(p);renderHome();navigate('home');window.BrahmiAtelierTest={iastToBrahmi,paintPressedKeys,HELD_TRAINER_KEYS,brahmiToIAST,brahmiKeyChord,brahmiKeySequence,REVERSE_BRAHMI_CONSONANTS,cp,charMap,reverseLookup,TEXTS,LESSONS,BRAHMI_LAYERS,physicalLabel,germanKeyStroke,ROWS_JIS,JIS_KANA,activeRows};
 })();
 </script>
 </body></html>
