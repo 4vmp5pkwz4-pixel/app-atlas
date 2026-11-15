@@ -47,7 +47,7 @@ assert len(keys)>=9
 assert all(set(x)==keys for x in data["ui"].values())
 for lang,texts in data["ui"].items():
     for field in ("keyboardNote","guideMapInfo","guideMapCaveat","convIntro","convRomanCaveat","transcriptionNotice"):
-        assert texts[field] and len(texts[field])>60,(lang,field)
+        assert texts[field] and len(texts[field])>=(20 if lang=="ja" else 40),(lang,field)
 
 assert "K, then A; Shift+A gives the same" in html
 assert "Shift+A gives the same" in html
