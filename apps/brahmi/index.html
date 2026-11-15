@@ -473,6 +473,107 @@ body.training-mode .phrase-roman{font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){.phrase-lab *{scroll-behavior:auto}}
 
+
+/* 0.9.1 learning cockpit: preserved TWO large live input tracks.
+   Small source-derived mnemonic cues live INSIDE the existing track headings;
+   the full Phrase Atlas is a parallel reference, never a blocking preamble. */
+body.training-mode .trainer-workspace{
+ display:grid;
+ grid-template-columns:minmax(0,1.3fr) minmax(320px,.85fr);
+ column-gap:clamp(7px,1vw,15px);
+ row-gap:0;align-content:start;
+}
+/* Compact chapter context: title and navigation share the SAME row, rather
+   than taking four rows before the target and two actual input fields. */
+body.training-mode .trainer-workspace>.lesson-headline{
+ grid-column:1;grid-row:1;align-self:center;margin:0!important;
+ font-size:clamp(18px,1.85vw,25px);line-height:1.1;min-width:0
+}
+body.training-mode .trainer-workspace>.lesson-header{
+ grid-column:2;grid-row:1;justify-content:flex-end;align-self:center;
+ min-width:0;white-space:nowrap
+}
+body.training-mode .trainer-workspace>#lessonIndex{
+ position:absolute;clip:rect(0 0 0 0);clip-path:inset(50%);
+ width:1px;height:1px;overflow:hidden;white-space:nowrap
+}
+body.training-mode .trainer-workspace>.lesson-description{
+ grid-column:1/-1;grid-row:2;margin:2px 0 5px;
+ max-height:17px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+}
+body.training-mode .trainer-workspace>.exercise{grid-column:1;grid-row:3;min-width:0;align-self:start}
+body.training-mode .trainer-workspace>.phrase-lab{
+ grid-column:2;grid-row:3;align-self:start;min-width:0;margin:0;
+ max-height:min(48vh,440px);overflow-y:auto;overscroll-behavior:contain;
+ scrollbar-width:thin;scrollbar-color:#58796f transparent
+}
+body.training-mode .trainer-workspace>.brahmi-matrix{grid-column:1/-1;grid-row:4}
+.input-line-head{display:flex;gap:8px;align-items:center;min-width:0;min-height:17px;margin-bottom:4px}
+.input-line-head .input-line-label{flex:0 1 43%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:0}
+.input-line-head .inline-skill-cues{flex:1 1 0;min-width:0;display:flex;align-items:center;gap:3px;
+ border-left:1px solid rgba(152,204,189,.26);padding-left:8px;overflow-x:auto;overflow-y:hidden;
+ scrollbar-width:thin;white-space:nowrap;color:#c6e6d8;line-height:1.1}
+.inline-skill-cues[hidden]{display:none!important}
+.inline-skill-cues .cue-token{flex:none;display:inline-flex;align-items:center;justify-content:center;
+ min-width:17px;padding:2px 4px;border-radius:5px;
+ font:750 10px/1.1 ui-monospace,SFMono-Regular,Consolas,monospace;
+ border:1px solid rgba(160,216,197,.23);color:#d6e8df;background:rgba(34,62,58,.7)}
+.inline-skill-cues .cue-token.is-now{border-color:#e7ca8d;background:#574e36;color:#fff9e7;box-shadow:inset 0 0 0 1px #e4cf9c44}
+.inline-skill-cues .cue-token.is-past{opacity:.55}
+.inline-iast-cues{font:600 11px/1.3 ui-monospace,SFMono-Regular,Consolas,monospace}
+.inline-iast-cues .cue-caption{flex:none;color:#ebd29d;font:800 9px/1.2 -apple-system,BlinkMacSystemFont,sans-serif}
+.inline-iast-cues .cue-roman{flex:none;font-size:11px;color:#d6ebe1}
+body.training-mode .exercise>div[style*="height:13px"]{display:none}
+body.training-mode .input-track{padding:5px 7px}
+body.training-mode .dual-typing{gap:5px}
+body.training-mode .input-line-head .input-line-label{font-size:clamp(8px,.69vw,10px);letter-spacing:.035em}
+body.training-mode .input-line-head .cue-token{font-size:clamp(8px,.67vw,10px);padding:1px 3px}
+body.training-mode .input-line-head .cue-roman{font-size:clamp(9px,.75vw,12px)}
+/* Two semantic reading tracks + a narrow physical-chip sidebar, no third full-width row. */
+.phrase-lines{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(105px,.78fr);
+ grid-template-rows:auto auto;gap:4px}
+.phrase-lines>.phrase-line{min-width:0;display:flex;flex-direction:column;gap:2px;padding:5px 7px}
+.phrase-lines>.phrase-line:nth-child(1){grid-column:1;grid-row:1}
+.phrase-lines>.phrase-line:nth-child(2){grid-column:1;grid-row:2}
+.phrase-lines>.phrase-line:nth-child(3){grid-column:2;grid-row:1/span 2}
+.phrase-lines[data-comparing="true"]>.phrase-line:nth-child(3){grid-row:1}
+.phrase-lines>.phrase-line:nth-child(4){grid-column:2;grid-row:2}
+.phrase-lines>.phrase-line .phrase-value{max-height:66px;min-width:0}
+.phrase-lines .phrase-chords{display:flex;gap:3px;flex-wrap:wrap;align-content:flex-start}
+body.training-mode .phrase-controls{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+body.training-mode .phrase-actions{grid-column:1/-1}
+body.training-mode .phrase-choice-control{grid-column:1/-1}
+body.training-mode .phrase-meta{min-height:0;font-size:9px}
+body.training-mode .phrase-lab-summary{padding:6px 9px}
+body.training-mode .phrase-lab-body{padding:0 7px 7px}
+body.training-mode .phrase-value{max-height:60px}
+@media(max-width:1150px){
+ body.training-mode .trainer-workspace{display:grid;grid-template-columns:minmax(0,1fr);align-content:start}
+ body.training-mode .trainer-workspace>.lesson-headline{grid-column:1;grid-row:1}
+ body.training-mode .trainer-workspace>.lesson-header{grid-column:1;grid-row:2;justify-content:flex-start;flex-wrap:wrap;padding:2px 0}
+ body.training-mode .trainer-workspace>.lesson-description{
+  position:absolute;clip:rect(0 0 0 0);clip-path:inset(50%);
+  width:1px;height:1px;overflow:hidden;white-space:nowrap
+ }
+ body.training-mode .trainer-workspace>.exercise{grid-column:1;grid-row:3;margin-bottom:6px}
+ body.training-mode .trainer-workspace>.phrase-lab{grid-column:1;grid-row:4;max-height:none;margin:6px 0 8px}
+ body.training-mode .trainer-workspace>.brahmi-matrix{grid-column:1;grid-row:5}
+}
+@media(max-width:600px){
+ .input-line-head{gap:5px}
+ .input-line-head .input-line-label{flex:0 1 38%;max-width:38%}
+ .input-line-head .inline-skill-cues{padding-left:5px;gap:2px}
+ body.training-mode .input-track{padding:4px 6px}
+ body.training-mode .phrase-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body.training-mode .phrase-lines{grid-template-columns:minmax(0,1.35fr) minmax(100px,.85fr)}
+}
+@media(max-height:500px){
+ body.training-mode .lesson-description{display:none}
+ body.training-mode #lessonIndex{margin-top:2px!important}
+ body.training-mode .lesson-headline{font-size:18px;margin:2px 0}
+ body.training-mode .trainer-workspace>.phrase-lab{max-height:none}
+}
+
 </style>
 </head>
 <body>
@@ -488,10 +589,10 @@ body.training-mode .phrase-roman{font-size:12px}
 <button data-page="stats"><span class="nav-icon">▥</span><span data-i18n="navStats">Прогресс</span></button>
 <button data-page="settings"><span class="nav-icon">⚙</span><span data-i18n="navSettings">Настройки</span></button>
 </nav>
-<div class="aside-foot"><strong>𑀅𑀳𑀺𑀁𑀲𑀸</strong><p data-i18n="foot">Практикуй внимательно. Прогресс остаётся в браузере. Никакой регистрации или передачи на сервер.</p><span>v0.9.0 β · OFFLINE FIRST · 2026</span></div>
+<div class="aside-foot"><strong>𑀅𑀳𑀺𑀁𑀲𑀸</strong><p data-i18n="foot">Практикуй внимательно. Прогресс остаётся в браузере. Никакой регистрации или передачи на сервер.</p><span>v0.9.1 β · OFFLINE FIRST · 2026</span></div>
 </aside>
 <main class="main">
-<div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.9.0-beta" title="Brahmi Atelier 0.9.0-beta">v0.9.0 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
+<div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.9.1-beta" title="Brahmi Atelier 0.9.1-beta">v0.9.1 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
 <section id="page-home" class="page active">
 <div class="hero"><span class="eyebrow" data-i18n="heroEyebrow">ДРЕВНЕЕ ПИСЬМО · СОВРЕМЕННЫЙ НАВЫК</span><h1 data-i18n-html="heroTitle">Прикоснись к <em>2300 годам</em> письменной истории.</h1><p data-i18n="heroLead">Изучи письмо брахми слепым десятипальцевым методом на немецкой клавиатуре Mac. От первого знака до подлинных пракритских надписей Ашоки.</p><div class="actions"><button class="btn btn-primary" id="continueButton" data-i18n="startLearning">Начать обучение</button><button class="btn" data-page="texts" data-i18n="openTexts">Читать надписи</button></div></div>
 <div class="stat-grid" id="homeStats"></div>
@@ -504,6 +605,19 @@ body.training-mode .phrase-roman{font-size:12px}
 <div class="trainer-workspace" id="trainerWorkspace" tabindex="-1">
 <div class="lesson-header"><button class="btn btn-sm btn-ghost" id="backLessons" data-i18n="allLessons">← Все уроки</button><div class="actions"><button class="btn btn-sm" id="prevLesson" data-i18n="prev">← Назад</button><button class="btn btn-sm" id="nextLesson" data-i18n="next">Следующий →</button><button class="btn btn-sm" id="openConvertFromTrain" data-i18n="convOpen">Преобразование ⇄</button></div></div>
 <div class="eyebrow" style="margin-top:19px" id="lessonIndex">01 / 18</div><h1 class="lesson-headline" id="lessonName">Первый ряд</h1><p class="lesson-description" id="lessonSummary"></p>
+
+<div class="exercise"><div class="exercise-meta"><span class="tag" id="lessonCategory">НАВЫК</span><div class="actions"><button class="btn btn-sm btn-ghost" id="newPrompt" data-i18n="newPrompt">↻ Повторить</button><button class="btn btn-sm btn-ghost" id="toggleRoman" data-i18n="toggleRoman">a → 𑀅 / транслитерация</button></div></div><div id="translitPrompt" class="reading text-roman"></div><div id="prompt" class="target brahmi" aria-live="off"></div><div class="progress-track" aria-label="Прогресс ввода"><div id="typingProgress"></div></div><div style="height:13px"></div><div class="dual-typing">
+<div class="input-track physical-track">
+<div class="input-line-head"><label class="input-line-label" for="germanMirror" id="physicalInputLabel" data-i18n="physicalLine">ФИЗИЧЕСКАЯ РАСКЛАДКА · печатай здесь</label><div id="liveMacRail" class="inline-skill-cues inline-mac-cues" role="group" aria-label="Upcoming physical keys" tabindex="0"></div></div>
+<textarea id="germanMirror" class="german-mirror" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="Current macOS keyboard input" rows="2" placeholder="Type with your current macOS layout"></textarea>
+</div>
+<div class="input-track brahmi-track">
+<div class="input-line-head"><label class="input-line-label" for="typingInput" data-i18n="brahmiLine">БРАХМИ · появляется автоматически</label><div id="liveRomanRail" class="inline-skill-cues inline-iast-cues" role="note" aria-label="IAST reading of current exercise" tabindex="0"></div></div>
+<textarea id="typingInput" class="type-field brahmi" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" readonly aria-label="Brahmi Unicode result" rows="2"></textarea>
+</div>
+</div>
+<div class="german-target"><span data-i18n="physicalTarget">СЛЕДУЮЩИЕ ФИЗИЧЕСКИЕ КЛАВИШИ</span><strong id="expectedGerman">—</strong></div>
+<p class="micro" data-i18n="mirrorInfo">В первой строке печатай обычной раскладкой Mac; во второй появятся соответствующие символы брахми по физическим клавишам. Никакой установки или смены системной раскладки не требуется.</p><div class="type-tools"><span id="nextHint" class="hint" aria-live="polite"></span><span class="actions"><button class="btn btn-sm" id="focusInput" data-i18n="focusInput">Ввести</button><button class="btn btn-sm" id="resetInput" data-i18n="resetInput">Сброс</button></span></div><div class="metric-row"><div class="metric"><b id="metricAcc">100%</b><small data-i18n="accuracy">Точность</small></div><div class="metric"><b id="metricCpm">0</b><small data-i18n="cpm">Знаков/мин</small></div><div class="metric"><b id="metricTime">0:00</b><small data-i18n="time">Время</small></div><div class="metric"><b id="metricErrors">0</b><small data-i18n="errors">Ошибки</small></div></div><div class="smallbox" id="lessonExplanation"></div></div>
 <details id="trainerPhraseLab" class="phrase-lab" open>
  <summary class="phrase-lab-summary"><span data-i18n="phraseTitle">Фраза · брахми / IAST / клавиши Mac</span><span class="phrase-lab-mark">𑀓 · ka · K</span></summary>
  <div class="phrase-lab-body">
@@ -523,18 +637,6 @@ body.training-mode .phrase-roman{font-size:12px}
   <p class="phrase-footnote" data-i18n="phraseCaveat">Физические сочетания из исходной таблицы брахми; отображение клавиш не меняет раскладку macOS. — означает отсутствие подтверждённой комбинации.</p>
  </div>
 </details>
-<div class="exercise"><div class="exercise-meta"><span class="tag" id="lessonCategory">НАВЫК</span><div class="actions"><button class="btn btn-sm btn-ghost" id="newPrompt" data-i18n="newPrompt">↻ Повторить</button><button class="btn btn-sm btn-ghost" id="toggleRoman" data-i18n="toggleRoman">a → 𑀅 / транслитерация</button></div></div><div id="translitPrompt" class="reading text-roman"></div><div id="prompt" class="target brahmi" aria-live="off"></div><div class="progress-track" aria-label="Прогресс ввода"><div id="typingProgress"></div></div><div style="height:13px"></div><div class="dual-typing">
-<div class="input-track physical-track">
-<label class="input-line-label" for="germanMirror" id="physicalInputLabel" data-i18n="physicalLine">ФИЗИЧЕСКАЯ РАСКЛАДКА · печатай здесь</label>
-<textarea id="germanMirror" class="german-mirror" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="Current macOS keyboard input" rows="2" placeholder="Type with your current macOS layout"></textarea>
-</div>
-<div class="input-track brahmi-track">
-<label class="input-line-label" for="typingInput" data-i18n="brahmiLine">БРАХМИ · появляется автоматически</label>
-<textarea id="typingInput" class="type-field brahmi" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" readonly aria-label="Brahmi Unicode result" rows="2"></textarea>
-</div>
-</div>
-<div class="german-target"><span data-i18n="physicalTarget">СЛЕДУЮЩИЕ ФИЗИЧЕСКИЕ КЛАВИШИ</span><strong id="expectedGerman">—</strong></div>
-<p class="micro" data-i18n="mirrorInfo">В первой строке печатай обычной раскладкой Mac; во второй появятся соответствующие символы брахми по физическим клавишам. Никакой установки или смены системной раскладки не требуется.</p><div class="type-tools"><span id="nextHint" class="hint" aria-live="polite"></span><span class="actions"><button class="btn btn-sm" id="focusInput" data-i18n="focusInput">Ввести</button><button class="btn btn-sm" id="resetInput" data-i18n="resetInput">Сброс</button></span></div><div class="metric-row"><div class="metric"><b id="metricAcc">100%</b><small data-i18n="accuracy">Точность</small></div><div class="metric"><b id="metricCpm">0</b><small data-i18n="cpm">Знаков/мин</small></div><div class="metric"><b id="metricTime">0:00</b><small data-i18n="time">Время</small></div><div class="metric"><b id="metricErrors">0</b><small data-i18n="errors">Ошибки</small></div></div><div class="smallbox" id="lessonExplanation"></div></div>
 <details class="brahmi-matrix" id="layoutMatrix"><summary data-i18n="matrixTitle">Полная таблица Brahmi · 4 слоя</summary><div id="mapTable"></div></details>
 </div>
 <div class="keyboard-dock" id="keyboardDock" aria-label="Complete Brahmi keyboard">
@@ -801,7 +903,7 @@ const BRAHMI_REVIEWED_DESCRIPTIONS={"edition":"2026-11-15","kind":"reviewed appl
 for(const [locale,labels] of Object.entries(BRAHMI_REVIEWED_DESCRIPTIONS.ui))Object.assign(I18N[locale],labels);
 const PHRASE_ATLAS_I18N={"ru":{"phraseTitle":"Фраза · брахми / IAST / клавиши Mac","phraseChoose":"Фраза","phraseCurrent":"Текущее упражнение","phraseLayout":"Раскладка Mac","phraseCompare":"Сравнить с","phraseNoCompare":"Без сравнения","phrasePractice":"Тренировать","phraseConvert":"В конвертер ⇄","phraseSourceLink":"Первоисточник ↗","phraseBrahmi":"БРАХМИ","phraseKeys":"КЛАВИШИ","phraseSourceText":"Исторические тексты","phraseSourceWisdom":"Изречения с источниками","phraseNoMap":"Нет клавиш для {n} знаков; упражнение недоступно","phraseReady":"Просмотр не сбрасывает упражнение","phraseTooLong":"Слишком длинный текст для тренировки (макс. 1000 знаков)","phraseCaveat":"Полная последовательность физических клавиш из исходной таблицы брахми. — означает отсутствие комбинации. Не переключает раскладку macOS.","phraseCurrentReference":"Текущий урок"},"de":{"phraseTitle":"Satz · Brahmi / IAST / Mac-Tasten","phraseChoose":"Text","phraseCurrent":"Aktuelle Übung","phraseLayout":"Mac-Belegung","phraseCompare":"Vergleichen mit","phraseNoCompare":"Ohne Vergleich","phrasePractice":"Diesen Text üben","phraseConvert":"Zum Konverter ⇄","phraseSourceLink":"Quelle ↗","phraseBrahmi":"BRAHMI","phraseKeys":"TASTEN","phraseSourceText":"Historische Texte","phraseSourceWisdom":"Quellenbelegte Aussprüche","phraseNoMap":"Für {n} Zeichen fehlt eine belegte Taste; Übung nicht möglich","phraseReady":"Der Vergleich setzt die Übung nicht zurück","phraseTooLong":"Text für die Übung zu lang (max. 1000 Zeichen)","phraseCaveat":"Vollständige physische Tastenfolge aus der Brahmi-Quellbelegung. — bedeutet nicht belegt. Ändert keine macOS-Eingabequelle.","phraseCurrentReference":"Aktuelle Lektion"},"en":{"phraseTitle":"Phrase · Brahmi / IAST / Mac keys","phraseChoose":"Passage","phraseCurrent":"Current exercise","phraseLayout":"Mac layout","phraseCompare":"Compare with","phraseNoCompare":"No comparison","phrasePractice":"Practice passage","phraseConvert":"Open converter ⇄","phraseSourceLink":"Primary source ↗","phraseBrahmi":"BRAHMI","phraseKeys":"KEYS","phraseSourceText":"Historical texts","phraseSourceWisdom":"Source-referenced quotations","phraseNoMap":"{n} signs have no mapped key; cannot practice this passage","phraseReady":"Preview does not reset your current exercise","phraseTooLong":"Too long to practice (max. 1,000 signs)","phraseCaveat":"Complete physical key sequence from the original Brahmi map; — means unmapped. Does not switch the macOS input layout.","phraseCurrentReference":"Current lesson"},"ja":{"phraseTitle":"全文 · ブラーフミー / IAST / Macキー","phraseChoose":"文章","phraseCurrent":"現在の練習","phraseLayout":"Mac配列","phraseCompare":"比較する配列","phraseNoCompare":"比較なし","phrasePractice":"この文章を練習","phraseConvert":"変換画面 ⇄","phraseSourceLink":"原典 ↗","phraseBrahmi":"ブラーフミー","phraseKeys":"キー","phraseSourceText":"歴史的な文献","phraseSourceWisdom":"出典付きの引用","phraseNoMap":"{n}文字には割当キーがないため練習できません","phraseReady":"閲覧しても現在の練習はリセットされません","phraseTooLong":"練習には長すぎます（最大1000文字）","phraseCaveat":"出典付きブラーフミー配列の全物理キー列。—は未割当。macOSの入力配列は変更しません。","phraseCurrentReference":"現在の課題"},"hi":{"phraseTitle":"पूरा वाक्य · ब्राह्मी / IAST / Mac कुंजियाँ","phraseChoose":"वाक्य","phraseCurrent":"वर्तमान अभ्यास","phraseLayout":"Mac विन्यास","phraseCompare":"इससे तुलना","phraseNoCompare":"तुलना नहीं","phrasePractice":"वाक्य का अभ्यास","phraseConvert":"परिवर्तक खोलें ⇄","phraseSourceLink":"मूल स्रोत ↗","phraseBrahmi":"ब्राह्मी","phraseKeys":"कुंजियाँ","phraseSourceText":"ऐतिहासिक पाठ","phraseSourceWisdom":"स्रोत-सहित उद्धरण","phraseNoMap":"{n} चिह्नों के लिए कुंजी निर्धारित नहीं; अभ्यास संभव नहीं","phraseReady":"देखने से वर्तमान अभ्यास रीसेट नहीं होगा","phraseTooLong":"अभ्यास के लिए बहुत लंबा (अधिकतम 1000 चिह्न)","phraseCaveat":"मूल ब्राह्मी मानचित्र की पूरी भौतिक कुंजी-श्रृंखला; — का अर्थ कुंजी नहीं। macOS का विन्यास नहीं बदलता।","phraseCurrentReference":"वर्तमान अभ्यास"},"br":{"phraseTitle":"𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · 𑀅𑀓𑁆𑀔𑀭 · ⌨","phraseChoose":"𑀧𑀸𑀞","phraseCurrent":"𑀅𑀪𑁆𑀬𑀸𑀲","phraseLayout":"⌨","phraseCompare":"⇄","phraseNoCompare":"—","phrasePractice":"𑀅𑀪𑁆𑀬𑀸𑀲","phraseConvert":"⇄","phraseSourceLink":"↗","phraseBrahmi":"𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻","phraseKeys":"⌨","phraseSourceText":"𑀮𑁂𑀔","phraseSourceWisdom":"𑀯𑀘𑀦","phraseNoMap":"— {n}","phraseReady":"⌨ · 𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻","phraseTooLong":"1000","phraseCaveat":"𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · ⌨ · —","phraseCurrentReference":"𑀅𑀪𑁆𑀬𑀸𑀲"}};
 for(const [locale,entries] of Object.entries(PHRASE_ATLAS_I18N))Object.assign(I18N[locale],entries);
-const APP_VERSION="0.9.0-beta";
+const APP_VERSION="0.9.1-beta";
 const LOCAL_KEY='brahmi-atelier-2026-v1';
 let saved={version:1,lang:(['ru','de','en','ja','hi'].includes((navigator.language||'').slice(0,2))?(navigator.language||'').slice(0,2):'en'),mode:'sim',physical:((navigator.language||'').slice(0,2)==='ja'?'ja':'de'),jaPreview:'romaji',roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};
 try{const p=JSON.parse(localStorage.getItem(LOCAL_KEY)||'null');if(p&&p.version===1)saved={...saved,...p,completed:p.completed||{},sessions:p.sessions||[],errors:p.errors||{},cal:p.cal||{}}}catch(e){}
@@ -943,12 +1045,43 @@ function setCustom(text,roman=''){phraseChoice='current';lesson={id:'custom',ru:
 function resetSession(render=true){if(clock)clearInterval(clock);clock=null;started=0;tries=0;mistakes=0;wrongMap={};prevValue='';finished=false;composing=false;germanTrace=[];pendingGerman=null;$('typingInput').value='';$('germanMirror').value='';renderGermanMirror();$('typingInput').disabled=false;$('germanMirror').disabled=false;if(render){renderExercise();renderKeyboard()}}
 function mainPrefix(){const a=cp($('typingInput').value),b=cp(prompt);let n=0;while(n<a.length&&n<b.length&&a[n]===b[n])n++;return n}
 function renderExercise(){if(!lesson)return;const index=LESSONS.findIndex(x=>x.id===lesson.id);$('lessonIndex').textContent=index>=0?uiNumber(String(index+1).padStart(2,'0'))+' / '+uiNumber(LESSONS.length):'— / '+uiNumber(LESSONS.length);$('lessonName').textContent=lesson[saved.lang]||lesson.en||lesson.ru;$('lessonSummary').textContent=lesson[saved.lang+'Desc']||lesson.enDesc||lesson.ruDesc;$('lessonCategory').textContent=(lesson.kind==='historic'||lesson.kind==='final')?T('historic'):T('practice');$('newPrompt').disabled=false;$('prevLesson').disabled=index<=0;$('nextLesson').disabled=index===-1||index===LESSONS.length-1;const text=lessonMeta?`${lessonMeta[saved.lang]||lessonMeta.en||lessonMeta.ru} · ${lessonMeta.source}`:(lesson['hint'+saved.lang.charAt(0).toUpperCase()+saved.lang.slice(1)]||lesson.hintEn||lesson.hintRu);$('lessonExplanation').textContent=text;$('inputModeHint').textContent=T(saved.mode==='native'?'nativeHint':'simHint');$('translitPrompt').textContent=romanPrompt;$('translitPrompt').classList.toggle('hidden',!showRoman||!romanPrompt||lesson.kind==='final');renderPhraseLab();renderLive()}
+/* The two primary textareas are never replaced by atlas cards.
+   Micro-cues are derived from the SAME source keymap and converter reading,
+   refresh with typing progress, and never write to scoring/input state. */
+function renderCompactCue(position=mainPrefix()){
+ const keys=$('liveMacRail'),roman=$('liveRomanRail');if(!keys||!roman)return;
+ const blind=Boolean(saved.blind||forceBlind);
+ keys.hidden=blind;roman.hidden=blind||!showRoman;
+ if(blind)return;
+ keys.setAttribute('aria-label',T('phraseKeys')+' · '+(PHYSICAL_LAYOUT_NAMES[saved.physical]||saved.physical));
+ const arr=cp(prompt);
+ const start=Math.max(0,position-2),end=Math.min(arr.length,start+12);
+ const frag=document.createDocumentFragment();
+ for(let i=start;i<end;i++){
+  const sign=arr[i],chord=sign===' '?'␣':brahmiKeyChord(sign,saved.physical,saved.jaPreview);
+  const tag=document.createElement('span');
+  tag.className='cue-token'+(i===position?' is-now':i<position?' is-past':'')+(chord==='—'?' is-unmapped':'');
+  tag.textContent=chord;tag.title=(sign===' '?'␣':sign)+' · '+chord;
+  tag.dataset.position=String(i);
+  if(i===position)tag.setAttribute('aria-current','step');
+  frag.appendChild(tag);
+ }
+ keys.replaceChildren(frag);
+ if(roman.dataset.source!==prompt){
+  roman.dataset.source=prompt;
+  roman.replaceChildren();
+  const lbl=document.createElement('span');lbl.className='cue-caption';lbl.textContent='IAST';
+  const reading=document.createElement('span');reading.className='cue-roman';
+  reading.textContent=brahmiToIAST(prompt).text||'—';
+  roman.append(lbl,reading);
+ }
+}
 function renderLive(){const target=cp(prompt),actual=cp($('typingInput').value),n=target.length;let longest=mainPrefix();let display='';
 // Render whole grapheme clusters to preserve Brahmi vowel attachment and conjunct shaping.
 // Scoring still uses Unicode code points, because the user types dependent signs as separate keystrokes.
 const segments=typeof Intl!=='undefined'&&Intl.Segmenter?[...new Intl.Segmenter('und',{granularity:'grapheme'}).segment(prompt)].map(x=>x.segment):cp(prompt);
 let pos=0;for(const cluster of segments){const end=pos+cp(cluster).length;let cls=end<=longest?'good':(actual.length>longest&&longest<end&&longest>=pos)?'bad':(longest>=pos&&longest<end)?'current':'future';display+=`<span class="${cls}">${cluster===' '?'<span style="white-space:pre"> </span>':esc(cluster)}</span>`;pos=end}
-$('prompt').innerHTML=display||'—';$('typingProgress').style.width=(n?Math.min(100,Math.round(longest/n*100)):0)+'%';const sec=started?Math.max(.001,(Date.now()-started)/1000):0;const clean=longest;const acc=tries?Math.round(100*Math.max(0,tries-mistakes)/tries):100;const cpm=sec>=.2?Math.round(clean/sec*60):0;$('metricAcc').textContent=uiNumber(acc)+'%';$('metricCpm').textContent=uiNumber(cpm);$('metricErrors').textContent=uiNumber(mistakes);$('metricTime').textContent=uiNumber(Math.floor(sec/60))+':'+uiNumber(String(Math.floor(sec%60)).padStart(2,'0'));germanUpcoming(target,longest);highlightPhraseProgress(longest);const next=target[longest];const route=reverseLookup(next);let hint=next?`${T('nextSign')}: <strong class="brahmi">${esc(next===' '?'␣':next)}</strong>`:`${T('done')}`;if(route)hint+=` · <strong>${(route.al?'⌥+':'')+(route.sh?'⇧+':'')+esc(physicalLabel(route.key))}</strong>`;$('nextHint').innerHTML=hint;const f=route?fingers[route.key]||'thumb':null;$('fingerHint').textContent=!next?T('done'):route?`${(route.al?'⌥ + ':'')+(route.sh?'⇧ + ':'')}${physicalLabel(route.key)} · ${fingerName(f)}`:T('noKey');qsa('.key').forEach(el=>el.classList.toggle('active-key',Boolean(route&&route.key===el.dataset.code)));return{longest,acc,cpm}}
+$('prompt').innerHTML=display||'—';$('typingProgress').style.width=(n?Math.min(100,Math.round(longest/n*100)):0)+'%';const sec=started?Math.max(.001,(Date.now()-started)/1000):0;const clean=longest;const acc=tries?Math.round(100*Math.max(0,tries-mistakes)/tries):100;const cpm=sec>=.2?Math.round(clean/sec*60):0;$('metricAcc').textContent=uiNumber(acc)+'%';$('metricCpm').textContent=uiNumber(cpm);$('metricErrors').textContent=uiNumber(mistakes);$('metricTime').textContent=uiNumber(Math.floor(sec/60))+':'+uiNumber(String(Math.floor(sec%60)).padStart(2,'0'));germanUpcoming(target,longest);renderCompactCue(longest);highlightPhraseProgress(longest);const next=target[longest];const route=reverseLookup(next);let hint=next?`${T('nextSign')}: <strong class="brahmi">${esc(next===' '?'␣':next)}</strong>`:`${T('done')}`;if(route)hint+=` · <strong>${(route.al?'⌥+':'')+(route.sh?'⇧+':'')+esc(physicalLabel(route.key))}</strong>`;$('nextHint').innerHTML=hint;const f=route?fingers[route.key]||'thumb':null;$('fingerHint').textContent=!next?T('done'):route?`${(route.al?'⌥ + ':'')+(route.sh?'⇧ + ':'')}${physicalLabel(route.key)} · ${fingerName(f)}`:T('noKey');qsa('.key').forEach(el=>el.classList.toggle('active-key',Boolean(route&&route.key===el.dataset.code)));return{longest,acc,cpm}}
 function mistakeSound(){if(!saved.sound)return;try{const ctx=new (window.AudioContext||window.webkitAudioContext)();const osc=ctx.createOscillator(),g=ctx.createGain();osc.type='sine';osc.frequency.setValueAtTime(210,ctx.currentTime);g.gain.setValueAtTime(.045,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.1);osc.connect(g);g.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+.11);osc.onended=()=>ctx.close()}catch(e){}}
 function onTypingInput(e){if(finished||composing)return;const now=$('typingInput').value;const was=cp(prevValue),arr=cp(now),ref=cp(prompt);let common=0;while(common<was.length&&common<arr.length&&was[common]===arr[common])common++;let suffix=0;while(suffix<was.length-common&&suffix<arr.length-common&&was[was.length-1-suffix]===arr[arr.length-1-suffix])suffix++;const added=arr.slice(common,arr.length-suffix);const removed=was.length-common-suffix;const inserted=added.map((_,i)=>i===0?(pendingGerman||'·'):'');if(saved.physical==='ja'&&saved.mode==='sim'){pendingGerman=null;}else{germanTrace.splice(common,removed,...inserted);pendingGerman=null;renderGermanMirror();}if(!started&&added.length){started=Date.now();clock=setInterval(()=>{if(currentPage==='train'&&!finished)renderLive()},250)}if(added.length){for(let j=0;j<added.length;j++){const c=added[j],position=common+j;if(c==='\n'&&position!==ref.length)continue;tries++;if(c!==ref[position]){mistakes++;wrongMap[ref[position]||c]=(wrongMap[ref[position]||c]||0)+1;mistakeSound()}}}prevValue=now;const live=renderLive();if(now===prompt&&!finished&&started){finished=true;$('typingInput').disabled=true;$('germanMirror').disabled=true;clearInterval(clock);clock=null;completeSession(live)}}
 function completeSession({acc,cpm}){if(lesson.id!=='custom'){const x=saved.completed[lesson.id]||{count:0,best:0};x.count++;x.best=Math.max(x.best,acc);
@@ -1189,6 +1322,7 @@ function renderPhraseLab(){
  $('phraseKeysLabel').textContent=saved.lang==='br'?T('phraseKeys'):T('phraseKeys')+' · '+(PHYSICAL_LAYOUT_NAMES[saved.physical]||saved.physical);
  phraseChordsInto($('phraseKeys'),text,saved.physical);
  const compared=saved.phraseCompare!=='off';
+ document.querySelector('#trainerPhraseLab .phrase-lines').dataset.comparing=String(compared);
  $('phraseCompareRow').hidden=!compared;
  if(compared){
   $('phraseCompareLabel').textContent=saved.lang==='br'?T('phraseCompare'):(PHYSICAL_LAYOUT_NAMES[saved.phraseCompare]||saved.phraseCompare);
@@ -1616,7 +1750,7 @@ $('phraseCompare').onchange=e=>{saved.phraseCompare=e.target.value;persist();ren
 $('phrasePractice').onclick=phrasePracticeSelected;
 $('phraseToConvert').onclick=()=>{const item=phraseSelectionData();if(!item)return;$('convSource').value=item.text;$('convLayout').value=saved.physical;$('convJisMode').value=saved.jaPreview;navigate('convert')};
 $('keyViewMode').onchange=e=>{saved.keyView=['compare','brahmi','iast'].includes(e.target.value)?e.target.value:'compare';persist();renderKeyboard()};$('japaneseMode').onchange=e=>{saved.jaPreview=e.target.value;persist();renderKeyboard();renderPhraseLab()};qsa('[data-layer]').forEach(btn=>btn.onclick=()=>{modifierShift=btn.dataset.layer==='shift'||btn.dataset.layer==='shiftOption';modifierAlt=btn.dataset.layer==='option'||btn.dataset.layer==='shiftOption';renderKeyboard()});$('soundToggle').onchange=e=>{saved.sound=e.target.checked;persist()};$('romanSetting').onchange=e=>{saved.roman=e.target.checked;showRoman=saved.roman;persist();renderExercise()};$('blindSetting').onchange=e=>{saved.blind=e.target.checked;persist();renderKeyboard()};$('clearCal').onclick=()=>{saved.cal={};persist();updateSettings();renderKeyboard();$('calDetected').textContent='—';toast(T('cleared'))};$('closeModal').onclick=()=>$('completionOverlay').classList.remove('show');$('completionOverlay').addEventListener('click',e=>{if(e.target===$('completionOverlay'))$('completionOverlay').classList.remove('show')});$('againModal').onclick=()=>{$('completionOverlay').classList.remove('show');if(lesson.kind==='custom'){resetSession();trainingFocus()}else loadLesson(lesson.id,++currentVariant)};$('nextModal').onclick=()=>{$('completionOverlay').classList.remove('show');const i=LESSONS.findIndex(l=>l.id===lesson.id);if(i>=0&&i<LESSONS.length-1)loadLesson(LESSONS[i+1].id)};$('trainWeak').onclick=()=>loadLesson('adaptive');$('exportData').onclick=()=>{const b=new Blob([JSON.stringify(saved,null,2)],{type:'application/json'}),url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='brahmi-atelier-progress.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);toast(T('exportDone'))};$('importButton').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const obj=JSON.parse(await file.text());if(obj.version!==1||!obj.completed||!Array.isArray(obj.sessions))throw Error('schema');saved={...saved,...obj,cal:obj.cal||{},errors:obj.errors||{}};showRoman=saved.roman;persist();setLanguage(saved.lang);toast(T('importDone'))}catch(e){toast(T('importError'))}e.target.value=''};$('resetAll').onclick=()=>{if(!confirm(T('resetConfirm')))return;const lang=saved.lang,phys=saved.physical,mode=saved.mode,jaPreview=saved.jaPreview;saved={version:1,lang,mode:'sim',physical:phys,jaPreview,keyView:'compare',independentModeInitialized:true,observed:{},roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};persist();setLanguage(lang);toast(T('cleared'))};
-showRoman=saved.roman;setLanguage(saved.lang);const initial=LESSONS.find(l=>l.id===saved.activeLesson)||LESSONS[0];lesson=initial;const p=promptOf(initial);setPrompt(p);renderHome();navigate('home');window.BrahmiAtelierTest={APP_VERSION,WISDOM_CORPUS,WISDOM_HISTORY,nextWisdom,iastToBrahmi,paintPressedKeys,HELD_TRAINER_KEYS,brahmiToIAST,brahmiKeyChord,brahmiKeySequence,phraseSelectionData,phraseUnmapped,renderPhraseLab,PHRASE_ATLAS_I18N,REVERSE_BRAHMI_CONSONANTS,cp,charMap,reverseLookup,T,TEXTS,LESSONS,BRAHMI_LAYERS,physicalLabel,germanKeyStroke,macKeycapPair,ROWS_JIS,JIS_KANA,activeRows,MAC_GERMAN_ISO,MAC_EXTRA_LAYOUTS,HINDI_UI,HINDI_CONTENT,PHYSICAL_PRESETS,romanKeySign,latinMnemonicAgreement,previewShortcut,modifierState,inspectKey};
+showRoman=saved.roman;setLanguage(saved.lang);const initial=LESSONS.find(l=>l.id===saved.activeLesson)||LESSONS[0];lesson=initial;const p=promptOf(initial);setPrompt(p);renderHome();navigate('home');window.BrahmiAtelierTest={APP_VERSION,WISDOM_CORPUS,WISDOM_HISTORY,nextWisdom,iastToBrahmi,paintPressedKeys,HELD_TRAINER_KEYS,brahmiToIAST,brahmiKeyChord,brahmiKeySequence,renderCompactCue,phraseSelectionData,phraseUnmapped,renderPhraseLab,PHRASE_ATLAS_I18N,REVERSE_BRAHMI_CONSONANTS,cp,charMap,reverseLookup,T,TEXTS,LESSONS,BRAHMI_LAYERS,physicalLabel,germanKeyStroke,macKeycapPair,ROWS_JIS,JIS_KANA,activeRows,MAC_GERMAN_ISO,MAC_EXTRA_LAYOUTS,HINDI_UI,HINDI_CONTENT,PHYSICAL_PRESETS,romanKeySign,latinMnemonicAgreement,previewShortcut,modifierState,inspectKey};
 })();
 </script>
 </body></html>

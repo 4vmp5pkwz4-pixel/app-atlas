@@ -18,11 +18,11 @@ release=load("data/brahmi-release.json")
 catalog=load("catalog.json")
 source=load("data/macos-brahmi-reference.json")
 atlas=load("data/brahmi-inscript-keyman-audit.json")
-expected_version="0.9.0-beta"
+expected_version="0.9.1-beta"
 assert release["version"]==expected_version, "Version release metadata drifted"
-assert release["display"]=="v0.9.0 β"
+assert release["display"]=="v0.9.1 β"
 assert "const APP_VERSION=\""+expected_version+"\";" in html
-assert ">v0.9.0 β</span>" in html
+assert ">v0.9.1 β</span>" in html
 assert {**source["layers"]["base"]}["KeyA"]=="𑀸"
 assert source["layers"]["shift"]["KeyA"]=="𑀸", "Shift+A has same Brahmi output as A"
 assert source["layers"]["base"]["KeyI"]=="𑀺"
@@ -63,14 +63,14 @@ assert "для немецкой QWERTZ-клавиатуры Mac" not in html
 assert "visual keyboard always shows German QWERTZ" not in str(data["ui"]["en"])
 
 brahmi=next(p for p in catalog["projects"] if p["id"]=="brahmi")
-assert "v0.9.0 β" in brahmi["tags"]
-assert all("0.9.0" in brahmi["desc"][lang] for lang in ("ru","en","de"))
+assert "v0.9.1 β" in brahmi["tags"]
+assert all("0.9.1" in brahmi["desc"][lang] for lang in ("ru","en","de"))
 assert len(brahmi["tags"])>=5
 assert "v0.6.0" not in str(brahmi)
 m=re.search(r'<script id="embedded-catalog" type="application/json">([\s\S]+?)</script>',index)
 assert m and json.loads(m.group(1))==catalog, "Inline catalog differs from official file"
 for wrong in ("with QWERTZ lessons", "Zehnfingertrainer für die antike Brahmi-Schrift mit QWERTZ-Lektionen", "v0.6.0"):
     assert wrong not in project, wrong
-assert "v0.9.0 β" in project
+assert "v0.9.1 β" in project
 assert "not a facsimile" in readme.lower() or "not exact photographs" in readme.lower() or "not exact photographs" in (ROOT/"docs/BRAHMI_EDITORIAL_AUDIT_20261115.md").read_text(encoding="utf-8").lower()
 print("PASS: reviewed 5 natural languages, 10 lessons, original Shift+A/IAST truth, v0.8.1 catalog + SEO consistency")

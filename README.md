@@ -4,7 +4,7 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.9.0 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.0-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.9.1 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.1-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
 An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. **RU · EN · DE.** The main catalog contains no analytics or login.
 
@@ -52,6 +52,12 @@ docs/                    Distribution, release and legal checklists
 - [German legal-readiness checklist](docs/LEGAL_READINESS.md)
 
 **Licensing:** No open-source license has yet been selected for this repository. Visibility on GitHub does not in itself grant redistribution rights for third-party materials. Confirm the rights to any bundled and historical content and complete applicable operator/legal information before wider promotion. Features in scientific demonstrators are not evidence of empirical validation.
+
+## Brahmi Atelier v0.9.1-beta · restore dual-track learning cockpit
+
+This focused ergonomic update **retains the entire v0.9 phrase atlas and every authenticated keymap**, but reverses the visual priority. The **actual two live tracks** (physical Mac input and automatic Unicode Brahmi) are shown before the atlas, with a small source-derived **upcoming chord ribbon and complete scrollable IAST** embedded horizontally in the existing labels — no extra full-width text rows added below them. On large screens the Atlas is a separately scrollable sidecar; on smaller screens it follows the main exercise. Within the Atlas, two primary reading lines (Brahmi and IAST) share a compact grid with tiny physical key chips on the right. In blind-practice mode all extra inline cues disappear; selecting another historical preview does not change the live input. The five-row keyboard remains pinned at its original height.
+
+[Learning and layout invariants](docs/BRAHMI_DUAL_TRACK_PEDAGOGY.md) · [v0.9 complete source spec](docs/BRAHMI_TRAINER_PHRASE_ATLAS.md).
 
 ## Brahmi Atelier v0.9.0-beta · compact complete-phrase learning atlas
 
