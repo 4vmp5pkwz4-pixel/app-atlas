@@ -654,7 +654,7 @@ function physicalLabel(code){
  const special={Escape:'esc',Lang2:'英数',Lang1:'かな',Fn:'fn',Backspace:'⌫',Enter:'↵',Tab:'⇥',CapsLock:'⇪',ShiftLeft:'⇧',ShiftRight:'⇧',AltLeft:'⌥',AltRight:'⌥',MetaLeft:'⌘',MetaRight:'⌘',ControlLeft:'⌃',ControlRight:'⌃',Space:'Space'};
  if(special[code])return special[code];
  const x=(PHYSICAL_PRESETS[saved.physical]||physDe)[code];
- if(x!==undefined)return x;
+ if(x!==undefined)return ['ruMac','ruPh'].includes(saved.physical)&&/^[а-яё]$/iu.test(x)?x.toUpperCase():x;
  if(code.startsWith('Key'))return code.slice(3);
  if(code.startsWith('Digit'))return code.slice(5);
  return code;
