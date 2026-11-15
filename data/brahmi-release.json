@@ -1,8 +1,8 @@
 {
-  "version": "0.9.0-beta",
-  "display": "v0.9.0 β",
+  "version": "0.9.1-beta",
+  "display": "v0.9.1 β",
   "released_at": "2026-11-15",
-  "feature": "Inline Phrase Atlas in full Brahmi typing trainer: synchronized complete Brahmi/IAST/physical Mac key sequences for exercise, 10 source-linked historical texts and 25 quotations; eight source-pinned Mac layout views with independently selectable second layout, explicit safe Practice/Converter handoff, six localized interfaces, persistent side-by-side preference, live next-key highlighting and no loss of keyboard height",
+  "feature": "Dual-track learning cockpit: preserves large real Mac input and Brahmi output simultaneously, adds source-derived compact physical chord/IAST cues inside their existing headings, displays complete v0.9 Phrase Atlas in parallel desktop sidecar or below original typing on mobile without changing keyboard dock or phrase functions",
   "corpus": "data/brahmi-wisdom.json",
   "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
   "keyboardSources": [
@@ -50,6 +50,10 @@
       "devq",
       "ja"
     ],
-    "noInventedMappings": true
+    "noInventedMappings": true,
+    "desktop": "parallel non-blocking sidecar",
+    "mobile": "after original two live writing tracks",
+    "compactCues": "source-mapped physical next chords and same-converter IAST, hidden in blind mode",
+    "fullCorpusPreserved": true
   }
 }
