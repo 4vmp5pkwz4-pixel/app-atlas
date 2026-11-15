@@ -38,6 +38,23 @@ The **34 basic consonants U+11013–U+11034** are treated as an unweighted set. 
 
 These scores quantify **a particular modern source layout's mnemonic affinity**, not historic preservation, universal language distance, or an independent InScript benchmark. Russian ЙЦУКЕН and Japanese JIS Kana are deliberately not assigned a Latin-letter score: a valid Cyrillic phoneme or Japanese input-method comparison would require a separate, explicitly documented and language-aware metric.
 
+## Independent InScript-to-InScript comparison
+
+We additionally retrieved, parsed, and pinned two *independent real keyboards*, as distinct from the original 2019 phonetic Mac Brahmi source:
+
+- [Keyman Brahmi Inscript 1.0.1 `brahmi_inscript.kmn`](https://github.com/keymanapp/keyboards/blob/master/release/b/brahmi_inscript/source/brahmi_inscript.kmn), Git blob `a8a936af5a2b7fa3a0c3de77cf9a40b59ecae2fa`.
+- [Keyman Devanagari INSCRIPT Basic 1.1 `basic_kbdindev.kmn`](https://github.com/keymanapp/keyboards/blob/master/release/basic/basic_kbdindev/source/basic_kbdindev.kmn), Git blob `9f6eeb18e0010f26eb26a8e45bf8384a85773a48`.
+
+Machine-readable, test-gated data: `data/brahmi-inscript-keyman-audit.json`, embedded byte-equivalently in the standalone atlas. Each source chord includes its actual modifiers (e.g., `SHIFT K_Z`). `RALT` and `ALT` notation are normalized for comparing modifier *names*, not asserting all OS-level Option behavior is identical.
+
+**Consonants:** **32/34** of the exact paired Brahmi/Devanagari consonants share the *same chord*. The two exceptions are `𑀬 य` (Brahmi `K_Z`; Devanagari `K_SLASH`) and `𑀱 ष` (Brahmi `SHIFT K_Z`; Devanagari `SHIFT K_COMMA`).
+
+**Independent vowels:** **10/14** match. Exceptions are vocalic R (`𑀋 ऋ`), RR (`𑀌 ॠ`), L (`𑀍 ऌ`) and LL (`𑀎 ॡ`), assigned different chords in the two selected implementations.
+
+**Keymap coverage:** the Keyman Brahmi Inscript input directly produces **108/115** assigned Brahmi Unicode characters, compared with **106/115** in Prachya Boonkwan's 2019 Mac layout. Keyman adds direct U+11003 (JIHVAMULIYA) and U+11004 (UPADHMANIYA) mappings; both versions still lack separate assignments for six Old Tamil U+11070–U+11075 code points and the Brahmi Number Joiner U+1107F.
+
+Neither the 32/34 structural correspondence nor the 26/34 Latin-key mnemonic score is a universal or historical ranking: they assess **different pairings** and **specific source-controlled products**. This cross-script result provides stronger evidence for the systematic reuse of positions *within these two InScript implementations*, not ancient keyboard inheritance.
+
 ## What the reader can do
 
 - Browse all 115 assigned signs with glyph, code point, group, available educational Roman value, aligned Devanagari for 34 common consonants and 14 independent vowels, original four-layer Mac source chord, and alternate physical keycap labels.
@@ -58,7 +75,7 @@ These scores quantify **a particular modern source layout's mnemonic affinity**,
 ## Reproducibility and release gate
 
 - `python3 scripts/verify_phonetic_atlas.py` checks source fidelity, 115/106/9, exact nine missing code points, physical preset consistency and JS syntax.
-- `npm run test:browser` checks 115 rendered rows, scores 26/25/26, layouts, filters, CSV, localizations and the link from the parent converter.
+- `npm run test:browser` checks 115 rendered rows, scores 26/25/26, the independent 48-pair InScript audit (32/34, 10/14), layouts, filters, CSV, localizations and the link from the parent converter.
 - `python3 scripts/verify_brahmi.py` and `python3 scripts/validate.py` must still pass.
 - Real Safari, installed keyboard layouts, screen-reader readability of Brahmi fonts and Japanese IME output still require Mac hardware testing. Successful Chromium tests do not prove that OS-reserved shortcuts can be intercepted.
 
