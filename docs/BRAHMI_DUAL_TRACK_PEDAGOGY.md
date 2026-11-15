@@ -40,3 +40,7 @@ A read-only browser audit of published v0.9.0 observed the two inputs at approxi
 `scripts/verify_brahmi_dual_cockpit.py` checks source markup order, two unchanged input identifiers, two integrated cue holders, independent source and version. `tests/browser/brahmi-dual-cockpit.spec.cjs` checks geometry and live data in desktop/mobile Chromium, active chord tracking, blind-mode behavior, source-layout changes and exact corpus preview compatibility. Existing phrase atlas and trainer tests must continue to pass without removal.
 
 For a scientifically useful future iteration, study task completion time, error rate, gaze travel and retention in actual learners across the old v0.9 layout and this compact layout. The current usability rationale is evidence-informed but not an experimental claim of measured learning superiority.
+
+## Compact header refinement
+
+The first browser viewport test revealed that even with the Phrase Atlas moved into a sidecar, the original separate lesson navigation, number, title and summary consumed enough vertical space to push the second original input below the fixed keyboard dock in a 1440×900 viewport. The chapter heading and navigation are therefore **combined into a single row** on desktop; on narrow devices the title and actions occupy two compact rows. The chapter number remains readable by assistive technology, and the lesson guidance remains in the existing detailed explanation. The essential invariant is the viewport visibility of both input fields—not merely DOM presence.
