@@ -1,0 +1,49 @@
+name: Release Brahmi Atelier Japanese JIS and Brahmi-script v0.4.0 beta
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/bootstrap-brahmi-v040.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate full macOS source mapping and website
+        run: |
+          python3 scripts/validate.py
+          python3 scripts/verify_brahmi.py
+      - name: Install browser tests
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Block release until all desktop/mobile acceptance tests pass
+        run: npm run test:browser
+      - name: Create HTML app and itch.io/website ZIP bundles
+        run: python3 scripts/package.py
+      - name: Publish immutable beta release with SHA-256 checksums
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v0.4.0-beta --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            echo "v0.4.0-beta exists, leaving it unchanged"
+          else
+            gh release create v0.4.0-beta dist/* \
+              --repo "${GITHUB_REPOSITORY}" \
+              --target "${GITHUB_SHA}" \
+              --title "Brahmi Atelier · Japanese Mac JIS · Brahmi-script UI · v0.4.0 beta" \
+              --notes "Five interface locales RU/DE/EN/JA and a modern experimental Pali-inspired interface in Unicode Brahmi. The complete Apple Japanese JIS Mac keyboard shows Eisu/Kana mode keys, yen, ro, fn, and Japanese punctuation, with Kana/Romaji legends. Japanese IME native composition is preserved above the independent physical-key Brahmi output below. All four authenticated original Mac Brahmi modifier layers remain exact; no fake Brahmi mapping is added to source-unmapped JIS-only keys. Every key remains visible in portrait and landscape, 24 lessons and Ashoka Edict XII are preserved. Bundled standalone brahmi.html, itch HTML zip, website archive and SHA256 sums. A full 48-check desktop/mobile Playwright suite, source verification and website validation block publication until passed. Brahmi-script UI is modern teaching text, NOT ancient inscriptional Prakrit. Safari on Japanese Mac hardware requires a separate on-device audit." \
+              --prerelease
+          fi
