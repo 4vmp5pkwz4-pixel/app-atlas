@@ -68,14 +68,22 @@ jobs:
           VERSION_TAG: ${{ steps.metadata.outputs.tag }}
         shell: bash
         run: |
+          FEATURE="$(python3 -c 'import json; print(json.load(open("data/brahmi-release.json",encoding="utf-8"))["feature"])')"
+          {
+            printf '%s\n\n' "$FEATURE"
+            printf '%s\n' "Verified against source data and desktop/mobile browser acceptance. The offline ZIP contains the trainer and phonetic atlas."
+            printf '%s\n' "Historical readings are editorial transcriptions, and Latin-IAST keyboard matches are mnemonics, not evidence of ancient keyboard lineage."
+            printf '%s\n' "Physical Option, IME and macOS-reserved shortcuts require Mac hardware verification."
+          } > release-notes.md
           if gh release view "$VERSION_TAG" >/dev/null 2>&1; then
-            echo "Release exists: uploading validated artifacts."
+            echo "Release exists: uploading validated artifacts and current notes."
             gh release upload "$VERSION_TAG" dist/* --clobber
+            gh release edit "$VERSION_TAG" --notes-file release-notes.md
           else
             gh release create "$VERSION_TAG" dist/* \
               --target "$GITHUB_SHA" \
               --title "Brahmi Atelier $VERSION_TAG" \
-              --notes "$(python3 -c 'import json; print(json.load(open("data/brahmi-release.json",encoding="utf-8"))["feature"])')\n\nVerified with source checks and desktop/mobile browser acceptance. The offline ZIP includes the trainer and phonetic atlas. Physical Option, IME and macOS Safari shortcuts remain hardware-dependent. See the source-linked release documentation in the repository."
+              --notes-file release-notes.md
           fi
       - name: Store validation artifacts
         if: always()
