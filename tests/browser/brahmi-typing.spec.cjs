@@ -174,3 +174,57 @@ test('new modifier lessons exist in all three languages and are selectable',asyn
  await page.locator('[data-layer="option"]').click();
  await expect(page.locator('.key[data-code="KeyA"] .glyph')).toHaveText('𑀹');
 });
+
+test('permanent full keyboard stays entirely inside 12 viewport geometries',async({page},testInfo)=>{
+ await page.locator('#continueButton').click();
+ await expect(page.locator('body')).toHaveClass(/training-mode/);
+ for(const [width,height] of [
+   [320,568],[360,640],[375,667],[390,844],[430,932],
+   [667,375],[844,390],[768,1024],[1024,768],[1312,1172],[1440,900],[1920,1080]
+ ]){
+   await page.setViewportSize({width,height});
+   const v=await page.evaluate(()=>{
+    const box=x=>x.getBoundingClientRect().toJSON();
+    const rows=[...document.querySelectorAll('#keyboard .key-row')].map(box);
+    const keys=[...document.querySelectorAll('#keyboard .key')].map(box);
+    const scroll=document.querySelector('.keyboard-scroll');
+    return {w:innerWidth,h:innerHeight,kb:box(document.getElementById('keyboard')),
+      dock:box(document.getElementById('keyboardDock')),
+      workspace:box(document.getElementById('trainerWorkspace')),rows,keys,
+      scrollWidth:scroll.scrollWidth,clientWidth:scroll.clientWidth};
+   });
+   const name=width+'x'+height;
+   expect(v.rows.length,name+': complete number of keyboard rows').toBe(5);
+   expect(v.keys.length,name+': all Mac keys exist').toBeGreaterThanOrEqual(60);
+   expect(v.dock.top,name+': dock begins inside viewport').toBeGreaterThanOrEqual(-1);
+   expect(v.dock.bottom,name+': dock ends inside viewport').toBeLessThanOrEqual(v.h+1);
+   expect(v.kb.top,name+': keyboard starts inside viewport').toBeGreaterThanOrEqual(-1);
+   expect(v.kb.bottom,name+': last keyboard row visible').toBeLessThanOrEqual(v.h+1);
+   expect(v.kb.left,name+': keyboard left edge visible').toBeGreaterThanOrEqual(-1);
+   expect(v.kb.right,name+': keyboard right edge visible').toBeLessThanOrEqual(v.w+1);
+   expect(v.workspace.height,name+': remaining lesson area usable').toBeGreaterThan(40);
+   expect(v.scrollWidth,name+': no sideways scrolling').toBeLessThanOrEqual(v.clientWidth+2);
+   for(const r of [...v.rows,...v.keys]){
+      expect(r.left,name+': left clipping').toBeGreaterThanOrEqual(-1);
+      expect(r.right,name+': right clipping').toBeLessThanOrEqual(v.w+1);
+      expect(r.top,name+': top clipping').toBeGreaterThanOrEqual(-1);
+      expect(r.bottom,name+': bottom clipping').toBeLessThanOrEqual(v.h+1);
+   }
+   if([[320,568],[667,375],[1312,1172],[1440,900]].some(a=>a[0]===width&&a[1]===height))
+      await page.screenshot({path:'test-results/brahmi-viewport-'+testInfo.project.name+'-'+name+'.png',fullPage:false});
+ }
+});
+test('scrolling the exercise cannot scroll the permanent keyboard off-screen',async({page})=>{
+ await page.setViewportSize({width:375,height:667});
+ await page.locator('#continueButton').click();
+ const before=await page.locator('#keyboardDock').boundingBox();
+ await page.locator('#trainerWorkspace').evaluate(el=>{el.scrollTop=el.scrollHeight});
+ const after=await page.locator('#keyboardDock').boundingBox();
+ expect(before).toBeTruthy();
+ expect(after).toBeTruthy();
+ expect(Math.abs(before.y-after.y)).toBeLessThan(1.5);
+ expect(after.y+after.height).toBeLessThanOrEqual(668);
+ await expect(page.locator('#keyboard .key[data-code="KeyM"]')).toBeVisible();
+ await page.locator('#keyboard .key[data-code="KeyM"]').click();
+ await expect(page.locator('#germanMirror')).not.toHaveValue('');
+});
