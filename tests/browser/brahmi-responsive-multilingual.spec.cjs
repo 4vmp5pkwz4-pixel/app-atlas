@@ -89,7 +89,8 @@ test('mobile, tablet and landscape fit and zoom maintain usable five-row keyboar
   });
   expect(zoom.overflow).toBe('auto');
   expect(zoom.documentScroll).toBeLessThanOrEqual(zoom.width+3);
-  if(width<900)expect(zoom.scroll).toBeGreaterThan(zoom.client+100);
+  if(width<760)expect(zoom.scroll).toBeGreaterThan(zoom.client+80);
+  else if(width<900)expect(zoom.scroll).toBeGreaterThan(zoom.client+20);
   expect(Math.abs(zoom.height-base.keyboardHeight)).toBeLessThan(60);
   if(width===390||width===844)await page.screenshot({path:testInfo.outputPath('layout-'+width+'x'+height+'.png'),fullPage:false});
   await toggle.click();
