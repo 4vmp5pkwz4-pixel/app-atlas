@@ -1,8 +1,8 @@
 {
-  "version": "0.9.3-beta",
-  "display": "v0.9.3 β",
+  "version": "0.9.4-beta",
+  "display": "v0.9.4 β",
   "released_at": "2026-11-16",
-  "feature": "Post-deployment visual refinement: preserve five enlarged rows in a bounded two-axis magnified keyboard viewport on small or short screens, with native-layout and independent Brahmi accuracy retained; general descriptions remain multilingual",
+  "feature": "Source-invariant Normal and Shift legends across all eight Mac keyboard views; readable three-tier zoomed keycaps with contained two-axis scrolling, no overwrite of original Brahmi/IAST or dual live input lines, accurate multilingual public catalog descriptions",
   "corpus": "data/brahmi-wisdom.json",
   "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
   "keyboardSources": [
@@ -59,13 +59,16 @@
   },
   "responsiveKeyboard": {
     "default": "full five-row fit",
-    "inspect": "magnified keyboard with internal horizontal and vertical scrolling",
+    "inspect": "two-axis bounded magnified keyboard with readable normal/Shift/Brahmi/IAST",
     "persistentPreference": true,
     "orientation": "portrait and landscape layouts",
     "physicalSourceIndependence": true,
     "zoomScrollAxes": "both",
     "boundedHeight": "min(36dvh,310px)",
-    "fifthRowReachable": true
+    "fifthRowReachable": true,
+    "fit": "complete five-row overview",
+    "sourceInvariants": "8 source-grounded Normal/Shift layout views; Brahmi four layers independent"
   },
-  "audit": "docs/BRAHMI_CROSS_LAYOUT_RESPONSIVE_AUDIT.md"
+  "audit": "docs/BRAHMI_CROSS_LAYOUT_RESPONSIVE_AUDIT.md",
+  "keycapAudit": "docs/BRAHMI_KEYCAP_FIDELITY_V094.md"
 }

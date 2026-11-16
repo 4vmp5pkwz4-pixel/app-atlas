@@ -620,6 +620,54 @@ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .shift-peek
 }
 @media(prefers-reduced-motion:reduce){body.training-mode .keyboard-scroll{scroll-behavior:auto}}
 
+
+/* Source-first keycap architecture: a full five-row FIT overview, with a
+   legible, 3-information-line INSPECT zoom. The zoom is internally scrollable
+   on BOTH axes and never enlarges the two real input tracks. */
+body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key{
+ height:60px;min-height:60px;max-height:none;padding:3px 2px;
+ display:flex;flex-direction:column;justify-content:space-between;
+}
+body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .physical-cap{
+ display:grid;grid-template-columns:minmax(0,1fr) auto;
+ align-items:center;justify-items:start;column-gap:2px;
+ width:100%;min-height:17px;max-height:18px;overflow:visible;
+}
+body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .latin{
+ font-size:clamp(12px,1.22vw,17px);font-weight:850;line-height:1;
+ max-width:100%;min-width:0;overflow:hidden;text-overflow:clip;
+}
+body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key[data-multichar="true"] .latin{
+ font-size:clamp(11px,1.07vw,14px);
+}
+body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .shift-peek{
+ display:inline;position:static;transform:none;max-width:100%;
+ line-height:1;font-size:clamp(9px,.84vw,12px);
+ overflow:visible;text-overflow:clip;letter-spacing:-.035em;
+}
+body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .glyph{
+ font-size:clamp(17px,1.6vw,23px);line-height:1.08;max-height:25px;
+}
+body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{
+ font-size:clamp(10px,.95vw,13px);line-height:1.08;max-height:14px;
+}
+@media(max-width:600px){
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key{height:60px;min-height:60px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .latin{font-size:14px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .glyph{font-size:20px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:12px}
+}
+@media(max-height:480px) and (orientation:landscape){
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key{height:58px;min-height:58px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .glyph{font-size:18px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:11px}
+}
+/* Never let a large alternate corner label force a dependent Indic vowel or
+   Cyrillic base glyph out of its source position in the fitted overview. */
+body.training-mode #keyboard .key[data-alt-kind="symbol"] .physical-cap .latin{
+ min-width:0;max-width:100%;text-overflow:clip;
+}
+
 </style>
 </head>
 <body>
@@ -635,10 +683,10 @@ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .shift-peek
 <button data-page="stats"><span class="nav-icon">▥</span><span data-i18n="navStats">Прогресс</span></button>
 <button data-page="settings"><span class="nav-icon">⚙</span><span data-i18n="navSettings">Настройки</span></button>
 </nav>
-<div class="aside-foot"><strong>𑀅𑀳𑀺𑀁𑀲𑀸</strong><p data-i18n="foot">Практикуй внимательно. Прогресс остаётся в браузере. Никакой регистрации или передачи на сервер.</p><span>v0.9.3 β · OFFLINE FIRST · 2026</span></div>
+<div class="aside-foot"><strong>𑀅𑀳𑀺𑀁𑀲𑀸</strong><p data-i18n="foot">Практикуй внимательно. Прогресс остаётся в браузере. Никакой регистрации или передачи на сервер.</p><span>v0.9.4 β · OFFLINE FIRST · 2026</span></div>
 </aside>
 <main class="main">
-<div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.9.3-beta" title="Brahmi Atelier 0.9.3-beta">v0.9.3 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
+<div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.9.4-beta" title="Brahmi Atelier 0.9.4-beta">v0.9.4 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
 <section id="page-home" class="page active">
 <div class="hero"><span class="eyebrow" data-i18n="heroEyebrow">ДРЕВНЕЕ ПИСЬМО · СОВРЕМЕННЫЙ НАВЫК</span><h1 data-i18n-html="heroTitle">Прикоснись к <em>2300 годам</em> письменной истории.</h1><p data-i18n="heroLead">Открывайте древнее письмо брахми в многоязычном тренажёре: привычная клавиатура Mac, мгновенный результат Unicode и тексты с историческими источниками.</p><div class="actions"><button class="btn btn-primary" id="continueButton" data-i18n="startLearning">Начать обучение</button><button class="btn" data-page="texts" data-i18n="openTexts">Читать надписи</button></div></div>
 <div class="stat-grid" id="homeStats"></div>
@@ -706,7 +754,7 @@ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .shift-peek
   <option value="brahmi" data-i18n="keyViewBrahmi">Mac · Brahmi</option>
   <option value="iast" data-i18n="keyViewIast">Mac · IAST</option>
  </select>
- <button type="button" class="btn btn-sm" id="keyboardZoomToggle" aria-pressed="false" data-i18n="zoomKeys" title="Magnified keyboard: swipe horizontally to inspect keycaps">Magnify keys</button>
+ <button type="button" class="btn btn-sm" id="keyboardZoomToggle" aria-pressed="false" data-i18n="zoomKeys" title="Magnified keyboard: swipe horizontally and vertically to inspect keycaps">Magnify keys</button>
  <span id="keyLayerStatus" role="status" aria-live="polite">Normal · Brahmi</span>
  <span class="key-agreement-legend" id="keyAgreementLegend" data-i18n="keyAgreementLegend">◆ Latin–IAST mnemonic match</span>
 </div>
@@ -878,6 +926,14 @@ Object.assign(RU_REFERENCE_SHIFT,{Digit1:'!',Digit2:'"',Digit3:'№',Digit4:';',
 PHYSICAL_BASE_PRESETS.ru=RU_REFERENCE_BASE;
 const JIS_EXTRA_CODES=['IntlYen','IntlRo','Lang1','Lang2','Fn'];
 const MAC_EXTRA_LAYOUTS={"description":"Native macOS source key legends. Input may have composition/dead keys; these presets only visualize physical positions and never switch the OS input source.","source":"Unicode CLDR keyboard charts 41 macOS Russian and Hindi","sourceUrls":["https://www.unicode.org/cldr/charts/41/keyboards/layouts/ru.html","https://www.unicode.org/cldr/charts/41/keyboards/layouts/hi.html"],"id":{"ruMac":"ru-t-k0-osx","ruPh":"ru-t-k0-osx-qwerty","dev":"hi-t-k0-osx","devq":"hi-t-k0-osx-qwerty"},"layouts":{"ruMac":{"base":{"Backquote":"]","KeyQ":"й","KeyW":"ц","KeyE":"у","KeyR":"к","KeyT":"е","KeyY":"н","KeyU":"г","KeyI":"ш","KeyO":"щ","KeyP":"з","KeyA":"ф","KeyS":"ы","KeyD":"в","KeyF":"а","KeyG":"п","KeyH":"р","KeyJ":"о","KeyK":"л","KeyL":"д","KeyZ":"я","KeyX":"ч","KeyC":"с","KeyV":"м","KeyB":"и","KeyN":"т","KeyM":"ь","BracketLeft":"х","BracketRight":"ъ","Backslash":"ё","Semicolon":"ж","Quote":"э","Comma":"б","Period":"ю","Slash":"/","IntlBackslash":">"},"shift":{"Backquote":"[","KeyQ":"Й","KeyW":"Ц","KeyE":"У","KeyR":"К","KeyT":"Е","KeyY":"Н","KeyU":"Г","KeyI":"Ш","KeyO":"Щ","KeyP":"З","KeyA":"Ф","KeyS":"Ы","KeyD":"В","KeyF":"А","KeyG":"П","KeyH":"Р","KeyJ":"О","KeyK":"Л","KeyL":"Д","KeyZ":"Я","KeyX":"Ч","KeyC":"С","KeyV":"М","KeyB":"И","KeyN":"Т","KeyM":"Ь","BracketLeft":"Х","BracketRight":"Ъ","Backslash":"Ё","Semicolon":"Ж","Quote":"Э","Comma":"Б","Period":"Ю","Slash":"?","IntlBackslash":"<"}},"ruPh":{"base":{"Backquote":"щ","KeyQ":"я","KeyW":"ш","KeyE":"е","KeyR":"р","KeyT":"т","KeyY":"ы","KeyU":"у","KeyI":"и","KeyO":"о","KeyP":"п","KeyA":"а","KeyS":"с","KeyD":"д","KeyF":"ф","KeyG":"г","KeyH":"ч","KeyJ":"й","KeyK":"к","KeyL":"л","KeyZ":"з","KeyX":"х","KeyC":"ц","KeyV":"в","KeyB":"б","KeyN":"н","KeyM":"м","BracketLeft":"ю","BracketRight":"ж","Backslash":"э","Minus":"ь","Equal":"ъ","Comma":",","Period":".","Semicolon":";","Quote":"'","Slash":"/"},"shift":{"Backquote":"Щ","KeyQ":"Я","KeyW":"Ш","KeyE":"Е","KeyR":"Р","KeyT":"Т","KeyY":"Ы","KeyU":"У","KeyI":"И","KeyO":"О","KeyP":"П","KeyA":"А","KeyS":"С","KeyD":"Д","KeyF":"Ф","KeyG":"Г","KeyH":"Ч","KeyJ":"Й","KeyK":"К","KeyL":"Л","KeyZ":"З","KeyX":"Х","KeyC":"Ц","KeyV":"В","KeyB":"Б","KeyN":"Н","KeyM":"М","BracketLeft":"Ю","BracketRight":"Ж","Backslash":"Э","Minus":"Ь","Equal":"Ъ","Comma":"<","Period":">","Semicolon":":","Quote":"\"","Slash":"?"}},"dev":{"base":{"Backquote":"ॊ","KeyQ":"ौ","KeyW":"ै","KeyE":"ा","KeyR":"ी","KeyT":"ू","KeyY":"ब","KeyU":"ह","KeyI":"ग","KeyO":"द","KeyP":"ज","KeyA":"ो","KeyS":"े","KeyD":"्","KeyF":"ि","KeyG":"ु","KeyH":"प","KeyJ":"र","KeyK":"क","KeyL":"त","KeyZ":"ॆ","KeyX":"ं","KeyC":"म","KeyV":"न","KeyB":"व","KeyN":"ल","KeyM":"स","BracketLeft":"ड","BracketRight":"़","Backslash":"ॉ","Equal":"ृ","Semicolon":"च","Quote":"ट","Comma":",","Period":".","Slash":"य","Digit1":"१","Digit2":"२","Digit3":"३","Digit4":"४","Digit5":"५","Digit6":"६","Digit7":"७","Digit8":"८","Digit9":"९","Digit0":"०"},"shift":{"Backquote":"ऒ","KeyQ":"औ","KeyW":"ऐ","KeyE":"आ","KeyR":"ई","KeyT":"ऊ","KeyY":"भ","KeyU":"ङ","KeyI":"घ","KeyO":"ध","KeyP":"झ","KeyA":"ओ","KeyS":"ए","KeyD":"अ","KeyF":"इ","KeyG":"उ","KeyH":"फ","KeyJ":"ऱ","KeyK":"ख","KeyL":"थ","KeyZ":"ऎ","KeyX":"ँ","KeyC":"ण","KeyV":"ऩ","KeyB":"ऴ","KeyN":"ळ","KeyM":"श","BracketLeft":"ढ","BracketRight":"ञ","Backslash":"ऑ","Equal":"ऋ","Semicolon":"छ","Quote":"ठ","Comma":"ष","Period":"।","Slash":"य़","Digit1":"ऍ","Digit2":"ॅ","Digit3":"्र","Digit4":"र्","Digit5":"ज्ञ","Digit6":"त्र","Digit7":"क्ष","Digit8":"श्र","Digit9":"(","Digit0":")","Minus":"ः"}},"devq":{"base":{"Backquote":"ॆ","KeyQ":"ॅ","KeyW":"अ","KeyE":"े","KeyR":"र","KeyT":"त","KeyY":"य","KeyU":"ु","KeyI":"ि","KeyO":"ो","KeyP":"प","KeyA":"ा","KeyS":"स","KeyD":"द","KeyF":"्","KeyG":"ग","KeyH":"ह","KeyJ":"ज","KeyK":"क","KeyL":"ल","KeyZ":"ङ","KeyX":"ष","KeyC":"च","KeyV":"व","KeyB":"ब","KeyN":"न","KeyM":"म","BracketLeft":"॰","BracketRight":"₹","Backslash":"ॊ","Semicolon":";","Quote":"'","Comma":",","Period":"।","Slash":"/","Minus":"-","Equal":"=","Digit1":"१","Digit2":"२","Digit3":"३","Digit4":"४","Digit5":"५","Digit6":"६","Digit7":"७","Digit8":"८","Digit9":"९","Digit0":"०"},"shift":{"Backquote":"ऎ","KeyQ":"ॉ","KeyW":"आ","KeyE":"ै","KeyR":"ृ","KeyT":"थ","KeyY":"य़","KeyU":"ू","KeyI":"ी","KeyO":"ौ","KeyP":"फ","KeyA":"ा","KeyS":"श","KeyD":"ध","KeyF":"़","KeyG":"घ","KeyH":"ः","KeyJ":"झ","KeyK":"ख","KeyL":"ळ","KeyZ":"ँ","KeyX":"क्ष","KeyC":"छ","KeyV":"","KeyB":"भ","KeyN":"ण","KeyM":"ं","Keyundefined":"ं","BracketLeft":"[","BracketRight":"]","Backslash":"ऒ","Semicolon":":","Quote":"\"","Comma":"<","Period":">","Slash":"?","Minus":"_","Equal":"+","Digit1":"!","Digit2":"@","Digit3":"#","Digit4":"$","Digit5":"%","Digit6":"^","Digit7":"&","Digit8":"*","Digit9":"(","Digit0":")"}}},"notes":["Only CLDR-documented base/shift characters are asserted. Option may use dead keys or composition and requires on-device calibration.","Russian – QWERTY is also referred to as Russian – Phonetic in macOS builds.","The Devanagari (InScript) and Devanagari – QWERTY Mac sources are separate from Keyman Devanagari INSCRIPT Basic and must not be conflated."]};
+// Invariant: one canonical Normal source per language/layout, never the
+// typographic uppercase letters printed on a real hardware keycap.
+Object.assign(PHYSICAL_BASE_PRESETS,{
+ ruMac:MAC_EXTRA_LAYOUTS.layouts.ruMac.base,
+ ruPh:MAC_EXTRA_LAYOUTS.layouts.ruPh.base,
+ dev:MAC_EXTRA_LAYOUTS.layouts.dev.base,
+ devq:MAC_EXTRA_LAYOUTS.layouts.devq.base
+});
 const PHYSICAL_PRESETS={de:physDe,en:physUS,ru:physRu,ja:physJa,ruMac:MAC_EXTRA_LAYOUTS.layouts.ruMac.base,ruPh:MAC_EXTRA_LAYOUTS.layouts.ruPh.base,dev:MAC_EXTRA_LAYOUTS.layouts.dev.base,devq:MAC_EXTRA_LAYOUTS.layouts.devq.base};
 const PHYSICAL_SHIFT_PRESETS={de:MAC_GERMAN_ISO.layers.shift,en:MAC_KEYCAP_EXTENDED.layouts.en.shift,ja:MAC_KEYCAP_EXTENDED.layouts.ja.shift,ru:RU_REFERENCE_SHIFT,ruMac:MAC_EXTRA_LAYOUTS.layouts.ruMac.shift,ruPh:MAC_EXTRA_LAYOUTS.layouts.ruPh.shift,dev:MAC_EXTRA_LAYOUTS.layouts.dev.shift,devq:MAC_EXTRA_LAYOUTS.layouts.devq.shift};
 const PHYSICAL_LAYOUT_NAMES={de:'DE · Mac QWERTZ (ISO)',en:'EN · US QWERTY',ru:'RU · ЙЦУКЕН (reference)',ruMac:'RU · macOS',ruPh:'RU · Mac QWERTY',dev:'देवनागरी · InScript',devq:'देवनागरी · QWERTY',ja:'JP · Mac JIS / かな・英数'};
@@ -960,10 +1016,11 @@ for(const [locale,labels] of Object.entries(BRAHMI_REVIEWED_DESCRIPTIONS.ui))Obj
 const PHRASE_ATLAS_I18N={"ru":{"phraseTitle":"Фраза · брахми / IAST / клавиши Mac","phraseChoose":"Фраза","phraseCurrent":"Текущее упражнение","phraseLayout":"Раскладка Mac","phraseCompare":"Сравнить с","phraseNoCompare":"Без сравнения","phrasePractice":"Тренировать","phraseConvert":"В конвертер ⇄","phraseSourceLink":"Первоисточник ↗","phraseBrahmi":"БРАХМИ","phraseKeys":"КЛАВИШИ","phraseSourceText":"Исторические тексты","phraseSourceWisdom":"Изречения с источниками","phraseNoMap":"Нет клавиш для {n} знаков; упражнение недоступно","phraseReady":"Просмотр не сбрасывает упражнение","phraseTooLong":"Слишком длинный текст для тренировки (макс. 1000 знаков)","phraseCaveat":"Полная последовательность физических клавиш из исходной таблицы брахми. — означает отсутствие комбинации. Не переключает раскладку macOS.","phraseCurrentReference":"Текущий урок"},"de":{"phraseTitle":"Satz · Brahmi / IAST / Mac-Tasten","phraseChoose":"Text","phraseCurrent":"Aktuelle Übung","phraseLayout":"Mac-Belegung","phraseCompare":"Vergleichen mit","phraseNoCompare":"Ohne Vergleich","phrasePractice":"Diesen Text üben","phraseConvert":"Zum Konverter ⇄","phraseSourceLink":"Quelle ↗","phraseBrahmi":"BRAHMI","phraseKeys":"TASTEN","phraseSourceText":"Historische Texte","phraseSourceWisdom":"Quellenbelegte Aussprüche","phraseNoMap":"Für {n} Zeichen fehlt eine belegte Taste; Übung nicht möglich","phraseReady":"Der Vergleich setzt die Übung nicht zurück","phraseTooLong":"Text für die Übung zu lang (max. 1000 Zeichen)","phraseCaveat":"Vollständige physische Tastenfolge aus der Brahmi-Quellbelegung. — bedeutet nicht belegt. Ändert keine macOS-Eingabequelle.","phraseCurrentReference":"Aktuelle Lektion"},"en":{"phraseTitle":"Phrase · Brahmi / IAST / Mac keys","phraseChoose":"Passage","phraseCurrent":"Current exercise","phraseLayout":"Mac layout","phraseCompare":"Compare with","phraseNoCompare":"No comparison","phrasePractice":"Practice passage","phraseConvert":"Open converter ⇄","phraseSourceLink":"Primary source ↗","phraseBrahmi":"BRAHMI","phraseKeys":"KEYS","phraseSourceText":"Historical texts","phraseSourceWisdom":"Source-referenced quotations","phraseNoMap":"{n} signs have no mapped key; cannot practice this passage","phraseReady":"Preview does not reset your current exercise","phraseTooLong":"Too long to practice (max. 1,000 signs)","phraseCaveat":"Complete physical key sequence from the original Brahmi map; — means unmapped. Does not switch the macOS input layout.","phraseCurrentReference":"Current lesson"},"ja":{"phraseTitle":"全文 · ブラーフミー / IAST / Macキー","phraseChoose":"文章","phraseCurrent":"現在の練習","phraseLayout":"Mac配列","phraseCompare":"比較する配列","phraseNoCompare":"比較なし","phrasePractice":"この文章を練習","phraseConvert":"変換画面 ⇄","phraseSourceLink":"原典 ↗","phraseBrahmi":"ブラーフミー","phraseKeys":"キー","phraseSourceText":"歴史的な文献","phraseSourceWisdom":"出典付きの引用","phraseNoMap":"{n}文字には割当キーがないため練習できません","phraseReady":"閲覧しても現在の練習はリセットされません","phraseTooLong":"練習には長すぎます（最大1000文字）","phraseCaveat":"出典付きブラーフミー配列の全物理キー列。—は未割当。macOSの入力配列は変更しません。","phraseCurrentReference":"現在の課題"},"hi":{"phraseTitle":"पूरा वाक्य · ब्राह्मी / IAST / Mac कुंजियाँ","phraseChoose":"वाक्य","phraseCurrent":"वर्तमान अभ्यास","phraseLayout":"Mac विन्यास","phraseCompare":"इससे तुलना","phraseNoCompare":"तुलना नहीं","phrasePractice":"वाक्य का अभ्यास","phraseConvert":"परिवर्तक खोलें ⇄","phraseSourceLink":"मूल स्रोत ↗","phraseBrahmi":"ब्राह्मी","phraseKeys":"कुंजियाँ","phraseSourceText":"ऐतिहासिक पाठ","phraseSourceWisdom":"स्रोत-सहित उद्धरण","phraseNoMap":"{n} चिह्नों के लिए कुंजी निर्धारित नहीं; अभ्यास संभव नहीं","phraseReady":"देखने से वर्तमान अभ्यास रीसेट नहीं होगा","phraseTooLong":"अभ्यास के लिए बहुत लंबा (अधिकतम 1000 चिह्न)","phraseCaveat":"मूल ब्राह्मी मानचित्र की पूरी भौतिक कुंजी-श्रृंखला; — का अर्थ कुंजी नहीं। macOS का विन्यास नहीं बदलता।","phraseCurrentReference":"वर्तमान अभ्यास"},"br":{"phraseTitle":"𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · 𑀅𑀓𑁆𑀔𑀭 · ⌨","phraseChoose":"𑀧𑀸𑀞","phraseCurrent":"𑀅𑀪𑁆𑀬𑀸𑀲","phraseLayout":"⌨","phraseCompare":"⇄","phraseNoCompare":"—","phrasePractice":"𑀅𑀪𑁆𑀬𑀸𑀲","phraseConvert":"⇄","phraseSourceLink":"↗","phraseBrahmi":"𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻","phraseKeys":"⌨","phraseSourceText":"𑀮𑁂𑀔","phraseSourceWisdom":"𑀯𑀘𑀦","phraseNoMap":"— {n}","phraseReady":"⌨ · 𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻","phraseTooLong":"1000","phraseCaveat":"𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · ⌨ · —","phraseCurrentReference":"𑀅𑀪𑁆𑀬𑀸𑀲"}};
 for(const [locale,entries] of Object.entries(PHRASE_ATLAS_I18N))Object.assign(I18N[locale],entries);
 // Global product copy is multilingual; the specific supported layouts belong in selectors.
-const MULTILINGUAL_UI_COPY={"ru":{"zoomKeys":"Увеличить клавиши","heroLead":"Изучайте древнюю письменность брахми в многоязычном тренажёре: привычная клавиатура Mac, мгновенный результат Unicode и исторические тексты с источниками."},"de":{"zoomKeys":"Tasten vergrößern","heroLead":"Entdecken Sie die alte Brahmi-Schrift in einem mehrsprachigen Lernatelier: vertraute Mac-Tasten, unmittelbares Unicode-Feedback und historisch belegte Textauszüge."},"en":{"zoomKeys":"Magnify keys","heroLead":"Discover the ancient Brahmi script in a multilingual learning studio: familiar Mac keys, instant Unicode feedback and source-linked historical texts."},"ja":{"zoomKeys":"キーを拡大","heroLead":"多言語対応の学習スタジオで古代ブラーフミー文字を学べます。使い慣れたMacキーボードで入力し、Unicodeの結果と史料に基づく文章を確認できます。"},"hi":{"zoomKeys":"कुंजियाँ बड़ी करें","heroLead":"बहुभाषी ब्राह्मी शिक्षण स्टूडियो में अपनी परिचित Mac कुंजियों से अभ्यास करें, Unicode परिणाम तुरंत देखें और स्रोत-संदर्भित ऐतिहासिक पाठ पढ़ें।"}};
+const MULTILINGUAL_UI_COPY={"ru":{"zoomKeys":"Увеличить клавиши","heroLead":"Изучайте древнюю письменность брахми в многоязычном тренажёре: привычная клавиатура Mac, мгновенный результат Unicode и исторические тексты с источниками.","zoomPanHint":"Прокручивайте увеличенную клавиатуру по горизонтали и вертикали, чтобы увидеть все пять рядов"},"de":{"zoomKeys":"Tasten vergrößern","heroLead":"Entdecken Sie die alte Brahmi-Schrift in einem mehrsprachigen Lernatelier: vertraute Mac-Tasten, unmittelbares Unicode-Feedback und historisch belegte Textauszüge.","zoomPanHint":"Vergrößerte Tastatur waagerecht und senkrecht verschieben, um alle fünf Reihen zu erreichen"},"en":{"zoomKeys":"Magnify keys","heroLead":"Discover the ancient Brahmi script in a multilingual learning studio: familiar Mac keys, instant Unicode feedback and source-linked historical texts.","zoomPanHint":"Scroll the magnified keyboard horizontally and vertically to explore all five rows"},"ja":{"zoomKeys":"キーを拡大","heroLead":"多言語対応の学習スタジオで古代ブラーフミー文字を学べます。使い慣れたMacキーボードで入力し、Unicodeの結果と史料に基づく文章を確認できます。","zoomPanHint":"拡大したキーボードを上下左右にスクロールして5段すべてを確認できます"},"hi":{"zoomKeys":"कुंजियाँ बड़ी करें","heroLead":"बहुभाषी ब्राह्मी शिक्षण स्टूडियो में अपनी परिचित Mac कुंजियों से अभ्यास करें, Unicode परिणाम तुरंत देखें और स्रोत-संदर्भित ऐतिहासिक पाठ पढ़ें।","zoomPanHint":"बड़ी कीबोर्ड की पाँचों पंक्तियाँ देखने के लिए क्षैतिज और ऊर्ध्वाधर स्क्रॉल करें"}};
 for(const [lang,labels] of Object.entries(MULTILINGUAL_UI_COPY))Object.assign(I18N[lang],labels);
 I18N.br.zoomKeys='⊕ 𑀓';
-const APP_VERSION="0.9.3-beta";
+I18N.br.zoomPanHint='⇆ ↕ 𑀧𑀜𑁆𑀘 𑀧𑀁𑀢𑀺';
+const APP_VERSION="0.9.4-beta";
 const LOCAL_KEY='brahmi-atelier-2026-v1';
 let saved={version:1,keyboardZoom:false,lang:(['ru','de','en','ja','hi'].includes((navigator.language||'').slice(0,2))?(navigator.language||'').slice(0,2):'en'),mode:'sim',physical:((navigator.language||'').slice(0,2)==='ja'?'ja':'de'),jaPreview:'romaji',roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};
 try{const p=JSON.parse(localStorage.getItem(LOCAL_KEY)||'null');if(p&&p.version===1)saved={...saved,...p,completed:p.completed||{},sessions:p.sessions||[],errors:p.errors||{},cal:p.cal||{}}}catch(e){}
@@ -993,7 +1050,7 @@ function physicalLabel(code){
  const special={Escape:'esc',Lang2:'英数',Lang1:'かな',Fn:'fn',Backspace:'⌫',Enter:'↵',Tab:'⇥',CapsLock:'⇪',ShiftLeft:'⇧',ShiftRight:'⇧',AltLeft:'⌥',AltRight:'⌥',MetaLeft:'⌘',MetaRight:'⌘',ControlLeft:'⌃',ControlRight:'⌃',Space:'Space'};
  if(special[code])return special[code];
  const x=(PHYSICAL_PRESETS[saved.physical]||physDe)[code];
- if(x!==undefined)return ['ruMac','ruPh'].includes(saved.physical)&&/^[а-яё]$/iu.test(x)?x.toUpperCase():x;
+ if(x!==undefined)return ['ruMac','ruPh'].includes(saved.physical)&&/^[а-яё]$/iu.test(x)?x.toUpperCase():x; // hardware key names only; actual Normal output is PHYSICAL_BASE_PRESETS
  if(code.startsWith('Key'))return code.slice(3);
  if(code.startsWith('Digit'))return code.slice(5);
  return code;
@@ -1005,7 +1062,10 @@ function physicalLayerLabel(code,shift=false,alt=false){
  if(saved.physical==='ja'&&saved.jaPreview==='kana'&&JIS_KANA[code]&&!alt){return JIS_KANA[code]}
  if(code==='Space')return '␣';
  if(alt)return '⌥'+(shift?'⇧':'')+'+'+basic;
- if(!shift)return PHYSICAL_BASE_PRESETS[saved.physical]?.[code]??basic;
+ if(!shift){
+  const normal=PHYSICAL_BASE_PRESETS[saved.physical];
+  return normal&&Object.prototype.hasOwnProperty.call(normal,code)?normal[code]||'—':basic;
+ }
  const verified=PHYSICAL_SHIFT_PRESETS[saved.physical];if(verified){return Object.prototype.hasOwnProperty.call(verified,code)?verified[code]||'—':basic;}
  if(code.startsWith('Key')||/^[\p{L}]$/u.test(basic))return basic.toUpperCase();
  const ruShift={Digit1:'!',Digit2:'"',Digit3:'№',Digit4:';',Digit5:'%',Digit6:':',Digit7:'?',Digit8:'*',Digit9:'(',Digit0:')',Comma:'<',Period:'>',Slash:','};
@@ -1619,7 +1679,8 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)clearKeyHol
 
 function renderKeyboard(){
  $('keyboardZoomToggle').setAttribute('aria-pressed',String(saved.keyboardZoom));
- $('keyboardZoomToggle').title=T('zoomKeys')+' · ⇆';
+ $('keyboardZoomToggle').title=T('zoomKeys')+' · '+T('zoomPanHint');
+ $('keyboardScroll').setAttribute('aria-label',saved.keyboardZoom?T('zoomPanHint'):T('zoomKeys'));
  $('keyboardScroll').dataset.zoom=String(saved.keyboardZoom);
  if(!['compare','brahmi','iast'].includes(saved.keyView))saved.keyView='compare';
  const hide=saved.blind||forceBlind;

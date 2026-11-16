@@ -34,3 +34,5 @@ jobs:
         run: python3 scripts/verify_brahmi_dual_cockpit.py
       - name: Verify source-backed multilingual US and JIS keycaps and responsive states
         run: python3 scripts/verify_brahmi_cross_layout.py
+      - name: Verify all eight Normal Shift keycaps and multilingual viewport fidelity
+        run: python3 scripts/verify_brahmi_all_layouts.py

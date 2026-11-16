@@ -6,8 +6,8 @@ test.beforeEach(async({page})=>{
 test('native Russian macOS, Russian QWERTY, Devanagari InScript, and Devanagari QWERTY keys match source CLDR',async({page})=>{
  await page.locator('[data-page="train"]').first().click();
  for(const [layout,key,label] of [
- ['ruMac','KeyQ','Й'],['ruMac','Backslash','Ё'],
- ['ruPh','KeyA','А'],['ruPh','KeyH','Ч'],['ruPh','KeyY','Ы'],
+ ['ruMac','KeyQ','й'],['ruMac','Backslash','ё'],
+ ['ruPh','KeyA','а'],['ruPh','KeyH','ч'],['ruPh','KeyY','ы'],
  ['dev','KeyK','क'],['dev','KeyF','ि'],['devq','KeyF','्'],['devq','KeyK','क']
  ]){
   await page.locator('#sourceLayout').selectOption(layout);

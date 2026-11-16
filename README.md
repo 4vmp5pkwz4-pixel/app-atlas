@@ -4,9 +4,9 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.9.3 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.3-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.9.4 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.4-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
-An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. **RU · EN · DE.** The main catalog contains no analytics or login.
+An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. The main catalog has a multilingual interface and contains no analytics or login.
 
 ## Available projects
 
@@ -52,6 +52,12 @@ docs/                    Distribution, release and legal checklists
 - [German legal-readiness checklist](docs/LEGAL_READINESS.md)
 
 **Licensing:** No open-source license has yet been selected for this repository. Visibility on GitHub does not in itself grant redistribution rights for third-party materials. Confirm the rights to any bundled and historical content and complete applicable operator/legal information before wider promotion. Features in scientific demonstrators are not evidence of empirical validation.
+
+## Brahmi Atelier v0.9.4-beta · unified keycap sources and responsive readability
+
+All eight keyboard label views now use their **documented Normal and Shift character sources**, without silently capitalizing Russian Mac source glyphs or substituting fallback Latin letters for Devanagari. The original Brahmi Unicode and IAST mappings remain independent. Five-row **Fit** mode preserves a complete keyboard overview; optional magnification provides sufficiently tall three-line keycaps, with bounded horizontal and vertical scrolling even in short landscape windows. The two original live typing tracks remain intact. APP ATLAS general introductory copy now says **multilingual**, while explicit language choices remain visible in selectors.
+
+[Source and viewport audit](docs/BRAHMI_KEYCAP_FIDELITY_V094.md).
 
 ## Brahmi Atelier v0.9.3-beta · contained two-axis zoom on every orientation
 

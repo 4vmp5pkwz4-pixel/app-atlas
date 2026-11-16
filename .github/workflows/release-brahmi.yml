@@ -49,6 +49,7 @@ jobs:
           python3 scripts/verify_brahmi_phrase_atlas.py
           python3 scripts/verify_brahmi_dual_cockpit.py
           python3 scripts/verify_brahmi_cross_layout.py
+          python3 scripts/verify_brahmi_all_layouts.py
       - name: Install pinned browser dependencies
         run: |
           npm install --no-audit --no-fund
