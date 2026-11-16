@@ -603,6 +603,10 @@ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .shift-peek
  body.training-mode #keyboard .key .physical-cap .latin{font-size:clamp(8px,1.4vh,11px)}
  body.training-mode #keyboard .key .glyph{font-size:clamp(9px,2.8vh,13px)}
  body.training-mode #keyboard .key .iast{font-size:clamp(7px,2vh,9px)}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key{height:36px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .physical-cap .latin{font-size:12px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .glyph{font-size:15px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){body.training-mode .keyboard-scroll{scroll-behavior:auto}}
 
@@ -1605,6 +1609,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)clearKeyHol
 
 function renderKeyboard(){
  $('keyboardZoomToggle').setAttribute('aria-pressed',String(saved.keyboardZoom));
+ $('keyboardZoomToggle').title=T('zoomKeys')+' · ⇆';
  $('keyboardScroll').dataset.zoom=String(saved.keyboardZoom);
  if(!['compare','brahmi','iast'].includes(saved.keyView))saved.keyView='compare';
  const hide=saved.blind||forceBlind;
