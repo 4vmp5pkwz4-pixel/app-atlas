@@ -6,7 +6,7 @@ def read(name):return (R/name).read_text(encoding="utf-8")
 html=read("apps/brahmi/index.html")
 release=json.loads(read("data/brahmi-release.json"))
 catalog=json.loads(read("catalog.json"))
-assert release["version"]=="0.9.1-beta"
+assert release["version"]=="0.9.2-beta"
 assert release["phraseAtlas"]["source"]=="docs/BRAHMI_TRAINER_PHRASE_ATLAS.md"
 assert release["phraseAtlas"]["layouts"]==["de","en","ru","ruMac","ruPh","dev","devq","ja"]
 assert release["phraseAtlas"]["noInventedMappings"]
@@ -53,8 +53,8 @@ key="const MAC_GERMAN_ISO="
 start=html.index(key)+len(key)
 assert json.loads(html[start:html.index(";\n",start)])==mac
 project=next(x for x in catalog["projects"] if x["id"]=="brahmi")
-assert "v0.9.1 β" in project["tags"]
-assert "eight Mac keyboard presets" in project["desc"]["en"]
+assert "v0.9.2 β" in project["tags"]
+assert "multilingual" in project["desc"]["en"]
 with tempfile.TemporaryDirectory() as tmp:
     p=pathlib.Path(tmp)/"app.js"
     p.write_text("\n".join(re.findall(r"<script(?:\s[^>]*)?>([\s\S]*?)</script>",html)),encoding="utf-8")

@@ -4,7 +4,7 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.9.1 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.1-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.9.2 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.2-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
 An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. **RU · EN · DE.** The main catalog contains no analytics or login.
 
@@ -52,6 +52,12 @@ docs/                    Distribution, release and legal checklists
 - [German legal-readiness checklist](docs/LEGAL_READINESS.md)
 
 **Licensing:** No open-source license has yet been selected for this repository. Visibility on GitHub does not in itself grant redistribution rights for third-party materials. Confirm the rights to any bundled and historical content and complete applicable operator/legal information before wider promotion. Features in scientific demonstrators are not evidence of empirical validation.
+
+## Brahmi Atelier v0.9.2-beta · responsive multilingual keyboard
+
+The original two large typing tracks and the five-row full-width keyboard remain primary. Users can choose an optional **magnified keyboard with horizontal scrolling** for a legible inspection of complex characters on narrow screens. The macOS US ANSI physical shape and independently documented JIS Romaji Normal/Shift layers now have pinned references, rather than inheriting German Shift punctuation. Kana labels are physical keycap previews, not claims of native IME output. The ancient Brahmi source map and IAST stay independent and unchanged.
+
+[Reproducible layout and orientation audit](docs/BRAHMI_CROSS_LAYOUT_RESPONSIVE_AUDIT.md) · [US/JIS reference data](data/macos-english-jis-keycaps.json).
 
 ## Brahmi Atelier v0.9.1-beta · restore dual-track learning cockpit
 

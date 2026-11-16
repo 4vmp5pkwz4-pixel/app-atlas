@@ -1,11 +1,11 @@
 # APP ATLAS · External launch copy (draft, review before submission)
 
 Canonical site: https://4vmp5pkwz4-pixel.github.io/app-atlas/
-Current Brahmi beta release: https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.1-beta
+Current Brahmi beta release: https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.2-beta
 
 Do not claim external storefront publication until the external store page is visible and tested. All audience numbers, awards, testimonials and performance claims must be supported by evidence.
 
-## itch.io · Brahmi Atelier (current v0.9.1-beta copy)
+## itch.io · Brahmi Atelier (current v0.9.2-beta copy)
 
 **Title (EN):** Brahmi Atelier — Discover an Ancient Script Through Your Keyboard  
 **Subtitle (EN):** A source-grounded Brahmi typing studio with live Mac input, Unicode Brahmi and scholarly IAST.  
@@ -20,7 +20,7 @@ Do not claim external storefront publication until the external store page is vi
 
 **Editorial accuracy and scope:** Brahmi is a script, not a single ancient language. IAST is scholarly transliteration, not a semantic translation or a guaranteed reconstruction of ancient pronunciation. The historical passages are modern educational Unicode renderings of edited readings, not artifact facsimiles. The eight Mac presets are visualized physical layouts; changing them in the app does not switch macOS input sources. Option/dead-key/IME behavior can vary on physical hardware. The upstream Brahmi keymap is a specific documented 2019 implementation and does not establish historic links to modern QWERTY. The offline release does not require an account.
 
-**Distribution:** [Play in browser](https://4vmp5pkwz4-pixel.github.io/app-atlas/apps/brahmi/) · [Verified portable release](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.1-beta). External storefront publication must not be claimed before a live storefront listing is independently checked.
+**Distribution:** [Play in browser](https://4vmp5pkwz4-pixel.github.io/app-atlas/apps/brahmi/) · [Verified portable release](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.2-beta). External storefront publication must not be claimed before a live storefront listing is independently checked.
 
 Suggested descriptive tags: brahmi, ancient scripts, writing systems, typing practice, epigraphy, IAST, keyboard layouts, interactive learning, Unicode.
 
