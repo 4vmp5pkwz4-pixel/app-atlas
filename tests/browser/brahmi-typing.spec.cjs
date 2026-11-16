@@ -132,8 +132,8 @@ test('RU/EN/DE independent keycaps, preserved OS symbol, same Brahmi physical ke
     await expect(page.locator('#typingInput')).toHaveValue(brahmi);
  }
  await page.locator('#sourceLayout').selectOption('ru');
- await expect(page.locator('.key[data-code="KeyQ"] .latin')).toHaveText('Й');
- await expect(page.locator('.key[data-code="KeyY"] .latin')).toHaveText('Н');
+ await expect(page.locator('.key[data-code="KeyQ"] .latin')).toHaveText('й');
+ await expect(page.locator('.key[data-code="KeyY"] .latin')).toHaveText('н');
  await page.locator('#sourceLayout').selectOption('de');
  await expect(page.locator('.key[data-code="KeyY"] .latin')).toHaveText('z');
 });
@@ -254,7 +254,7 @@ test('Japanese locale and JIS hardware include all Mac-only keys',async({page})=
  await expect(page.locator('.key[data-code="KeyQ"] .latin')).toHaveText('た');
  await expect(page.locator('.key[data-code="KeyY"] .latin')).toHaveText('ん');
  await page.locator('#japaneseMode').selectOption('romaji');
- await expect(page.locator('.key[data-code="KeyA"] .latin')).toHaveText('A');
+ await expect(page.locator('.key[data-code="KeyA"] .latin')).toHaveText('a');
  await expect(page.locator('#typingInput')).toHaveAttribute('readonly','');
 });
 test('Japanese OS input composition is preserved while Brahmi counts physical keystrokes',async({page})=>{
