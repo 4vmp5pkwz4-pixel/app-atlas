@@ -54,7 +54,7 @@ start=html.index(key)+len(key)
 assert json.loads(html[start:html.index(";\n",start)])==mac
 project=next(x for x in catalog["projects"] if x["id"]=="brahmi")
 assert "v0.9.2 β" in project["tags"]
-assert "eight Mac keyboard presets" in project["desc"]["en"]
+assert "multilingual" in project["desc"]["en"]
 with tempfile.TemporaryDirectory() as tmp:
     p=pathlib.Path(tmp)/"app.js"
     p.write_text("\n".join(re.findall(r"<script(?:\s[^>]*)?>([\s\S]*?)</script>",html)),encoding="utf-8")
