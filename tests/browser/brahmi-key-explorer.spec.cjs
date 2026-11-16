@@ -20,7 +20,7 @@ test('all ordinary keycaps expose original Mac legend, authentic Brahmi glyph an
   await expect(page.locator('#keyInspectorText')).toContainText('𑀓');
   await expect(page.locator('#keyInspectorText')).toContainText('ka');
   await page.locator('#sourceLayout').selectOption('ruMac');
-  await expect(ka.locator('.latin')).toHaveText('Л');
+  await expect(ka.locator('.latin')).toHaveText('л');
   await expect(ka.locator('.iast')).toHaveText('ka');
   await expect(ka).toHaveAttribute('data-mnemonic','na');
   await page.locator('#sourceLayout').selectOption('dev');
