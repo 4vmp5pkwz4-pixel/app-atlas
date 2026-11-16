@@ -33,8 +33,8 @@ test('eight Normal/Shift views match their canonical map and retain independent 
   const shifted=await page.evaluate((l)=>{
    const T=window.BrahmiAtelierTest,source=T.PHYSICAL_SHIFT_PRESETS[l];
    return Object.entries(source).filter(([c])=>document.querySelector('#keyboard .key[data-code="'+c+'"]'))
-     .filter(([c,v])=>document.querySelector('#keyboard .key[data-code="'+c+'"] .latin')?.textContent!==v)
-     .map(([c,v])=>({code:c,expected:v,actual:document.querySelector('#keyboard .key[data-code="'+c+'"] .latin')?.textContent}));
+     .filter(([c,v])=>document.querySelector('#keyboard .key[data-code="'+c+'"] .latin')?.textContent!==(v||'—'))
+     .map(([c,v])=>({code:c,expected:v||'—',actual:document.querySelector('#keyboard .key[data-code="'+c+'"] .latin')?.textContent}));
   },layout);
   expect(shifted,layout).toEqual([]);
   await page.locator('[data-layer="base"]').click();
