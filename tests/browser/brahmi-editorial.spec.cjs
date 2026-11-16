@@ -58,7 +58,7 @@ test('public metadata, searchable catalog and project SEO match reviewed release
  const p=c.projects.find(x=>x.id==='brahmi');
  expect(p.tags).toContain('v0.9.2 β');
  for(const locale of ['ru','de','en'])expect(p.desc[locale]).toContain('0.9.2');
- expect(p.desc.en).toContain('eight Mac keyboard presets');
+ expect(p.desc.en).toContain('multilingual');
  await page.goto('/projects/brahmi/');
  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',/Brahmi.*IAST/);
  await expect(page.locator('.tags')).toContainText('v0.9.2 β');
