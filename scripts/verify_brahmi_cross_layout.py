@@ -37,7 +37,7 @@ assert "keyboardZoomToggle" in app and "keyboardScroll" in app
 assert "max-height:min(36dvh,310px)" in app
 assert "overflow-x:auto;overflow-y:auto" in app
 assert "touch-action:pan-x pan-y" in app
-assert 'data-zoom="true"' in app and "overscroll-behavior-x:contain" in app
+assert 'data-zoom="true"' in app and "overscroll-behavior:contain" in app
 assert "function renderCompactCue" in app and 'id="germanMirror"' in app and 'id="typingInput"' in app
 p=next(p for p in cat["projects"] if p["id"]=="brahmi")
 assert p["tags"][1]=="Multilingual learning studio"
