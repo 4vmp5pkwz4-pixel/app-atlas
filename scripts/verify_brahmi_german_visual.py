@@ -29,7 +29,8 @@ for k,(normal,upper) in pairs.items():
     assert (base[k],shift[k])==(normal,upper),f"{k}: expected {normal}/{upper}"
 assert "de:MAC_GERMAN_ISO.layers.shift" in html
 assert "de:MAC_GERMAN_ISO.layers.base" in html
-assert "if(!shift)return PHYSICAL_BASE_PRESETS[saved.physical]?.[code]??basic;" in html
+assert "const normal=PHYSICAL_BASE_PRESETS[saved.physical];" in html
+assert "Object.prototype.hasOwnProperty.call(normal,code)?normal[code]||'—':basic;" in html
 assert "function macKeycapPair(" in html
 assert "shift-peek" in html
 assert "body.training-mode #keyboard .key .physical-cap .latin" in html
