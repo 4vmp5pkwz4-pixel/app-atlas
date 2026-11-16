@@ -63,5 +63,5 @@ test('public metadata, searchable catalog and project SEO match reviewed release
  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',/Brahmi.*IAST/);
  await expect(page.locator('.tags')).toContainText('v0.9.4 β');
  await expect(page.locator('.story[data-story="en"]')).not.toContainText('with QWERTZ lessons');
- await expect(page.locator('a').filter({hasText:'Offline app ZIP / release'})).toHaveAttribute('href',/v0\.9\.3-beta/);
+ await expect(page.locator('a').filter({hasText:'Offline app ZIP / release'})).toHaveAttribute('href',/v0\.9\.4-beta/);
 });
