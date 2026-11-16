@@ -1,15 +1,16 @@
 {
-  "version": "0.9.1-beta",
-  "display": "v0.9.1 β",
-  "released_at": "2026-11-15",
-  "feature": "Dual-track learning cockpit: preserves large real Mac input and Brahmi output simultaneously, adds source-derived compact physical chord/IAST cues inside their existing headings, displays complete v0.9 Phrase Atlas in parallel desktop sidecar or below original typing on mobile without changing keyboard dock or phrase functions",
+  "version": "0.9.2-beta",
+  "display": "v0.9.2 β",
+  "released_at": "2026-11-16",
+  "feature": "Multilingual cross-layout keyboard fidelity and responsive learning: CLDR-grounded US and JIS Latin Normal/Shift legends, physically correct US ANSI rows, no German fallback in JIS, optional magnified horizontally scrollable keyboard, preserved two live typing rows, source-independent Brahmi and scholarly IAST",
   "corpus": "data/brahmi-wisdom.json",
   "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
   "keyboardSources": [
     "data/macos-brahmi-reference.json",
     "data/macos-extra-layouts.json",
     "data/brahmi-inscript-keyman-audit.json",
-    "data/macos-german-iso-keycaps.json"
+    "data/macos-german-iso-keycaps.json",
+    "data/macos-english-jis-keycaps.json"
   ],
   "i18nSources": [
     "data/brahmi-hindi-ui.json",
@@ -55,5 +56,13 @@
     "mobile": "after original two live writing tracks",
     "compactCues": "source-mapped physical next chords and same-converter IAST, hidden in blind mode",
     "fullCorpusPreserved": true
-  }
+  },
+  "responsiveKeyboard": {
+    "default": "full five-row fit",
+    "inspect": "optional magnified horizontal scrolling",
+    "persistentPreference": true,
+    "orientation": "portrait and landscape layouts",
+    "physicalSourceIndependence": true
+  },
+  "audit": "docs/BRAHMI_CROSS_LAYOUT_RESPONSIVE_AUDIT.md"
 }
