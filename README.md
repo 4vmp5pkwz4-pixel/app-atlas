@@ -4,7 +4,7 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.9.2 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.2-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.9.3 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.3-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
 An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. **RU · EN · DE.** The main catalog contains no analytics or login.
 
@@ -52,6 +52,10 @@ docs/                    Distribution, release and legal checklists
 - [German legal-readiness checklist](docs/LEGAL_READINESS.md)
 
 **Licensing:** No open-source license has yet been selected for this repository. Visibility on GitHub does not in itself grant redistribution rights for third-party materials. Confirm the rights to any bundled and historical content and complete applicable operator/legal information before wider promotion. Features in scientific demonstrators are not evidence of empirical validation.
+
+## Brahmi Atelier v0.9.3-beta · contained two-axis zoom on every orientation
+
+Post-deployment visual inspection of v0.9.2 found that enlarging the keyboard could place the fourth or fifth key row beyond the visible keyboard region on very short screens. v0.9.3 gives the zoomed five-row keyboard **its own vertically bounded viewport with two-axis scrolling**, maintaining horizontal swipe/trackpad exploration, source-authenticated legends and access to every row without growing the overall page or replacing the primary two typing tracks. The original complete five-row fit view remains the default. [Audit and verification](docs/BRAHMI_CROSS_LAYOUT_RESPONSIVE_AUDIT.md).
 
 ## Brahmi Atelier v0.9.2-beta · responsive multilingual keyboard
 
