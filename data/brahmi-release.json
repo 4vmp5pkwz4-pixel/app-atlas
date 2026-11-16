@@ -1,8 +1,8 @@
 {
-  "version": "0.9.2-beta",
-  "display": "v0.9.2 β",
+  "version": "0.9.3-beta",
+  "display": "v0.9.3 β",
   "released_at": "2026-11-16",
-  "feature": "Multilingual cross-layout keyboard fidelity and responsive learning: CLDR-grounded US and JIS Latin Normal/Shift legends, physically correct US ANSI rows, no German fallback in JIS, optional magnified horizontally scrollable keyboard, preserved two live typing rows, source-independent Brahmi and scholarly IAST",
+  "feature": "Post-deployment visual refinement: preserve five enlarged rows in a bounded two-axis magnified keyboard viewport on small or short screens, with native-layout and independent Brahmi accuracy retained; general descriptions remain multilingual",
   "corpus": "data/brahmi-wisdom.json",
   "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
   "keyboardSources": [
@@ -59,10 +59,13 @@
   },
   "responsiveKeyboard": {
     "default": "full five-row fit",
-    "inspect": "optional magnified horizontal scrolling",
+    "inspect": "magnified keyboard with internal horizontal and vertical scrolling",
     "persistentPreference": true,
     "orientation": "portrait and landscape layouts",
-    "physicalSourceIndependence": true
+    "physicalSourceIndependence": true,
+    "zoomScrollAxes": "both",
+    "boundedHeight": "min(36dvh,310px)",
+    "fifthRowReachable": true
   },
   "audit": "docs/BRAHMI_CROSS_LAYOUT_RESPONSIVE_AUDIT.md"
 }

@@ -583,18 +583,28 @@ body.training-mode #keyboardZoomToggle[aria-pressed="true"]{color:#fff3ce;border
 body.training-mode #keyboard .key .physical-cap{max-width:100%;min-width:0}
 body.training-mode #keyboard .key .latin{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Devanagari","Noto Sans JP","Segoe UI",sans-serif;max-width:100%;overflow:hidden;text-overflow:clip}
 body.training-mode #keyboard .key[data-multichar="true"] .latin{font-size:clamp(7px,.81vw,11px);letter-spacing:-.035em}
-body.training-mode .keyboard-scroll[data-zoom="true"]{overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:thin;scrollbar-color:#8bb8a3 #1a302e}
+/* Magnified mode is a two-axis INSPECTION viewport, not a taller fixed dock.
+   The original two large practice fields remain outside this bounded scroll. */
+body.training-mode .keyboard-scroll[data-zoom="true"]{
+  overflow-x:auto;overflow-y:auto;
+  max-height:min(36dvh,310px);min-height:0;
+  overscroll-behavior:contain;touch-action:pan-x pan-y;
+  scrollbar-width:thin;scrollbar-color:#8bb8a3 #1a302e;
+}
 body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard{width:max(100%,900px);max-width:none;min-width:900px}
+body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key{
+  height:48px;min-height:48px;padding:2px 1px;overflow:hidden;
+}
 body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .physical-cap .latin{font-size:clamp(12px,1.15vw,17px)}
 body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .glyph{font-size:clamp(16px,1.6vw,23px)}
-body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:clamp(10px,.95vw,13px)}
+body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:clamp(10px,.95vw,13px);line-height:1.05}
 body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .shift-peek{display:inline;font-size:clamp(9px,.8vw,12px)}
 @media(max-width:600px){
  body.training-mode #keyboard .key[data-multichar="true"] .latin{font-size:clamp(6px,1.75vw,9px)}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard{width:900px;min-width:900px}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .latin{font-size:14px}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .glyph{font-size:20px}
- body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:12px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:11px}
 }
 @media(max-height:480px) and (orientation:landscape){
  body.training-mode .keyboard-dock{gap:2px;padding:3px 5px}
@@ -603,7 +613,7 @@ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .shift-peek
  body.training-mode #keyboard .key .physical-cap .latin{font-size:clamp(8px,1.4vh,11px)}
  body.training-mode #keyboard .key .glyph{font-size:clamp(9px,2.8vh,13px)}
  body.training-mode #keyboard .key .iast{font-size:clamp(7px,2vh,9px)}
- body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key{height:36px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key{height:46px;min-height:46px}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .physical-cap .latin{font-size:12px}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .glyph{font-size:15px}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:9px}
@@ -625,10 +635,10 @@ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .shift-peek
 <button data-page="stats"><span class="nav-icon">▥</span><span data-i18n="navStats">Прогресс</span></button>
 <button data-page="settings"><span class="nav-icon">⚙</span><span data-i18n="navSettings">Настройки</span></button>
 </nav>
-<div class="aside-foot"><strong>𑀅𑀳𑀺𑀁𑀲𑀸</strong><p data-i18n="foot">Практикуй внимательно. Прогресс остаётся в браузере. Никакой регистрации или передачи на сервер.</p><span>v0.9.2 β · OFFLINE FIRST · 2026</span></div>
+<div class="aside-foot"><strong>𑀅𑀳𑀺𑀁𑀲𑀸</strong><p data-i18n="foot">Практикуй внимательно. Прогресс остаётся в браузере. Никакой регистрации или передачи на сервер.</p><span>v0.9.3 β · OFFLINE FIRST · 2026</span></div>
 </aside>
 <main class="main">
-<div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.9.2-beta" title="Brahmi Atelier 0.9.2-beta">v0.9.2 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
+<div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.9.3-beta" title="Brahmi Atelier 0.9.3-beta">v0.9.3 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
 <section id="page-home" class="page active">
 <div class="hero"><span class="eyebrow" data-i18n="heroEyebrow">ДРЕВНЕЕ ПИСЬМО · СОВРЕМЕННЫЙ НАВЫК</span><h1 data-i18n-html="heroTitle">Прикоснись к <em>2300 годам</em> письменной истории.</h1><p data-i18n="heroLead">Открывайте древнее письмо брахми в многоязычном тренажёре: привычная клавиатура Mac, мгновенный результат Unicode и тексты с историческими источниками.</p><div class="actions"><button class="btn btn-primary" id="continueButton" data-i18n="startLearning">Начать обучение</button><button class="btn" data-page="texts" data-i18n="openTexts">Читать надписи</button></div></div>
 <div class="stat-grid" id="homeStats"></div>
@@ -953,7 +963,7 @@ for(const [locale,entries] of Object.entries(PHRASE_ATLAS_I18N))Object.assign(I1
 const MULTILINGUAL_UI_COPY={"ru":{"zoomKeys":"Увеличить клавиши","heroLead":"Изучайте древнюю письменность брахми в многоязычном тренажёре: привычная клавиатура Mac, мгновенный результат Unicode и исторические тексты с источниками."},"de":{"zoomKeys":"Tasten vergrößern","heroLead":"Entdecken Sie die alte Brahmi-Schrift in einem mehrsprachigen Lernatelier: vertraute Mac-Tasten, unmittelbares Unicode-Feedback und historisch belegte Textauszüge."},"en":{"zoomKeys":"Magnify keys","heroLead":"Discover the ancient Brahmi script in a multilingual learning studio: familiar Mac keys, instant Unicode feedback and source-linked historical texts."},"ja":{"zoomKeys":"キーを拡大","heroLead":"多言語対応の学習スタジオで古代ブラーフミー文字を学べます。使い慣れたMacキーボードで入力し、Unicodeの結果と史料に基づく文章を確認できます。"},"hi":{"zoomKeys":"कुंजियाँ बड़ी करें","heroLead":"बहुभाषी ब्राह्मी शिक्षण स्टूडियो में अपनी परिचित Mac कुंजियों से अभ्यास करें, Unicode परिणाम तुरंत देखें और स्रोत-संदर्भित ऐतिहासिक पाठ पढ़ें।"}};
 for(const [lang,labels] of Object.entries(MULTILINGUAL_UI_COPY))Object.assign(I18N[lang],labels);
 I18N.br.zoomKeys='⊕ 𑀓';
-const APP_VERSION="0.9.2-beta";
+const APP_VERSION="0.9.3-beta";
 const LOCAL_KEY='brahmi-atelier-2026-v1';
 let saved={version:1,keyboardZoom:false,lang:(['ru','de','en','ja','hi'].includes((navigator.language||'').slice(0,2))?(navigator.language||'').slice(0,2):'en'),mode:'sim',physical:((navigator.language||'').slice(0,2)==='ja'?'ja':'de'),jaPreview:'romaji',roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};
 try{const p=JSON.parse(localStorage.getItem(LOCAL_KEY)||'null');if(p&&p.version===1)saved={...saved,...p,completed:p.completed||{},sessions:p.sessions||[],errors:p.errors||{},cal:p.cal||{}}}catch(e){}
