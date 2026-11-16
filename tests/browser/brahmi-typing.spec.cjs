@@ -121,7 +121,7 @@ test('exact original Mac Brahmi mapping in all four layers',async({page})=>{
 test('RU/EN/DE independent keycaps, preserved OS symbol, same Brahmi physical key',async({page})=>{
  await page.locator('.nav [data-page="train"]').click();
  for(const [source,keyLabel,actualSymbol,brahmi] of [
-   ['ru','Ф','ф','𑀸'],['en','A','a','𑀸'],['de','a','a','𑀸']
+   ['ru','ф','ф','𑀸'],['en','a','a','𑀸'],['de','a','a','𑀸']
  ]){
     await page.locator('#sourceLayout').selectOption(source);
     await expect(page.locator('.key[data-code="KeyA"] .latin')).toHaveText(keyLabel);
@@ -246,7 +246,8 @@ test('Japanese locale and JIS hardware include all Mac-only keys',async({page})=
  await expect(page.locator('.key[data-code="Lang1"] .latin')).toHaveText('かな');
  await expect(page.locator('.key[data-code="Lang2"] .latin')).toHaveText('英数');
  await expect(page.locator('.key[data-code="IntlYen"] .latin')).toHaveText('¥');
- await expect(page.locator('.key[data-code="IntlRo"] .latin')).toHaveText('ろ');
+ await expect(page.locator('.key[data-code="IntlRo"] .latin')).toHaveText('_');
+ await expect(page.locator('#japaneseMode')).toHaveValue('romaji');
  await expect(page.locator('.key[data-code="IntlRo"] .glyph')).toHaveText('—');
  await expect(page.locator('.key[data-code="IntlYen"] .glyph')).toHaveText('—');
  await page.locator('#japaneseMode').selectOption('kana');
