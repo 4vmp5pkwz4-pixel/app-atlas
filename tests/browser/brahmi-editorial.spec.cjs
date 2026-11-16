@@ -56,12 +56,12 @@ test('source-edited inscription descriptions and numerical distinctions remain v
 test('public metadata, searchable catalog and project SEO match reviewed release',async({page})=>{
  const c=await page.evaluate(async()=>await (await fetch('/catalog.json')).json());
  const p=c.projects.find(x=>x.id==='brahmi');
- expect(p.tags).toContain('v0.9.1 β');
- for(const locale of ['ru','de','en'])expect(p.desc[locale]).toContain('0.9.1');
+ expect(p.tags).toContain('v0.9.2 β');
+ for(const locale of ['ru','de','en'])expect(p.desc[locale]).toContain('0.9.2');
  expect(p.desc.en).toContain('eight Mac keyboard presets');
  await page.goto('/projects/brahmi/');
  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',/Brahmi.*IAST/);
- await expect(page.locator('.tags')).toContainText('v0.9.1 β');
+ await expect(page.locator('.tags')).toContainText('v0.9.2 β');
  await expect(page.locator('.story[data-story="en"]')).not.toContainText('with QWERTZ lessons');
  await expect(page.locator('a').filter({hasText:'Offline app ZIP / release'})).toHaveAttribute('href',/v0\.9\.1-beta/);
 });
