@@ -583,18 +583,28 @@ body.training-mode #keyboardZoomToggle[aria-pressed="true"]{color:#fff3ce;border
 body.training-mode #keyboard .key .physical-cap{max-width:100%;min-width:0}
 body.training-mode #keyboard .key .latin{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Devanagari","Noto Sans JP","Segoe UI",sans-serif;max-width:100%;overflow:hidden;text-overflow:clip}
 body.training-mode #keyboard .key[data-multichar="true"] .latin{font-size:clamp(7px,.81vw,11px);letter-spacing:-.035em}
-body.training-mode .keyboard-scroll[data-zoom="true"]{overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:thin;scrollbar-color:#8bb8a3 #1a302e}
+/* Magnified mode is a two-axis INSPECTION viewport, not a taller fixed dock.
+   The original two large practice fields remain outside this bounded scroll. */
+body.training-mode .keyboard-scroll[data-zoom="true"]{
+  overflow-x:auto;overflow-y:auto;
+  max-height:min(36dvh,310px);min-height:0;
+  overscroll-behavior:contain;touch-action:pan-x pan-y;
+  scrollbar-width:thin;scrollbar-color:#8bb8a3 #1a302e;
+}
 body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard{width:max(100%,900px);max-width:none;min-width:900px}
+body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key{
+  height:48px;min-height:48px;padding:2px 1px;overflow:hidden;
+}
 body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .physical-cap .latin{font-size:clamp(12px,1.15vw,17px)}
 body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .glyph{font-size:clamp(16px,1.6vw,23px)}
-body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:clamp(10px,.95vw,13px)}
+body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:clamp(10px,.95vw,13px);line-height:1.05}
 body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .shift-peek{display:inline;font-size:clamp(9px,.8vw,12px)}
 @media(max-width:600px){
  body.training-mode #keyboard .key[data-multichar="true"] .latin{font-size:clamp(6px,1.75vw,9px)}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard{width:900px;min-width:900px}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .latin{font-size:14px}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .glyph{font-size:20px}
- body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:12px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:11px}
 }
 @media(max-height:480px) and (orientation:landscape){
  body.training-mode .keyboard-dock{gap:2px;padding:3px 5px}
@@ -603,7 +613,7 @@ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .shift-peek
  body.training-mode #keyboard .key .physical-cap .latin{font-size:clamp(8px,1.4vh,11px)}
  body.training-mode #keyboard .key .glyph{font-size:clamp(9px,2.8vh,13px)}
  body.training-mode #keyboard .key .iast{font-size:clamp(7px,2vh,9px)}
- body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key{height:36px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key{height:46px;min-height:46px}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .physical-cap .latin{font-size:12px}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .glyph{font-size:15px}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:9px}
