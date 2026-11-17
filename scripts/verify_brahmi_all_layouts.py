@@ -18,9 +18,9 @@ def embedded(name):
     b=app.index(";\n",a)
     return json.loads(app[a:b])
 
-assert release["version"]=="0.9.6-beta"
-assert release["display"]=="v0.9.6 β"
-assert 'const APP_VERSION="0.9.6-beta";' in app
+assert release["version"]=="0.9.7-beta"
+assert release["display"]=="v0.9.7 β"
+assert 'const APP_VERSION="0.9.7-beta";' in app
 assert embedded("MAC_EXTRA_LAYOUTS")==mac_extra
 assert embedded("MAC_KEYCAP_EXTENDED")==mac_extended
 assert embedded("MAC_GERMAN_ISO")==mac_de
@@ -66,13 +66,13 @@ assert '<span data-i="multilingual">' in index
 for phrase in ('multilingual:"Многоязыковой"','multilingual:"Multilingual"','multilingual:"Mehrsprachig"'):
     assert phrase in site
 entry=next(p for p in catalog["projects"] if p["id"]=="brahmi")
-assert entry["tags"][0]=="v0.9.6 β"
+assert entry["tags"][0]=="v0.9.7 β"
 for lang in ("ru","en","de"):
-    assert "0.9.6" in entry["desc"][lang]
+    assert "0.9.7" in entry["desc"][lang]
 assert all(lang not in entry["tags"] for lang in ("RU / DE / EN","RU · EN · DE"))
 m=re.search(r'<script id="embedded-catalog" type="application/json">([\s\S]*?)</script>',index)
 assert m and json.loads(m.group(1))==catalog
-assert "v0.9.6-beta" in read("projects/brahmi/index.html")
+assert "v0.9.7-beta" in read("projects/brahmi/index.html")
 
 with tempfile.TemporaryDirectory() as tmp:
     scripts=re.findall(r"<script(?:\s[^>]*)?>([\s\S]*?)</script>",app)
