@@ -5,7 +5,7 @@ Owner instruction (17 November 2026): permit worldwide use, modification and com
 | Component | Status |
 | --- | --- |
 | APP ATLAS / original Brahmi Atelier | Apache-2.0; root LICENSE and NOTICE |
-| Buddhabrot portable mirror | MIT; upstream README declares MIT and full license now added to both main and default branch. At review the mirrored HTML and main upstream HTML had identical Git blob 4aa8849458aa93c336c58b8827eff4c5fd1bb119. No relicense. |
+| Buddhabrot portable mirror | MIT; upstream README declares MIT and full license now added to both main and default branch. At review the mirrored HTML and main upstream HTML had identical Git blob 4aa8849458aa93c336c58b8827eff4c5fd1bb119. MIT notice then embedded identically in upstream main, default branch and mirror (blob caaced42c7813d72d7c6074bf3d3ddf26f68659e). No relicense. |
 | HOPF-OmniAtlas / UPRS-M-BIUS-HOPF | GPL-3.0 license texts found; separate linked sites, retain existing license; not included in hosted app ZIPs. |
 | HCC / Normalisierung | No root LICENSE found on default branch; not cleared for redistribution under this policy; linked separately. Further repository-specific rights review needed. |
 | Mac Brahmi map | Prachya Boonkwan, MIT; source and attribution retained; full notice bundled. |
