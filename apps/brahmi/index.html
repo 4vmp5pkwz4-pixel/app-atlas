@@ -358,7 +358,7 @@ body.hindi-interface .nav button{line-height:1.5}
 .key .shortcut-action{color:#a8d5c4}
 .key.is-shortcut{border-style:dashed;box-shadow:inset 0 0 0 1px rgba(226,191,127,.14)}
 .key-inspector{min-height:24px;display:flex;align-items:center;padding:3px 9px;border-left:2px solid var(--gold);color:var(--muted);font-size:12px;line-height:1.4}
-.key-inspector-text{overflow-wrap:anywhere}
+.key-inspector-text{overflow-wrap:anywhere;color:inherit;text-decoration:underline;text-decoration-color:#dfbf8266;text-underline-offset:2px}
 #keyboard[data-view="brahmi"] .iast,#keyboard[data-view="iast"] .glyph{display:none}
 #keyboard[data-view="iast"] .iast{font-size:17px;color:var(--gold2)}
 body.training-mode .key-view-controls{gap:4px 9px;padding:1px 0}
@@ -690,13 +690,13 @@ body.training-mode #keyboard .key[data-alt-kind="symbol"] .physical-cap .latin{
 <button data-page="stats"><span class="nav-icon">▥</span><span data-i18n="navStats">Прогресс</span></button>
 <button data-page="settings"><span class="nav-icon">⚙</span><span data-i18n="navSettings">Настройки</span></button>
 </nav>
-<div class="aside-foot"><strong>𑀅𑀳𑀺𑀁𑀲𑀸</strong><p data-i18n="foot">Практикуй внимательно. Прогресс остаётся в браузере. Никакой регистрации или передачи на сервер.</p><span>v0.9.5 β · OFFLINE FIRST · 2026</span></div>
+<div class="aside-foot"><strong>𑀅𑀳𑀺𑀁𑀲𑀸</strong><p data-i18n="foot">Практикуй внимательно. Прогресс остаётся в браузере. Никакой регистрации или передачи на сервер.</p><span>v0.9.6 β · OFFLINE FIRST · 2026</span></div>
 </aside>
 <main class="main">
-<div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.9.5-beta" title="Brahmi Atelier 0.9.5-beta">v0.9.5 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
+<div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.9.6-beta" title="Brahmi Atelier 0.9.6-beta">v0.9.6 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
 <section id="page-home" class="page active">
 <div class="hero"><span class="eyebrow" data-i18n="heroEyebrow">ДРЕВНЕЕ ПИСЬМО · СОВРЕМЕННЫЙ НАВЫК</span><h1 data-i18n-html="heroTitle">Прикоснись к <em>2300 годам</em> письменной истории.</h1><p data-i18n="heroLead">Открывайте древнее письмо брахми в многоязычном тренажёре: привычная клавиатура Mac, мгновенный результат Unicode и тексты с историческими источниками.</p><div class="actions"><button class="btn btn-primary" id="continueButton" data-i18n="startLearning">Начать обучение</button><button class="btn" data-page="texts" data-i18n="openTexts">Читать надписи</button><a class="btn" id="bfgHome" href="./research-lab.html" data-i18n="bfgLab">Лаборатория BFG</a></div></div>
-<div class="stat-grid" id="homeStats"></div>
+<div class="section-heading"><h2 data-i18n="atlasLearnTitle">От знака к исследованию</h2></div><div class="two-col"><div class="card"><h3 data-i18n="dictionaryTitle">Словарь произношений</h3><p data-i18n="dictionaryLead">115 знаков: IPA, артикуляция, слоги и упражнения.</p><a class="btn" id="dictHome" href="./pronunciation.html" data-i18n="dictionaryOpen">Открыть словарь</a></div><div class="card"><h3 data-i18n="atlasMapTitle">Клавиши и письменности</h3><p data-i18n="atlasMapLead">Исходные раскладки и универсальная структура информации.</p><div class="actions"><a class="btn" id="atlasHome" href="./phonetic-atlas.html" data-i18n="atlasOpen">Фонетический атлас · 115 знаков</a><a class="btn" href="./research-lab.html" data-i18n="bfgLab">Лаборатория BFG</a></div></div></div><div class="stat-grid" id="homeStats"></div>
 <div class="section-heading"><h2 data-i18n="courseTitle">Последовательный курс</h2><small data-i18n="courseSub">От движения пальца к чтению оригинала</small></div>
 <div class="lesson-grid" id="lessonGrid"></div>
 <div class="section-heading"><h2 data-i18n="precisionTitle">Принцип: точность прежде скорости</h2></div>
@@ -765,7 +765,7 @@ body.training-mode #keyboard .key[data-alt-kind="symbol"] .physical-cap .latin{
  <span id="keyLayerStatus" role="status" aria-live="polite">Normal · Brahmi</span>
  <span class="key-agreement-legend" id="keyAgreementLegend" data-i18n="keyAgreementLegend">◆ Latin–IAST mnemonic match</span>
 </div>
-<div class="keyboard-heading"><span id="physicalKeyboardLabel">DE / MAC QWERTZ</span><span>𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI</span></div><div class="keyboard-scroll" id="keyboardScroll" data-zoom="false" role="region" aria-label="Keyboard preview: horizontal scrolling available in magnified mode" tabindex="0"><div class="keyboard" id="keyboard"></div></div><div class="key-inspector" id="keyInspector" role="status" aria-live="polite" aria-atomic="true"><span class="key-inspector-text" id="keyInspectorText"></span></div>
+<div class="keyboard-heading"><span id="physicalKeyboardLabel">DE / MAC QWERTZ</span><span>𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI</span></div><div class="keyboard-scroll" id="keyboardScroll" data-zoom="false" role="region" aria-label="Keyboard preview: horizontal scrolling available in magnified mode" tabindex="0"><div class="keyboard" id="keyboard"></div></div><div class="key-inspector" id="keyInspector" role="status" aria-live="polite" aria-atomic="true"><a class="key-inspector-text" id="keyInspectorText" href="./pronunciation.html"></a></div>
 <div class="finger-panel"><div><span class="muted" data-i18n="fingerLabel">Следующая клавиша и палец:</span> <strong id="fingerHint">—</strong></div><span class="micro" id="inputModeHint"></span></div><p class="keyboard-note" data-i18n="keyboardNote">Клавиши соответствуют физическим позициям немецкой QWERTZ. Нажимай на изображение для пробного ввода; для слепой печати используй настоящую клавиатуру.</p>
 </div>
 </section>
@@ -789,6 +789,7 @@ body.training-mode #keyboard .key[data-alt-kind="symbol"] .physical-cap .latin{
        <button type="button" id="convDhammapada" class="btn btn-sm" data-i18n="wisdomDhammapada">Из Дхаммапады</button>
        <button type="button" id="convClear" class="btn btn-sm" data-i18n="clear">Очистить</button>
        <a class="btn btn-sm" id="atlasLaunch" href="./phonetic-atlas.html" data-i18n="atlasOpen">Фонетический атлас · 115 знаков</a>
+<a class="btn btn-sm" id="dictConvert" href="./pronunciation.html" data-i18n="dictionaryOpen">Словарь произношений</a>
         <a class="btn btn-sm" id="bfgTransfer" href="./research-lab.html" data-i18n="bfgTransfer">Исследовать этот текст · BFG</a>
        <span id="convPrivacy" class="micro" data-i18n="convPrivacy">Всё обрабатывается локально в браузере.</span>
       </div>
@@ -1038,7 +1039,16 @@ hi:{bfgLab:"BFG अनुसंधान प्रयोगशाला",bfgTran
 for(const [locale,labels] of Object.entries(BFG_LAB_COPY))Object.assign(I18N[locale],labels);
 // Modern educational labels rendered in Brahmi, not claimed as historical terminology.
 Object.assign(I18N.br,{bfgLab:iastToBrahmi('vijjā parikkhā'),bfgTransfer:iastToBrahmi('imaṃ lekhaṃ parikkhatha'),bfgBlocked:iastToBrahmi('lekhaṃ puna likhatha')});
-const APP_VERSION="0.9.5-beta";
+const DICT_UI={
+ru:{atlasLearnTitle:"От знака к исследованию",dictionaryTitle:"Словарь произношений",dictionaryLead:"115 знаков: IPA, артикуляция, слоги и упражнения.",dictionaryOpen:"Открыть словарь",atlasMapTitle:"Клавиши и письменности",atlasMapLead:"Исходные раскладки и универсальная структура информации.",dictInspect:"Открыть профиль знака и его произношение"},
+en:{atlasLearnTitle:"From sign to research",dictionaryTitle:"Pronunciation dictionary",dictionaryLead:"115 signs: IPA, articulation, syllables and exercises.",dictionaryOpen:"Open dictionary",atlasMapTitle:"Keys and writing systems",atlasMapLead:"Source keymaps and universal information structure.",dictInspect:"Open this sign's pronunciation profile"},
+de:{atlasLearnTitle:"Vom Zeichen zur Forschung",dictionaryTitle:"Aussprachewörterbuch",dictionaryLead:"115 Zeichen: IPA, Artikulation, Silben und Übungen.",dictionaryOpen:"Wörterbuch öffnen",atlasMapTitle:"Tasten und Schriftsysteme",atlasMapLead:"Originalbelegungen und universelle Informationsstruktur.",dictInspect:"Ausspracheprofil öffnen"},
+ja:{atlasLearnTitle:"文字から研究へ",dictionaryTitle:"発音辞典",dictionaryLead:"115文字：IPA、調音、音節、練習。",dictionaryOpen:"辞典を開く",atlasMapTitle:"キーと文字体系",atlasMapLead:"原典キー配列と普遍的な情報構造。",dictInspect:"発音詳細を開く"},
+hi:{atlasLearnTitle:"चिह्न से अनुसंधान तक",dictionaryTitle:"उच्चारण शब्दकोश",dictionaryLead:"115 चिह्न: IPA, उच्चारण, अक्षर और अभ्यास।",dictionaryOpen:"शब्दकोश खोलें",atlasMapTitle:"कुंजी और लिपियाँ",atlasMapLead:"मूल कुंजी विन्यास और सार्वभौमिक सूचना संरचना।",dictInspect:"उच्चारण देखें"}
+};for(const [lang,c] of Object.entries(DICT_UI))Object.assign(I18N[lang],c);
+Object.assign(I18N.br,Object.fromEntries(Object.entries({atlasLearnTitle:"akkharato vijjāya",dictionaryTitle:"saddakosaṃ",dictionaryLead:"akkharaṃ saddaṃ sikkhā",dictionaryOpen:"saddakosaṃ passatha",atlasMapTitle:"akkharāni lekhanāni",atlasMapLead:"akkharavidhānaṃ vijjā",dictInspect:"saddaṃ passatha"}).map(([k,v])=>[k,iastToBrahmi(v)])));
+function dictionaryURL(glyph){const p=Array.from(glyph||"")[0]?.codePointAt(0);return "./pronunciation.html"+(p>=0x11000&&p<=0x1107F?"#"+p.toString(16).toUpperCase():"")}
+const APP_VERSION="0.9.6-beta";
 const LOCAL_KEY='brahmi-atelier-2026-v1';
 let saved={version:1,keyboardZoom:false,lang:(['ru','de','en','ja','hi'].includes((navigator.language||'').slice(0,2))?(navigator.language||'').slice(0,2):'en'),mode:'sim',physical:((navigator.language||'').slice(0,2)==='ja'?'ja':'de'),jaPreview:'romaji',roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};
 try{const p=JSON.parse(localStorage.getItem(LOCAL_KEY)||'null');if(p&&p.version===1)saved={...saved,...p,completed:p.completed||{},sessions:p.sessions||[],errors:p.errors||{},cal:p.cal||{}}}catch(e){}
@@ -1488,6 +1498,8 @@ function phrasePracticeSelected(){
 function renderConverter(){
  renderWisdom();
  const original=$('convSource').value;
+ const first=Array.from(original).find(c=>{const n=c.codePointAt(0);return n>=0x11000&&n<=0x1107f});
+ $('dictConvert').href=dictionaryURL(first);
  const translation=brahmiToIAST(original);
  $('convRoman').value=translation.text;
  const lay=$('convLayout').value,jis=$('convJisMode').value;
@@ -1609,6 +1621,8 @@ function inspectKey(code){
   }
  }
  target.textContent=description;
+ target.href=dictionaryURL(!special&&!previewShortcut(code,mods)?charMap(code,mods.shift,mods.option):"");
+ target.title=T('dictInspect');
  qsa('#keyboard .key').forEach(b=>b.classList.toggle('is-inspected',b.dataset.code===code));
 }
 function updateKeyLayerStatus(){
@@ -1879,6 +1893,8 @@ $('wisdomCategory').onchange=e=>nextWisdom(e.target.value);
 $('convClear').onclick=()=>{$('convSource').value='';renderConverter();$('convSource').focus()};
 $('convCopyRoman').onclick=()=>copyConverter('Roman');
 $('convCopyKeys').onclick=()=>copyConverter('Physical');
+for(const id of ['dictHome','dictConvert','keyInspectorText'])$(id).addEventListener('click',()=>{try{sessionStorage.setItem('brahmi-dictionary-return-v1',location.pathname.endsWith('/brahmi.html')?'brahmi.html':'index.html')}catch(_){}});
+$('dictConvert').addEventListener('click',()=>{const el=$('convSource'),part=el.value.slice(el.selectionStart,el.selectionEnd);const first=Array.from(part||el.value).find(c=>{let n=c.codePointAt(0);return n>=0x11000&&n<=0x1107f});$('dictConvert').href=dictionaryURL(first)});
 $('bfgHome').addEventListener('click',()=>{try{sessionStorage.removeItem('bfg-lab-input-v1');sessionStorage.setItem('bfg-lab-return-v1',location.pathname.endsWith('/brahmi.html')?'brahmi.html':'index.html')}catch(_){}});
 $('bfgTransfer').addEventListener('click',e=>{
  if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
@@ -1903,7 +1919,9 @@ $('phrasePractice').onclick=phrasePracticeSelected;
 $('phraseToConvert').onclick=()=>{const item=phraseSelectionData();if(!item)return;$('convSource').value=item.text;$('convLayout').value=saved.physical;$('convJisMode').value=saved.jaPreview;navigate('convert')};
 $('keyViewMode').onchange=e=>{saved.keyView=['compare','brahmi','iast'].includes(e.target.value)?e.target.value:'compare';persist();renderKeyboard()};
 $('keyboardZoomToggle').onclick=()=>{saved.keyboardZoom=!saved.keyboardZoom;persist();renderKeyboard();$('keyboardZoomToggle').focus({preventScroll:true})};$('japaneseMode').onchange=e=>{saved.jaPreview=e.target.value;persist();renderKeyboard();renderPhraseLab()};qsa('[data-layer]').forEach(btn=>btn.onclick=()=>{modifierShift=btn.dataset.layer==='shift'||btn.dataset.layer==='shiftOption';modifierAlt=btn.dataset.layer==='option'||btn.dataset.layer==='shiftOption';renderKeyboard()});$('soundToggle').onchange=e=>{saved.sound=e.target.checked;persist()};$('romanSetting').onchange=e=>{saved.roman=e.target.checked;showRoman=saved.roman;persist();renderExercise()};$('blindSetting').onchange=e=>{saved.blind=e.target.checked;persist();renderKeyboard()};$('clearCal').onclick=()=>{saved.cal={};persist();updateSettings();renderKeyboard();$('calDetected').textContent='—';toast(T('cleared'))};$('closeModal').onclick=()=>$('completionOverlay').classList.remove('show');$('completionOverlay').addEventListener('click',e=>{if(e.target===$('completionOverlay'))$('completionOverlay').classList.remove('show')});$('againModal').onclick=()=>{$('completionOverlay').classList.remove('show');if(lesson.kind==='custom'){resetSession();trainingFocus()}else loadLesson(lesson.id,++currentVariant)};$('nextModal').onclick=()=>{$('completionOverlay').classList.remove('show');const i=LESSONS.findIndex(l=>l.id===lesson.id);if(i>=0&&i<LESSONS.length-1)loadLesson(LESSONS[i+1].id)};$('trainWeak').onclick=()=>loadLesson('adaptive');$('exportData').onclick=()=>{const b=new Blob([JSON.stringify(saved,null,2)],{type:'application/json'}),url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='brahmi-atelier-progress.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);toast(T('exportDone'))};$('importButton').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const obj=JSON.parse(await file.text());if(obj.version!==1||!obj.completed||!Array.isArray(obj.sessions))throw Error('schema');saved={...saved,...obj,cal:obj.cal||{},errors:obj.errors||{}};showRoman=saved.roman;persist();setLanguage(saved.lang);toast(T('importDone'))}catch(e){toast(T('importError'))}e.target.value=''};$('resetAll').onclick=()=>{if(!confirm(T('resetConfirm')))return;const lang=saved.lang,phys=saved.physical,mode=saved.mode,jaPreview=saved.jaPreview;saved={version:1,lang,mode:'sim',physical:phys,jaPreview,keyView:'compare',independentModeInitialized:true,observed:{},roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};persist();setLanguage(lang);toast(T('cleared'))};
-showRoman=saved.roman;setLanguage(saved.lang);const initial=LESSONS.find(l=>l.id===saved.activeLesson)||LESSONS[0];lesson=initial;const p=promptOf(initial);setPrompt(p);renderHome();navigate('home');window.BrahmiAtelierTest={APP_VERSION,WISDOM_CORPUS,WISDOM_HISTORY,nextWisdom,iastToBrahmi,paintPressedKeys,HELD_TRAINER_KEYS,brahmiToIAST,brahmiKeyChord,brahmiKeySequence,renderCompactCue,phraseSelectionData,phraseUnmapped,renderPhraseLab,PHRASE_ATLAS_I18N,REVERSE_BRAHMI_CONSONANTS,cp,charMap,reverseLookup,T,TEXTS,LESSONS,BRAHMI_LAYERS,physicalLabel,germanKeyStroke,macKeycapPair,ROWS_JIS,JIS_KANA,activeRows,MAC_GERMAN_ISO,MAC_KEYCAP_EXTENDED,PHYSICAL_BASE_PRESETS,PHYSICAL_SHIFT_PRESETS,physicalLayerLabel,ROWS_US,MAC_EXTRA_LAYOUTS,HINDI_UI,HINDI_CONTENT,PHYSICAL_PRESETS,romanKeySign,latinMnemonicAgreement,previewShortcut,modifierState,inspectKey};
+showRoman=saved.roman;setLanguage(saved.lang);const initial=LESSONS.find(l=>l.id===saved.activeLesson)||LESSONS[0];lesson=initial;const p=promptOf(initial);setPrompt(p);renderHome();navigate('home');
+try{const raw=sessionStorage.getItem('brahmi-dictionary-practice-v1');sessionStorage.removeItem('brahmi-dictionary-practice-v1');if(raw&&cp(raw).length<=32&&cp(raw).every(c=>{const n=c.codePointAt(0);return n>=0x11000&&n<=0x1107f})&&!phraseUnmapped(raw).length)setCustom(raw,brahmiToIAST(raw).text)}catch(_){}
+window.BrahmiAtelierTest={APP_VERSION,WISDOM_CORPUS,WISDOM_HISTORY,nextWisdom,iastToBrahmi,paintPressedKeys,HELD_TRAINER_KEYS,brahmiToIAST,brahmiKeyChord,brahmiKeySequence,renderCompactCue,phraseSelectionData,phraseUnmapped,renderPhraseLab,PHRASE_ATLAS_I18N,REVERSE_BRAHMI_CONSONANTS,cp,charMap,reverseLookup,T,TEXTS,LESSONS,BRAHMI_LAYERS,physicalLabel,germanKeyStroke,macKeycapPair,ROWS_JIS,JIS_KANA,activeRows,MAC_GERMAN_ISO,MAC_KEYCAP_EXTENDED,PHYSICAL_BASE_PRESETS,PHYSICAL_SHIFT_PRESETS,physicalLayerLabel,ROWS_US,MAC_EXTRA_LAYOUTS,HINDI_UI,HINDI_CONTENT,PHYSICAL_PRESETS,romanKeySign,latinMnemonicAgreement,previewShortcut,modifierState,inspectKey};
 })();
 </script>
 </body></html>

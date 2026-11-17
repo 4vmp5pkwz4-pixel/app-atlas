@@ -38,3 +38,5 @@ jobs:
         run: python3 scripts/verify_brahmi_all_layouts.py
       - name: Verify BFG research core against independent enumeration
         run: node tests/bfg-core.test.cjs
+      - name: Verify complete phonetic dictionary and source-linked chords
+        run: python3 scripts/verify_brahmi_pronunciation.py

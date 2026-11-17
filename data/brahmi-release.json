@@ -1,8 +1,8 @@
 {
-  "version": "0.9.5-beta",
-  "display": "v0.9.5 β",
+  "version": "0.9.6-beta",
+  "display": "v0.9.6 β",
   "released_at": "2026-11-17",
-  "feature": "BFG Research Lab 0.1.0 with exact local symbolic and graph-cut calculations, multilingual converter handoff and golden exercise/atlas proportions; original eight physical layouts, four Brahmi layers and dual-input invariants preserved",
+  "feature": "Complete 115-sign pronunciation dictionary with broad IPA and articulatory profiles, optional local Hindi demonstration, syllable-to-trainer handoff, recognition quiz and script-independent feature projections; original keymaps and golden responsive trainer preserved.",
   "corpus": "data/brahmi-wisdom.json",
   "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
   "keyboardSources": [
@@ -85,5 +85,14 @@
       13
     ],
     "scope": "hierarchy and spacing only; original physical key geometry and responsive FIT constraints take precedence"
+  },
+  "pronunciation": {
+    "file": "apps/brahmi/pronunciation.html",
+    "dataset": "data/brahmi-pronunciation.json",
+    "assignedSigns": 115,
+    "phoneticProfiles": 75,
+    "sourceMapped": 106,
+    "voice": "Optional device-local modern Hindi demonstration, not historical audio",
+    "scope": "Unicode 17.0"
   }
 }
