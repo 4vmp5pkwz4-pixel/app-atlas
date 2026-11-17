@@ -1,6 +1,6 @@
 # BFG Research Lab 0.1.0
 
-Experimental companion to Brahmi Atelier 0.9.4-beta. The trainer, physical key maps, transliteration data, corpora and licenses are unchanged. The research lab accepts arbitrary Unicode; it adds no historical transcription or external biological dataset.
+Experimental companion to Brahmi Atelier 0.9.5-beta. The trainer, physical key maps, transliteration data, corpora and licenses are unchanged. The research lab accepts arbitrary Unicode; it adds no historical transcription or external biological dataset.
 
 ## Use
 Open research-lab.html from the trainer homepage or use the converter's explicit “Research this text” action. Text is passed through same-tab sessionStorage and consumed once. If storage is unavailable, copy and paste manually. No computation uses a server. The portable ZIP must include research-lab.html and bfg-core.js.
@@ -19,4 +19,4 @@ For independent flagged erasure of auxiliary binary labels, c_v=(1-p)^w_v-p^w_v 
 For cut sums, dp(empty)=1; dp(S)=sum_{v in S}dp(S-v)/cut(S) for proper nonempty S; the full set omits the denominator. Exact fractions use BigInt. The noise transport calculation uses integer max flow with E<D<I coordinatewise and E/I exchange for the complement.
 
 ## Reproduce
-Run node tests/bfg-core.test.cjs and npm run test:browser. The latter uses the existing desktop/mobile Playwright configurations. Run python3 scripts/package.py to verify offline integration. The BFG version is independent of the trainer version; merge/release should follow the repository's review and versioning policy (do not overwrite an existing release unknowingly). Scientific priority and physical implementation are not claimed.
+Run node tests/bfg-core.test.cjs and npm run test:browser. The latter uses the existing desktop/mobile Playwright configurations. Run python3 scripts/package.py to verify offline integration. The BFG module has its own version. The integrated trainer release is 0.9.5-beta, with a new tag preserving the previous release. Scientific priority and physical implementation are not claimed.

@@ -479,8 +479,8 @@ body.training-mode .phrase-roman{font-size:12px}
    the full Phrase Atlas is a parallel reference, never a blocking preamble. */
 body.training-mode .trainer-workspace{
  display:grid;
- grid-template-columns:minmax(0,1.3fr) minmax(320px,.85fr);
- column-gap:clamp(7px,1vw,15px);
+ grid-template-columns:minmax(0,1.61803398875fr) minmax(320px,1fr);
+ column-gap:clamp(8px,1vw,13px);
  row-gap:0;align-content:start;
 }
 /* Compact chapter context: title and navigation share the SAME row, rather
@@ -525,12 +525,12 @@ body.training-mode .trainer-workspace>.brahmi-matrix{grid-column:1/-1;grid-row:4
 .inline-iast-cues .cue-roman{flex:none;font-size:11px;color:#d6ebe1}
 body.training-mode .exercise>div[style*="height:13px"]{display:none}
 body.training-mode .input-track{padding:5px 7px}
-body.training-mode .dual-typing{gap:5px}
+body.training-mode .dual-typing{gap:5px} /* Fibonacci spacing; equal input heights remain mandatory. */
 body.training-mode .input-line-head .input-line-label{font-size:clamp(8px,.69vw,10px);letter-spacing:.035em}
 body.training-mode .input-line-head .cue-token{font-size:clamp(8px,.67vw,10px);padding:1px 3px}
 body.training-mode .input-line-head .cue-roman{font-size:clamp(9px,.75vw,12px)}
 /* Two semantic reading tracks + a narrow physical-chip sidebar, no third full-width row. */
-.phrase-lines{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(105px,.78fr);
+.phrase-lines{display:grid;grid-template-columns:minmax(0,1.61803398875fr) minmax(105px,1fr);
  grid-template-rows:auto auto;gap:4px}
 .phrase-lines>.phrase-line{min-width:0;display:flex;flex-direction:column;gap:2px;padding:5px 7px}
 .phrase-lines>.phrase-line:nth-child(1){grid-column:1;grid-row:1}
@@ -565,7 +565,7 @@ body.training-mode .phrase-value{max-height:60px}
  .input-line-head .inline-skill-cues{padding-left:5px;gap:2px}
  body.training-mode .input-track{padding:4px 6px}
  body.training-mode .phrase-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
- body.training-mode .phrase-lines{grid-template-columns:minmax(0,1.35fr) minmax(100px,.85fr)}
+ body.training-mode .phrase-lines{grid-template-columns:minmax(0,1.61803398875fr) minmax(100px,1fr)}
 }
 @media(max-height:500px){
  body.training-mode .lesson-description{display:none}
@@ -662,6 +662,13 @@ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .glyph{font-size:18px}
  body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard .key .iast{font-size:11px}
 }
+/* Golden visual scale, subject to the existing FIT geometry and short-screen limits.
+   13:21 is the Fibonacci approximation to phi; source key widths and modifier labels never change.
+   Apply only where the full INSPECT keycap has room; mobile/short viewport overrides remain intact. */
+@media(min-width:1151px) and (min-height:700px){
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard[data-view="compare"] .key .glyph{font-size:21px}
+ body.training-mode .keyboard-scroll[data-zoom="true"] #keyboard[data-view="compare"] .key .iast{font-size:13px}
+}
 /* Never let a large alternate corner label force a dependent Indic vowel or
    Cyrillic base glyph out of its source position in the fitted overview. */
 body.training-mode #keyboard .key[data-alt-kind="symbol"] .physical-cap .latin{
@@ -683,12 +690,12 @@ body.training-mode #keyboard .key[data-alt-kind="symbol"] .physical-cap .latin{
 <button data-page="stats"><span class="nav-icon">▥</span><span data-i18n="navStats">Прогресс</span></button>
 <button data-page="settings"><span class="nav-icon">⚙</span><span data-i18n="navSettings">Настройки</span></button>
 </nav>
-<div class="aside-foot"><strong>𑀅𑀳𑀺𑀁𑀲𑀸</strong><p data-i18n="foot">Практикуй внимательно. Прогресс остаётся в браузере. Никакой регистрации или передачи на сервер.</p><span>v0.9.4 β · OFFLINE FIRST · 2026</span></div>
+<div class="aside-foot"><strong>𑀅𑀳𑀺𑀁𑀲𑀸</strong><p data-i18n="foot">Практикуй внимательно. Прогресс остаётся в браузере. Никакой регистрации или передачи на сервер.</p><span>v0.9.5 β · OFFLINE FIRST · 2026</span></div>
 </aside>
 <main class="main">
-<div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.9.4-beta" title="Brahmi Atelier 0.9.4-beta">v0.9.4 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
+<div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.9.5-beta" title="Brahmi Atelier 0.9.5-beta">v0.9.5 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
 <section id="page-home" class="page active">
-<div class="hero"><span class="eyebrow" data-i18n="heroEyebrow">ДРЕВНЕЕ ПИСЬМО · СОВРЕМЕННЫЙ НАВЫК</span><h1 data-i18n-html="heroTitle">Прикоснись к <em>2300 годам</em> письменной истории.</h1><p data-i18n="heroLead">Открывайте древнее письмо брахми в многоязычном тренажёре: привычная клавиатура Mac, мгновенный результат Unicode и тексты с историческими источниками.</p><div class="actions"><button class="btn btn-primary" id="continueButton" data-i18n="startLearning">Начать обучение</button><button class="btn" data-page="texts" data-i18n="openTexts">Читать надписи</button><a class="btn" href="./research-lab.html" data-i18n="bfgLab">Лаборатория BFG</a></div></div>
+<div class="hero"><span class="eyebrow" data-i18n="heroEyebrow">ДРЕВНЕЕ ПИСЬМО · СОВРЕМЕННЫЙ НАВЫК</span><h1 data-i18n-html="heroTitle">Прикоснись к <em>2300 годам</em> письменной истории.</h1><p data-i18n="heroLead">Открывайте древнее письмо брахми в многоязычном тренажёре: привычная клавиатура Mac, мгновенный результат Unicode и тексты с историческими источниками.</p><div class="actions"><button class="btn btn-primary" id="continueButton" data-i18n="startLearning">Начать обучение</button><button class="btn" data-page="texts" data-i18n="openTexts">Читать надписи</button><a class="btn" id="bfgHome" href="./research-lab.html" data-i18n="bfgLab">Лаборатория BFG</a></div></div>
 <div class="stat-grid" id="homeStats"></div>
 <div class="section-heading"><h2 data-i18n="courseTitle">Последовательный курс</h2><small data-i18n="courseSub">От движения пальца к чтению оригинала</small></div>
 <div class="lesson-grid" id="lessonGrid"></div>
@@ -1029,8 +1036,9 @@ ja:{bfgLab:"BFG研究ラボ",bfgTransfer:"このテキストを分析 · BFG",bf
 hi:{bfgLab:"BFG अनुसंधान प्रयोगशाला",bfgTransfer:"इस पाठ का विश्लेषण · BFG",bfgBlocked:"पाठ भेजना उपलब्ध नहीं है। पाठ कॉपी करें और होम से प्रयोगशाला खोलें।"}
 };
 for(const [locale,labels] of Object.entries(BFG_LAB_COPY))Object.assign(I18N[locale],labels);
-Object.assign(I18N.br,BFG_LAB_COPY.en); // scientific lab labels use an explicit English fallback
-const APP_VERSION="0.9.4-beta";
+// Modern educational labels rendered in Brahmi, not claimed as historical terminology.
+Object.assign(I18N.br,{bfgLab:iastToBrahmi('vijjā parikkhā'),bfgTransfer:iastToBrahmi('imaṃ lekhaṃ parikkhatha'),bfgBlocked:iastToBrahmi('lekhaṃ puna likhatha')});
+const APP_VERSION="0.9.5-beta";
 const LOCAL_KEY='brahmi-atelier-2026-v1';
 let saved={version:1,keyboardZoom:false,lang:(['ru','de','en','ja','hi'].includes((navigator.language||'').slice(0,2))?(navigator.language||'').slice(0,2):'en'),mode:'sim',physical:((navigator.language||'').slice(0,2)==='ja'?'ja':'de'),jaPreview:'romaji',roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};
 try{const p=JSON.parse(localStorage.getItem(LOCAL_KEY)||'null');if(p&&p.version===1)saved={...saved,...p,completed:p.completed||{},sessions:p.sessions||[],errors:p.errors||{},cal:p.cal||{}}}catch(e){}
@@ -1871,6 +1879,7 @@ $('wisdomCategory').onchange=e=>nextWisdom(e.target.value);
 $('convClear').onclick=()=>{$('convSource').value='';renderConverter();$('convSource').focus()};
 $('convCopyRoman').onclick=()=>copyConverter('Roman');
 $('convCopyKeys').onclick=()=>copyConverter('Physical');
+$('bfgHome').addEventListener('click',()=>{try{sessionStorage.removeItem('bfg-lab-input-v1');sessionStorage.setItem('bfg-lab-return-v1',location.pathname.endsWith('/brahmi.html')?'brahmi.html':'index.html')}catch(_){}});
 $('bfgTransfer').addEventListener('click',e=>{
  if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
  try{

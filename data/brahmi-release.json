@@ -1,8 +1,8 @@
 {
-  "version": "0.9.4-beta",
-  "display": "v0.9.4 β",
-  "released_at": "2026-11-16",
-  "feature": "Source-invariant Normal and Shift legends across all eight Mac keyboard views; readable three-tier zoomed keycaps with contained two-axis scrolling, no overwrite of original Brahmi/IAST or dual live input lines, accurate multilingual public catalog descriptions",
+  "version": "0.9.5-beta",
+  "display": "v0.9.5 β",
+  "released_at": "2026-11-17",
+  "feature": "BFG Research Lab 0.1.0 with exact local symbolic and graph-cut calculations, multilingual converter handoff and golden exercise/atlas proportions; original eight physical layouts, four Brahmi layers and dual-input invariants preserved",
   "corpus": "data/brahmi-wisdom.json",
   "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
   "keyboardSources": [
@@ -70,5 +70,20 @@
     "sourceInvariants": "8 source-grounded Normal/Shift layout views; Brahmi four layers independent"
   },
   "audit": "docs/BRAHMI_CROSS_LAYOUT_RESPONSIVE_AUDIT.md",
-  "keycapAudit": "docs/BRAHMI_KEYCAP_FIDELITY_V094.md"
+  "keycapAudit": "docs/BRAHMI_KEYCAP_FIDELITY_V094.md",
+  "researchLab": {
+    "version": "0.1.0",
+    "url": "apps/brahmi/research-lab.html",
+    "core": "apps/brahmi/bfg-core.js",
+    "documentation": "docs/BFG_RESEARCH_LAB.md",
+    "localOnly": true
+  },
+  "goldenDesign": {
+    "wideWorkspaceRatio": 1.61803398875,
+    "inspectGlyphIAST": [
+      21,
+      13
+    ],
+    "scope": "hierarchy and spacing only; original physical key geometry and responsive FIT constraints take precedence"
+  }
 }
