@@ -26,7 +26,9 @@ function countGraph(g,p,budget=12000){
    else{const x=solve(mask&~bit(v)),y=solve(mask&~(bit(v)|g.adj[v]));z={count:x.count+y.count,w:Math.max(x.w,y.w+g.classes[v].w),q:Math.max(x.q,y.q+weights[v])}}
   }memo.set(mask,z);return z;
  }
- let exact=null;try{exact=solve(g.eligible)}catch(e){if(e.message!=="budget")throw e}
+ let exact=null;
+ if(g.classes.length===g.a.length){let k=Math.ceil(g.a.length/2);exact={count:fib(g.a.length+2),w:k,q:k*(1-2*p)}}
+ else try{exact=solve(g.eligible)}catch(e){if(e.message!=="budget")throw e}
  const all=idx(g.eligible),dimUpper=Math.min(logBig(fib(g.a.length+2)),all.length,exact?logBig(exact.count):Infinity),upper=Math.min(dimUpper,all.reduce((s,i)=>s+weights[i],0));
  return {exact:!!exact,count:exact?String(exact.count):null,countLower:String(1n<<BigInt(gw.selected.length)),logDimensionUpper:dimUpper,maxOnesLower:exact?exact.w:gw.total,maxOnesUpper:exact?exact.w:Math.min(Math.ceil(g.a.length/2),all.reduce((s,i)=>s+g.classes[i].w,0)),capacityLower:p===0&&exact?logBig(exact.count):exact?exact.q:gq.total,capacityUpper:upper,greedy:gw.selected,visited};
 }
@@ -44,7 +46,7 @@ function tunnel(w,edges){
  const end=(1<<w)-1,dp=[[1n,1n]];let mincut=Infinity;
  for(let s=1;s<=end;s++){let z=[0n,1n];for(let i=0;i<w;i++)if(s&(1<<i))z=add(z,dp[s^(1<<i)]);if(s!==end){let c=0;for(const [i,j,v] of edges)if(Boolean(s&(1<<i))!==Boolean(s&(1<<j)))c+=v;if(!c)throw Error("Graph must be connected");mincut=Math.min(mincut,c);z=frac(z[0],z[1]*BigInt(c))}dp[s]=z}return {value:dp[end],mincut};
 }
-function parseNoise(text){let m=new Map();for(const l of text.trim().split(/\n/)){if(!l.trim())continue;let a=l.trim().split(/\s+/);if(a.length!==2||!/^[EDI]{1,8}$/.test(a[0])||!/^[0-9]+$/.test(a[1]))throw Error("Use E/D/I words and integer mass");let v=Number(a[1]);if(!Number.isSafeInteger(v)||v>1000000)throw Error("Mass too large");if(v)m.set(a[0],(m.get(a[0])||0)+v)}let rows=[...m];if(!rows.length||rows.length>32||rows.some(([s])=>s.length!==rows[0][0].length))throw Error("Use 1–32 words of equal length");return rows}
+function parseNoise(text){if(text.length>8000)throw Error("Flag input too long");let m=new Map();for(const l of text.trim().split(/\n/)){if(!l.trim())continue;let a=l.trim().split(/\s+/);if(a.length!==2||!/^[EDI]{1,8}$/.test(a[0])||!/^[0-9]+$/.test(a[1]))throw Error("Use E/D/I words and integer mass");let v=Number(a[1]);if(!Number.isSafeInteger(v)||v>1000000)throw Error("Mass too large");if(v)m.set(a[0],(m.get(a[0])||0)+v)}let rows=[...m];if(!rows.length||rows.length>32||rows.some(([s])=>s.length!==rows[0][0].length))throw Error("Use 1–32 words of equal length");return rows}
 function transport(rows,other){const total=rows.reduce((a,x)=>a+x[1],0),n=rows.length,m=other.length,N=n+m+2,S=N-2,T=N-1,cap=Array.from({length:N},()=>Array(N).fill(0)),rank={E:0,D:1,I:2};
  rows.forEach(([s,v],i)=>{cap[S][i]=v;other.forEach(([t],j)=>{if([...s].every((c,k)=>rank[c]>=rank[t[k]]))cap[i][n+j]=total})});other.forEach(([s,v],j)=>cap[n+j][T]=v);let flow=0;
  while(true){const prev=Array(N).fill(-1),q=[S];prev[S]=S;for(let i=0;i<q.length&&prev[T]<0;i++)for(let j=0;j<N;j++)if(prev[j]<0&&cap[q[i]][j]>0){prev[j]=q[i];q.push(j)}if(prev[T]<0)break;let d=total;for(let j=T;j!==S;j=prev[j])d=Math.min(d,cap[prev[j]][j]);for(let j=T;j!==S;j=prev[j]){cap[prev[j]][j]-=d;cap[j][prev[j]]+=d}flow+=d}return {missing:total-flow,total}}

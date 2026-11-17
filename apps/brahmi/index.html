@@ -688,7 +688,7 @@ body.training-mode #keyboard .key[data-alt-kind="symbol"] .physical-cap .latin{
 <main class="main">
 <div class="topbar"><span class="eyebrow">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 · BRAHMI LEARNING STUDIO</span><div class="top-controls"><span class="pill" id="systemStatus">◌ <span data-i18n="systemStatus">Физическая QWERTZ</span></span><select class="select" id="langSelect" aria-label="Language"><option value="ru">Русский</option><option value="de">Deutsch</option><option value="en">English</option><option value="ja">日本語</option><option value="br">𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻</option><option value="hi">हिन्दी · देवनागरी</option></select><span id="versionBadge" class="version-badge" role="status" aria-label="Brahmi Atelier version 0.9.4-beta" title="Brahmi Atelier 0.9.4-beta">v0.9.4 β</span><button class="btn btn-sm" id="focusButton" data-i18n="focusMode">Фокус</button></div></div>
 <section id="page-home" class="page active">
-<div class="hero"><span class="eyebrow" data-i18n="heroEyebrow">ДРЕВНЕЕ ПИСЬМО · СОВРЕМЕННЫЙ НАВЫК</span><h1 data-i18n-html="heroTitle">Прикоснись к <em>2300 годам</em> письменной истории.</h1><p data-i18n="heroLead">Открывайте древнее письмо брахми в многоязычном тренажёре: привычная клавиатура Mac, мгновенный результат Unicode и тексты с историческими источниками.</p><div class="actions"><button class="btn btn-primary" id="continueButton" data-i18n="startLearning">Начать обучение</button><button class="btn" data-page="texts" data-i18n="openTexts">Читать надписи</button></div></div>
+<div class="hero"><span class="eyebrow" data-i18n="heroEyebrow">ДРЕВНЕЕ ПИСЬМО · СОВРЕМЕННЫЙ НАВЫК</span><h1 data-i18n-html="heroTitle">Прикоснись к <em>2300 годам</em> письменной истории.</h1><p data-i18n="heroLead">Открывайте древнее письмо брахми в многоязычном тренажёре: привычная клавиатура Mac, мгновенный результат Unicode и тексты с историческими источниками.</p><div class="actions"><button class="btn btn-primary" id="continueButton" data-i18n="startLearning">Начать обучение</button><button class="btn" data-page="texts" data-i18n="openTexts">Читать надписи</button><a class="btn" href="./research-lab.html" data-i18n="bfgLab">Лаборатория BFG</a></div></div>
 <div class="stat-grid" id="homeStats"></div>
 <div class="section-heading"><h2 data-i18n="courseTitle">Последовательный курс</h2><small data-i18n="courseSub">От движения пальца к чтению оригинала</small></div>
 <div class="lesson-grid" id="lessonGrid"></div>
@@ -782,6 +782,7 @@ body.training-mode #keyboard .key[data-alt-kind="symbol"] .physical-cap .latin{
        <button type="button" id="convDhammapada" class="btn btn-sm" data-i18n="wisdomDhammapada">Из Дхаммапады</button>
        <button type="button" id="convClear" class="btn btn-sm" data-i18n="clear">Очистить</button>
        <a class="btn btn-sm" id="atlasLaunch" href="./phonetic-atlas.html" data-i18n="atlasOpen">Фонетический атлас · 115 знаков</a>
+        <a class="btn btn-sm" id="bfgTransfer" href="./research-lab.html" data-i18n="bfgTransfer">Исследовать этот текст · BFG</a>
        <span id="convPrivacy" class="micro" data-i18n="convPrivacy">Всё обрабатывается локально в браузере.</span>
       </div>
       
@@ -1020,6 +1021,15 @@ const MULTILINGUAL_UI_COPY={"ru":{"zoomKeys":"Увеличить клавиши"
 for(const [lang,labels] of Object.entries(MULTILINGUAL_UI_COPY))Object.assign(I18N[lang],labels);
 I18N.br.zoomKeys='⊕ 𑀓';
 I18N.br.zoomPanHint='⇆ ↕ 𑀧𑀜𑁆𑀘 𑀧𑀁𑀢𑀺';
+const BFG_LAB_COPY={
+ru:{bfgLab:"Лаборатория BFG",bfgTransfer:"Исследовать этот текст · BFG",bfgBlocked:"Передача текста недоступна. Скопируйте его вручную и откройте лабораторию с главной страницы."},
+de:{bfgLab:"BFG-Forschungslabor",bfgTransfer:"Diesen Text erforschen · BFG",bfgBlocked:"Textübergabe nicht verfügbar. Text kopieren und Labor auf der Startseite öffnen."},
+en:{bfgLab:"BFG Research Lab",bfgTransfer:"Research this text · BFG",bfgBlocked:"Text transfer unavailable. Copy the text manually and open the lab from Home."},
+ja:{bfgLab:"BFG研究ラボ",bfgTransfer:"このテキストを分析 · BFG",bfgBlocked:"転送できません。テキストをコピーし、ホームからラボを開いてください。"},
+hi:{bfgLab:"BFG अनुसंधान प्रयोगशाला",bfgTransfer:"इस पाठ का विश्लेषण · BFG",bfgBlocked:"पाठ भेजना उपलब्ध नहीं है। पाठ कॉपी करें और होम से प्रयोगशाला खोलें।"}
+};
+for(const [locale,labels] of Object.entries(BFG_LAB_COPY))Object.assign(I18N[locale],labels);
+Object.assign(I18N.br,BFG_LAB_COPY.en); // scientific lab labels use an explicit English fallback
 const APP_VERSION="0.9.4-beta";
 const LOCAL_KEY='brahmi-atelier-2026-v1';
 let saved={version:1,keyboardZoom:false,lang:(['ru','de','en','ja','hi'].includes((navigator.language||'').slice(0,2))?(navigator.language||'').slice(0,2):'en'),mode:'sim',physical:((navigator.language||'').slice(0,2)==='ja'?'ja':'de'),jaPreview:'romaji',roman:true,blind:false,sound:false,completed:{},sessions:[],errors:{},cal:{},streak:0,lastDay:'',activeLesson:'home1'};
@@ -1861,6 +1871,13 @@ $('wisdomCategory').onchange=e=>nextWisdom(e.target.value);
 $('convClear').onclick=()=>{$('convSource').value='';renderConverter();$('convSource').focus()};
 $('convCopyRoman').onclick=()=>copyConverter('Roman');
 $('convCopyKeys').onclick=()=>copyConverter('Physical');
+$('bfgTransfer').addEventListener('click',e=>{
+ if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
+ try{
+  sessionStorage.setItem('bfg-lab-input-v1',$('convSource').value);
+  sessionStorage.setItem('bfg-lab-return-v1',location.pathname.endsWith('/brahmi.html')?'brahmi.html':'index.html');
+ }catch(_){e.preventDefault();toast(T('bfgBlocked'))}
+});
 $('openKeyExplorer').onclick=()=>{
  saved.physical=$('convLayout').value;persist();
  const source=$('convSource').value;
