@@ -48,6 +48,8 @@ for project in catalog["projects"]:
     zip_items(OUT / (project["id"] + "-itch-html.zip"),bundle)
 
 public = legal + [("licenses/Buddhabrot-MIT.txt", buddhabrot_license)]
+for name in ("docs/LICENSING.md", "docs/PUBLISHING.md", "docs/DISTRIBUTION.md"):
+    public.append((name, ROOT / name))
 for relative in ["index.html", "catalog.json", "sitemap.xml", "robots.txt", ".nojekyll"]:
     p = ROOT / relative
     if p.is_file():
