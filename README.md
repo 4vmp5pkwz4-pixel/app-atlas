@@ -53,6 +53,10 @@ docs/                    Distribution, release and legal checklists
 
 **Licensing:** Owner-controlled original APP ATLAS and Brahmi Atelier software and documentation are licensed under [Apache-2.0](LICENSE), permitting commercial use, modification and redistribution. The Buddhabrot mirror remains MIT; linked projects retain their own terms. Third-party materials and ancient-text sources are excluded from the blanket grant; see [NOTICE](NOTICE), [third-party notices](THIRD_PARTY_NOTICES.txt), and [licensing audit](docs/LICENSING.md). Full historical-text and asset clearance remains open in [issue #2](https://github.com/4vmp5pkwz4-pixel/app-atlas/issues/2). Features in scientific demonstrators are not evidence of empirical validation. Complete applicable operator/legal information before wider promotion.
 
+## Brahmi Atelier v0.9.6-beta · pronunciation and universal representations
+
+[Pronunciation dictionary](apps/brahmi/pronunciation.html): all 115 Unicode 17 Brahmi signs; 75 broad phonetic profiles, 40 non-phonetic or control entries, 106 source-mapped signs. Includes an interactive articulatory matrix, syllable composer, reading recognition quiz, optional device-local modern Hindi speech examples and exact trainer/atlas links. BFG supports explicit user-defined feature projections on arbitrary Unicode. This is a pedagogical model, not a reconstruction of uniquely determined ancient speech.
+
 ## Brahmi Atelier v0.9.5-beta · BFG Research Lab and golden visual hierarchy
 
 Local research companion: exact context-graph counting, Fibonacci fusion masks, AC/GT mask encoding, graph-cut tunnelling and flagged-loss analysis. Open from the home page or send the current converter text directly. The trainer keeps the original keymaps and two synchronized input tracks; wide workspaces use a golden-ratio exercise/reference split, with a 21:13 glyph/IAST scale in spacious inspect mode. [Technical methods and limits](docs/BFG_RESEARCH_LAB.md).
