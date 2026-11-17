@@ -37,7 +37,7 @@ test('independent geometry, linked tracks, independent reset and preservation of
  expect(a.w/(a.w+b.w)).toBeCloseTo(.55,1);
  await size(page,'prompt',85);expect(Math.abs((await geometry(page,'#prompt')).h-85)).toBeLessThan(2);
  await page.locator('[data-studio-reset="prompt"]').click();await expect(page.locator('body')).not.toHaveAttribute('data-studio-prompt','');
- await size(page,'row',68);expect(Math.abs((await geometry(page,'#keyboard .key')).h-68)).toBeLessThan(2);
+ await size(page,'row',68);expect(Math.abs((await geometry(page,'#keyboard .key[data-code="KeyK"]')).h-68)).toBeLessThan(2);
  await page.locator('#studioClose').click();await expect(page.locator('#typingInput')).toHaveValue('𑀓');
  await page.screenshot({path:info.outputPath('custom-geometry.png')});
  await page.reload();await page.locator('.nav [data-page="train"]').first().click();
@@ -70,7 +70,7 @@ test('opt-in drag grips resize both tracks and preserve safe inspect labels',asy
  await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await page.mouse.move(box.x+box.width/2,box.y+box.height/2+24,{steps:4});await page.mouse.up();
  expect((await geometry(page,'#germanMirror')).h).toBeGreaterThan(before+10);
  await page.locator('#studioOpen').click();await size(page,'row',34);await page.locator('#studioClose').click();await page.locator('#keyboardZoomToggle').click();
- expect((await geometry(page,'#keyboard .key')).h).toBeGreaterThanOrEqual(58);
+ expect((await geometry(page,'#keyboard .key[data-code="KeyK"]')).h).toBeGreaterThanOrEqual(58);
  await expect(page.locator('#keyboard .key-row')).toHaveCount(5);
  await page.screenshot({path:info.outputPath('direct-resize-inspect.png')});
 });
