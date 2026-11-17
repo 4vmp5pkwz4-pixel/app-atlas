@@ -61,3 +61,16 @@ test('mobile and short-landscape oversized settings scroll within bounded worksp
  await page.locator('#studioOpen').click();await page.locator('#studioImmerse').click();await page.locator('#studioClose').click();await expect(page.locator('body')).toHaveClass(/studio-immersive/);
  await page.locator('#studioExit').click();await expect(page.locator('body')).not.toHaveClass(/studio-immersive/);
 });
+
+test('opt-in drag grips resize both tracks and preserve safe inspect labels',async({page},info)=>{
+ await page.setViewportSize({width:1440,height:900});await prepare(page);
+ await page.locator('#studioHandles').check();await page.locator('#studioLink').uncheck();await page.locator('#studioClose').click();
+ const before=(await geometry(page,'#germanMirror')).h;
+ const grip=page.locator('#studioGripMac');await expect(grip).toBeVisible();const box=await grip.boundingBox();
+ await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await page.mouse.move(box.x+box.width/2,box.y+box.height/2+24,{steps:4});await page.mouse.up();
+ expect((await geometry(page,'#germanMirror')).h).toBeGreaterThan(before+10);
+ await page.locator('#studioOpen').click();await size(page,'row',34);await page.locator('#studioClose').click();await page.locator('#keyboardZoomToggle').click();
+ expect((await geometry(page,'#keyboard .key')).h).toBeGreaterThanOrEqual(58);
+ await expect(page.locator('#keyboard .key-row')).toHaveCount(5);
+ await page.screenshot({path:info.outputPath('direct-resize-inspect.png')});
+});
