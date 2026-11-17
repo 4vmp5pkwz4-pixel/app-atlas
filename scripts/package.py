@@ -45,6 +45,11 @@ for project in catalog["projects"]:
         assert atlas.is_file(), "Brahmi atlas missing"
         shutil.copyfile(atlas,OUT/"phonetic-atlas.html")
         bundle.append(("phonetic-atlas.html",atlas))
+        for name in ("research-lab.html", "bfg-core.js"):
+            lab_file = ROOT / "apps/brahmi" / name
+            assert lab_file.is_file(), f"BFG lab component missing: {name}"
+            shutil.copyfile(lab_file, OUT / name)
+            bundle.append((name, lab_file))
     zip_items(OUT / (project["id"] + "-itch-html.zip"),bundle)
 
 public = legal + [("licenses/Buddhabrot-MIT.txt", buddhabrot_license)]

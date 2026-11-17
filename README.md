@@ -4,7 +4,7 @@
 [![Browser tests](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/browser.yml)
 [![Live site health](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml/badge.svg)](https://github.com/4vmp5pkwz4-pixel/app-atlas/actions/workflows/health.yml)
 
-**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest v0.9.4 beta](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/tag/v0.9.4-beta)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
+**[Open APP ATLAS](https://4vmp5pkwz4-pixel.github.io/app-atlas/)** · **[Download latest release](https://github.com/4vmp5pkwz4-pixel/app-atlas/releases/latest)** · [All source repositories](https://github.com/4vmp5pkwz4-pixel?tab=repositories)
 
 An independent, mobile-friendly, multilingual catalog of interactive learning applications, scientific visualization tools and experimental web instruments. The main catalog has a multilingual interface and contains no analytics or login.
 
@@ -52,6 +52,10 @@ docs/                    Distribution, release and legal checklists
 - [German legal-readiness checklist](docs/LEGAL_READINESS.md)
 
 **Licensing:** Owner-controlled original APP ATLAS and Brahmi Atelier software and documentation are licensed under [Apache-2.0](LICENSE), permitting commercial use, modification and redistribution. The Buddhabrot mirror remains MIT; linked projects retain their own terms. Third-party materials and ancient-text sources are excluded from the blanket grant; see [NOTICE](NOTICE), [third-party notices](THIRD_PARTY_NOTICES.txt), and [licensing audit](docs/LICENSING.md). Full historical-text and asset clearance remains open in [issue #2](https://github.com/4vmp5pkwz4-pixel/app-atlas/issues/2). Features in scientific demonstrators are not evidence of empirical validation. Complete applicable operator/legal information before wider promotion.
+
+## Brahmi Atelier v0.9.5-beta · BFG Research Lab and golden visual hierarchy
+
+Local research companion: exact context-graph counting, Fibonacci fusion masks, AC/GT mask encoding, graph-cut tunnelling and flagged-loss analysis. Open from the home page or send the current converter text directly. The trainer keeps the original keymaps and two synchronized input tracks; wide workspaces use a golden-ratio exercise/reference split, with a 21:13 glyph/IAST scale in spacious inspect mode. [Technical methods and limits](docs/BFG_RESEARCH_LAB.md).
 
 ## Brahmi Atelier v0.9.4-beta · unified keycap sources and responsive readability
 

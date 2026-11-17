@@ -19,6 +19,7 @@ test('two original live inputs precede expanded Phrase Atlas in DOM and desktop 
  });
  expect(data.order).toBe(true);
  expect(data.exercise.right).toBeLessThan(data.atlas.x+3);
+ expect(data.exercise.width/data.atlas.width).toBeCloseTo((1+Math.sqrt(5))/2,1);
  expect(Math.abs(data.exercise.y-data.atlas.y)).toBeLessThan(12);
  expect(data.mac.bottom).toBeLessThan(data.keyboard.y+3);
  expect(data.brahmi.bottom).toBeLessThan(data.keyboard.y+3);
