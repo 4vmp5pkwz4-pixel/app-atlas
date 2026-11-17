@@ -12,12 +12,16 @@ Download the artifact **app-atlas-downloads** from a successful GitHub Actions r
 
 For a permanent release, create a repository tag such as `v1.0.0` pointing to a validated commit. The **Publish versioned downloads** workflow creates a GitHub Release with the ZIPs, standalone HTMLs and SHA-256 list. Do not create a tag for a broken build.
 
+## Licenses in every distribution
+
+Owner-controlled original catalog and Brahmi Atelier software are Apache-2.0; Buddhabrot is MIT. Retain LICENSE, NOTICE and THIRD_PARTY_NOTICES.txt. The Buddhabrot ZIP uses its MIT license at the archive root. Historical-text clearance and full asset review remain open; do not advertise all embedded material as commercially cleared until issue #2 is resolved. See [licensing audit](LICENSING.md). Existing versioned archives are unchanged.
+
 ## itch.io publication
 
 1. Sign in to the correct itch.io account, create a new project, choose project type **HTML**.
 2. Upload `brahmi-itch-html.zip` or `buddhabrot-itch-html.zip` from a validated release. Each contains `index.html` at its root.
 3. Enable **This file will be played in the browser** if the app behaves correctly in itch.io's sandboxed iframe. Check fullscreen, keyboard focus, iPhone and Android.
-4. Add verified title, clear description, screenshots, accessibility notes, privacy/contact information, license if selected, canonical source repository and project URL.
+4. Add verified title, clear description, screenshots, accessibility notes, privacy/contact information, app-specific license and third-party notices, canonical source repository and project URL.
 5. Test the actual uploaded page and controls in an incognito window before announcing.
 6. Repeat for each ready app. Complex multi-file and WebXR applications require project-specific packaging and testing.
 
