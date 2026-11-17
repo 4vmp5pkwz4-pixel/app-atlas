@@ -59,6 +59,7 @@ test('universal BFG projection merges but never splits equivalence classes',asyn
  await page.locator('#projectionPanel summary').click();
  await page.locator('#featureRun').click();
  await expect(page.locator('#featureOut')).toContainText('|C|: 4 → 2');
+ await expect(page.locator('#featureOut')).toContainText('Strict loss of allowed states');
  await page.locator('#featureCompare').click();
  await expect(page.locator('#comparison')).toContainText('Different positional partitions');
  await page.locator('#featureMap').fill('{}');
@@ -66,4 +67,10 @@ test('universal BFG projection merges but never splits equivalence classes',asyn
  await expect(page.locator('#featureOut')).toContainText('|C|: 4 → 4');
  await page.locator('#featureCompare').click();
  await expect(page.locator('#comparison')).toContainText('Equivalent positional partitions');
+ await expect(page.locator('#featureOut')).toContainText('Same allowed space');
+ await page.locator('#source').fill('aabb');
+ await page.locator('#featureMap').fill('{"a":"same","b":"same"}');
+ await page.locator('#featureRun').click();
+ await expect(page.locator('#featureOut')).toContainText('|C|: 2 → 1');
+ await expect(page.locator('#featureOut')).toContainText('Same allowed space');
 });
