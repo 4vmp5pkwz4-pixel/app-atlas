@@ -1,8 +1,8 @@
 {
-  "version": "0.9.7-beta",
-  "display": "v0.9.7 β",
+  "version": "0.9.8-beta",
+  "display": "v0.9.8 β",
   "released_at": "2026-11-17",
-  "feature": "Immersive Atelier Studio with five royal dark palettes, ten independent geometry controls, linked or separate input heights, Auto resets, local preferences, four workspace presets and optional browser fullscreen; all source keyboard maps and scientific modules preserved.",
+  "feature": "Unified Atelier shell: persistent BFG research, pronunciation dictionary and key atlas, live shared themes and typography, integrated in-app transfers, compact research tabs and offline compatibility. Source keyboard maps and scientific kernel unchanged.",
   "corpus": "data/brahmi-wisdom.json",
   "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
   "keyboardSources": [
@@ -114,5 +114,17 @@
       "reading",
       "typing"
     ]
+  },
+  "workspace": {
+    "shell": "apps/brahmi/index.html",
+    "adapter": "apps/brahmi/atelier-workspace.js",
+    "sections": [
+      "research",
+      "dictionary",
+      "atlas"
+    ],
+    "appearance": "live shared Studio preferences",
+    "standaloneCompatible": true,
+    "sessionState": "preserved while switching sections in the current tab"
   }
 }

@@ -20,8 +20,10 @@ test("BFG handoff from the existing converter preserves Unicode",async({page})=>
  await page.locator('.nav [data-page="convert"]').click();
  await page.locator("#convSource").fill("𑀓𑀮𑀓");
  await page.locator("#bfgTransfer").click();
- await expect(page).toHaveURL(/research-lab\.html$/);
- await expect(page.locator("#source")).toHaveValue("𑀓𑀮𑀓");
- await expect(page.locator("#count")).toHaveText("3");
+ await expect(page).toHaveURL(/index\.html#research$/);
+ const lab=page.frameLocator("#atelier-frame-research");
+ await expect(lab.locator("#source")).toHaveValue("𑀓𑀮𑀓");
+ await expect(lab.locator("#count")).toHaveText("3");
+ await expect(page.locator("#page-research")).toHaveClass(/active/);
  expect(await page.evaluate(()=>sessionStorage.getItem("bfg-lab-input-v1"))).toBeNull();
 });

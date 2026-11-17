@@ -50,7 +50,8 @@ test('atlas and converter deep links target real sign profiles',async({page})=>{
  await page.locator('#convSource').fill('𑀔𑀓');
  await expect(page.locator('#dictConvert')).toHaveAttribute('href',/pronunciation\.html#11014$/);
  await page.locator('#dictConvert').click();
- await expect(page.locator('#ipa')).toHaveText('[kʰ]');
+ await expect(page).toHaveURL(/index\.html#dictionary$/);
+ await expect(page.frameLocator('#atelier-frame-dictionary').locator('#ipa')).toHaveText('[kʰ]');
 });
 test('universal BFG projection merges but never splits equivalence classes',async({page})=>{
  await page.goto(root+'research-lab.html');
