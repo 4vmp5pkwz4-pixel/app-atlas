@@ -5,9 +5,9 @@ import json,re,subprocess,tempfile
 R=Path(__file__).resolve().parents[1]
 app=(R/"apps/brahmi/index.html").read_text(encoding="utf-8")
 release=json.loads((R/"data/brahmi-release.json").read_text(encoding="utf-8"))
-assert release["version"]=="0.9.6-beta"
-assert 'const APP_VERSION="0.9.6-beta";' in app
-assert ">v0.9.6 β</span>" in app
+assert release["version"]=="0.9.7-beta"
+assert 'const APP_VERSION="0.9.7-beta";' in app
+assert ">v0.9.7 β</span>" in app
 assert app.count('id="germanMirror"')==1
 assert app.count('id="typingInput"')==1
 assert app.count('id="liveMacRail"')==1
