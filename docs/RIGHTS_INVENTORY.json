@@ -1,0 +1,1110 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-17",
+  "auditedTree": "541a9eea688ce5624fcaa37b4558909d425b33e2",
+  "scope": "Tracked APP ATLAS tree; public runtime packages, embedded sources and CI declarations. Linked repos excluded.",
+  "limitations": [
+    "Primary Hultzsch scan screenshot request rejected due to PDF size; comparison used independent scan-based witness and OCR, not diplomatic collation.",
+    "No installed dependency lockfile or node_modules inventory; CI tools are not bundled.",
+    "No claim about all historical release binaries or private project content."
+  ],
+  "historical": {
+    "wisdomBlob": "8b0c58dd5dcd0b97831f0bd676d40ade43623cea",
+    "appBlob": "68ce95b3d3c77cde3376bed103677262ee2149a9",
+    "records": [
+      {
+        "id": "asoka-xii-i",
+        "context": "wisdom",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending",
+        "note": "1925 witness has samavāyo; app has samavayo."
+      },
+      {
+        "id": "asoka-xii-d",
+        "context": "wisdom",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "asoka-xii-e",
+        "context": "wisdom",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "match after case/anusvara/spacing/hyphen normalization",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "asoka-xii-f",
+        "context": "wisdom",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "asoka-xii-g",
+        "context": "wisdom",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "asoka-xii-c",
+        "context": "wisdom",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "match after case/anusvara/spacing/hyphen normalization",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "asoka-xii-j",
+        "context": "wisdom",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "asoka-v-b",
+        "context": "wisdom",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "9–11",
+        "referenceComparison": "match after case/anusvara/spacing/hyphen normalization",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "asoka-ii-d",
+        "context": "wisdom",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "2–4",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "asoka-i-b",
+        "context": "wisdom",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "1–2",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "asoka-xii-n",
+        "context": "wisdom",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "asoka-xii-h",
+        "context": "wisdom",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "dhp-1",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp1-20/pli/ms",
+        "sourceBlob": "4815d2ccc074f62495382f75beed6a12bf0f0e7d",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "dhp-2",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp1-20/pli/ms",
+        "sourceBlob": "4815d2ccc074f62495382f75beed6a12bf0f0e7d",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "dhp-5",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp1-20/pli/ms",
+        "sourceBlob": "4815d2ccc074f62495382f75beed6a12bf0f0e7d",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "dhp-160",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp157-166/pli/ms",
+        "sourceBlob": "1dd9a48220910246a9d658adadf841dfbe4aa782",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "dhp-183",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp179-196/pli/ms",
+        "sourceBlob": "dfb1c0028f6cf1d804ee66857314804827706e18",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "dhp-184",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp179-196/pli/ms",
+        "sourceBlob": "dfb1c0028f6cf1d804ee66857314804827706e18",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "dhp-204",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp197-208/pli/ms",
+        "sourceBlob": "ecd493d0125cee86a7fc1175f1e447e29c30b97d",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "dhp-223",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp221-234/pli/ms",
+        "sourceBlob": "ddfa20da049095f9c55ca957e942257a9a0de181",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "dhp-232",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp221-234/pli/ms",
+        "sourceBlob": "ddfa20da049095f9c55ca957e942257a9a0de181",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "dhp-276",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp273-289/pli/ms",
+        "sourceBlob": "c502d649864f921a0319640fbb8571ab510acfce",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "dhp-277",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp273-289/pli/ms",
+        "sourceBlob": "c502d649864f921a0319640fbb8571ab510acfce",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "dhp-278",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp273-289/pli/ms",
+        "sourceBlob": "c502d649864f921a0319640fbb8571ab510acfce",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "dhp-279",
+        "context": "wisdom",
+        "source": "https://suttacentral.net/dhp273-289/pli/ms",
+        "sourceBlob": "c502d649864f921a0319640fbb8571ab510acfce",
+        "status": "matched public-domain Pali excerpt",
+        "license": "Public domain (ancient root text; SuttaCentral licensing policy)"
+      },
+      {
+        "id": "lumbini",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-rummindei",
+        "edition": "Hultzsch 1925",
+        "pages": "164–165",
+        "referenceComparison": "match after case/anusvara/spacing/hyphen normalization",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "lumbini2",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-rummindei",
+        "edition": "Hultzsch 1925",
+        "pages": "164–165",
+        "referenceComparison": "match after case/anusvara/spacing/hyphen normalization",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "bairat",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-calcutta-bairat",
+        "edition": "Hultzsch 1925",
+        "pages": "172–174",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending",
+        "note": "1925 witness contains restored letters and an extra se; app is not a diplomatic transcription."
+      },
+      {
+        "id": "harmony",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending",
+        "note": "1925 witness has samavāyo; app has samavayo."
+      },
+      {
+        "id": "speech",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "respect",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "many",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "well",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "2–4",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "medicine",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "2–4",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending",
+        "note": "Compare aspirate spelling and vowel lengths."
+      },
+      {
+        "id": "edict12-d",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "edict12-e",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "match after case/anusvara/spacing/hyphen normalization",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "edict12-f",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "edict12-g",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "edict12-h",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending"
+      },
+      {
+        "id": "edict12-i",
+        "context": "library",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "edition": "Hultzsch 1925",
+        "pages": "20–22",
+        "referenceComparison": "variant or normalization beyond exact-match rule",
+        "status": "primary scan collation or written permission pending",
+        "note": "1925 witness has samavāyo; app has samavayo."
+      },
+      {
+        "id": "edict12di",
+        "context": "library",
+        "status": "derived from six pending segments d–i",
+        "source": "https://theosislibrary.com/library/verified-ashoka-edicts-girnar",
+        "pages": "20–22"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".agents/skills/brahmi-dual-layout/SKILL.md",
+      "gitBlob": "4dbc2d8c7a36ad8ffeb2235be449c99e58734f6e",
+      "bytes": 13741,
+      "scope": "repository"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "gitBlob": "1221de95c2040d9c18efc925d8e42b10294e8b75",
+      "bytes": 946,
+      "scope": "repository"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.yml",
+      "gitBlob": "8f80ce27121220e24ceb1260200f4801bfd86174",
+      "bytes": 893,
+      "scope": "repository"
+    },
+    {
+      "path": ".github/workflows/bootstrap-beta.yml",
+      "gitBlob": "c613d3e3e4c7d861b7b5c44aaf142c93a6923df2",
+      "bytes": 1432,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/bootstrap-brahmi-v020.yml",
+      "gitBlob": "d51053e9310d7c9919327bc45bcf1b2a5542b5ed",
+      "bytes": 1674,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/bootstrap-brahmi-v030.yml",
+      "gitBlob": "74511eaea2e78000df33c59144dde37dd908bb70",
+      "bytes": 2459,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/bootstrap-brahmi-v031.yml",
+      "gitBlob": "ba92ab5719cc1516f4b3ae436421510e380a78de",
+      "bytes": 2489,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/bootstrap-brahmi-v032.yml",
+      "gitBlob": "934d89e5827744858aff9cfece5f34198e206236",
+      "bytes": 2576,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/bootstrap-brahmi-v040.yml",
+      "gitBlob": "fe34e6e369ddf74655200c83eb1795f93457a020",
+      "bytes": 2514,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/bootstrap-brahmi-v050.yml",
+      "gitBlob": "77b423aea5915c992c2e8932491d1fedf5f972ca",
+      "bytes": 2792,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/bootstrap-brahmi-v060.yml",
+      "gitBlob": "756372143f46f749d2d654a28ad7edb2f884ceb0",
+      "bytes": 2918,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/browser.yml",
+      "gitBlob": "4df69c0f358d481e3c0fc5488183b9e26fd84d91",
+      "bytes": 1356,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/downloads.yml",
+      "gitBlob": "bb72f687c347634c439c46a4f59a294571ac37ab",
+      "bytes": 1172,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/health.yml",
+      "gitBlob": "f346515f91535bdfdce013a1cace7eeb81918e8d",
+      "bytes": 412,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/itch-publish.yml",
+      "gitBlob": "5705c1623af0f42ea6b8e256478cec353010c6fa",
+      "bytes": 1942,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/release-brahmi.yml",
+      "gitBlob": "8776d473ab84838f5f29bc044f49864aca935312",
+      "bytes": 4187,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/releases.yml",
+      "gitBlob": "8cb7ee79210b5a7d43ad267f8470677cbf2ad3f2",
+      "bytes": 682,
+      "scope": "build-only"
+    },
+    {
+      "path": ".github/workflows/validate.yml",
+      "gitBlob": "830a02267555397ee6b7e6f7e206d6673d4d33c5",
+      "bytes": 1644,
+      "scope": "build-only"
+    },
+    {
+      "path": ".nojekyll",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "AGENTS.md",
+      "gitBlob": "b742a6609127b690278e2a750486b767c40bcbd8",
+      "bytes": 2826,
+      "scope": "repository"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "gitBlob": "7a5fb9eef2d7bbe9ae3f434119f1737957cf7781",
+      "bytes": 787,
+      "scope": "repository"
+    },
+    {
+      "path": "LICENSE",
+      "gitBlob": "ff9ad4530f5716304e042cbac72cecd7c40f0e0e",
+      "bytes": 11359,
+      "scope": "repository"
+    },
+    {
+      "path": "NOTICE",
+      "gitBlob": "2494bf3991764e4e6fc914e67aaf9b67b34c8423",
+      "bytes": 1041,
+      "scope": "repository"
+    },
+    {
+      "path": "README.md",
+      "gitBlob": "bd8224f6b9f9fda40c3756f965ef7a0f5d652a71",
+      "bytes": 24259,
+      "scope": "repository"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.txt",
+      "gitBlob": "0f985e41b8792d4cc9d94b73c97ac020e16a5dee",
+      "bytes": 10685,
+      "scope": "repository"
+    },
+    {
+      "path": "apps/brahmi/index.html",
+      "gitBlob": "68ce95b3d3c77cde3376bed103677262ee2149a9",
+      "bytes": 403813,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "apps/brahmi/phonetic-atlas.html",
+      "gitBlob": "449c25ae1d5debe081d8a1e95e235af309f8cd27",
+      "bytes": 72725,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "apps/buddhabrot/index.html",
+      "gitBlob": "caaced42c7813d72d7c6074bf3d3ddf26f68659e",
+      "bytes": 61797,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "assets/atlas-mark.svg",
+      "gitBlob": "3e867261bd0f955311db29d72b753f16555a9116",
+      "bytes": 540,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "assets/detail.css",
+      "gitBlob": "c141a97222b6e016a774769576025d5eeaffc23c",
+      "bytes": 2692,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "assets/site.css",
+      "gitBlob": "617d3b862f8d89b52746e08f668add7cb8ec9058",
+      "bytes": 11382,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "assets/site.js",
+      "gitBlob": "16fd7a1a862d4490df1a3c88a497985b08658f58",
+      "bytes": 11551,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "catalog.json",
+      "gitBlob": "7776cc09d0006e024e074fbfc8fbfcb7f21d919b",
+      "bytes": 7984,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "data/brahmi-hindi-content.json",
+      "gitBlob": "fa7705847341d0e219f9670b0b507d450f2df9b8",
+      "bytes": 16908,
+      "scope": "source-data"
+    },
+    {
+      "path": "data/brahmi-hindi-ui.json",
+      "gitBlob": "a87d881e54a848584e73e90ad74b739cf2d80076",
+      "bytes": 23490,
+      "scope": "source-data"
+    },
+    {
+      "path": "data/brahmi-inscript-keyman-audit.json",
+      "gitBlob": "e628fdf07e0b78c67243d2c8b71691d33e99f560",
+      "bytes": 14397,
+      "scope": "source-data"
+    },
+    {
+      "path": "data/brahmi-release.json",
+      "gitBlob": "9706d0ab86592a7e30b441ff31ca3d6022c7752b",
+      "bytes": 2599,
+      "scope": "source-data"
+    },
+    {
+      "path": "data/brahmi-reviewed-descriptions.json",
+      "gitBlob": "746068ddb8dcb3a751398bf377ee388ed8a56d12",
+      "bytes": 11676,
+      "scope": "source-data"
+    },
+    {
+      "path": "data/brahmi-wisdom.json",
+      "gitBlob": "8b0c58dd5dcd0b97831f0bd676d40ade43623cea",
+      "bytes": 18463,
+      "scope": "source-data"
+    },
+    {
+      "path": "data/macos-brahmi-reference.json",
+      "gitBlob": "ab7399a8fa388a1a001e99a4b91baeace1c7f4ce",
+      "bytes": 6029,
+      "scope": "source-data"
+    },
+    {
+      "path": "data/macos-english-jis-keycaps.json",
+      "gitBlob": "f3761df14e1be0ae1077a67d404eb14b06585873",
+      "bytes": 5100,
+      "scope": "source-data"
+    },
+    {
+      "path": "data/macos-extra-layouts.json",
+      "gitBlob": "02a878f2237d583035475d935206799926c8970f",
+      "bytes": 9135,
+      "scope": "source-data"
+    },
+    {
+      "path": "data/macos-german-iso-keycaps.json",
+      "gitBlob": "dafd79c6375c66345ae368a1a2c0b950d8f29d04",
+      "bytes": 2363,
+      "scope": "source-data"
+    },
+    {
+      "path": "data/macos-jis-layout.json",
+      "gitBlob": "6cdb847b917ea6925e22dd8bd6190150f65ff2b3",
+      "bytes": 3404,
+      "scope": "source-data"
+    },
+    {
+      "path": "docs/BRAHMI_CONVERTER_AND_KEY_FEEDBACK.md",
+      "gitBlob": "26cde8315bc831bb1cdd8920d4559f4714311e33",
+      "bytes": 5353,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/BRAHMI_CROSS_LAYOUT_RESPONSIVE_AUDIT.md",
+      "gitBlob": "109ebe82dfda245382d754c4bb5ff4a5cd3a803c",
+      "bytes": 6948,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/BRAHMI_DUAL_TRACK_PEDAGOGY.md",
+      "gitBlob": "8b1ee103a4537c4f3a2089f2190b782fdad72b13",
+      "bytes": 6418,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/BRAHMI_EDITORIAL_AUDIT_20261115.md",
+      "gitBlob": "10aecc470a8706b5bacb80bb970e4074ba7f0801",
+      "bytes": 6857,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/BRAHMI_GERMAN_ISO_VISUAL_AUDIT.md",
+      "gitBlob": "607e2fd1f58249f1f6dc1c0ecdf68d8047fd69ba",
+      "bytes": 6731,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/BRAHMI_HINDI_AND_NATIVE_MAC.md",
+      "gitBlob": "7b5274f5ee751a83c1c1c64481ee2f8b0542c6db",
+      "bytes": 3497,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/BRAHMI_KEYCAP_FIDELITY_V094.md",
+      "gitBlob": "040c8298d556d46e3d4d91f2adc14141828991dd",
+      "bytes": 6528,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/BRAHMI_LIVE_KEY_EXPLORER.md",
+      "gitBlob": "0d80707781e7774d8abecd334a3a695b46f6921e",
+      "bytes": 5477,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/BRAHMI_PHONETIC_ATLAS_AUDIT.md",
+      "gitBlob": "b0c475130e3a817681309b5b1d91ae8dfec74ef7",
+      "bytes": 7973,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/BRAHMI_RELEASE_CHECKLIST.md",
+      "gitBlob": "137d6ad39278e8e56e1a2540f02b3376d879ed29",
+      "bytes": 1291,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/BRAHMI_TRAINER_PHRASE_ATLAS.md",
+      "gitBlob": "96ba87febd6cd7d14ee445c392d5222db12d01e0",
+      "bytes": 5825,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/BROWSER_AUDIT_2026-11-14.md",
+      "gitBlob": "23182123d9591d2ef68a312b1c526fcf5e0d376b",
+      "bytes": 1757,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/DISTRIBUTION.md",
+      "gitBlob": "9d9d89900ce4f7174de03397dfed93e313c728c3",
+      "bytes": 3210,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/GITHUB_DISCOVERY.md",
+      "gitBlob": "a2f5fdb8afee17ec5ead8ce300f12d3e1f1317bf",
+      "bytes": 1861,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/ITCH_AUTOMATION.md",
+      "gitBlob": "1201a14a6525c640a634190eec77c007e7326912",
+      "bytes": 1781,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/JAPANESE_JIS_AND_BRAHMI_SCRIPT.md",
+      "gitBlob": "38e2dca0b26f85efd85a275c9477c99316afb218",
+      "bytes": 3102,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/KEYBOARD_VIEWPORT_QA.md",
+      "gitBlob": "8310168a20558afa6cc0e2654afb30fdac19890d",
+      "bytes": 2049,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/LAUNCH_COPY.md",
+      "gitBlob": "bc1115ba0e87e0c4f7853fdd918b1bc049e6f2b1",
+      "bytes": 6771,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/LEGAL_READINESS.md",
+      "gitBlob": "042af5ea4164bc172bc3c1532d898c7d423a065e",
+      "bytes": 1909,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/LICENSING.md",
+      "gitBlob": "79b8d918c81df58704b37a87aad1a5e24a51748c",
+      "bytes": 3119,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/MACOS_BRAHMI_SOURCE.md",
+      "gitBlob": "2fa5ef25e251615a4f999818993e13467aba321c",
+      "bytes": 3526,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/PUBLISHING.md",
+      "gitBlob": "ef526c977890203bc9b76a03cc4ab0928a8c30c7",
+      "bytes": 3258,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/TYPING_LEARNING_EVIDENCE.md",
+      "gitBlob": "5b14e143e092922634e3332f843ed9ad0c44a530",
+      "bytes": 4870,
+      "scope": "repository"
+    },
+    {
+      "path": "docs/WISDOM_CORPUS_AND_VERSION.md",
+      "gitBlob": "6d2583776b330a0d55d7e63d7e92702521f3b6b6",
+      "bytes": 4154,
+      "scope": "repository"
+    },
+    {
+      "path": "index.html",
+      "gitBlob": "d4b9139fedde567df09d168932f83025418f7aef",
+      "bytes": 14063,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "licenses/Buddhabrot-MIT.txt",
+      "gitBlob": "d94b6b563a04bb6d4475b77ced91f7ccfc0a5bfd",
+      "bytes": 1082,
+      "scope": "repository"
+    },
+    {
+      "path": "package.json",
+      "gitBlob": "b0e6aaddcc22a0097fca2f3fafba090eb853b4aa",
+      "bytes": 274,
+      "scope": "build-only"
+    },
+    {
+      "path": "playwright.config.cjs",
+      "gitBlob": "771ac78524c71da9cf78c112acd60a44ec313cac",
+      "bytes": 693,
+      "scope": "repository"
+    },
+    {
+      "path": "projects/brahmi/index.html",
+      "gitBlob": "3da850db4c34cbef0243d4aa7d698b74d41c12e0",
+      "bytes": 11848,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "projects/buddhabrot/index.html",
+      "gitBlob": "efd63a3bc8342684d9ffd9c7ed7ba4feea6dcf7b",
+      "bytes": 5121,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "projects/hcc/index.html",
+      "gitBlob": "c917c508d343996b1b5515953f42767ed23cd161",
+      "bytes": 5052,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "projects/hopf/index.html",
+      "gitBlob": "2b0ebb129023da9e24c23f46047f363e7436627b",
+      "bytes": 5006,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "projects/norma/index.html",
+      "gitBlob": "036bbbe1e244c4ca77ea63a6b2177a709e2db242",
+      "bytes": 5101,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "projects/uprs/index.html",
+      "gitBlob": "85e1d9d3399711ca982e88dd1e43875c38bddd7f",
+      "bytes": 5106,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "robots.txt",
+      "gitBlob": "20fd579cb598a9ecac358daba251ed71124f0394",
+      "bytes": 89,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "scripts/check_sites.py",
+      "gitBlob": "505b7a1daa4b7fc4cd7874c3b60497b88100dc46",
+      "bytes": 2692,
+      "scope": "repository"
+    },
+    {
+      "path": "scripts/package.py",
+      "gitBlob": "8b319428f16eff04709744cb3c98505b3fd85121",
+      "bytes": 2907,
+      "scope": "repository"
+    },
+    {
+      "path": "scripts/validate.py",
+      "gitBlob": "df7f7648d9757dccb787e83c7e5c181e647839c0",
+      "bytes": 2810,
+      "scope": "repository"
+    },
+    {
+      "path": "scripts/verify_brahmi.py",
+      "gitBlob": "2d1ec9a194dc53061f24ef1e47b1929689b7371f",
+      "bytes": 4420,
+      "scope": "repository"
+    },
+    {
+      "path": "scripts/verify_brahmi_all_layouts.py",
+      "gitBlob": "b5654fdf567ea1505a749abaf1753b41237476f7",
+      "bytes": 4023,
+      "scope": "repository"
+    },
+    {
+      "path": "scripts/verify_brahmi_cross_layout.py",
+      "gitBlob": "3f9edbbfe992a4ce644441ae22b4d512e1b17d8b",
+      "bytes": 2974,
+      "scope": "repository"
+    },
+    {
+      "path": "scripts/verify_brahmi_dual_cockpit.py",
+      "gitBlob": "cbebaed987c14ae119a00d23c3ef8df3ad7a9b91",
+      "bytes": 2341,
+      "scope": "repository"
+    },
+    {
+      "path": "scripts/verify_brahmi_editorial.py",
+      "gitBlob": "599eb31396fd38523aa6818a7d935cb852e5f8c4",
+      "bytes": 3928,
+      "scope": "repository"
+    },
+    {
+      "path": "scripts/verify_brahmi_extended_locales.py",
+      "gitBlob": "b88314b8af07deb55ac30c6f465132ffa3bc1e09",
+      "bytes": 2434,
+      "scope": "repository"
+    },
+    {
+      "path": "scripts/verify_brahmi_german_visual.py",
+      "gitBlob": "7943e0dbb717b99f710caa2b0783cd7620923112",
+      "bytes": 2919,
+      "scope": "repository"
+    },
+    {
+      "path": "scripts/verify_brahmi_phrase_atlas.py",
+      "gitBlob": "6f748a6877b08d964417009113d11703bb896499",
+      "bytes": 3599,
+      "scope": "repository"
+    },
+    {
+      "path": "scripts/verify_phonetic_atlas.py",
+      "gitBlob": "12c7bbb2f8dd1daebf35abef2d4d75a33049e23b",
+      "bytes": 3112,
+      "scope": "repository"
+    },
+    {
+      "path": "sitemap.xml",
+      "gitBlob": "4e768e0f8caa7bce9164f4bfa2243b484a6bcec4",
+      "bytes": 851,
+      "scope": "public-runtime"
+    },
+    {
+      "path": "tests/browser/app-atlas.spec.cjs",
+      "gitBlob": "d4eb8f8b91eecf48f1bac05a557aa91a62e2c209",
+      "bytes": 3759,
+      "scope": "repository"
+    },
+    {
+      "path": "tests/browser/brahmi-all-layout-invariants.spec.cjs",
+      "gitBlob": "58ae543a58f4e04bf2d45463f62de95a3fdfd134",
+      "bytes": 7165,
+      "scope": "repository"
+    },
+    {
+      "path": "tests/browser/brahmi-devanagari-russian.spec.cjs",
+      "gitBlob": "b707442bcf2268bce0e88d3377633737445367d7",
+      "bytes": 4539,
+      "scope": "repository"
+    },
+    {
+      "path": "tests/browser/brahmi-dual-cockpit.spec.cjs",
+      "gitBlob": "6d6b5a8988b51f60ec74acfd0b4e2efa6b3cb3da",
+      "bytes": 6292,
+      "scope": "repository"
+    },
+    {
+      "path": "tests/browser/brahmi-editorial.spec.cjs",
+      "gitBlob": "cf54275383e023353d603bdcc284e04017467011",
+      "bytes": 3846,
+      "scope": "repository"
+    },
+    {
+      "path": "tests/browser/brahmi-german-visual.spec.cjs",
+      "gitBlob": "788848f1254888604208334b7d7cef42b10abaaa",
+      "bytes": 6514,
+      "scope": "repository"
+    },
+    {
+      "path": "tests/browser/brahmi-key-explorer.spec.cjs",
+      "gitBlob": "4e638dadd40374f541eb225f6631d5bd34518bc7",
+      "bytes": 8219,
+      "scope": "repository"
+    },
+    {
+      "path": "tests/browser/brahmi-phonetic-atlas.spec.cjs",
+      "gitBlob": "e800ea561938e51f86c6cbb74ca3f57888080f9c",
+      "bytes": 3475,
+      "scope": "repository"
+    },
+    {
+      "path": "tests/browser/brahmi-phrase-atlas.spec.cjs",
+      "gitBlob": "555337944190fc87a7ff42515c9c13eff35fc91f",
+      "bytes": 9880,
+      "scope": "repository"
+    },
+    {
+      "path": "tests/browser/brahmi-responsive-multilingual.spec.cjs",
+      "gitBlob": "2b6ec98da232224c00e7505a40a86c0d7130bcce",
+      "bytes": 7267,
+      "scope": "repository"
+    },
+    {
+      "path": "tests/browser/brahmi-typing.spec.cjs",
+      "gitBlob": "0d24e59e1eeb0d87d4f53eecd86951705501f19c",
+      "bytes": 35110,
+      "scope": "repository"
+    },
+    {
+      "path": "tests/browser/brahmi-zoom-contained.spec.cjs",
+      "gitBlob": "718c584e56de3c7177276f0ac5cb230fbf407e5b",
+      "bytes": 3450,
+      "scope": "repository"
+    },
+    {
+      "path": "third_party/BRAHMI_LAYOUT_LICENSE.md",
+      "gitBlob": "aaf6b84c397f3d2d7137e65a7f34b24691f6791a",
+      "bytes": 1782,
+      "scope": "repository"
+    }
+  ],
+  "components": [
+    [
+      "Owner-controlled catalog and code",
+      "Apache-2.0",
+      "runtime"
+    ],
+    [
+      "Buddhabrot portable",
+      "MIT",
+      "runtime"
+    ],
+    [
+      "Prachya Boonkwan Brahmi map",
+      "MIT",
+      "runtime"
+    ],
+    [
+      "Joshua Wong Keyman Brahmi Inscript",
+      "MIT",
+      "source-derived data"
+    ],
+    [
+      "SIL International Devanagari Inscript",
+      "MIT",
+      "source-derived data"
+    ],
+    [
+      "Unicode CLDR 41",
+      "Unicode-DFS-2016",
+      "source-derived data"
+    ],
+    [
+      "Unicode CLDR 48",
+      "Unicode-3.0",
+      "source-derived data"
+    ],
+    [
+      "Unicode character names",
+      "Unicode data license",
+      "factual names"
+    ],
+    [
+      "JIS factual key legends / W3C code names",
+      "reference only; no external SVG file bundled",
+      "source-derived factual data"
+    ],
+    [
+      "System fonts",
+      "not distributed",
+      "runtime local"
+    ],
+    [
+      "SuttaCentral Pali Dhammapada",
+      "public domain",
+      "runtime"
+    ],
+    [
+      "Hultzsch 1925 original",
+      "public domain",
+      "historical reference"
+    ],
+    [
+      "Pramāṇa digital editorial layer",
+      "permission not established",
+      "unresolved"
+    ],
+    [
+      "@playwright/test 1.65.0",
+      "Apache-2.0",
+      "build-only"
+    ],
+    [
+      "Playwright Chromium and OS dependencies",
+      "separate vendor licenses",
+      "build-only; installed graph not audited"
+    ],
+    [
+      "actions/checkout@v4",
+      "MIT",
+      "build-only"
+    ],
+    [
+      "actions/setup-node@v4",
+      "MIT",
+      "build-only"
+    ],
+    [
+      "actions/upload-artifact@v4",
+      "MIT",
+      "build-only"
+    ],
+    [
+      "jdno/setup-butler@v2.0.0",
+      "MIT",
+      "build-only"
+    ],
+    [
+      "itch.io butler",
+      "MIT upstream",
+      "build-only"
+    ]
+  ]
+}
