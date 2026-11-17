@@ -74,6 +74,7 @@ jobs:
           test -s dist/research-lab.html
           test -s dist/bfg-core.js
           test -s dist/pronunciation.html
+          test -s dist/atelier-workspace.js
           test -s dist/brahmi-itch-html.zip
       - name: Publish GitHub release after successful verification
         env:
