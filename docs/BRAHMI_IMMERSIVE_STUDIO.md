@@ -4,3 +4,5 @@ The Studio toolbar button opens a non-modal local control surface. Obsidian, Sap
 
 Preferences are stored separately in brahmi-studio-v1; lesson progress is unchanged. The browser suite captures screenshots at desktop and mobile sizes and checks bounded geometry, persistence, keyboard invariants and selected semantic color contrast pairs. Browser screenshots and automated geometry checks do not establish subjective visual perfection or physical headset behavior.
 Direct resize grips are optional and keyboard accessible (arrow keys). They adjust the exercise/atlas split on wide screens, each track, and keyboard dock cap. Inspect key rows keep a 58 px minimum for the three-label geometry; Auto retains the original responsive fit. Finger color cues are retained for every palette.
+
+A one-click Auto rescue appears in the toolbar whenever a manual size is active. It resets geometry, not theme or learning progress. Placeholder typography is compact to avoid large multiline prompts in the physical input field.

@@ -74,3 +74,13 @@ test('opt-in drag grips resize both tracks and preserve safe inspect labels',asy
  await expect(page.locator('#keyboard .key-row')).toHaveCount(5);
  await page.screenshot({path:info.outputPath('direct-resize-inspect.png')});
 });
+
+test('one-click Auto rescues oversized geometry without changing appearance',async({page})=>{
+ await page.setViewportSize({width:390,height:844});await prepare(page);
+ await page.locator('[data-theme-choice="ruby"]').click();await size(page,'mac',170);await size(page,'dock',70);
+ await page.locator('#studioClose').click();await expect(page.locator('#studioQuickAuto')).toBeVisible();
+ await page.locator('#studioQuickAuto').click();
+ await expect(page.locator('#studioQuickAuto')).toBeHidden();await expect(page.locator('html')).toHaveAttribute('data-atelier-theme','ruby');
+ await expect(page.locator('body')).not.toHaveAttribute('data-studio-mac','');
+ await expect(page.locator('#keyboard .key-row')).toHaveCount(5);
+});
