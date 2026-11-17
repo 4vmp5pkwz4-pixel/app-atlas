@@ -53,6 +53,10 @@ docs/                    Distribution, release and legal checklists
 
 **Licensing:** Owner-controlled original APP ATLAS and Brahmi Atelier software and documentation are licensed under [Apache-2.0](LICENSE), permitting commercial use, modification and redistribution. The Buddhabrot mirror remains MIT; linked projects retain their own terms. Third-party materials and ancient-text sources are excluded from the blanket grant; see [NOTICE](NOTICE), [third-party notices](THIRD_PARTY_NOTICES.txt), and [licensing audit](docs/LICENSING.md). Full historical-text and asset clearance remains open in [issue #2](https://github.com/4vmp5pkwz4-pixel/app-atlas/issues/2). Features in scientific demonstrators are not evidence of empirical validation. Complete applicable operator/legal information before wider promotion.
 
+## Brahmi Atelier v0.9.9-beta · trainer recovery
+
+Restores the v0.9.4 automatic proportions and original readable key typography. Golden is explicit. Fixes focus on returning from research, closing Studio or resetting input, excludes time spent outside practice from speed metrics, preserves the current exercise and adds an explicit original-trainer recovery control (no progress deletion). All scientific modules, themes and source tables remain available.
+
 ## Brahmi Atelier v0.9.8-beta · unified learning and research workspace
 
 Research, pronunciation and the key atlas are integrated into the main navigation with a common Studio palette, language, text size and panel settings. Local scientific components retain their in-memory state while switching sections. Explicit transfers connect the exercise, phrase atlas, converter and laboratory. Existing standalone URLs and portable ZIP remain usable. [Design and limitations](docs/BRAHMI_UNIFIED_WORKSPACE.md).

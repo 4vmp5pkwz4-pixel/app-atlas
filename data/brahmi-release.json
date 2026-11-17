@@ -1,8 +1,8 @@
 {
-  "version": "0.9.8-beta",
-  "display": "v0.9.8 β",
+  "version": "0.9.9-beta",
+  "display": "v0.9.9 β",
   "released_at": "2026-11-17",
-  "feature": "Unified Atelier shell: persistent BFG research, pronunciation dictionary and key atlas, live shared themes and typography, integrated in-app transfers, compact research tabs and offline compatibility. Source keyboard maps and scientific kernel unchanged.",
+  "feature": "Trainer recovery: v0.9.4 automatic geometry, explicit Golden and Classic recovery, continuous focus across Studio and research, paused practice timing, separate IPA link, preserved source tables and learning data.",
   "corpus": "data/brahmi-wisdom.json",
   "source": "https://github.com/4vmp5pkwz4-pixel/app-atlas",
   "keyboardSources": [
@@ -84,7 +84,7 @@
       21,
       13
     ],
-    "scope": "hierarchy and spacing only; original physical key geometry and responsive FIT constraints take precedence"
+    "scope": "explicit Golden preset, manual settings take precedence; source geometry unchanged"
   },
   "pronunciation": {
     "file": "apps/brahmi/pronunciation.html",
@@ -107,7 +107,7 @@
     ],
     "sizeControls": 10,
     "fullscreen": "browser Fullscreen API; not native XR",
-    "auto": "original responsive layout",
+    "auto": "original v0.9.4 responsive geometry; Golden is opt-in",
     "presets": [
       "auto",
       "balanced",

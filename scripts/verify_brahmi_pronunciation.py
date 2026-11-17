@@ -42,7 +42,7 @@ assert "pronunciation.html" in read("apps/brahmi/phonetic-atlas.html")
 assert "pronunciation.html" in read("scripts/package.py")
 assert "bfg-feature-projection/1" in read("apps/brahmi/research-lab.html")
 rel=json.loads(read("data/brahmi-release.json"))
-assert rel["pronunciation"]["assignedSigns"]==115 and rel["version"]=="0.9.8-beta"
+assert rel["pronunciation"]["assignedSigns"]==115 and rel["version"]=="0.9.9-beta"
 with tempfile.TemporaryDirectory() as tmp:
     for name in ("pronunciation.html","research-lab.html"):
         text=read("apps/brahmi/"+name)
