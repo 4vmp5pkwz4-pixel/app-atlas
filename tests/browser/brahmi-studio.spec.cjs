@@ -46,6 +46,8 @@ test('independent geometry, linked tracks, independent reset and preservation of
  await expect(page.locator('body')).not.toHaveAttribute('data-studio-row','');
  await expect(page.locator('body')).not.toHaveAttribute('data-studio-brahmi','');
  await page.locator('#studioClose').click();
+ expect((await geometry(page,'.trainer-workspace>.exercise')).w/(await geometry(page,'#trainerPhraseLab')).w).toBeCloseTo(1.3/.85,1);
+ await page.locator('#studioOpen').click();await page.locator('[data-studio-preset="balanced"]').click();await page.locator('#studioClose').click();
  expect((await geometry(page,'.trainer-workspace>.exercise')).w/(await geometry(page,'#trainerPhraseLab')).w).toBeCloseTo((1+Math.sqrt(5))/2,1);
 });
 test('mobile and short-landscape oversized settings scroll within bounded workspace',async({page},info)=>{

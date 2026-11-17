@@ -5,9 +5,9 @@ import json,re,subprocess,tempfile
 R=Path(__file__).resolve().parents[1]
 app=(R/"apps/brahmi/index.html").read_text(encoding="utf-8")
 release=json.loads((R/"data/brahmi-release.json").read_text(encoding="utf-8"))
-assert release["version"]=="0.9.8-beta"
-assert 'const APP_VERSION="0.9.8-beta";' in app
-assert ">v0.9.8 β</span>" in app
+assert release["version"]=="0.9.9-beta"
+assert 'const APP_VERSION="0.9.9-beta";' in app
+assert ">v0.9.9 β</span>" in app
 assert app.count('id="germanMirror"')==1
 assert app.count('id="typingInput"')==1
 assert app.count('id="liveMacRail"')==1
@@ -21,7 +21,8 @@ assert "brahmiKeyChord(sign,saved.physical,saved.jaPreview)" in app
 assert "brahmiToIAST(prompt).text" in app
 assert "const blind=Boolean(saved.blind||forceBlind)" in app
 assert "keys.hidden=blind;roman.hidden=blind||!showRoman" in app
-assert 'grid-template-columns:minmax(0,1.61803398875fr) minmax(320px,1fr)' in app
+assert 'grid-template-columns:minmax(0,1.3fr) minmax(320px,.85fr)' in app
+assert 'grid-template-columns:minmax(0,1.61803398875fr) minmax(320px,1fr)' in app and 'data-studio-golden' in app
 assert "body.training-mode .trainer-workspace>.exercise{grid-column:1;grid-row:3" in app
 assert "body.training-mode .trainer-workspace>.phrase-lab" in app
 assert "body.training-mode .trainer-workspace{display:grid;grid-template-columns:minmax(0,1fr)" in app

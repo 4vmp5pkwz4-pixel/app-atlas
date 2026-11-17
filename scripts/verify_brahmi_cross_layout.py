@@ -17,7 +17,7 @@ def embedded(name):
 assert embedded("MAC_KEYCAP_EXTENDED")==ref
 assert embedded("MAC_GERMAN_ISO")==german
 assert embedded("BRAHMI_LAYERS")==brahmi["layers"]
-assert release["version"]=="0.9.8-beta" and "v0.9.8 β" in app
+assert release["version"]=="0.9.9-beta" and "v0.9.9 β" in app
 assert "data/macos-english-jis-keycaps.json" in release["keyboardSources"]
 assert len(ref["layouts"]["en"]["base"])==47
 assert len(ref["layouts"]["ja"]["base"])==48
@@ -43,7 +43,7 @@ p=next(p for p in cat["projects"] if p["id"]=="brahmi")
 assert p["tags"][1]=="Multilingual learning studio"
 assert "RU / DE / EN / JA / HI" not in str(p)
 for locale in ("ru","en","de"):
-    assert "0.9.8" in p["desc"][locale]
+    assert "0.9.9" in p["desc"][locale]
 inline=re.search(r'<script id="embedded-catalog" type="application/json">([\s\S]*?)</script>',read("index.html"))
 assert inline and json.loads(inline.group(1))==cat
 with tempfile.TemporaryDirectory() as tmp:
