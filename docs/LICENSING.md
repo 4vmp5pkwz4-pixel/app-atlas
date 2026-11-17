@@ -20,3 +20,7 @@ See [THIRD_PARTY_NOTICES.txt](../THIRD_PARTY_NOTICES.txt), [NOTICE](../NOTICE), 
 ## Release gate
 
 Keep issue #2 open until provenance and commercial redistribution rights for all embedded editions and assets are established (or replaced with independently cleared equivalents). A link to another project does not change its license. Do not promote old release archives as fully cleared; new packages include the notices, but provenance review is still required. No private repository is included or relicensed. Operator/privacy review remains a separate obligation.
+
+## 2026-11-17 follow-up
+
+See [historical text and third-party rights audit](RIGHTS_AUDIT_20261117.md) and [machine-readable rights inventory](RIGHTS_INVENTORY.json). All 13 Pāli excerpts verified; 28 Aśoka/library records reviewed against an independent 1925 witness (including composite). Primary scan reconciliation and build-dependency resolution remain open. The baseline public runtime inventory is covered; historical permissions are not.
