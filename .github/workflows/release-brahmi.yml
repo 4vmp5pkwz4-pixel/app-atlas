@@ -6,6 +6,7 @@ on:
     paths:
       - apps/brahmi/**
       - data/brahmi-release.json
+      - data/brahmi-pronunciation.json
       - data/brahmi-hindi-*.json
       - data/brahmi-reviewed-descriptions.json
       - catalog.json
@@ -51,6 +52,7 @@ jobs:
           python3 scripts/verify_brahmi_cross_layout.py
           python3 scripts/verify_brahmi_all_layouts.py
           node tests/bfg-core.test.cjs
+          python3 scripts/verify_brahmi_pronunciation.py
       - name: Install pinned browser dependencies
         run: |
           npm install --no-audit --no-fund
@@ -71,6 +73,7 @@ jobs:
           test -s dist/phonetic-atlas.html
           test -s dist/research-lab.html
           test -s dist/bfg-core.js
+          test -s dist/pronunciation.html
           test -s dist/brahmi-itch-html.zip
       - name: Publish GitHub release after successful verification
         env:
@@ -81,7 +84,7 @@ jobs:
           FEATURE="$(python3 -c 'import json; print(json.load(open("data/brahmi-release.json",encoding="utf-8"))["feature"])')"
           {
             printf '%s\n\n' "$FEATURE"
-            printf '%s\n' "Verified against source data and desktop/mobile browser acceptance. The offline ZIP contains the trainer, phonetic atlas and BFG Research Lab."
+            printf '%s\n' "Verified against source data and desktop/mobile browser acceptance. The offline ZIP contains the trainer, pronunciation dictionary, phonetic atlas and BFG Research Lab."
             printf '%s\n' "Historical readings are editorial transcriptions, and Latin-IAST keyboard matches are mnemonics, not evidence of ancient keyboard lineage."
             printf '%s\n' "Physical Option, IME and macOS-reserved shortcuts require Mac hardware verification."
           } > release-notes.md
