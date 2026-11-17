@@ -11,6 +11,14 @@ OUT = ROOT / "dist"
 OUT.mkdir(exist_ok=True)
 catalog = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
 
+legal = [(name, ROOT / name) for name in ("LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.txt")]
+for name, path in legal:
+    assert path.is_file(), f"Missing legal notice: {name}"
+    shutil.copyfile(path, OUT / name)
+buddhabrot_license = ROOT / "licenses/Buddhabrot-MIT.txt"
+assert buddhabrot_license.is_file()
+shutil.copyfile(buddhabrot_license, OUT / "Buddhabrot-MIT.txt")
+
 def zip_items(dest, items):
     with zipfile.ZipFile(dest, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for arcname, path in sorted(items, key=lambda x: x[0]):
@@ -28,6 +36,10 @@ for project in catalog["projects"]:
     simple = OUT / (project["id"] + ".html")
     shutil.copyfile(source, simple)
     bundle=[("index.html",source)]
+    if project["id"] == "buddhabrot":
+        bundle.extend([("LICENSE", buddhabrot_license), ("THIRD_PARTY_NOTICES.txt", ROOT / "THIRD_PARTY_NOTICES.txt")])
+    else:
+        bundle.extend(legal)
     if project["id"]=="brahmi":
         atlas=ROOT/"apps/brahmi/phonetic-atlas.html"
         assert atlas.is_file(), "Brahmi atlas missing"
@@ -35,7 +47,7 @@ for project in catalog["projects"]:
         bundle.append(("phonetic-atlas.html",atlas))
     zip_items(OUT / (project["id"] + "-itch-html.zip"),bundle)
 
-public = []
+public = legal + [("licenses/Buddhabrot-MIT.txt", buddhabrot_license)]
 for relative in ["index.html", "catalog.json", "sitemap.xml", "robots.txt", ".nojekyll"]:
     p = ROOT / relative
     if p.is_file():
