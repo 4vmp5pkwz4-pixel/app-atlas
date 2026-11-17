@@ -51,7 +51,7 @@ docs/                    Distribution, release and legal checklists
 - [Publishing workflow](docs/PUBLISHING.md)
 - [German legal-readiness checklist](docs/LEGAL_READINESS.md)
 
-**Licensing:** No open-source license has yet been selected for this repository. Visibility on GitHub does not in itself grant redistribution rights for third-party materials. Confirm the rights to any bundled and historical content and complete applicable operator/legal information before wider promotion. Features in scientific demonstrators are not evidence of empirical validation.
+**Licensing:** Owner-controlled original APP ATLAS and Brahmi Atelier software and documentation are licensed under [Apache-2.0](LICENSE), permitting commercial use, modification and redistribution. The Buddhabrot mirror remains MIT; linked projects retain their own terms. Third-party materials and ancient-text sources are excluded from the blanket grant; see [NOTICE](NOTICE), [third-party notices](THIRD_PARTY_NOTICES.txt), and [licensing audit](docs/LICENSING.md). Full historical-text and asset clearance remains open in [issue #2](https://github.com/4vmp5pkwz4-pixel/app-atlas/issues/2). Features in scientific demonstrators are not evidence of empirical validation. Complete applicable operator/legal information before wider promotion.
 
 ## Brahmi Atelier v0.9.4-beta · unified keycap sources and responsive readability
 
